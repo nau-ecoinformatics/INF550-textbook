@@ -264,7 +264,8 @@ For more details about digital repeat photogrpahy you can check out the followin
 
 ## Pulling Data via the *phenocamapi* Package
 
-The <https://github.com/bnasr/phenocamapi> *phenocamapi* R package</a>
+The <https://github.com/bnasr/phenocamapi> *
+* R package</a>
 is developed to simplify interacting with the
 <a href="https://phenocam.sr.unh.edu" target="_blank">PhenoCam network</a>
 dataset and perform data wrangling steps on PhenoCam sites' data and metadata.
@@ -725,14 +726,14 @@ Download and extract the zip file to be used as input data for the following ste
 
 # set up the input image directory
 data_dir <- 'data/'
-#dir.create(data_dir, showWarnings = F)
+# dir.create(data_dir, showWarnings = F)
 
-#pointreyes_zip <- paste0(data_dir, 'pointreyes.zip')
+pointreyes_zip <- paste0(data_dir, 'pointreyes.zip')
 pointreyes_dir <- paste0(data_dir, 'pointreyes')
 
-#download zip file
-#download.file(pointreyes_url, destfile = pointreyes_zip)
-#unzip(pointreyes_zip, exdir = data_dir)
+# download zip file
+# download.file(pointreyes_url, destfile = pointreyes_zip)
+# unzip(pointreyes_zip, exdir = data_dir)
 
 # get a list of all .jpg files in the directory
 pointreyes_images <- dir(path = 'data/pointreyes',
@@ -869,170 +870,214 @@ The *hazer* R package is developed and maintained by
 The most recent release is available from
 <a href="https://github.com/bnasr/hazer" target="_blank">https://github.com/bnasr/hazer</a>.
 
-
-## Extracting Timeseries from Images using the xROI R Package
-
-In this section, we'll learn how to use an interactive open-source toolkit, the
-<a href="https://cran.r-project.org/web/packages/xROI/index.html" target="_blank">xROI R package</a>
-that facilitates the process of time series extraction and improves the quality
-of the final data. The xROI package provides a responsive environment for
+## Extracting Region of Interest and Timeseries from Images using the phenopix R Package
+  
+In this section, we'll learn how to use an open-source toolkit, the
+<a href="https://cran.r-project.org/web/packages/phenopix/index.html" target="_blank">phenopix R package</a>
+that facilitates the process of generating a region of interest and extracting time series of color channels across repeat photography. The phenopix package provides an environment for
 scientists to interactively:
 
 a) delineate regions of interest (ROIs),
-b) handle field of view (FOV) shifts, and
-c) extract and export time series data characterizing color-based metrics.
+b) extract values and time series of color-based metrics such as greenness, 
+c) fit curves to seasonal trajectories, and 
+d) extract relavent phenological theresholds or "phenophases" from imagery.
 
-Using the *xROI* R package, the user can detect FOV shifts with minimal difficulty.
-The software gives user the opportunity to re-adjust mask files or redraw new
-ones every time an FOV shift occurs.
+Using the *phenopix* R package allows users access to a suite of modern data processing methods for PhenoCam imagery. For further information, reference the [phenopix publication](https://www.sciencedirect.com/science/article/abs/pii/S0168192316300089). 
 
-```{r, echo=FALSE}
+![phenopix-pub](images/phenopix.png)
 
-knitr::include_graphics('docs/images/xROI.png')
-```
+### Install and use the phenopix package
 
-### xROI Design
-
-
-The R language and Shiny package were used as the main development tool for xROI,
-while Markdown, HTML, CSS and JavaScript languages were used to improve the
-interactivity. While Shiny apps are primarily used for web-based applications to
-be used online, the package authors used Shiny for its graphical user interface
-capabilities. In other words, both the User Interface (UI) and server modules are run
-locally from the same machine and hence no internet connection is required (after
-installation). The xROI's UI element presents a side-panel for data entry and
-three main tab-pages, each responsible for a specific task. The server-side
-element consists of R and bash scripts. Image processing and geospatial features
-were performed using the `Geospatial Data Abstraction Library (GDAL)` and the
-`rgdal` and `raster` R packages.
-
-### Install xROI
-
-The xROI R package has been published on The Comprehensive R Archive Network (CRAN).
-The latest tested xROI package can be installed from the
-<a href="https://cran.r-project.org/package=xROI" target="_blank">CRAN packages repository</a> by running the following command in an R environment.
-
+To begin utilizing the phenopix package, first install it using the following code. 
 
 ```{r, eval=FALSE}
-utils::install.packages('xROI', repos = "http://cran.us.r-project.org" )
+install.packages('phenopix')
 ```
 
-Alternatively, the latest beta release of xROI can be directly downloaded and
-installed from the development GitHub repository.
-
-
-```{r, eval=FALSE}
-# install devtools first
-utils::install.packages('devtools', repos = "http://cran.us.r-project.org" )
-
-# use devtools to install from GitHub
-devtools::install_github("bnasr/xROI")
-```
-
-xROI depends on many R packages including: `raster`, `rgdal`, `sp`, `jpeg`,
-`tiff`, `shiny`, `shinyjs`, `shinyBS`, `shinyAce`, `shinyTime`, `shinyFiles`,
-`shinydashboard`, `shinythemes`, `colourpicker`, `rjson`, `stringr`, `data.table`,
-`lubridate`, `plotly`, `moments`, and `RCurl`. All the required libraries and
-packages will be automatically installed with installation of *xROI*. The package
-offers a fully interactive high-level interface as well as a set of low-level
-functions for ROI processing.
-
-### Launch xROI
-
-A comprehensive user manual for low-level image processing using *xROI* is available from
-<a href="https://cran.r-project.org/package=xROI/xROI.pdf" target="_blank">CRAN xROI.pdf</a>.
-While the user manual includes a set of examples for each function; here we
-will learn to use the graphical interactive mode.
-
-Calling the `Launch()` function, as we'll do below, opens up the interactive
-mode in your operating system’s default web browser. The landing page offers an
-example dataset to explore different modules or upload a new dataset of images.
-
-You can launch the interactive mode can be launched from an interactive R environment.
-
-
-```{r, eval=FALSE}
-# load xROI
-library(xROI)
-
-# launch xROI
-Launch()
-```
-
-Or from the command line (e.g. bash in Linux, Terminal in macOS and Command
-Prompt in Windows machines) where an R engine is already installed.
-
-
-```bash
-
-Rscript -e “xROI::Launch(Interactive = TRUE)”
-
-```
-
-
-### End xROI
-
-When you are done with the xROI interface you can close the tab in your browser
-and end the session in R by using one of the following options
-
-**In RStudio:** Press the <Esc> key on your keyboard.
-**In R Terminal:** Press <Ctrl + C> on your keyboard.
-
-### Use xROI
-
-To get some hands-on experience with `xROI`, we can analyze images from the
-<a href="https://phenocam.sr.unh.edu/webcam/sites/dukehw/">dukehw</a>
-of the PhenoCam network.
-
-You can download the data set from
-<a href="http://bit.ly/2PzZ2fL">this link (direct download)</a>.
-
-Follow the steps below:
-
-First,save and extract (unzip) the file on your computer.
-
-Second, open the data set in `xROI` by setting the file path to your data
-
-
-```{r, eval=FALSE}
-# launch data in ROI
-# first edit the path below to the dowloaded directory you just extracted
-xROI::Launch('/path/to/extracted/directory')
-
-# alternatively, you can run without specifying a path and use the interface to browse
-```
-
-Now, draw an ROI and the metadata.
-
-Then, save the metadata and explore its content.
-
-Now we can explore if there is any FOV shift in the dataset using the `CLI processer` tab.
-
-Finally, we can go to the `Time series extraction` tab. Extract the time-series. Save the output and explore the dataset in R.
-
-
-## Documentation and Citation
-
-More documentation about **xROI** can be found from: <a href="https://bnasr.github.io/papers/Seyednasrollah_et_al_2019_PRS.pdf">Seyednarollah, et al. 2019</a>.
+Then, load phenopix.
 
 ```{r}
-knitr::include_graphics('docs/images/xROI-ms2019.png')
+library(phenopix)
 ```
->xROI published in ISPRS Journal of Photogrammetry and Remote Sensing, 2019
+The package utilizes an expected directory structure to store phenological imagery, region of interest, and calculated vegetation indices. The general workflow is described as follows:
 
-### Challenge: Use xROI
+```
+Put all your images in /IMG/ 
+Put your reference image in /REF/ 
+Draw your ROI with DrawROI():
+ set path_img_ref to  /REF/ 
+ set path_ROIs to /ROI/ 
+Then you can extractVIs(): 
+ set img.path as /IMG/ 
+ set roi.path as /ROI/ 
+ set vi.path to /VI/ 
+``` 
 
-Let's use xROI on a little more challenging site with field of view shifts.
+We will start by creating the required directory structure. 
+ 
+```{r, warning=FALSE}
+# Create directories for phenopix 
+img_path = "data/phenopix/IMG" # to contain phenocam images 
+ref_path = "data/phenopix/REF" # to contain a reference image 
+roi_path = "data/phenopix/ROI" # to contain the ROI 
+vi_path = "data/phenopix/VI" # to contain vegetation index data 
 
-Download and extract the data set from
-<a href="http://bit.ly/2DrZgA1">this link (direct download, 218 MB)</a>
-and follow the above steps to extract the time-series.
+dir.create(img_path, recursive = TRUE)
+dir.create(ref_path)
+dir.create(roi_path)
+dir.create(vi_path)
+```
 
+Next we will download some images to work with from the phenocam API and store these in the /IMG/ directory. 
 
-The *xROI* R package is developed and maintained by
-<a href="https://bnasr.github.io/">Bijan Seyednarollah</a>.
-The most recent release is available from <a href="https://github.com/bnasr/xROI" target="_blank">https://github.com/bnasr/xROI</a>.
+```{r, warning=FALSE}
+# Download a few midday images 
+site_name = "dukehw"
 
+download_midday_images(
+  site = site_name,
+  y = 2017,
+  months = 6:9,
+  days = 15,
+  download_dir = img_path
+)
+```
+
+We need one image to use as a reference for drawing the ROI. Here, we simply use the first downloaded image, moving it into the REF folder. 
+
+```{r,results='hide'}
+file.copy(
+  list.files(img_path, pattern = "\\.jpg$", full.names = TRUE)[1],
+  ref_path)
+
+ref_image = list.files(ref_path)
+```
+
+We can now use DrawMULTIROI() to draw a polygon around the vegetation we want to analyze. 
+
+```{r, eval=FALSE}
+windows() 
+
+roi.data <- DrawMULTIROI( 
+  path_img_ref = ref_path, 
+  path_ROIs = roi_path, 
+  nroi = 1, 
+  roi.names = "canopy"
+)
+```
+
+After running this code, a window will open showing the reference image. Use the mouse to draw a polygon on a desired portion of the canopy, avoiding areas such as the sky which not be included in the analysis. Once finished, right click the screen and click stop. Then enter 'y' in the R console to finish.  
+
+The polygon will be saved in the /ROI/ directory under the name "canopy".
+
+### Check the ROI
+
+By inspecting the /ROI/ directory, we can see that the ROI was saved as a .Rdata object, and in addition, a .jpg image was saved of the generated ROI. Inspect the image to verify that the ROI was generated correctly.
+
+```{r, eval=FALSE}
+list.files(roi_path)
+```
+In addition to inspecting the .jpg, the ROI object can also be visualized over a rasterized version of the reference image. 
+
+```{r,eval=FALSE,warning=FALSE}
+# load the ROI
+load(file.path(roi_path, "roi.data.Rdata")) 
+
+# load the reference image as a raster
+ref_raster <- raster::flip( 
+  raster::brick(file.path(ref_path, ref_image))
+) 
+
+# plot 
+raster::plotRGB(ref_raster) 
+sp::plot( 
+  roi.data$canopy$polygons, 
+  add = TRUE, 
+  border = "red", 
+  lwd = 2 )
+```
+
+![](images/ROI1_canopy.jpg)
+
+The red polygon shows the pixels that will be used to calculate vegetation greenness.
+
+### Extracting vegetation index time series 
+
+One we have a suitable ROI for the imagery, we can utilize this boundary to extract time series of a particular color channel from the data. By default, this is performed using an average of pixel values in the ROI at each time step. These data are extracted using the `extractVIs()` function.
+
+```{r, eval=FALSE}
+vi.data <- extractVIs(
+  img.path = img_path,
+  roi.path = roi_path,
+  vi.path  = vi_path,
+  roi.name = "canopy",
+  date.code = "yyyy_mm_dd_HHMMSS"
+)
+```
+
+```{r, eval=FALSE}
+# Display the structure of returned output in vi.data
+str(vi.data)
+```
+![](images/phenopix-VIs.png)
+We can see that the `extractVIs()` function returns a dataframe with several values. These include the average and standard deviation across red, green, and blue channels at each time step, as well as for set of additional calculated indices. 
+
+These indices are: image brightness (br), the green chromatic coordinate (gi), red chromatic coordinate (ri), blue chromatic coordinate (bi), and the green excess index (gei). 
+In vegetation phenology, the green chromatic coordinate (g~cc~) is widely used as an indicator of vegetation grenness, and represents the proportion of green reflectance releative to total brightness. 
+
+![](images/gcc-formula.png)
+
+We will thus plot the g~cc~ in the ROI over the downloaded image set.
+
+```{r, eval=FALSE}
+# first, extract the dataframe 
+vi.df <- vi.data$canopy
+
+# plot
+plot(vi.df$date, vi.df$gi.av, type = "b", col = "darkgreen", pch = 16,
+     xlab = "Date", ylab = "Green chromatic coordinate (gi.av)",
+     main = sprintf("%s  — phenopix ROI 'canopy'  — VI time series", site_name))
+
+```
+
+![](images/phenopix-timeseries.png)
+
+Finally, we can assess how the different color channels relate to one another, in this case by ploting the g~cc~ against the red chromatic coordinate (r~cc~) during the summer-fall phenological transition. 
+
+```{r, eval=FALSE}
+# Plot the three chromatic coordinates
+plot(
+  vi.df$date, vi.df$gi.av,
+  type = "b",
+  col = "darkgreen",
+  pch = 16,
+  ylim = range(c(vi.df$gi.av, vi.df$ri.av)),
+  xlab = "Date",
+  ylab = "Chromatic coordinate",
+  main = sprintf(
+    "%s — phenopix ROI 'canopy' — VI time series",
+    site_name
+  )
+)
+
+lines(
+  vi.df$date, vi.df$ri.av,
+  type = "b",
+  col = "red",
+  pch = 16
+)
+
+legend(
+  "topleft",
+  legend = c("Green (gi)", "Red (ri)"),
+  col = c("darkgreen", "red"),
+  lty = 1,
+  pch = 16
+)
+```
+![](images/phenopix-timeseries-2.png)
+
+For further information on the phenopix package, including generating seasonal phenology curves and phenophases, reference the [CRAN package description](https://CRAN.R-project.org/package=phenopix) and user manual. 
 
 
 ## Hands on: Digital Repeat Photography Computational
@@ -1049,8 +1094,8 @@ library(dplyr)
 
 As a refresher, there are two main ways to pull in PhenoCam data.  First, directly via the API:
 
-```{r}
-c      = jsonlite::fromJSON('https://phenocam.sr.unh.edu/api/cameras/?format=json&limit=2000')
+```{r,warning=FALSE}
+c      = jsonlite::fromJSON('https://phenocam.nau.edu/api/cameras/?format=json&limit=2000')
 c = c$results
 c_m=c$sitemetadata
 c$sitemetadata=NULL
@@ -1066,7 +1111,6 @@ And second, via the phenocamapi package:
 ```{r, warnings=FALSE}
 phenos=get_phenos()
 head(phenos)
-
 ```
 
 To familiarize yourself with the phenocam API, let's explore the structure:

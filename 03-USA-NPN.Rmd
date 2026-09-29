@@ -133,7 +133,7 @@ public.
 ## Types of USA-NPN Data:
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/USA_NPN_data_types.png')
+knitr::include_graphics('./images/USA_NPN_data_types.png')
 ```
 
 ### Observational
@@ -170,7 +170,7 @@ include: *status and intensity data*, *individual phenometrics*, and
 *site-level phenometrics*.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/npn_data_exampe.png')
+knitr::include_graphics('./images/npn_data_exampe.png')
 ```
 
 > Visual comparison of data collected by monitoring phenological events,
@@ -230,7 +230,7 @@ observational phenology data types are created by the USA-NPN, they are
 described at www.usanpn.org/data/new_data_products.
 
 ```{r,echo=FALSE}
-knitr::include_graphics('./docs/images/animal_pheno.png')
+knitr::include_graphics('./images/animal_pheno.png')
 ```
 
 > USA-NPN Animal Phenological Data by Type from Rosemartin et al.,2018
@@ -266,7 +266,7 @@ hemlock woolly adelgid, and gypsy moth. These products are described in
 2020)](https://academic.oup.com/aesa/article/113/2/139/5727873)
 
 ```{r,echo=FALSE}
-knitr::include_graphics('./docs/images/wolly_adleg.png')
+knitr::include_graphics('./images/wolly_adleg.png')
 ```
 
 > Example of USA-NPN's Hemlock Wolly Adelgid Pheno-Forecast for August,
@@ -856,7 +856,7 @@ npn_get_agdd_point_data(
 This returns a value of 7.64098 GDD, base 50F, for the coordinates 38
 north, -90 west on February 25th, 2019.
 
-```{r}
+```{r, eval=FALSE}
 npn_get_point_data(
  'si-x:lilac_bloom_ncep', 
  '30', 
@@ -1597,7 +1597,7 @@ of phenology information is wrapped up in the ability of existing models
 to represent drivers of phenology and phenological shifts appropriately.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/700phenology.jpg')
+knitr::include_graphics('./images/700phenology.jpg')
 ```
 
 The specific timing of phenological events, such as first leaf or first
@@ -1655,7 +1655,7 @@ the most common is **interval censoring**, which occurs when a
 **phenological event transpires between visits to a site**.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/cens1.png')
+knitr::include_graphics('./images/cens1.png')
 ```
 
 > Illustration of the types of censoring that are relevant to analyses
@@ -1687,7 +1687,7 @@ account for this feature of the sampling design must be used.
 ## So then how can we model censored data?
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/cens2.png')
+knitr::include_graphics('./images/cens2.png')
 ```
 
 > An extension of the ontology developed above, this figure shows a
@@ -1707,7 +1707,7 @@ must impute times using single-point imputation techniques, which have
 been shown to lead to invalid inference.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/cens3.png')
+knitr::include_graphics('./images/cens3.png')
 ```
 
 > The histogram seen in the upper panel is constructed on the basis of

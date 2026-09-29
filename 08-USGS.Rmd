@@ -197,7 +197,7 @@ This is available for streamflow, groundwater levels, and water quality sensors.
   - statistics = "stat"
   - site = "site"
 
-*_`startDate`_* and *_`endDate`_* Strings in the format "YYYY-MM-DDTHH:SS:MM", either as a date or character class. The start and end date-times are inclusive.
+*_`startDate`_* and *_`endDate`_* Strings in the format "YYYY-MM-DDTHH:SS:MM", either as a date or character class. The start and end date-times are inclusive. 
 
 *_`stateCd`_* Two character abbreviation for a US state or territory. Execute `state.abb` in the console to get a vector of US state abbreviations. Territories include: 
 
@@ -314,21 +314,21 @@ names(wqpcounts_sc)
 This returns a list with `r length(wqpcounts_sc)` different items, including total number of sites, breakdown of the number of sites by source (BioData, NWIS, STORET), total number of records, and breakdown of records count by source. Let's just look at total number of sites and total number of records.
 
 ```{r wqpcounts_sc_justcounts, message=FALSE, warning=FALSE}
-wqpcounts_sc[['total-site-count']]
-wqpcounts_sc[['total-result-count']]
+wqpcounts_sc[['Total-Site-Count']]
+wqpcounts_sc[['Total-Result-Count']]
 ```
 
-This doesn't provide any information about the sites, just the total number. I know that with `r prettyNum(wqpcounts_sc[['total-result-count']], big.mark=",")` results, I will want to add more criteria before trying to download. Let's continue to add query parameters before moving to `whatWQPsites`.
+This doesn't provide any information about the sites, just the total number. I know that with `r prettyNum(wqpcounts_sc[['Total-Result-Count']], big.mark=",")` results, I will want to add more criteria before trying to download. Let's continue to add query parameters before moving to `whatWQPsites`.
 
 ```{r wqpcounts_sc_stream, message=FALSE, warning=FALSE}
 # specify that you only want data from streams
 wqpcounts_sc_stream <- readWQPdata(statecode="US:45", siteType="Stream",
                                   querySummary = TRUE)
-wqpcounts_sc_stream[['total-site-count']]
-wqpcounts_sc_stream[['total-result-count']]
+wqpcounts_sc_stream[['Total-Site-Count']]
+wqpcounts_sc_stream[['Total-Result-Count']]
 ```
 
-`r prettyNum(wqpcounts_sc_stream[['total-result-count']], big.mark=",")` results are still a lot to download. Let's add more levels of criteria:
+`r prettyNum(wqpcounts_sc_stream[['Total-Result-Count']], big.mark=",")` results are still a lot to download. Let's add more levels of criteria:
 
 ```{r wqpcounts_sc_stream_temp, message=FALSE, warning=FALSE}
 # specify that you want water temperature data and it should be from 1975 or later
@@ -336,11 +336,11 @@ wqpcounts_sc_stream_temp <- readWQPdata(statecode="US:45", siteType="Stream",
                                        characteristicName="Temperature, water",
                                        startDate="1975-01-01",
                                        querySummary = TRUE)
-wqpcounts_sc_stream_temp[['total-site-count']]
-wqpcounts_sc_stream_temp[['total-result-count']]
+wqpcounts_sc_stream_temp[['Total-Site-Count']]
+wqpcounts_sc_stream_temp[['Total-Result-Count']]
 ```
 
-`r prettyNum(wqpcounts_sc_stream_temp[['total-result-count']], big.mark=",")` is little more manageble. We can also easily compare avilable stream temperature and lake temperature data.
+`r prettyNum(wqpcounts_sc_stream_temp[['Total-Result-Count']], big.mark=",")` is little more manageble. We can also easily compare avilable stream temperature and lake temperature data.
 
 ```{r wqpcounts_sc_streamVSlake, message=FALSE, warning=FALSE}
 wqpcounts_sc_lake_temp <- readWQPdata(statecode="US:45", 
@@ -349,12 +349,12 @@ wqpcounts_sc_lake_temp <- readWQPdata(statecode="US:45",
                                       startDate="1975-01-01",
                                       querySummary = TRUE)
 # comparing site counts
-wqpcounts_sc_stream_temp[['total-site-count']]
-wqpcounts_sc_lake_temp[['total-site-count']]
+wqpcounts_sc_stream_temp[['Total-Site-Count']]
+wqpcounts_sc_lake_temp[['Total-Site-Count']]
 
 # comparing result counts
-wqpcounts_sc_stream_temp[['total-result-count']]
-wqpcounts_sc_lake_temp[['total-result-count']]
+wqpcounts_sc_stream_temp[['Total-Result-Count']]
+wqpcounts_sc_lake_temp[['Total-Result-Count']]
 ```
 
 From these query results, it looks like South Carolina has much more stream data than it does lake data.
@@ -399,46 +399,70 @@ We have learned how to discover data available in NWIS, but now we will look at 
 
 ```{r eval=TRUE, echo=FALSE, message=FALSE}
 library(dataRetrieval)
-Function <- c("readNWISdata", 'readNWISdv', "readNWISgwl", "readNWISmeas", "readNWISpCode", "readNWISpeak",
-              "readNWISqw", "readNWISrating", "readNWISsite", "readNWISstat", "readNWISuse", "readNWISuv")
-Description <- c(
-  "Most general NWIS data import function. User must explicitly define the service parameter. More flexible than the other functions.",
-  "Returns time-series data summarized to a day. Default is mean daily.",
-  "Groundwater levels.",
-  "Surface water measurements.",
-  "Metadata information for one or many parameter codes.",
-  "Annual maximum instantaneous streamflows and gage heights.",
-  "Discrete water quality data.",
-  "Rating table information for active stream gages",
-  "Site metadata information",
-  "Daily, monthly, or annual statistics for time-series data. Default is mean daily.",
-  "Data from the USGS National Water Use Program.",
-  "Returns time-series data reported from the USGS Instantaneous Values Web Service."
-)
-Arguments <- unlist(lapply(Function, function(f) { paste(names(formals(f)), collapse = ", ") }))
-
-Function_fancy <- c('<a href="#readnwisdata">readNWISdata</a>', 
-                    '<a href="#readnwisdv">readNWISdv</a>', 
-                    '<a href="#readnwisgwl">readNWISgwl</a>', 
-                    '<a href="#readnwismeas">readNWISmeas</a>',
-                    '<a href="#readnwispcode">readNWISpCode</a>',
-                    '<a href="#readnwispeak">readNWISpeak</a>',
-                    '<a href="#readnwisqw">readNWISqw</a>',
-                    '<a href="#readnwisrating">readNWISrating</a>',
-                    '<a href="#readnwissite">readNWISsite</a>',
-                    '<a href="#readnwisstat">readNWISstat</a>',
-                    '<a href="#readnwisuse">readNWISuse</a>',
-                    '<a href="#readnwisuv">readNWISuv</a>')
-
 library(htmlTable)
-htmlTable(data.frame(Function = Function_fancy, 
-                     Description = Description, 
-                     Arguments = Arguments), caption="<caption>Table 1. readNWIS function definitions</caption>",
-          rnames=FALSE, align=c("l","l","l"), col.rgroup = c("none", "#F7F7F7"), 
-          css.cell="padding-bottom: 0.5em; padding-right: 0.5em; padding-top: 0.5em;")
+
+Function <- c(
+  "read_waterdata",
+  "read_waterdata_daily",
+  "read_waterdata_field_measurements",
+  "read_waterdata_channel",
+  "read_waterdata_parameter_codes",
+  "read_waterdata_peaks",
+  "read_waterdata_samples",
+  "read_waterdata_ratings",
+  "read_waterdata_monitoring_location",
+  "read_waterdata_stats_por",
+  "read_waterdata_continuous"
+)
+
+Description <- c(
+  "Generalized USGS Water Data API retrieval function.",
+  "Returns USGS daily water data.",
+  "Returns USGS field measurement water data.",
+  "Returns USGS channel measurement data.",
+  "Returns USGS parameter code information.",
+  "Returns USGS peak data.",
+  "Returns USGS discrete water-quality sample data.",
+  "Returns USGS rating curve data.",
+  "Returns USGS monitoring location data.",
+  "Returns USGS daily statistics for the period of record.",
+  "Returns continuous USGS water data."
+)
+
+Arguments <- unlist(lapply(Function, function(f) {
+  paste(names(formals(get(f))), collapse = ", ")
+}))
+
+Function_fancy <- c(
+  '<a href="#read_waterdata">read_waterdata</a>',
+  '<a href="#read_waterdata_daily">read_waterdata_daily</a>',
+  '<a href="#read_waterdata_field_measurements">read_waterdata_field_measurements</a>',
+  '<a href="#read_waterdata_channel">read_waterdata_channel</a>',
+  '<a href="#read_waterdata_parameter_codes">read_waterdata_parameter_codes</a>',
+  '<a href="#read_waterdata_peaks">read_waterdata_peaks</a>',
+  '<a href="#read_waterdata_samples">read_waterdata_samples</a>',
+  '<a href="#read_waterdata_ratings">read_waterdata_ratings</a>',
+  '<a href="#read_waterdata_monitoring_location">read_waterdata_monitoring_location</a>',
+  '<a href="#read_waterdata_stats_por">read_waterdata_stats_por</a>',
+  '<a href="#read_waterdata_continuous">read_waterdata_continuous</a>'
+)
+
+htmlTable(
+  data.frame(
+    Function = Function_fancy,
+    Description = Description,
+    Arguments = Arguments
+  ),
+  caption = "<caption>Table 1. USGS Water Data retrieval functions</caption>",
+  rnames = FALSE,
+  align = c("l", "l", "l"),
+  col.rgroup = c("none", "#F7F7F7"),
+  css.cell = "padding-bottom: 0.5em; padding-right: 0.5em; padding-top: 0.5em;"
+)
 
 source("arg_table_functions.R")
 ```
+
 
 \html{<br>}
 
@@ -467,25 +491,31 @@ The following are examples of how to use each of the readNWIS family of function
 17. [readNWISuv](#readnwisuv)
 
 
-### readNWISdata
+### read_waterdata
 
-This function is the generic, catch-all for pulling down NWIS data. It can accept a number of arguments, but the argument name must be included. To use this function, you need to specify at list one major filter (state, county, site number, huc, or bounding box) and the NWIS service (daily value, instantaneous, groundwater, etc). The rest are optional query parameters. Follow along with the three examples below or see `?readNWISdata` for more information.
+This function is the generic, catch-all for pulling down NWIS data. It can accept a number of arguments, but the argument name must be included. To use this function, you need to specify at list one major filter (state, county, site number, huc, or bounding box) and the NWIS service (daily value, instantaneous, groundwater, etc). The rest are optional query parameters. Follow along with the three examples below or see `?read_waterdata` for more information.
 
-<a name="readnwisdata-county"></a>
+<a name="read_waterdata-county"></a>
 
 **Historic mean daily streamflow for sites in Maui County, Hawaii.**
 
-```{r readnwisdata-county, message=FALSE, warning=FALSE}
+```{r read_waterdata-county, message=FALSE, warning=FALSE}
 # Major filter: Maui County 
 ## need to also include the state when using counties as the major filter
 # Service: daily value, dv
 # Parameter code: streamflow in cfs, 00060
 
-MauiCo_avgdailyQ <- readNWISdata(stateCd="Hawaii", countyCd="Maui", service="dv", parameterCd="00060")
+MauiCo_avgdailyQ <- read_waterdata_daily(
+    county_name = "Maui County",
+    state_name = "Hawaii",
+    parameter_code = "00060",
+    statistic_id = "00003"
+)
+
 head(MauiCo_avgdailyQ)
 
 # How many sites are returned?
-length(unique(MauiCo_avgdailyQ$site_no))
+length(unique(MauiCo_avgdailyQ$monitoring_location_id))
 ```
 
 <a name="readnwisdata-huc"></a>
@@ -493,18 +523,22 @@ length(unique(MauiCo_avgdailyQ$site_no))
 **Historic minimum water temperatures for the HUC8 corresponding to the island of Maui, Hawaii.**
 
 To see all HUCs available, visit https://water.usgs.gov/GIS/huc_name.html. The default statistic for daily values in `readNWISdata` is to return the max (00001), min (00002), and mean (00003). We will specify the minimum only for this example. You will need to use the statistic code, not the name. For all the available statistic codes, see the [statType web service documentation](https://waterservices.usgs.gov/rest/Statistics-Service.html#statType) and [NWIS table mapping statistic names to codes](https://help.waterdata.usgs.gov/stat_code). Caution! In `readNWISdata` and `readNWISdv` the argument is called `statCd`, but in `readNWISstat` the argument is `statType`.
-
-```{r readnwisdata-huc, message=FALSE, warning=FALSE}
-# Major filter: HUC 8 for Maui, 20020000
-# Service: daily value, dv
+```{r}
+# Major filter: Maui County, Hawaii
 # Statistic: minimum, 00002
 # Parameter code: water temperature in deg C, 00010
 
-MauiHUC8_mindailyT <- readNWISdata(huc="20020000", service="dv", statCd="00002", parameterCd="00010")
-head(MauiHUC8_mindailyT)
+Maui_mindailyT <- read_waterdata_daily(
+  state_name = "Hawaii",
+  county_name = "Maui County",
+  statistic_id = "00002",
+  parameter_code = "00010"
+)
+
+head(Maui_mindailyT)
 
 # How many sites are returned?
-length(unique(MauiHUC8_mindailyT$site_no))
+length(unique(Maui_mindailyT$monitoring_location_id))
 ```
 
 <a name="readnwisdata-bbox"></a>

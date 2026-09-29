@@ -380,7 +380,7 @@ Now we'll use the `loadByProduct()` function to download data. Your API
 token is entered as the optional `token` input parameter. For this
 example, we'll download Plant foliar traits (DP1.10026.001).
 
-```{r getCFC, eval=FALSE, comment=NA, cache=TRUE}
+```{r getCFC, eval=FALSE, cache=TRUE, comment=NA}
 foliar <- loadByProduct(dpID="DP1.10026.001", site="all", 
                         package="expanded", check.size=F,
                         token=NEON_TOKEN)
@@ -440,7 +440,7 @@ to GitHub, move over to the command line or Atom.io and add it to your
 `.gitignore` file:
 
 ```{r}
-knitr::include_graphics("./docs/images/git_ignore.png")
+knitr::include_graphics("./images/git_ignore.png")
 ```
 
 Now, whenever you want to pull NEON data via the API, at the start of
@@ -477,7 +477,7 @@ Sampling (TOS) data and explore the data, from requesting it to plotting
 it.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/NEON_TOS_Sampling.png')
+knitr::include_graphics('./images/NEON_TOS_Sampling.png')
 ```
 
 > Generalized TOS sampling schematic, showing the placement of
@@ -504,7 +504,7 @@ data are reported per individual per plot; sampling metadata, such as
 per growth form sampling area, are reported per plot.
 
 ```{r, echo=FALSE}
-knitr::include_graphics('./docs/images/NEON_woody_sampling.png')
+knitr::include_graphics('./images/NEON_woody_sampling.png')
 ```
 
 > Illustration of a 20 m x 20 m Distributed/Gradient/Tower base plot
@@ -959,7 +959,14 @@ than one URL.
 
 ```{r os-query-bird-data-urls, cache=TRUE}
 # get data availability for WOOD July 2015
-brd <- GET(bird.urls[grep("WOOD/2015-07", bird.urls)])
+#brd <- GET(bird.urls[grep("WOOD/2015-07", bird.urls)])
+
+brd <- GET(
+  bird.urls[grep("WOOD/2015-07", bird.urls)],
+  add_headers(`X-API-Token` = NEON_TOKEN)
+)
+
+
 brd.files <- jsonlite::fromJSON(content(brd, as="text"))
 
 # view just the available data files 
@@ -1036,6 +1043,7 @@ so we won't use position in the list to select. Plus, we want code we
 can re-use when getting data from other sites and other months. So we
 select files based on the data table name and the package name.
 
+
 ```{r os-get-bird-data, cache=TRUE}
 
 # Get both files
@@ -1094,7 +1102,9 @@ avail.soil <- jsonlite::fromJSON(content(req.soil, as="text"), simplifyDataFrame
 temp.urls <- unlist(avail.soil$data$siteCodes$availableDataUrls)
 
 # get data availability from location/date of interest
-tmp <- GET(temp.urls[grep("MOAB/2017-06", temp.urls)])
+tmp <- GET(temp.urls[grep("MOAB/2017-06", temp.urls)],
+           add_headers(`X-API-Token` = NEON_TOKEN))
+
 tmp.files <- jsonlite::fromJSON(content(tmp, as="text"))
 length(tmp.files$data$files$name) # There are a lot of available files
 tmp.files$data$files$name[1:10]   # Let's print the first 10
@@ -1178,7 +1188,8 @@ cam.urls <- unlist(avail.aop$data$siteCodes$availableDataUrls)
 
 # get data availability from location/date of interest
 cam <- GET(cam.urls[intersect(grep("SJER", cam.urls),
-                              grep("2017", cam.urls))])
+                              grep("2017", cam.urls))],
+           add_headers(`X-API-Token` = NEON_TOKEN))
 cam.files <- jsonlite::fromJSON(content(cam, as="text"))
 
 # this list of files is very long, so we'll just look at the first ten

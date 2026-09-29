@@ -2,7 +2,9 @@
 editor_options:
   markdown:
     wrap: 72
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 # Pre-Course Setup: EcoInformatics Tools {.unnumbered}
@@ -59,6 +61,7 @@ Please check your version of R. You will need R 3.6.0+
 
 How to check your version in R or RStudio if you already have it:
 
+```
     > version
                    _                           
     platform       x86_64-apple-darwin15.6.0   
@@ -75,6 +78,7 @@ How to check your version in R or RStudio if you already have it:
     language       R                           
     version.string R version 3.5.1 (2018-07-02)
     nickname       Feather Spray  
+```
 
 If you don't already have R or need to update it [do so
 here.](https://cran.rstudio.com/)
@@ -106,11 +110,15 @@ R is available through most Linux package managers. You can download the
 binary files for your distribution from CRAN. Or you can use your
 package manager. e.g. for Debian/Ubuntu
 
-      run sudo apt-get install r-base
+```bash
+sudo apt-get install r-base
+```
 
 and for Fedora
 
-      run sudo yum install R
+```bash
+run sudo yum install R
+```
 
 To install RStudio, go to the [RStudio Download
 page](https://www.rstudio.com/products/rstudio/download/#download) Under
@@ -238,14 +246,19 @@ To generate your .PDF to upload, in your RMarkdown file simply push the
 3.  `git clone` the repo onto your own personal machine in a place that
     is functional and not temporary *(e.g. not your downloads folder)*.
 
-<!-- -->
-
+```bash
     #hints
     cd `Your/Path/Here'
     git clone 'repo HTTPS'
+```
 
 4.  Add 2-3 sentences introducing yourself in the `_Course-participants`
     folder. For example:
+
+```
+Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizona University.  Over the past two years I've worked as an open-source software engineer in the PhenoCam lab, and now I'm the coding and lab support for your course.  I really look forward to working with all of you!
+```
+
 
 <!-- -->
 
@@ -476,6 +489,7 @@ book's authors:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/JOlVcHrtl8M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
 </iframe>
+
 
 **In your derived data product pitch you will cover these themes:**
 

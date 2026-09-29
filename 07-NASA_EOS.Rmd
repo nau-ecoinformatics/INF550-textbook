@@ -1,4 +1,3 @@
-
 # NASA's Earth Observing System (EOS)
 
 > Estimated Time: 3 hours
@@ -133,7 +132,7 @@ Run the following chunk to install any packages you will need for this section:
 
 ```{r, eval=FALSE}
 # Packages you will need for AppEEARS API Tutorials
-packages = c('getPass','httr','jsonlite','ggplot2','dplyr','tidyr','readr','geojsonio','geojsonR','rgdal','sp', 'raster', 'rasterVis', 'RColorBrewer', 'jsonlite')
+packages = c('getPass','httr','jsonlite','ggplot2','dplyr','tidyr','readr','geojsonio','geojsonR','rgdal','sp', 'sf', 'raster', 'rasterVis', 'RColorBrewer', 'jsonlite')
 
 
 
@@ -262,6 +261,7 @@ library(ggplot2)            # Functions for graphing and mapping
 library(tidyr)              # Function for working with tabular data
 library(dplyr)              # Function for working with tabular data
 library(readr)              # Read rectangular data like CSV
+library(sf)                 # Read vector shapefile data 
 ```
 ***
 ### Set Up the Output Directory
@@ -351,7 +351,7 @@ The product service provides many useful details, including if a product is curr
 
 ```{r}
 # Convert the MCD15A3H.006 info to JSON object and print the prettified info
-prettify(toJSON(products$"MCD15A3H.006")) 
+prettify(toJSON(products$"MCD15A3H.061")) 
 ```
 
 Also, the products can be searched using their description. Below, search for products containing Leaf Area Index in their description and make a list of their productAndVersion.
@@ -369,7 +369,7 @@ LAI_Products
 Using the info above, Create a list of desired products.  
 
 ```{r}
-desired_products <- c('MCD15A3H.006','MOD11A2.006')   # Create a vector of desired products 
+desired_products <- c('MCD15A3H.061','MOD11A2.061')   # Create a vector of desired products 
 desired_products
 ```
 
@@ -380,7 +380,7 @@ desired_products
 This API call will list all of the layers available for a given product. Each product is referenced by its `ProductAndVersion` property which is also referred to as the product_id. First, request the layers for the `MCD15A3H.006` product.
 
 ```{r}
-# Request layers for the 1st product in the list: MCD15A3H.006
+# Request layers for the 1st product in the list: MCD15A3H.061
 MCD15A3H_req <- GET(paste0(API_URL,"product/", desired_products[1]))  # Request the info of a product from product URL
 MCD15A3H_content <- content(MCD15A3H_req)                             # Retrieve content of the request 
 MCD15A3H_response <- toJSON(MCD15A3H_content, auto_unbox = TRUE)      # Convert the content to JSON object
@@ -388,7 +388,7 @@ remove(MCD15A3H_req, MCD15A3H_content)                                # Remove t
 #prettify(MCD15A3H_response)                                          # Print the prettified response
 names(fromJSON(MCD15A3H_response))                                    # print the layer's names    
 ```
-Next, request the layers for the `MOD11A2.006` product.
+Next, request the layers for the `MOD11A2.061` product.
 ```{r}
 MOD11_req <- GET(paste0(API_URL,"product/", desired_products[2]))  # Request the info of a product from product URL
 MOD11_content <- content(MOD11_req)                                # Retrieve content of the request
@@ -401,7 +401,7 @@ Lastly, select the desired layers and pertinent products and make a data frame u
 
 ```{r}
 desired_layers <- c("LST_Day_1km","LST_Night_1km","Lai_500m")   # Create a vector of desired layers
-desired_prods <- c("MOD11A2.006","MOD11A2.006","MCD15A3H.006")  # Create a vector of products including the desired layers
+desired_prods <- c("MOD11A2.061","MOD11A2.061","MCD15A3H.061")  # Create a vector of products including the desired layers
 # Create a data frame including the desired data products and layers
 layers <- data.frame(product = desired_prods, layer = desired_layers) 
 ```
@@ -563,7 +563,7 @@ prettify(q_response)                                      # Print the prettified
 This API call will list all of the quality layer information for a product. For more information visit [AppEEARS API documentation](https://lpdaacsvc.cr.usgs.gov/appeears/api/?language=R#quality)
 
 ```{r, cache=TRUE}
-productAndVersion <- 'MCD15A3H.006'                            # Assign ProductAndVersion to a variable 
+productAndVersion <- 'MCD15A3H.061'                            # Assign ProductAndVersion to a variable 
 # Request the quality info from quality API for a specific product
 MCD15A3H_req <- GET(paste0(API_URL, "quality/", productAndVersion))
 MCD15A3H_content <- content(MCD15A3H_req)                      # Retrieve the content of request
@@ -603,7 +603,7 @@ Here, load the CSV file containing the results from your request using `readr` p
 Use the `readr` package to load the CSV file containing the results from the AppEEARS request.
 ```{r, message= FALSE, warning= FALSE}
 # Make a list of csv files in the output directory
-files <- list.files(outDir, pattern = "\\MOD11A2-006-results.csv$") 
+files <- list.files(outDir, pattern = "\\MOD11A2-061-results.csv$") 
 # Read the MOD11A2 results
 df <- read_csv(paste0(outDir,"/", files))
 ```
@@ -613,7 +613,7 @@ lst_SOAP <- df %>%
   # Filter df
   filter(Category == "SOAP") %>%  
   # Select desired columns
-  select(Latitude, Longitude, Date ,MOD11A2_006_LST_Day_1km, MOD11A2_006_LST_Night_1km) 
+  select(Latitude, Longitude, Date ,MOD11A2_061_LST_Day_1km, MOD11A2_061_LST_Night_1km) 
 ```
 Extract information for LST_DAY_1KM from MOD11_response of product service call from earlier in the tutorial.
 ```{r}
@@ -631,15 +631,15 @@ Next, plot a time series of daytime LST for the selected point. Below, filter th
 ```{r}
 lst_SOAP <- lst_SOAP %>%
   # exclude NoData
-  filter(MOD11A2_006_LST_Day_1km != fillValue)%>%
-  filter(MOD11A2_006_LST_Night_1km != fillValue)
+  filter(MOD11A2_061_LST_Day_1km != fillValue)%>%
+  filter(MOD11A2_061_LST_Night_1km != fillValue)
 
 ```
 Next, plot LST Day as a time series with some additional formatting using `ggplot2`.
 ```{r, fig.width = 12, fig.height=5}
 ggplot(lst_SOAP)+
-  geom_line(aes(x= Date, y = MOD11A2_006_LST_Day_1km), size=1, color="blue")+
-  geom_point(aes(x= Date, y = MOD11A2_006_LST_Day_1km), shape=18 , size = 3, color="blue")+
+  geom_line(aes(x= Date, y = MOD11A2_061_LST_Day_1km), size=1, color="blue")+
+  geom_point(aes(x= Date, y = MOD11A2_061_LST_Day_1km), shape=18 , size = 3, color="blue")+
   labs(title = "Time Series",
        x = "Date",
        y = sprintf( "LST_Day_1km (%s)", unit))+
@@ -655,7 +655,7 @@ ggplot(lst_SOAP)+
 
 Using the `tidyr` package, the LST Day and Night values for Grand Canyon NP are being gathered in a single column to be used to make a plot including both  `LST_Day_1km` and `LST_Night_1km`.
 ```{r}
-lst_SOAP_DN <- tidyr::gather(lst_SOAP, key = Tstat , value = LST, MOD11A2_006_LST_Day_1km, MOD11A2_006_LST_Night_1km)
+lst_SOAP_DN <- tidyr::gather(lst_SOAP, key = Tstat , value = LST, MOD11A2_061_LST_Day_1km, MOD11A2_061_LST_Night_1km)
 lst_SOAP_DN[1:5,]                     # print the five first observations 
 ```
 
@@ -686,14 +686,14 @@ Finally, bring in the daytime LST data from `SJER` , and compare with daytime LS
 Here, the `dplyr` is used to extract the LST_DAY_1km for `SJER`.  
 ```{r}
 lst_SJER <- df %>%
-  filter(MOD11A2_006_LST_Day_1km != fillValue) %>%        # Filter fill value 
+  filter(MOD11A2_061_LST_Day_1km != fillValue) %>%        # Filter fill value 
   filter(Category == "SJER")%>%                           # Filter SJER national park
-  select(Date, MOD11A2_006_LST_Day_1km)                   # Select desired columns
+  select(Date, MOD11A2_061_LST_Day_1km)                   # Select desired columns
 ```
 Make a scatterplot.
 ```{r, eval=FALSE}
 ggplot()+
-  geom_point(aes(x=lst_SOAP$MOD11A2_006_LST_Day_1km, y=lst_SJER$MOD11A2_006_LST_Day_1km[-11]), shape=18 , size = 3, color="blue")+
+  geom_point(aes(x=lst_SOAP$MOD11A2_061_LST_Day_1km, y=lst_SJER$MOD11A2_061_LST_Day_1km[-11]), shape=18 , size = 3, color="blue")+
   labs(title = "MODIS LST: SOAP vs. SJER, 2020",
        x = sprintf("SOAP: LST_Day_1km (%s)",unit),
        y = sprintf( "SJER: LST_Day_1km (%s)",unit))+
@@ -826,7 +826,7 @@ library(httr)              # To send a request to the server/receive a response 
 library(jsonlite)          # Implements a bidirectional mapping between JSON data and the most important R data types
 library(geojsonio)         # Convert data from various R classes to 'GeoJSON' 
 library(geojsonR)          # Functions for processing GeoJSON objects
-library(rgdal)             # Functions for spatial data input/output
+library(sf)                # Functions for spatial data input/output
 library(sp)                # classes and methods for spatial data types
 library(raster)            # Classes and methods for raster data
 library(rasterVis)         # Advanced plotting functions for raster objects 
@@ -908,7 +908,7 @@ for (p in products){
 The product service provides many useful details, including if a product is currently available in AppEEARS, a description, and information on the spatial and temporal resolution. Below, the product details are retrieved using 'ProductAndVersion'. 
 ```{r}
 # Convert the MCD15A3H.006 info to JSON object and print the prettified info
-prettify(toJSON(products$"MCD15A3H.006")) 
+prettify(toJSON(products$"MCD15A3H.061")) 
 ```
 Below, search for products containing Leaf Area Index in their description.
 
@@ -925,13 +925,13 @@ LAI_Products
 Using the info above, Create a list of desired products.  
 
 ```{r}
-desired_products <- c('MCD15A3H.006','MOD11A2.006','SRTMGL1_NC.003')   # Create a list of desired products 
+desired_products <- c('MCD15A3H.061','MOD11A2.061','SRTMGL1_NC.003')   # Create a list of desired products 
 desired_products
 ```
 
 ***
 ## Search and Explore Available Layers
-This API call will list all of the layers available for a given product. Each product is referenced by its `ProductAndVersion` property which is also referred to as the product_id. First, request the layers for the `MCD15A3H.006` product.
+This API call will list all of the layers available for a given product. Each product is referenced by its `ProductAndVersion` property which is also referred to as the product_id. First, request the layers for the `MCD15A3H.061` product.
 
 ```{r}
 # Request layers for the 1st product in the list: MCD15A3H.006
@@ -942,7 +942,7 @@ remove(MCD15A3H_req, MCD15A3H_content)                                # Remove t
 #prettify(MCD15A3H_response)                                          # Print the prettified response
 names(fromJSON(MCD15A3H_response))                                    # print the layer's names    
 ```
-Next, request the layers for the `MOD11A2.006` product.
+Next, request the layers for the `MOD11A2.061` product.
 ```{r, cache=TRUE}
 MOD11_req <- GET(paste0(API_URL,"product/", desired_products[2]))  # Request the info of a product from product URL
 MOD11_content <- content(MOD11_req)                                # Retrieve content of the request
@@ -964,7 +964,7 @@ Lastly, select the desired layers and pertinent products and make a data frame u
 # Create a vector of desired layers
 desired_layers <- c("LST_Day_1km","LST_Night_1km","Lai_500m","SRTMGL1_DEM")     
 # Create a vector of products including the desired layers
-desired_prods <- c("MOD11A2.006","MOD11A2.006","MCD15A3H.006","SRTMGL1_NC.003") 
+desired_prods <- c("MOD11A2.061","MOD11A2.061","MCD15A3H.061","SRTMGL1_NC.003") 
 # Create a data frame including the desired data products and layers
 layers <- data.frame(product = desired_prods, layer = desired_layers)              
 ```
@@ -975,10 +975,20 @@ The Submit task API call provides a way to submit a new request to be processed.
 
 ***
 ### Load a Shapefile
-In this section, begin by loading a shapefile using the `rgdal` package. The shapefile is publicly available for download from the [NPS website](https://irma.nps.gov/DataStore/Reference/Profile/2224545?lnv=True).
+In this section, we load a shapefile using the `sf` package. The shapefile is publicly available for download from the[NPS website](https://irma.nps.gov/DataStore/Reference/Profile/2224545?lnv=True).
+
 ```{r, cache=TRUE}
-onaq <- readOGR(dsn= "./ONAQ_extent", layer = "D15_ONAQ_C1_P1_v2")
-onaq_wgs84 <- spTransform(onaq, CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+nps <- st_read(
+    "./data/Administrative_Boundaries_of_National_Park_System_Units.gdb",
+    layer = "nps_boundary"
+)
+
+onaq <- nps[
+    grepl("Organ Pipe Cactus", nps$UNIT_NAME, ignore.case = TRUE),
+]
+
+onaq_wgs84 <- st_transform(onaq, 4326)
+
 ```
 
 convert the Spatial data frame to GeoJSON using `geojson_json` from `geojsonio` package, which makes it easy to create the geospatial data in and out of GeoJSON format.
@@ -1057,6 +1067,7 @@ task_content <- content(response)                           # Retrieve content o
 task_response <- toJSON(task_content, auto_unbox = TRUE)    # Convert the content to JSON and prettify it
 prettify(task_response)                                     # Print the task response
 ```
+
 A JSON downloaded from a previous request containing the information from that request can also be used if available
 ```{r}
 # task <- jsonlite::toJSON(jsonlite::read_json("LST-request.json"), digits = 10, auto_unbox = TRUE)

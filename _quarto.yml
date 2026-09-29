@@ -1,0 +1,43 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Environmental Informatics Using Research Infrastructures and their Data"
+
+  author:
+    - "Dr. Katharyn Duffy"
+    - "Dr. Ben Ruddell"
+
+  description: "Course text for NAU INF 550"
+
+  chapters:
+    - index.Rmd
+    - 01-Pre-Course_Skills.Rmd
+    #- 02-Introduction_to_NEON.Rmd
+    #- 03-USA-NPN.Rmd
+    #- 04-PhenoCam.Rmd
+    #- 05-Fluxes_and_Inter-operability - Copy.Rmd
+    #- 06-NEON_AOP.Rmd
+    #- 07-NASA_EOS.Rmd
+    #- 08-USGS.Rmd
+    #- 09-FAQ.Rmd
+
+
+  repo-url: https://github.com/nau-ecoinfo/INF550-textbook
+
+  repo-actions:
+    - edit
+    - issue
+
+format:
+  html:
+    theme: default
+    css: style.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    search: true
+
+execute:
+  freeze: false
