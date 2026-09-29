@@ -14,14 +14,14 @@ book:
   chapters:
     - index.Rmd
     - 01-Pre-Course_Skills.Rmd
-    #- 02-Introduction_to_NEON.Rmd
-    #- 03-USA-NPN.Rmd
-    #- 04-PhenoCam.Rmd
-    #- 05-Fluxes_and_Inter-operability - Copy.Rmd
-    #- 06-NEON_AOP.Rmd
-    #- 07-NASA_EOS.Rmd
+    - 02-Introduction_to_NEON.Rmd
+    - 03-USA-NPN.Rmd
+    - 04-PhenoCam.Rmd
+    - 05-Fluxes_and_Inter-operability - Copy.Rmd
+    - 06-NEON_AOP.Rmd
+    - 07-NASA_EOS.Rmd
     #- 08-USGS.Rmd
-    #- 09-FAQ.Rmd
+    - 09-FAQ.Rmd
 
 
   repo-url: https://github.com/nau-ecoinfo/INF550-textbook
