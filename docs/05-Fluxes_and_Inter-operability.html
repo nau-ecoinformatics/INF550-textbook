@@ -110,7 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -139,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/nau-ecoinfo/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -241,7 +240,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#neon-flux-coding-lab" id="toc-neon-flux-coding-lab" class="nav-link" data-scroll-target="#neon-flux-coding-lab"><span class="header-section-number">5.6.1</span> NEON Flux Coding Lab</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1919,7 +1918,7 @@ BiocManager::install('rhdf5')</code></pre>
 <pre><code>Finished: Stacked 3 data tables and 3 metadata tables!</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Stacking took 4.213469 secs</code></pre>
+<pre><code>Stacking took 2.916004 secs</code></pre>
 </div>
 </div>
 <p><code>pr</code> is another named list, and again, metadata and units can be found in the <code>variables</code> table. The <code>PARPAR_30min</code> table contains a <code>verticalPosition</code> field. This field indicates the position on the tower, with 10 being the first tower level, and 20, 30, etc going up the tower.</p>
@@ -6554,7 +6553,7 @@ coercion</code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -6898,4 +6897,4 @@ coercion</code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

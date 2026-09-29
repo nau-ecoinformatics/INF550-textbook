@@ -8,8 +8,8 @@ book:
   author:
     - "Dr. Katharyn Duffy"
     - "Dr. Ben Ruddell"
-
   description: "Course text for NAU INF 550"
+  site-url: https://nau-ecoinformatics.github.io/INF550-textbook/
 
   chapters:
     - index.Rmd
@@ -24,7 +24,7 @@ book:
     - 09-FAQ.Rmd
 
 
-  repo-url: https://github.com/nau-ecoinfo/INF550-textbook
+  repo-url: https://github.com/nau-ecoinformatics/INF550-textbook
 
   repo-actions:
     - edit
@@ -33,7 +33,6 @@ book:
 format:
   html:
     theme: default
-    css: style.css
     toc: true
     toc-depth: 3
     number-sections: true

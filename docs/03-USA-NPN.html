@@ -110,7 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -139,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/nau-ecoinfo/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -553,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db43b706fe7'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\Rtmpmg0Yq6\file604075146c4'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -573,7 +572,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db43b706fe7'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db440511155'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\Rtmpmg0Yq6\file6040caa248b'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -593,7 +592,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db440511155'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db4747331cf'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\Rtmpmg0Yq6\file604010dc5e00'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -613,7 +612,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db4747331cf'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db44a084326'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\Rtmpmg0Yq6\file6040767c4abf'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -648,7 +647,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db44a084326'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpqiLeYF\file3db41b672d69'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\Rtmpmg0Yq6\file60401f351b0e'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1163,7 +1162,7 @@ Attaching package: 'dplyr'</code></pre>
 <pre><code>Finished: Stacked 3 data tables and 5 metadata tables!</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Stacking took 11.08477 secs</code></pre>
+<pre><code>Stacking took 11.3788 secs</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NEON sends the data as a nested list, so I need to undo that</span></span>
 <span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unlist all data frames</span></span>
@@ -1199,11 +1198,11 @@ Attaching package: 'lubridate'</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(phe_statusintensity<span class="sc">$</span>phenophaseName)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Open flowers"         "Leaves"               "Colored leaves"      
- [4] "Falling leaves"       "Increasing leaf size" "Breaking leaf buds"  
+<pre><code> [1] "Breaking leaf buds"   "Falling leaves"       "Colored leaves"      
+ [4] "Leaves"               "Increasing leaf size" "Open flowers"        
  [7] "Initial growth"       "Emerging needles"     "Breaking needle buds"
 [10] "Young needles"        "Open pollen cones"    "Young leaves"        
-[13] "Ripe fruits"          "Fruits"              </code></pre>
+[13] "Fruits"               "Ripe fruits"         </code></pre>
 </div>
 </div>
 <p>And select a single taxon:</p>
@@ -1550,7 +1549,7 @@ mgcv::summary.gam(model) </code></pre>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -1894,4 +1893,4 @@ mgcv::summary.gam(model) </code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/edit/main/03-USA-NPN.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/03-USA-NPN.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

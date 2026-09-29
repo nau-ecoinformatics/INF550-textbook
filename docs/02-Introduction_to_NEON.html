@@ -110,7 +110,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="nav-sidebar floating quarto-light">
@@ -139,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/nau-ecoinfo/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -267,7 +266,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#neon-written-questions" id="toc-neon-written-questions" class="nav-link" data-scroll-target="#neon-written-questions"><span class="header-section-number">2.13.1</span> NEON Written questions</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1539,7 +1538,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>req</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Response [https://data.neonscience.org:443/api/v0/products/DP1.10003.001]
-  Date: 2026-09-29 14:43
+  Date: 2026-09-29 15:36
   Status: 200
   Content-Type: application/json
   Size: 81.6 kB</code></pre>
@@ -3142,7 +3141,7 @@ $data$locationChildrenUrls
 <p><strong>Question 1:</strong> How does NEON address ‘dark data’ (Chapter 1)?</p>
 <p><strong>Question 2:</strong> How might or does the NEON project intersect with your current research or future career goals? <em>(1 paragraph)</em></p>
 </section></section></main></div>
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinfo/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><div id="ds-challenge" data-markdown="1">
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><div id="ds-challenge" data-markdown="1">
 <p><strong>Question 3:</strong> Use the map in <strong>Chapter 2:Intro to NEON</strong> to answer the following questions. Consider the research question that you may explore as your final semester project or a current project that you are working on and answer each of the following questions:</p>
 <ul>
 <li>Are there NEON field sites that are in study regions of interest to you?<br>
@@ -3343,7 +3342,7 @@ $data$locationChildrenUrls
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
