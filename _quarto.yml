@@ -17,7 +17,7 @@ book:
     - 02-Introduction_to_NEON.Rmd
     - 03-USA-NPN.Rmd
     - 04-PhenoCam.Rmd
-    - 05-Fluxes_and_Inter-operability - Copy.Rmd
+    - 05-Fluxes_and_Inter-operability.Rmd
     - 06-NEON_AOP.Rmd
     - 07-NASA_EOS.Rmd
     #- 08-USGS.Rmd
