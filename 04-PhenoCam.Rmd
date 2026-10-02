@@ -884,11 +884,11 @@ d) extract relavent phenological theresholds or "phenophases" from imagery.
 
 Using the *phenopix* R package allows users access to a suite of modern data processing methods for PhenoCam imagery. For further information, reference the [phenopix publication](https://www.sciencedirect.com/science/article/abs/pii/S0168192316300089). 
 
-![phenopix-pub](images/phenopix.png)
+![](images/phenopix.png)
 
 ### Install and use the phenopix package
 
-To begin utilizing the phenopix package, first install it using the following code. 
+To begin utilizing phenopix, first install the package. 
 
 ```{r, eval=FALSE}
 install.packages('phenopix')
@@ -903,7 +903,7 @@ The package utilizes an expected directory structure to store phenological image
 
 ```
 Put all your images in /IMG/ 
-Put your reference image in /REF/ 
+Put your reference image (to draw ROI) in /REF/ 
 Draw your ROI with DrawROI():
  set path_img_ref to  /REF/ 
  set path_ROIs to /ROI/ 
@@ -946,18 +946,22 @@ download_midday_images(
 We need one image to use as a reference for drawing the ROI. Here, we simply use the first downloaded image, moving it into the REF folder. 
 
 ```{r,results='hide'}
+# copy first image to /REF/
 file.copy(
   list.files(img_path, pattern = "\\.jpg$", full.names = TRUE)[1],
   ref_path)
 
+# record image filename 
 ref_image = list.files(ref_path)
 ```
 
 We can now use DrawMULTIROI() to draw a polygon around the vegetation we want to analyze. 
 
 ```{r, eval=FALSE}
+# enable a new window for graphics 
 windows() 
 
+# call DrawMULTIROI()
 roi.data <- DrawMULTIROI( 
   path_img_ref = ref_path, 
   path_ROIs = roi_path, 
@@ -998,7 +1002,6 @@ sp::plot(
 ```
 
 ![](images/ROI1_canopy.jpg)
-
 The red polygon shows the pixels that will be used to calculate vegetation greenness.
 
 ### Extracting vegetation index time series 
@@ -1260,8 +1263,16 @@ Now look in your working directory.  You have data!  Read it in:
 
 
 ```{r}
-# load the time series data but replace the csv filename with whatever you downloaded
-df <- read.table("data/harvard_DB_1000_3day.csv", header = TRUE, sep = ",")
+# load the time series data, replace the csv filename with whatever you downloaded
+pheno <- phenocamr::read_phenocam("data/harvard_DB_1000_3day.csv")
+
+# Check if 'smooth_gcc_90' is missing from the data frame columns. It is typically provided, however, if not can be generated using the smooth_ts() function 
+if (!"smooth_gcc_90" %in% names(pheno$data)) {
+  pheno <- phenocamr::smooth_ts(pheno)
+}
+
+# extract the dataframe 
+df <- pheno$data
 
 # read in the transition date file
 td <- read.table("data/harvard_DB_1000_3day_transition_dates.csv",

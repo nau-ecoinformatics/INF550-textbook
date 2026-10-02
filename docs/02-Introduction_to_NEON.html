@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions:</span></a>
   </div>
@@ -212,61 +218,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a>
   <ul class="collapse">
-  <li><a href="#guest-lectures" id="toc-guest-lectures" class="nav-link" data-scroll-target="#guest-lectures"><span class="header-section-number">2.1.1</span> Guest Lectures</a></li>
-  <li><a href="#assignments-in-this-chapter" id="toc-assignments-in-this-chapter" class="nav-link" data-scroll-target="#assignments-in-this-chapter"><span class="header-section-number">2.1.2</span> Assignments in this Chapter</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</a></li>
   <li><a href="#the-neon-project-mission-design" id="toc-the-neon-project-mission-design" class="nav-link" data-scroll-target="#the-neon-project-mission-design"><span class="header-section-number">2.2</span> The NEON Project Mission &amp; Design</a></li>
   <li><a href="#the-science-and-design-of-neon" id="toc-the-science-and-design-of-neon" class="nav-link" data-scroll-target="#the-science-and-design-of-neon"><span class="header-section-number">2.3</span> The Science and Design of NEON</a></li>
-  <li><a href="#neons-spatial-design" id="toc-neons-spatial-design" class="nav-link" data-scroll-target="#neons-spatial-design"><span class="header-section-number">2.4</span> NEON’s Spatial Design</a>
-  <ul class="collapse">
-  <li><a href="#neon-samples-all-20-eco-regions" id="toc-neon-samples-all-20-eco-regions" class="nav-link" data-scroll-target="#neon-samples-all-20-eco-regions"><span class="header-section-number">2.4.1</span> NEON Samples All 20 Eco-Regions</a></li>
-  </ul></li>
-  <li><a href="#how-neon-collects-data" id="toc-how-neon-collects-data" class="nav-link" data-scroll-target="#how-neon-collects-data"><span class="header-section-number">2.5</span> How NEON Collects Data</a>
-  <ul class="collapse">
-  <li><a href="#specimens-samples" id="toc-specimens-samples" class="nav-link" data-scroll-target="#specimens-samples"><span class="header-section-number">2.5.1</span> Specimens &amp; Samples</a></li>
-  <li><a href="#airborne-remote-sensing" id="toc-airborne-remote-sensing" class="nav-link" data-scroll-target="#airborne-remote-sensing"><span class="header-section-number">2.5.2</span> Airborne Remote Sensing</a></li>
-  </ul></li>
-  <li><a href="#accessing-neon-data" id="toc-accessing-neon-data" class="nav-link" data-scroll-target="#accessing-neon-data"><span class="header-section-number">2.6</span> Accessing NEON Data</a>
-  <ul class="collapse">
-  <li><a href="#pathways-to-access-neon-data" id="toc-pathways-to-access-neon-data" class="nav-link" data-scroll-target="#pathways-to-access-neon-data"><span class="header-section-number">2.6.1</span> Pathways to access NEON Data</a></li>
-  </ul></li>
-  <li><a href="#hands-on-accessing-neon-data-user-tokens" id="toc-hands-on-accessing-neon-data-user-tokens" class="nav-link" data-scroll-target="#hands-on-accessing-neon-data-user-tokens"><span class="header-section-number">2.7</span> Hands on: Accessing NEON Data &amp; User Tokens</a>
-  <ul class="collapse">
-  <li><a href="#via-the-neon-api-with-your-user-token" id="toc-via-the-neon-api-with-your-user-token" class="nav-link" data-scroll-target="#via-the-neon-api-with-your-user-token"><span class="header-section-number">2.7.1</span> Via the NEON API, with your User Token</a></li>
-  <li><a href="#get-a-neon-api-token" id="toc-get-a-neon-api-token" class="nav-link" data-scroll-target="#get-a-neon-api-token"><span class="header-section-number">2.7.6</span> Get a NEON API Token</a></li>
-  <li><a href="#use-the-api-token-in-neonutilities" id="toc-use-the-api-token-in-neonutilities" class="nav-link" data-scroll-target="#use-the-api-token-in-neonutilities"><span class="header-section-number">2.7.7</span> Use the API token in neonUtilities</a></li>
-  <li><a href="#token-management-for-open-code" id="toc-token-management-for-open-code" class="nav-link" data-scroll-target="#token-management-for-open-code"><span class="header-section-number">2.7.8</span> Token management for open code</a></li>
-  </ul></li>
-  <li><a href="#hands-on-neon-tos-data" id="toc-hands-on-neon-tos-data" class="nav-link" data-scroll-target="#hands-on-neon-tos-data"><span class="header-section-number">2.8</span> Hands on: NEON TOS Data</a>
-  <ul class="collapse">
-  <li><a href="#pull-in-tree-data-from-neons-tos-and-investigate-relationships" id="toc-pull-in-tree-data-from-neons-tos-and-investigate-relationships" class="nav-link" data-scroll-target="#pull-in-tree-data-from-neons-tos-and-investigate-relationships"><span class="header-section-number">2.8.1</span> Pull in Tree Data from NEON’s TOS and investigate relationships</a></li>
-  </ul></li>
-  <li><a href="#intro-to-neon-exercises-part-1" id="toc-intro-to-neon-exercises-part-1" class="nav-link" data-scroll-target="#intro-to-neon-exercises-part-1"><span class="header-section-number">2.9</span> Intro to NEON Exercises Part 1</a>
-  <ul class="collapse">
-  <li><a href="#neon-coding-lab---tos-vegetation-structure" id="toc-neon-coding-lab---tos-vegetation-structure" class="nav-link" data-scroll-target="#neon-coding-lab---tos-vegetation-structure"><span class="header-section-number">2.9.1</span> NEON Coding Lab - TOS Vegetation Structure</a></li>
-  </ul></li>
+  <li><a href="#neons-spatial-design" id="toc-neons-spatial-design" class="nav-link" data-scroll-target="#neons-spatial-design"><span class="header-section-number">2.4</span> NEON’s Spatial Design</a></li>
+  <li><a href="#how-neon-collects-data" id="toc-how-neon-collects-data" class="nav-link" data-scroll-target="#how-neon-collects-data"><span class="header-section-number">2.5</span> How NEON Collects Data</a></li>
+  <li><a href="#accessing-neon-data" id="toc-accessing-neon-data" class="nav-link" data-scroll-target="#accessing-neon-data"><span class="header-section-number">2.6</span> Accessing NEON Data</a></li>
+  <li><a href="#hands-on-accessing-neon-data-user-tokens" id="toc-hands-on-accessing-neon-data-user-tokens" class="nav-link" data-scroll-target="#hands-on-accessing-neon-data-user-tokens"><span class="header-section-number">2.7</span> Hands on: Accessing NEON Data &amp; User Tokens</a></li>
+  <li><a href="#hands-on-neon-tos-data" id="toc-hands-on-neon-tos-data" class="nav-link" data-scroll-target="#hands-on-neon-tos-data"><span class="header-section-number">2.8</span> Hands on: NEON TOS Data</a></li>
+  <li><a href="#intro-to-neon-exercises-part-1" id="toc-intro-to-neon-exercises-part-1" class="nav-link" data-scroll-target="#intro-to-neon-exercises-part-1"><span class="header-section-number">2.9</span> Intro to NEON Exercises Part 1</a></li>
   <li><a href="#hands-on-pulling-neon-data-via-the-api" id="toc-hands-on-pulling-neon-data-via-the-api" class="nav-link" data-scroll-target="#hands-on-pulling-neon-data-via-the-api"><span class="header-section-number">2.10</span> Hands on: Pulling NEON Data via the API</a></li>
-  <li><a href="#what-is-an-api" id="toc-what-is-an-api" class="nav-link" data-scroll-target="#what-is-an-api"><span class="header-section-number">2.11</span> What is an API?</a>
-  <ul class="collapse">
-  <li><a href="#anatomy-of-an-api-call" id="toc-anatomy-of-an-api-call" class="nav-link" data-scroll-target="#anatomy-of-an-api-call"><span class="header-section-number">2.11.1</span> Anatomy of an API call</a></li>
-  <li><a href="#targets" id="toc-targets" class="nav-link" data-scroll-target="#targets"><span class="header-section-number">2.11.2</span> Targets:</a></li>
-  <li><a href="#observational-data-os" id="toc-observational-data-os" class="nav-link" data-scroll-target="#observational-data-os"><span class="header-section-number">2.11.3</span> Observational data (OS)</a></li>
-  <li><a href="#instrumentation-data-is" id="toc-instrumentation-data-is" class="nav-link" data-scroll-target="#instrumentation-data-is"><span class="header-section-number">2.11.4</span> Instrumentation data (IS)</a></li>
-  <li><a href="#remote-sensing-data-aop" id="toc-remote-sensing-data-aop" class="nav-link" data-scroll-target="#remote-sensing-data-aop"><span class="header-section-number">2.11.5</span> Remote sensing data (AOP)</a></li>
-  <li><a href="#geolocation-data" id="toc-geolocation-data" class="nav-link" data-scroll-target="#geolocation-data"><span class="header-section-number">2.11.6</span> Geolocation data</a></li>
-  <li><a href="#querying-a-single-named-location" id="toc-querying-a-single-named-location" class="nav-link" data-scroll-target="#querying-a-single-named-location"><span class="header-section-number">2.11.7</span> Querying a single named location</a></li>
-  <li><a href="#taxonomy" id="toc-taxonomy" class="nav-link" data-scroll-target="#taxonomy"><span class="header-section-number">2.11.8</span> Taxonomy</a></li>
-  </ul></li>
+  <li><a href="#what-is-an-api" id="toc-what-is-an-api" class="nav-link" data-scroll-target="#what-is-an-api"><span class="header-section-number">2.11</span> What is an API?</a></li>
   <li><a href="#stacking-neon-data" id="toc-stacking-neon-data" class="nav-link" data-scroll-target="#stacking-neon-data"><span class="header-section-number">2.12</span> Stacking NEON data</a></li>
-  <li><a href="#intro-to-neon-exercises-part-2" id="toc-intro-to-neon-exercises-part-2" class="nav-link" data-scroll-target="#intro-to-neon-exercises-part-2"><span class="header-section-number">2.13</span> Intro to NEON Exercises Part 2</a>
-  <ul class="collapse">
-  <li><a href="#neon-written-questions" id="toc-neon-written-questions" class="nav-link" data-scroll-target="#neon-written-questions"><span class="header-section-number">2.13.1</span> NEON Written questions</a></li>
-  </ul></li>
+  <li><a href="#intro-to-neon-exercises-part-2" id="toc-intro-to-neon-exercises-part-2" class="nav-link" data-scroll-target="#intro-to-neon-exercises-part-2"><span class="header-section-number">2.13</span> Intro to NEON Exercises Part 2</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/02-Introduction_to_NEON.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1538,7 +1505,7 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>req</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Response [https://data.neonscience.org:443/api/v0/products/DP1.10003.001]
-  Date: 2026-09-29 15:36
+  Date: 2026-10-02 16:03
   Status: 200
   Content-Type: application/json
   Size: 81.6 kB</code></pre>

@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions:</span></a>
   </div>
@@ -212,35 +218,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</a>
   <ul class="collapse">
-  <li><a href="#guest-lectures" id="toc-guest-lectures" class="nav-link" data-scroll-target="#guest-lectures"><span class="header-section-number">5.1.1</span> Guest Lectures</a></li>
-  <li><a href="#assignments-in-this-chapter" id="toc-assignments-in-this-chapter" class="nav-link" data-scroll-target="#assignments-in-this-chapter"><span class="header-section-number">5.1.2</span> Assignments in this chapter</a></li>
-  </ul></li>
-  <li><a href="#eddy-co_variance-data-what-does-it-actually-measure" id="toc-eddy-co_variance-data-what-does-it-actually-measure" class="nav-link" data-scroll-target="#eddy-co_variance-data-what-does-it-actually-measure"><span class="header-section-number">5.2</span> Eddy Co_variance Data: What does it actually measure?</a>
-  <ul class="collapse">
-  <li><a href="#example-eddy-site" id="toc-example-eddy-site" class="nav-link" data-scroll-target="#example-eddy-site"><span class="header-section-number">5.2.1</span> Example Eddy Site</a></li>
-  </ul></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">5.1</span> Learning Objectives</a></li>
+  <li><a href="#eddy-co_variance-data-what-does-it-actually-measure" id="toc-eddy-co_variance-data-what-does-it-actually-measure" class="nav-link" data-scroll-target="#eddy-co_variance-data-what-does-it-actually-measure"><span class="header-section-number">5.2</span> Eddy Co_variance Data: What does it actually measure?</a></li>
   <li><a href="#examples-of-other-flux-networks-ameriflux-fluxnet" id="toc-examples-of-other-flux-networks-ameriflux-fluxnet" class="nav-link" data-scroll-target="#examples-of-other-flux-networks-ameriflux-fluxnet"><span class="header-section-number">5.3</span> Examples of Other Flux Networks: AMERIFLUX &amp; FLUXNET</a></li>
   <li><a href="#the-power-of-networked-ecology-bridging-to-ameriflux-and-beyond" id="toc-the-power-of-networked-ecology-bridging-to-ameriflux-and-beyond" class="nav-link" data-scroll-target="#the-power-of-networked-ecology-bridging-to-ameriflux-and-beyond"><span class="header-section-number">5.4</span> The Power of Networked Ecology: Bridging to AMERIFLUX and Beyond</a></li>
-  <li><a href="#hands-on-introduction-to-working-with-neon-eddy-flux-data" id="toc-hands-on-introduction-to-working-with-neon-eddy-flux-data" class="nav-link" data-scroll-target="#hands-on-introduction-to-working-with-neon-eddy-flux-data"><span class="header-section-number">5.5</span> Hands On: Introduction to working with NEON eddy flux data</a>
-  <ul class="collapse">
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup"><span class="header-section-number">5.5.1</span> Setup</a></li>
-  <li><a href="#data-levels" id="toc-data-levels" class="nav-link" data-scroll-target="#data-levels"><span class="header-section-number">5.5.2</span> Data Levels</a></li>
-  <li><a href="#extract-level-4-data-fluxes" id="toc-extract-level-4-data-fluxes" class="nav-link" data-scroll-target="#extract-level-4-data-fluxes"><span class="header-section-number">5.5.3</span> Extract Level 4 data (Fluxes!)</a></li>
-  <li><a href="#time-stamps" id="toc-time-stamps" class="nav-link" data-scroll-target="#time-stamps"><span class="header-section-number">5.5.4</span> Time stamps</a></li>
-  <li><a href="#merge-flux-data-with-other-sensor-data" id="toc-merge-flux-data-with-other-sensor-data" class="nav-link" data-scroll-target="#merge-flux-data-with-other-sensor-data"><span class="header-section-number">5.5.5</span> Merge flux data with other sensor data</a></li>
-  <li><a href="#vertical-profile-data-level-3" id="toc-vertical-profile-data-level-3" class="nav-link" data-scroll-target="#vertical-profile-data-level-3"><span class="header-section-number">5.5.6</span> Vertical profile data (Level 3)</a></li>
-  <li><a href="#un-interpolated-vertical-profile-data-level-2" id="toc-un-interpolated-vertical-profile-data-level-2" class="nav-link" data-scroll-target="#un-interpolated-vertical-profile-data-level-2"><span class="header-section-number">5.5.7</span> Un-interpolated vertical profile data (Level 2)</a></li>
-  <li><a href="#calibrated-raw-data-level-1" id="toc-calibrated-raw-data-level-1" class="nav-link" data-scroll-target="#calibrated-raw-data-level-1"><span class="header-section-number">5.5.8</span> Calibrated raw data (Level 1)</a></li>
-  </ul></li>
-  <li><a href="#flux-measurements-and-interoperability-exercise" id="toc-flux-measurements-and-interoperability-exercise" class="nav-link" data-scroll-target="#flux-measurements-and-interoperability-exercise"><span class="header-section-number">5.6</span> Flux Measurements and Interoperability Exercise</a>
-  <ul class="collapse">
-  <li><a href="#neon-flux-coding-lab" id="toc-neon-flux-coding-lab" class="nav-link" data-scroll-target="#neon-flux-coding-lab"><span class="header-section-number">5.6.1</span> NEON Flux Coding Lab</a></li>
-  </ul></li>
+  <li><a href="#hands-on-introduction-to-working-with-neon-eddy-flux-data" id="toc-hands-on-introduction-to-working-with-neon-eddy-flux-data" class="nav-link" data-scroll-target="#hands-on-introduction-to-working-with-neon-eddy-flux-data"><span class="header-section-number">5.5</span> Hands On: Introduction to working with NEON eddy flux data</a></li>
+  <li><a href="#flux-measurements-and-interoperability-exercise" id="toc-flux-measurements-and-interoperability-exercise" class="nav-link" data-scroll-target="#flux-measurements-and-interoperability-exercise"><span class="header-section-number">5.6</span> Flux Measurements and Interoperability Exercise</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/05-Fluxes_and_Inter-operability.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1918,7 +1904,7 @@ BiocManager::install('rhdf5')</code></pre>
 <pre><code>Finished: Stacked 3 data tables and 3 metadata tables!</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Stacking took 2.916004 secs</code></pre>
+<pre><code>Stacking took 2.934154 secs</code></pre>
 </div>
 </div>
 <p><code>pr</code> is another named list, and again, metadata and units can be found in the <code>variables</code> table. The <code>PARPAR_30min</code> table contains a <code>verticalPosition</code> field. This field indicates the position on the tower, with 10 being the first tower level, and 20, 30, etc going up the tower.</p>

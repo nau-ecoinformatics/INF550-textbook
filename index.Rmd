@@ -1,18 +1,17 @@
 --- 
 title: "Environmental Informatics Using Research Infrastructures and their Data"
 author: "Dr. Katharyn Duffy, Dr. Ben Ruddell"
-#date: "2020 Edition"
-cover-image: "/Users/rohan/INF550-textbook/images/EcoInfo4.png"
-site: bookdown::bookdown_site
-output: bookdown::gitbook
-documentclass: book
-github-repo: 'nau-ecoinfo/INF550-textbook'
+#date: "2026"
+cover-image: "images/EcoInfo4.png"
+github-repo: 'nau-ecoinformatics/INF550-textbook'
 description: "Course text for NAU INF 550"
 always_allow_html: true
 ---
->2020 Edition
+
+> 2nd Edition (2026)
 
 # Preface {-}
+
 
 This textbook provides an introduction to environmental and ecological informatics in the context of "big science"- that is, in the context of research infrastructures and observatories that collect and publish reams of observations and derived data products about the earth and its environment. The reader will learn how to make use of environmental infrastructures' data products. 
 
@@ -31,6 +30,8 @@ Efforts have been made to select activities using data products, software, and t
 
 Informatics is arguably *the key scientific discipline* of the 21st century, and research infrastructures are the source of the raw natural resource fueling the informatics revolution: observational data. Most 21st century scientists and scientific staff will spend their careers immersed in the data revolution. We sincerely hope that this textbook provides the launchpad you need for your career or for your next project in environmental science.
 
+## Second Edition {-}
+This second edition represents a substantial effort to bring the textbook's computational examples and workflows into alignment with the current environmental informatics landscape. While the underlying scientific and computational concepts and learning objectives remain the same, the software packages, APIs, data products, and research infrastructures have continued to evolve. By six years after the first edition, an estimated 20-30% of the executable code required revision, with some sections needing to be rewritten entirely to utilize modern packages and workflows. This experience illustrates a key challenge in informatics, and particularly in the fast evolving field of ecoinformatics: software tools require continual maintenance or face becoming obsolete or non-functional. Maintaining reproducible educational resources in this field therefore requires ongoing revision as the surrounding research infrastructure evolves. In addition to updating the existing workflows, this second edition introduces additional research infrastructures which broaden the scope of the textbook while continuing to advance its original purpose. 
 
 ## Acknowledgements {-}
 

@@ -164,6 +164,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions:</span></a>
   </div>
@@ -177,16 +183,14 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
   <ul class="collapse">
-  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a>
-  <ul class="collapse">
-  <li><a href="#key-contributors" id="toc-key-contributors" class="nav-link" data-scroll-target="#key-contributors">Key Contributors</a></li>
-  </ul></li>
+  <li><a href="#second-edition" id="toc-second-edition" class="nav-link" data-scroll-target="#second-edition">Second Edition</a></li>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/index.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -222,9 +226,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><img src=".\Users/rohan/INF550-textbook/images/EcoInfo4.png" title="Environmental Informatics Using Research Infrastructures and their Data" class="quarto-cover-image nolightbox img-fluid"></p>
+<p><img src="images/EcoInfo4.png" title="Environmental Informatics Using Research Infrastructures and their Data" class="quarto-cover-image nolightbox img-fluid"></p>
 <blockquote class="blockquote">
-<p>2020 Edition</p>
+<p>2nd Edition (2026)</p>
 </blockquote>
 <section id="preface" class="level1 unnumbered">
 <h1 class="unnumbered">Preface</h1>
@@ -240,6 +244,10 @@ ul.task-list li input[type="checkbox"] {
 <p>The scope of the infrastructures and data products is mostly U.S. focused in this edition, but some of these infrastructures have a global reach, and the material is almost as useful for students in other countries as for U.S. students. The textbook can be tackled one unit at a time as a lab manual within a university course, or- in its intended application- a standard semester-long three-credit-hour graduate course should be offered to cover the entire textbook from start to finish. Digital supplements are provided with examples of successful projects.</p>
 <p>Efforts have been made to select activities using data products, software, and tools that are relatively mature and stable. Even so, because this textbook covers a rapidly moving field, portions will, unfortunately, become dated quickly. It is the authors’ intent to release frequent editions that update and expand the material to keep pace with the rapid development of our field.</p>
 <p>Informatics is arguably <em>the key scientific discipline</em> of the 21st century, and research infrastructures are the source of the raw natural resource fueling the informatics revolution: observational data. Most 21st century scientists and scientific staff will spend their careers immersed in the data revolution. We sincerely hope that this textbook provides the launchpad you need for your career or for your next project in environmental science.</p>
+<section id="second-edition" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="second-edition">Second Edition</h2>
+<p>This second edition represents a substantial effort to bring the textbook’s computational examples and workflows into alignment with the current environmental informatics landscape. While the underlying scientific and computational concepts and learning objectives remain the same, the software packages, APIs, data products, and research infrastructures have continued to evolve. By six years after the first edition, an estimated 20-30% of the executable code required revision, with some sections needing to be rewritten entirely to utilize modern packages and workflows. This experience illustrates a key challenge in informatics, and particularly in the fast evolving field of ecoinformatics: software tools require continual maintenance or face becoming obsolete or non-functional. Maintaining reproducible educational resources in this field therefore requires ongoing revision as the surrounding research infrastructure evolves. In addition to updating the existing workflows, this second edition introduces additional research infrastructures which broaden the scope of the textbook while continuing to advance its original purpose.</p>
+</section>
 <section id="acknowledgements" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="acknowledgements">Acknowledgements</h2>
 <p>This first version of the textbook was developed to offer INF550, a graduate course in the School of Informatics Computing and Cyber Systems at Northern Arizona University in Fall 2020, with funding and leadership from the National Science Foundation funded National Research Traineeship “T3” option in Ecological and Environmental Informatics within a PhD program in Informatics and Computing <em>(NRT-HDR #1829075, PI’s Ogle, Barber, Richardson, Ruddell, and Sankey)</em>. Our research infrastructure partners were critical to the creation of the material. Our partners at NEON - Battelle deserve special gratitude for anchoring the project. The opinions expressed are those of the researchers, and not necessarily the funding agencies. Special thanks to Megan Jones and Donal O’Leary at NEON-Battelle for their support in pulling NEON materials.</p>

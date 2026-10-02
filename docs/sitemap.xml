@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/index.html</loc>
-    <lastmod>2026-09-20T14:49:23.289Z</lastmod>
+    <lastmod>2026-10-02T16:00:49.037Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/01-Pre-Course_Skills.html</loc>
-    <lastmod>2026-09-22T16:48:17.659Z</lastmod>
+    <lastmod>2026-09-30T21:36:14.878Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/02-Introduction_to_NEON.html</loc>
@@ -18,7 +18,7 @@
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/04-PhenoCam.html</loc>
-    <lastmod>2026-09-28T17:27:49.688Z</lastmod>
+    <lastmod>2026-10-01T18:06:03.998Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/05-Fluxes_and_Inter-operability.html</loc>
@@ -31,6 +31,10 @@
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/07-NASA_EOS.html</loc>
     <lastmod>2026-09-23T23:13:37.457Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/08-USGS.html</loc>
+    <lastmod>2026-09-30T20:32:31.762Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/09-FAQ.html</loc>

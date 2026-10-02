@@ -20,7 +20,7 @@ book:
     - 05-Fluxes_and_Inter-operability.Rmd
     - 06-NEON_AOP.Rmd
     - 07-NASA_EOS.Rmd
-    #- 08-USGS.Rmd
+    - 08-USGS.Rmd
     - 09-FAQ.Rmd
 
 
@@ -34,7 +34,7 @@ format:
   html:
     theme: default
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     number-sections: true
     search: true
 

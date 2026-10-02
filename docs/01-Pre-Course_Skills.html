@@ -199,6 +199,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./09-FAQ.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Frequently Asked Questions:</span></a>
   </div>
@@ -212,32 +218,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
-  <ul>
-  <li><a href="#pre-course-skills-setup" id="toc-pre-course-skills-setup" class="nav-link active" data-scroll-target="#pre-course-skills-setup">Pre-Course Skills &amp; Setup</a>
   <ul class="collapse">
-  <li><a href="#installing-or-updating-r" id="toc-installing-or-updating-r" class="nav-link" data-scroll-target="#installing-or-updating-r">Installing or Updating R</a></li>
-  <li><a href="#windows-rrstudio-setup" id="toc-windows-rrstudio-setup" class="nav-link" data-scroll-target="#windows-rrstudio-setup">Windows R/RStudio Setup</a></li>
-  <li><a href="#mac-rrstudio-setup" id="toc-mac-rrstudio-setup" class="nav-link" data-scroll-target="#mac-rrstudio-setup">Mac R/RStudio Setup</a></li>
-  </ul></li>
-  <li><a href="#linux-rrstudio-setup" id="toc-linux-rrstudio-setup" class="nav-link" data-scroll-target="#linux-rrstudio-setup">Linux R/RStudio Setup</a>
-  <ul class="collapse">
-  <li><a href="#install-basic-packages-for-this-course" id="toc-install-basic-packages-for-this-course" class="nav-link" data-scroll-target="#install-basic-packages-for-this-course">Install basic packages for this course</a></li>
-  </ul></li>
+  <li><a href="#pre-course-skills-setup" id="toc-pre-course-skills-setup" class="nav-link active" data-scroll-target="#pre-course-skills-setup">Pre-Course Skills &amp; Setup</a></li>
+  <li><a href="#linux-rrstudio-setup" id="toc-linux-rrstudio-setup" class="nav-link" data-scroll-target="#linux-rrstudio-setup">Linux R/RStudio Setup</a></li>
   <li><a href="#installing-and-setting-up-git-github-on-your-machine" id="toc-installing-and-setting-up-git-github-on-your-machine" class="nav-link" data-scroll-target="#installing-and-setting-up-git-github-on-your-machine">Installing and Setting up Git &amp; Github on Your Machine</a></li>
   <li><a href="#installing-atom" id="toc-installing-atom" class="nav-link" data-scroll-target="#installing-atom">Installing Atom</a></li>
   <li><a href="#linking-rstudio-to-git" id="toc-linking-rstudio-to-git" class="nav-link" data-scroll-target="#linking-rstudio-to-git">Linking RStudio to Git</a></li>
   <li><a href="#how-we-will-be-conducting-this-course" id="toc-how-we-will-be-conducting-this-course" class="nav-link" data-scroll-target="#how-we-will-be-conducting-this-course">How we will be Conducting this Course</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises:</a>
-  <ul class="collapse">
-  <li><a href="#exercise-0.1-a-git-introduction" id="toc-exercise-0.1-a-git-introduction" class="nav-link" data-scroll-target="#exercise-0.1-a-git-introduction">Exercise 0.1: A git introduction</a></li>
-  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises:</a></li>
   <li><a href="#why-ecoinformatics" id="toc-why-ecoinformatics" class="nav-link" data-scroll-target="#why-ecoinformatics">Why ‘EcoInformatics’?</a>
   <ul class="collapse">
   <li><a href="#the-framework-of-this-course" id="toc-the-framework-of-this-course" class="nav-link" data-scroll-target="#the-framework-of-this-course">The Framework of this Course</a></li>
   <li><a href="#final-course-project-proposed-derived-data-product" id="toc-final-course-project-proposed-derived-data-product" class="nav-link" data-scroll-target="#final-course-project-proposed-derived-data-product">Final Course Project: Proposed Derived Data Product</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/01-Pre-Course_Skills.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/01-Pre-Course_Skills.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -264,17 +259,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The purpose of this course is to train you in key ecoinformatics practices.</p>
 <p>Therefore, as an Ecoinformatician you <em>need</em> to be able to:</p>
 <ol type="1">
-<li><p>Pull data from Application Programming Interfaces (APIs)</p>
-<ul>
-<li>More on this in Chapter 2</li>
-</ul></li>
-<li><p>Organize and document your code and data</p></li>
-<li><p>Version control your code to avoid disaster and make it reproducible</p>
-<ul>
-<li>For you, your collaborators, and/or the wider community</li>
-</ul></li>
-<li><p>Push your code up to public-facing repositories</p></li>
-<li><p>Pull others code from public repositories.</p></li>
+<li><p><strong>Access data.</strong> Pull data from Application Programming Interfaces (APIs).</p></li>
+<li><p><strong>Organize and document.</strong> Structure your code and data so that others can understand and reuse them.</p></li>
+<li><p><strong>Use version control.</strong> Track changes, avoid disasters, and make your work reproducible.</p></li>
+<li><p><strong>Share your code.</strong> Push your code to public-facing repositories.</p></li>
+<li><p><strong>Reuse existing code.</strong> Pull code from others’ public repositories.</p></li>
 </ol>
 <p>More thoughts on the benefits and power of reproducibility <a href="https://github.com/katharynduffy/ECOSS_reproducible_science">can be found here</a></p>
 <p>To be successful, both in this course and in your careers you will need these skills. This is why <strong>they are a requirement</strong> for this course. If you are already using these skills on a daily basis, fantastic! If you don’t feel that you have mastery in the workflows listed above we have placed lesson links throughout this chapter so that you can build these skills and be successful in this course.</p>

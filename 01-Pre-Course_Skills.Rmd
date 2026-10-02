@@ -14,19 +14,15 @@ practices.
 
 Therefore, as an Ecoinformatician you *need* to be able to:
 
-1.  Pull data from Application Programming Interfaces (APIs)
+1. **Access data.** Pull data from Application Programming Interfaces (APIs). 
 
-    -   More on this in Chapter 2
+2. **Organize and document.** Structure your code and data so that others can understand and reuse them.
 
-2.  Organize and document your code and data
+3. **Use version control.** Track changes, avoid disasters, and make your work reproducible.
 
-3.  Version control your code to avoid disaster and make it reproducible
+4. **Share your code.** Push your code to public-facing repositories.
 
-    -   For you, your collaborators, and/or the wider community
-
-4.  Push your code up to public-facing repositories
-
-5.  Pull others code from public repositories.
+5. **Reuse existing code.** Pull code from others' public repositories.
 
 More thoughts on the benefits and power of reproducibility [can be found
 here](https://github.com/katharynduffy/ECOSS_reproducible_science)

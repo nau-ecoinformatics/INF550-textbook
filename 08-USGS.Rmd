@@ -499,7 +499,7 @@ This function is the generic, catch-all for pulling down NWIS data. It can accep
 
 **Historic mean daily streamflow for sites in Maui County, Hawaii.**
 
-```{r read_waterdata-county, message=FALSE, warning=FALSE}
+```{r read_waterdata-county, message=FALSE, eval=FALSE}
 # Major filter: Maui County 
 ## need to also include the state when using counties as the major filter
 # Service: daily value, dv
@@ -554,13 +554,18 @@ This example uses `Sys.Date` to get the most recent date, so your dates will dif
 # Beginning: this past 30 days, use Sys.Date()
 
 prev30days <- Sys.Date() - 30
-SaltLake_totalN <- readNWISdata(bBox=c(-113.0428, 40.6474, -112.0265, 41.7018), service="qw", 
-                           parameterCd="00600", startDate=prev30days)
+
+SaltLake_totalN <- read_waterdata_samples(
+  boundingBox = c(-113.0428, 40.6474, -112.0265, 41.7018),
+  activityStartDateLower = prev30days,
+  activityStartDateUpper = Sys.Date()
+)
+
 # This service returns a lot of columns:
 names(SaltLake_totalN)
 
 # How many sites are returned?
-length(unique(SaltLake_totalN$site_no))
+length(unique(SaltLake_totalN$Location_Name))
 ```
 
 ### readNWISdv
@@ -576,11 +581,15 @@ This function is the daily value service function. It has a limited number of ar
 mt_available <- whatNWISdata(siteNumber="462107111312301", service="dv", parameterCd="00400")
 head(mt_available)
 
+
 # Major filter: site number, 462107111312301
 # Statistic: minimum and maximum, 00001 and 00002
 # Parameter: pH, 00400
 mt_site_pH <- readNWISdv(siteNumber="462107111312301", parameterCd="00400", 
                          statCd=c("00001", "00002"))
+
+
+
 head(mt_site_pH)
 ```
 
@@ -594,7 +603,10 @@ This function is the groundwater level service function. It has a limited number
 
 ```{r readnwisgwl, message=FALSE, warning=FALSE}
 # Major filter: site number, 452840122302202
-or_site_gwl <- readNWISgwl(siteNumbers="452840122302202")
+or_site_gwl <- read_waterdata_field_measurements(
+  monitoring_location_id = "USGS-452840122302202"
+)
+
 head(or_site_gwl)
 ```
 
@@ -608,7 +620,9 @@ This function is the field measurement service function which pulls manual measu
 
 ```{r readnwismeas, message=FALSE, warning=FALSE}
 # Major filter: site number, 02311500
-fl_site_meas <- readNWISmeas(siteNumbers="02311500")
+fl_site_meas <- read_waterdata_field_measurements(
+  monitoring_location_id = "USGS-02311500"
+)
 # Names of columns returned:
 names(fl_site_meas)
 ```
@@ -665,10 +679,23 @@ This function is the water quality service function. It has a limited number of 
 # Begin date: October 1, 2015
 # End date: September 30, 2016
 
-or_site_do <- readNWISqw(siteNumbers=c("455415119314601", "454554119121801"), parameterCd="00300",
-                        startDate="2015-10-01", endDate="2016-09-30")
+or_site_do <- read_waterdata_samples(
+  monitoringLocationIdentifier = c(
+    "USGS-455415119314601",
+    "USGS-454554119121801"
+  ),
+  usgsPCode = "00300",
+  activityStartDateLower = "2015-10-01",
+  activityStartDateUpper = "2016-09-30"
+)
 ncol(or_site_do)
-head(or_site_do[,c("site_no","sample_dt","result_va")])
+head(or_site_do[, c(
+  "Location_Identifier",
+  "Activity_StartDate",
+  "Result_Characteristic",
+  "Result_Measure",
+  "Result_MeasureUnit"
+)])
 ```
 
 <a name="readnwisqw-multparm"></a>
@@ -680,12 +707,21 @@ head(or_site_do[,c("site_no","sample_dt","result_va")])
 # Parameter: mercury and lead in micrograms/liter, 71890 and 01049
 # Begin date: January 1, 1972
 
-oh_site_cwa <- readNWISqw(siteNumbers="03237280", 
-                          parameterCd=c("71890", "01049"),
-                          startDate="1972-01-01")
+oh_site_cwa <- read_waterdata_samples(
+  monitoringLocationIdentifier = "USGS-03237280",
+  usgsPCode = c("71890", "01049"),
+  activityStartDateLower = "1972-01-01"
+)
 nrow(oh_site_cwa)
 ncol(oh_site_cwa)
-head(oh_site_cwa[,c("parm_cd","sample_dt","result_va")])
+
+head(oh_site_cwa[, c(
+  "USGSpcode",
+  "Activity_StartDate",
+  "Result_Characteristic",
+  "Result_Measure",
+  "Result_MeasureUnit"
+)])
 ```
 
 ### readNWISrating
@@ -707,12 +743,15 @@ There are also a number of attributes associated with the data.frame returned - 
 
 **Rating tables for Mississippi River at St. Louis, MO**
 
-```{r readnwisrating-base, message=FALSE, warning=FALSE}
+```{r readnwisrating-base, message=FALSE, warning=FALSE, cache=FALSE}
 # Major filter: site number, 07010000
 # Type: default, base 
 
-miss_rating_base <- readNWISrating(siteNumber="07010000")
-head(miss_rating_base)
+miss_rating_base <- read_waterdata_ratings(
+  monitoring_location_id = "USGS-07010000"
+)[[1]]
+
+head(miss_rating_base$ratings)
 ```
 
 
@@ -720,8 +759,12 @@ head(miss_rating_base)
 # Major filter: site number, 07010000
 # Type: corr 
 
-miss_rating_corr <- readNWISrating(siteNumber="07010000", type="corr")
-head(miss_rating_corr)
+miss_rating_corr <- read_waterdata_ratings(
+  monitoring_location_id = "USGS-07010000",
+  file_type = "corr"
+)[[1]]
+
+head(miss_rating_corr$ratings)
 ```
 
 
@@ -729,8 +772,12 @@ head(miss_rating_corr)
 # Major filter: site number, 07010000
 # Type: exsa 
 
-miss_rating_exsa <- readNWISrating(siteNumber="07010000", type="exsa")
-head(miss_rating_exsa)
+miss_rating_exsa <- read_waterdata_ratings(
+  monitoring_location_id = "USGS-07010000",
+  file_type = "exsa"
+)[[1]]
+
+head(miss_rating_exsa$ratings)
 ```
 
 ### readNWISsite
@@ -797,14 +844,13 @@ Follow along with the example below or see `?readNWISuse` for more information.
 <a name="readnwisuse"></a>
 
 **Las Vegas historic water use**
-
 ```{r readnwisuse, message=FALSE, warning=FALSE}
 # Major filter: Clark County, NV
 # Water-use category: public supply, PS
-vegas_wu <- readNWISuse(stateCd="NV", countyCd="Clark", categories="PS")
-ncol(vegas_wu)
-names(vegas_wu)
-head(vegas_wu[,1:7])
+#vegas_wu <- readNWISuse(stateCd="NV", countyCd="Clark", categories="PS")
+#ncol(vegas_wu)
+#names(vegas_wu)
+#head(vegas_wu[,1:7])
 ```
 
 ### readNWISuv
@@ -821,8 +867,12 @@ This function is the unit value (or instantaneous) service function. It has a li
 # Begin date: April 1, 2016
 # End date: April 30, 2016
 
-ca_site_do <- readNWISuv(siteNumbers="10336676", parameterCd=c("00060", "63680"),
-                         startDate="2016-04-01", endDate="2016-04-30")
+ca_site_do <- read_waterdata_continuous(
+  monitoring_location_id = "USGS-10336676",
+  parameter_code = c("00060", "63680"),
+  time = c("2016-04-01", "2016-04-30")
+)
+
 nrow(ca_site_do)
 head(ca_site_do)
 ```
@@ -919,27 +969,25 @@ Similar to `renameNWIScolumns`, `addWaterYear` can be used as a standalone funct
 ```{r addWaterYear, message=FALSE, warning=FALSE}
 # mean daily discharge on the Colorado River in Grand Canyon National Park for fall of 2014
 # The dates in Sept should be water year 2014, but the dates in Oct and Nov are water year 2015
-co_river_q_fall <- readNWISdv(siteNumber="09403850", parameterCd="00060", 
-                              startDate="2014-09-28", endDate="2014-11-30")
+co_river_q_fall <- read_waterdata_daily(
+  monitoring_location_id = "USGS-09403850",
+  parameter_code = "00060"
+)
+
+co_river_q_fall <- subset(
+  co_river_q_fall,
+  time >= as.Date("2018-09-28") &
+  time <= as.Date("2018-11-30")
+)
+
 head(co_river_q_fall)
 
 # now add the water year column
+co_river_q_fall$Date <- co_river_q_fall$time
 co_river_q_fall_wy <- addWaterYear(co_river_q_fall)
+
 head(co_river_q_fall_wy)
 unique(co_river_q_fall_wy$waterYear)
-```
-
-Now try with a pipe. 
-
-```{r addWaterYear-pipe, message=FALSE, warning=FALSE}
-# mean daily discharge on the Colorado River in Grand Canyon National Park for fall of 2014
-# pipe straight into rename function
-co_river_q_fall_pipe <- readNWISdv(siteNumber="09403850", parameterCd="00060", 
-                              startDate="2014-09-01", endDate="2014-11-30") %>% 
-  addWaterYear()
-
-names(co_river_q_fall_pipe)
-head(co_river_q_fall_pipe)
 ```
 
 **zeroPad**
@@ -1088,8 +1136,8 @@ siteInfo <- attr(Everglades_temp_2016_present, "siteInfo")
 library(maps)
 map('state', regions='florida')
 title(main="Everglade Sites")
-points(x=siteInfo$dec_lon_va, 
-       y=siteInfo$dec_lat_va)
+points(x=siteInfo$LongitudeMeasure, 
+       y=siteInfo$LatitudeMeasure)
 # Add a rectangle to see where your original query bounding box in relation to sites
 rect(-81.70, 25.08, -80.30, 26.51, col = NA, border = 'red')
 ```
@@ -1114,433 +1162,6 @@ Recently NOAA published a press release demonstrating that 2020 was *both* the h
 
 **3.** Calculate the monthly mean precipitation and streamflow from 2015-2019, and use that mean to calculate a 2020 anomaly timeseries.  Create two new plots (like #2 above) with the 2015-2019 mean as a thick black line, and 2020 anomaly as a thin red line.
 
-
-## geoKnife - Introduction
-
-## Lesson Summary
-
-This lesson will explore how to find and download large gridded datasets via the R package `geoknife`. The package was created to allow easy access to data stored in the [Geo Data Portal (GDP)](https://cida.usgs.gov/gdp/), or any gridded dataset available through the [OPeNDAP](https://www.opendap.org/) protocol DAP2 that meets some basic metadata requirements. `geoknife` refers to the gridded dataset as the `fabric`, the spatial feature of interest as the `stencil`, and the subset algorithm parameters as the `knife` (see below).
-
-![figure illustrating definitions of fabric, stencil, and knife](./images/geoknife_summary_subset.png "geoknife terminology figure")
-
-## Lesson Objectives
-
-Explore and query large gridded datasets for efficient and reproducible large-scale analyses.
-
-By the end of this lesson, the learner will be able to:
-
-1. Explain the differences between remote and local processing.
-2. Differentiate the three main concepts of this package: fabric, stencil, and knife.
-3. Use this package to retrieve pre-processed data from the Geo Data Portal (GDP) via geoknife.
-
-## Lesson Resources
-
-- Publication: [geoknife: reproducible web-processing of large gridded datasets](http://onlinelibrary.wiley.com/doi/10.1111/ecog.01880/abstract)
-- Tutorial (vignette): [geoknife vignette](https://cran.r-project.org/web/packages/geoknife/vignettes/geoknife.html)
-- An overview of [remote processing basics](https://cida.usgs.gov/gdp/how-to-gdp/) with the Geo Data Portal
-- A blog post on [visualizing Tropical Storm Colin rainfall](https://waterdata.usgs.gov/blog/ts-colin-precip/) with geoknife
-- Source code: [geoknife on GitHub](https://github.com/USGS-R/geoknife)
-- Report a bug or suggest a feature: [geoknife issues on GitHub](https://github.com/USGS-R/geoknife/issues)
-
-## Remote processing
-
-The USGS Geo Data Portal is designed to perform web-service processing on large gridded datasets. `geoknife` allows R users to take advantage of these services by processing large data, such as data available in the GDP catalog or a user-defined dataset, on the web. This type of workflow has three main advantages: 
-
-1. it allows the user to avoid downloading large datasets, 
-2. it avoids reinventing the wheel for the creation and optimization of complex geoprocessing algorithms, and 
-3. computing resources are dedicated elsewhere, so geoknife operations do not have much of an impact on a local computer.
-
-## geoknife components: fabric, stencil, knife
-
-The main components of a geoknife workflow are the "fabric", "stencil", and "knife". These three components go into the final element, the geoknife "job" (geojob), which defines what the user needs from the processing, allows tracking of the processing status, and methods to dowload the results. The fabric is the gridded web dataset to be processed, the stencil is the feature of interest, and the knife is the processing algorithm parameters. Each of the `geoknife` components is created using a corresponding function: fabrics are created using `webdata()`, stencils are created using `webgeom()` or `simplegeom()`, and knives are created using `webprocess()`. 
-
-This lesson will focus on discovering what options exist for each of those components. The next lesson will teach you how to construct each component and put it together to get the processed data. Before continuing this lesson, load the geoknife library (install if necessary).
-
-```{r}
-# load the geoknife package
-library(geoknife)
-```
-
-## Available webdata
-
-### GDP datasets
-
-To learn what data is available through GDP, you can explore the [online catalog](https://cida.usgs.gov/gdp/) or use the function `query`. Note that the access pattern for determining available fabrics differs slightly from stencils and knives. Running `query("webdata")` will return every dataset available through GDP:
-
-```{r load-webdata, message=FALSE, warning=FALSE}
-all_webdata <- query("webdata")
-head(all_webdata)
-length(all_webdata)
-```
-
-Notice that the object returned is a special `geoknife` class of `datagroup`. There are specific `geoknife` functions that only operate on an object of this class, see `?title` and `?abstract`. These two functions are used to extract metadata information about each of the available GDP datasets. With `r length(all_webdata)` datasets available, it is likely that reading through each to find ones that are of interest to you would be time consuming. You can use `grep` along with the functions `title` and `abstract` to figure out which datasets you would like to use for processing. 
-
-Let's say that we were interested in evapotranspiration data. To search for which GDP datasets might contain evapotranspiration data, you can use the titles and abstracts.
-
-```{r grep-webdata, message=FALSE, warning=FALSE}
-# notice that you cannot perform a grep on all_webdata - it is because it is a special class
-# `grep("evapotranspiration", all_webdata)` will fail
-# you need to perform pattern matching on vectors
-
-all_titles <- title(all_webdata)
-which_titles <- grep("evapotranspiration", all_titles)
-evap_titles <- all_titles[which_titles]
-head(evap_titles)
-
-all_abstracts <- abstract(all_webdata)
-which_abstracts <- grep("evapotranspiration", all_abstracts)
-evap_abstracts <- all_abstracts[which_abstracts]
-evap_abstracts[1]
-```
-
-`r length(unique(c(which_titles, which_abstracts)))` possible datasets to look through is a lot more manageable than `r length(all_webdata)`. Let's say the dataset titled "Yearly Conterminous U.S. actual evapotranspiration data" interested us enough to explore more. We have now identified a fabric of interest.
-
-We might want to know more about the dataset, such as what variables and time periods are available. To actually create the fabric, you will need to use `webdata` and supply the appropriate datagroup object as the input. This should result in an object with a class of `webdata`. The following functions will operate only on an object of class `webdata`.
-
-```{r create-fabric, message=FALSE, warning=FALSE}
-evap_fabric <- webdata(all_webdata["Yearly Conterminous U.S. actual evapotranspiration data"])
-class(evap_fabric)
-```
-
-Now that we have a defined fabric, we can explore what variables and time period are within that data. First, we use `query` to determine what variables exist. You'll notice that the function `variable` returns NA. This is fine when you are just exploring available data; however, exploring available times requires that the variable be defined because sometimes individual variables within a dataset can have different time ranges. Thus, we need to set which variable from the dataset will be used. Then, we can explore times that are available in the data. Using `query()` is helpful when exploring datasets, but is unecessary if you already know what times and variables you'd like to access. 
-
-```{r explore-fabric, message=FALSE, warning=FALSE}
-# no variables defined yet
-variables(evap_fabric)
-
-# find what variables are available
-query(evap_fabric, "variables")
-
-# trying to find available times before setting the variable results in an error
-# `query(evap_fabric, "times")` will fail
-
-# only one variable, "et"
-variables(evap_fabric) <- "et"
-variables(evap_fabric)
-
-# now that the variable is set, we can explore available times
-query(evap_fabric, "times")
-```
-
-### Datasets not in GDP
-
-Any gridded dataset available online that follows OPeNDAP protocol and some additional conventions can be used with `geoknife`. These datasets can be found through web searches or other catalogs and require finding out the OPeNDAP endpoint (URL) for the dataset. This url is used as the input to the argument `url` in `webdata`. Please email the GDP development team (gdp@usgs.gov) with questions abvout these specifics. 
-
-There are hundreds (or potentially thousands) of additional OPeNDAP datasets that will work with geoknife, but need to be found through web searches or catalogs (e.g., [www.esrl.noaa.gov/psd/thredds/dodsC/Datasets](www.esrl.noaa.gov/psd/thredds/dodsC/Datasets) and [apdrc.soest.hawaii.edu/data/data.php](http://apdrc.soest.hawaii.edu/data/data.php) ). 
-
-We searched NOAA’s OPenDAP data catalog and found data from the [Center for Operational Oceanographic Products and Services THREDDS server](https://opendap.co-ops.nos.noaa.gov/thredds/catalog.html). It includes forecasts for water levels, water currents, water temperatures, and salinity levels for Delaware Bay. Since it is forecasted data, the times associated with the data will change. To create a webdata object from this dataset, just use the OPeNDAP url. Then query variables and time as we did before.
-
-```{r create-fabric-NOAA, message=FALSE, warning=FALSE}
-DelBay_fabric <- webdata(url="https://opendap.co-ops.nos.noaa.gov/thredds/dodsC/DBOFS/fmrc/Aggregated_7_day_DBOFS_Fields_Forecast_best.ncd")
-query(DelBay_fabric, "variables")
-# need to set the variable(s) in order to query the times
-variables(DelBay_fabric) <- "temp"
-query(DelBay_fabric, "times")
-```
-
-The first example we've included here uses aggregated data, meaning there is a single URL for all the data of this type on the server. Some data that you encounter might be non-aggregated, meaning there are multiple URLs to access the same data. In these cases, you will need to create more than one geojob and join data at the end.
-
-Here is a second example of using a non-GDP dataset which is not aggregated in times or variables. This data was found under the [data section on Unidata's THREDDS server](https://thredds.ucar.edu/thredds). This example includes water vapor at 8km resolution at national extent from [here](https://thredds.ucar.edu/thredds/catalog/satellite/WV/catalog.html). 
-
-```{r create-fabric-UNIWISC, message=FALSE, warning=FALSE}
-wv_fabric <- webdata(url="https://thredds.ucar.edu/thredds/dodsC/satellite/WV/SUPER-NATIONAL_8km/current/SUPER-NATIONAL_8km_WV_20200904_1330.gini")
-query(wv_fabric, "variables")
-
-# need to set the variable(s) in order to query the times
-variables(wv_fabric) <- "IR_WV"
-query(wv_fabric, "times") # Note the times of this dataset include only a single timestep, since the data collection has a file for each time
-```
-The url used here for `webdata()` contains the date and the time, so we would need to construct a loop through multiple timesteps in order to assemble a time series from this data source. 
-
-## Available webgeoms
-Now that we have explored options for our webdata, let's look at what options exist for geospatial features.
-
-The next component to `geoknife` jobs is the spatial extent of the data, a.k.a. the stencil. The stencil is defined by using either of the functions `simplegeom` or `webgeom`. `simplegeom` is used to explicitly define an area by the user, but `webgeom` is used to specify an existing web feature service (WFS) as the geospatial extent. Defining your stencil using `simplegeom` will be covered in the next lesson. This lesson will just show you how to learn what available webgeoms exist. Users can use any WFS url to create their stencil, but there are a number of features that exist through GDP already. To determine what features exist, you can create a default webgeom object and then query its geom name, attributes, and values. This will return all available GDP default features. 
-
-```{r create-stencil, message=FALSE, warning=FALSE}
-# setup a default stencil by using webgeom and not supplying any arguments
-default_stencil <- webgeom()
-
-# now determine what geoms are available with the default
-default_geoms <- query(default_stencil, "geoms")
-length(default_geoms)
-head(default_geoms)
-```
-
-You will notice a pattern with the names of the geoms: a category followed by `:`, and then a specific name. These category-name combinations are the strings you would use to define your geom. Additionally, `webgeom` can accept a URL that points directly to a WFS. The categories you should be familiar with are `sample` and `upload`. `sample` geoms are any that are available through `geoknife` by default. `upload` geoms are custom shapefiles that someone uploaded through GDP. If you would like to upload a specific shapefile to GDP, go to the [advanced spatial section in GDP](https://cida.usgs.gov/gdp/client/#!advanced/spatial). **Be aware that uploaded shapefiles are wiped from the server at regular intervals (could be as often as weekly)**. To use your own shapefile: upload it as a zip shapefile, execute your job and then save the output; re-upload your shapefile the next time you need it on GDP if it has expired.
-
-Similar to fabrics where you could not query times without setting the variables, you cannot query attributes of stencils before defining the geoms. Likewise, you cannot query for values of a stencil until you have set the attributes. Attributes give the metadata associated with the stencil and it's geom. Values tell you the individual spatial features available in that attribute of the geom. 
-
-```{r explore-stencil, message=FALSE, warning=FALSE}
-# add a geom to see what values are available
-geom(default_stencil)
-geom(default_stencil) <- "sample:CONUS_states"
-
-# now that geom is set, you can query for available attributes
-query(default_stencil, "attributes")
-attribute(default_stencil) <- "STATE"
-
-# now that attribute is set, you can query for available values
-STATE_values <- query(default_stencil, "values")
-head(STATE_values)
-
-# switch the stencil to see the differences
-ecoreg_stencil <- default_stencil
-geom(ecoreg_stencil) <- "sample:Ecoregions_Level_III"
-query(ecoreg_stencil, "attributes")
-attribute(ecoreg_stencil) <- "LEVEL3_NAM"
-ecoreg_values <- query(ecoreg_stencil, "values")
-head(ecoreg_values)
-
-# now set the values to the Driftless Area and Blue Ridge ecoregions
-values(ecoreg_stencil) <- ecoreg_values[c(12, 33)]
-values(ecoreg_stencil)
-```
-
-There are some built-in templates that allow stencils to be defined more specifically. Currently, the package only supports US States, Level III Ecoregions, or HUC8s. Below are shortcuts to setting the geom, attribute, and values. 
-
-```{r template-stencils, message=FALSE, warning=FALSE}
-# creating geoms from the available templates
-webgeom('state::Wisconsin')
-webgeom('state::Wisconsin,Maine') # multiple states separated by comma
-webgeom('HUC8::09020306,14060009') # multiple HUCs separated by comma
-webgeom('ecoregion::Colorado Plateaus,Driftless Area') # multiple ecoregions separated by comma
-```
-
-## Available webprocesses
-
-The final component to a geojob is the process algorithm used to aggregate the data across the defined stencil. Web process algorithms can be defined by the user, but let's explore the defaults available through GDP.
-
-```{r create-knife, message=FALSE, warning=FALSE}
-# setup a default knife by using webprocess and not supplying any arguments
-default_knife <- webprocess()
-
-# now determine what web processing algorithms are available with the default
-default_algorithms <- query(default_knife, 'algorithms')
-length(default_algorithms)
-head(default_algorithms)
-```
-
-From this list, you can define which algorithm you would like the webprocess component to use. Definitions of each of the default algorithms can be found in the Geo Data Portal Algorithm Summaries section of the [GDP process documentation](https://cida.usgs.gov/gdp/client/#!advanced/process). For example, we want to use the OPeNDAP subsetting algorithm, "OPeNDAP Subset", which downloads a spatiotemporal chunk of data without any spatial processing. 
-
-```{r add-algorithm, message=FALSE, warning=FALSE}
-# algorithm actually has a default of the weighted average
-algorithm(default_knife)
-
-# change the algorithm to OPeNDAP's subset
-algorithm(default_knife) <- default_algorithms['OPeNDAP Subset']
-algorithm(default_knife)
-```
-
-Now that we can explore all of our options, we will learn how to construct each component and execute a geojob in the next lesson.
-
-## Setting up a geojob
-
-A `geojob` is the object that contains all of the necessary processing information to execute a data request to GDP. The `geojob` is made up of the `stencil`, `fabric`, and `knife`.
-
-To create a `geojob`, use the function `geoknife` and give the three components as arguments. `stencil` and `fabric` must be indicated, but `knife` has a default. Any additional arguments are specifications for the webprocessing step. See `?'webprocess-class'` for options. This portion of the lesson will not discuss all of the options. 
-
-```{r load-geoknife}
-# load the geoknife package
-library(geoknife)
-```
-
-Let's setup a `geojob` to find the unweighted annual evapotranspiration rates for the state of Indiana using the annual evapotranspiration data we saw in the previous section. Since we have seen the URL and know the available variables and times, we can set all of that directly in the `webdata` function. Note: the times field must be a vector of start then end date, and be class `POSIXct` or character.
-
-```{r create-geojob, message=FALSE, warning=FALSE}
-# create fabric
-evap_fabric <- webdata(times = c("2005-01-01", "2015-01-01"),
-                         variables = "et",
-                         url = 'https://cida.usgs.gov/thredds/dodsC/ssebopeta/yearly')
-
-# create stencil
-evap_stencil <- webgeom('state::Indiana')
-
-# create knife (which defaults to weighted)
-evap_knife <- webprocess()
-# find unweighted algorithm
-all_algorithms <- query(evap_knife, 'algorithms')
-unw_algorithm <- all_algorithms[grep('unweighted', names(all_algorithms))]
-# set knife algorithm to unweighted
-algorithm(evap_knife) <- unw_algorithm
-
-# create the geojob
-evap_geojob <- geoknife(evap_stencil, evap_fabric, evap_knife)
-```
-
-```{r wait-until-finished, echo=FALSE}
-# need this in order to knit without an error when using result()
-wait(evap_geojob, sleep.time = 10)
-```
-
-## Checking the geojob status
-
-The geojob has been created and started on the server. Now, you can check to see if the processing is complete by using `check`.
-
-```{r check-geojob, message=FALSE, warning=FALSE}
-check(evap_geojob)
-```
-
-Other helpful functions to get status information about the job are `running` (returns `TRUE`/`FALSE` to say if the job is still processing), `error` (returns `TRUE`/`FALSE` to say if there was an error during the processing), and `successful` (returns `TRUE`/`FALSE` indicating whether the job process was able to complete without any issues). Only one of these can return `TRUE` at a time.
-
-```{r other-checks-geojob, message=FALSE, warning=FALSE}
-running(evap_geojob)
-error(evap_geojob)
-successful(evap_geojob)
-```
-
-The results of all the status checks say that our job was successful. These status checks are useful if you put a geojob in a script and want to fail gracefully when there is an error in the job.
-
-## Getting geojob data
-
-Since this job has finished processing and was successful, you can now get the data. You'll notice that `evap_geojob` does not actually contain any data. It only contains information about the job that you submitted. To get the data, you need to use `result` or `download`. The feature summary algorithms will return simple tabular data, so you can use `result` to automatically take the output and parse it into an R `data.frame`. We used a feature summary algorithm in the evapotranspiration example, which returned tabular data. So, let's use `result` to get the `geojob` output.
-
-```{r get-geojob, message=FALSE, warning=FALSE}
-evap_data <- result(evap_geojob)
-nrow(evap_data)
-head(evap_data)
-```
-
-There are additional algorithms that return subsets of the raw data as netcdf or geotiff formats. These formats will require you to handle the output manually using `download`. Use this function to download the output to a file and then read it using your preferred data parsing method. `download` can also be used for tabular data if you have a parsing method that differs from what is used in `result`. See `?download` for more information.
-
-## `wait` and `email`
-
-This was not a computationally or spatially intensive request, so the job finished almost immediately. However, if we had setup a more complex job, it could still be running. Even though the processing of these large gridded datasets uses resources on a remote server, your workflow needs to account for processing time before using the results. There are a few scenarios to consider:
-
-1. You are manually executing a job and manually checking it.
-2. You are running a script that kicks off a `geoknife` process followed by lines of code that use the returned data. 
-3. You are running a long `geoknife` process and want to be able to close R/RStudio and come back to a completed job later. 
-
-For the first scenario, the workflow from above was fine. If you are manually checking that the job has completed before trying to extract results, then nothing should fail.
-
-For the second scenario, your code will fail because it will continue to execute the code line by line after starting the job. So, your code will fail at the code that gets the data (`result`/`download`) since the job is still running. You can prevent scripts from continuing until the job is complete by using the function `wait`. This function makes a call to GDP at specified intervals to see if the job is complete, and allows the code to continue once the job is complete. This function has two arguments: the `geojob` object and `sleep.time`. `sleep.time` defines the interval at which to check the status of the job in seconds (the default for `sleep.time` is 5 seconds). Please try to adjust `sleep.time` to limit the number of calls to GDP, e.g. if you know the job will take about an hour, set `sleep.time=120` (2 min) because every 5 seconds would be excessive. 
-
-```{r wait-workflow, message=FALSE, warning=FALSE, cache=TRUE}
-# typical wait workflow
-evap_geojob <- geoknife(evap_stencil, evap_fabric, evap_knife)
-wait(evap_geojob, sleep.time = 20)
-evap_data <- result(evap_geojob)
-```
-
-If you know ahead of time that your process will be long, you can tell the job to wait when defining your knife (the default is to not wait). `sleep.time` can be specified as an argument to `webprocess`. The following is functionally the same as the use of `wait()` from above.
-
-```{r wait-shortcut, message=FALSE, warning=FALSE, cache=TRUE}
-# create knife with the args wait and sleep.time
-evap_knife <- webprocess(wait=TRUE, sleep.time=20)
-
-# follow the same code from before to get the unweighted algorithm
-all_algorithms <- query(evap_knife, 'algorithms')
-unw_algorithm <- all_algorithms[grep('unweighted', names(all_algorithms))]
-algorithm(evap_knife) <- unw_algorithm
-
-# create geojob using knife w/ wait
-evap_geojob <- geoknife(evap_stencil, evap_fabric, evap_knife)
-
-# get result
-evap_data <- result(evap_geojob)
-```
-
-As for the third scenario, if you have a job that will take a long time and plan to close R in the interim, you can specify the argument `email` when creating the knife. Then when you use your new knife in the `geoknife` call, it will send an email with appropriate information upon job completion (you will see `gdp_data@usgs.gov` as the sender). 
-
-```{r email-example, message=FALSE, warning=FALSE}
-# example of how to specify an email address to get a job completion alert
-knife_willemail <- webprocess(email='fake.email@gmail.com')
-knife_willemail
-```
-
-The email alert will contain the completed job URL. Since this process requires you to leave R and get information from an email, it is often only recommended if you don't plan to do further analysis in R, or you use `saveRDS` to save the `geojob` object so you can load it in a later session. Otherwise, we recommend using the `wait()` function in a script. Use the URL as a string in this workflow to get your results:
-
-```{r email-example-results, message=FALSE, warning=FALSE, eval=FALSE}
-geojob <- geojob("my url as a string")
-check(geojob)
-mydata <- result(geojob)
-```
-
-## Putting it all together, mapping precipitation from Tropical Storm Colin
-
-The following example is slightly modified from the blog post [here](https://waterdata.usgs.gov/blog/ts-colin-precip/) and shows a workflow for accessing rainfall data for the time period covering Tropical Storm Colin and visualizing the total rainfall per county during the time range. 
-
-Define a function to retrieve precip data using geoknife
-```{r visualize-colin, message=FALSE, warning=FALSE}
-getPrecip <- function(states, startDate, endDate){
-    
-    # use fips data from maps package
-    counties_fips <- maps::county.fips %>% 
-        mutate(statecounty=as.character(polyname)) %>% # character to split into state & county
-        tidyr::separate(polyname, c('statename', 'county'), ',') %>%
-        mutate(fips = sprintf('%05d', fips)) %>% # fips need 5 digits to join w/ geoknife result
-        dplyr::filter(statename %in% states) 
-    
-    stencil <- webgeom(geom = 'sample:Counties',
-                       attribute = 'FIPS',
-                       values = counties_fips$fips)
-    
-    fabric <- webdata(url = 'https://cida.usgs.gov/thredds/dodsC/UofIMETDATA', 
-                      variables = "precipitation_amount", 
-                      times = c(startDate, endDate))
-    
-    job <- geoknife(stencil, fabric, wait = TRUE, REQUIRE_FULL_COVERAGE=FALSE)
-    check(job)
-    precipData_result <- result(job, with.units=TRUE)
-    precipData <- precipData_result %>% 
-        select(-variable, -statistic, -units) %>% 
-        gather(key = fips, value = precipVal, -DateTime) %>%
-        left_join(counties_fips, by="fips") #join w/ counties data
-    
-    return(precipData)
-    
-}
-# Function to map cumulative precipitation data using R package maps:
-precipMap <- function(precipData, startDate, endDate){
-  cols <- colorRampPalette(brewer.pal(9,'Blues'))(9)
-  precip_breaks <- c(seq(0,80,by = 10), 200)
-  
-  precipData_cols <- precipData %>% 
-    group_by(statename, statecounty) %>% 
-    summarize(cumprecip = sum(precipVal)) %>% 
-    mutate(cols = cut(cumprecip, breaks = precip_breaks, labels = cols, right=FALSE)) %>%
-    mutate(cols = as.character(cols))
-  
-  par(mar = c(0,0,3,0))
-  
-  map('county', regions = precipData_cols$statecounty, 
-      fill = TRUE, col = precipData_cols$cols, exact=TRUE)
-  
-  legend(x = "bottomright", fill = cols, cex = 0.7, bty = 'n', 
-         title = "Cumulative\nPrecipitation (mm)",
-         legend = c(paste('<', precip_breaks[-c(1,length(precip_breaks))]), 
-                    paste('>', tail(precip_breaks,2)[1]))) # greater
-  graphics::title("Cumulative Precipitation from Tropical Storm Colin",
-                  line = 2, cex.main=1.2)  #title was being masked by geoknife
-  mtext(side = 3, line = 1, cex = 0.9, 
-        text= paste("By county from", startDate, "to", endDate))
-}
-
-# Now, we can use those functions to fetch data for specific counties and time periods.
-# TS Colin made landfall on June 6th and moved into open ocean on June 7th. Use these dates as the start and end times in our 
-# function (need to account for timezone, +5 UTC). We can visualize the path of the storm by mapping cumulative precipitation for each county.
-library(dplyr)
-library(tidyr)
-library(geoknife) #order matters because 'query' is masked by a function in dplyr
-library(RColorBrewer)
-library(maps)
-library(conflicted)
-
-conflict_prefer("select", "dplyr")
-conflict_prefer("filter", "dplyr")
-
-statesTSColin <- c('florida', 'alabama', 'georgia', 
-                   'south carolina', 'north carolina')
-startTSColin <- "2016-06-06 05:00:00"
-endTSColin <- "2016-06-08 05:00:00"
-
-precipData <- getPrecip(states = statesTSColin, 
-                        startDate = startTSColin, 
-                        endDate = endTSColin)
-precipMap(precipData, 
-          startDate = startTSColin, 
-          endDate = endTSColin)
-```
 
 ## USGS Exercises Part 2
 
