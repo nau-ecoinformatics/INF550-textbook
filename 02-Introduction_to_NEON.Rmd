@@ -1534,7 +1534,7 @@ current research or future career goals? *(1 paragraph)*
 </div>
 
 ::: {#ds-challenge markdown="1"}
-**Question 3:** Use the map in **Chapter 2:Intro to NEON** to answer the
+**Question 3:** Use the map in **Chapter 2: Intro to NEON** to answer the
 following questions. Consider the research question that you may explore
 as your final semester project or a current project that you are working
 on and answer each of the following questions:

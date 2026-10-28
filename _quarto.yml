@@ -21,7 +21,8 @@ book:
     - 06-NEON_AOP.Rmd
     - 07-NASA_EOS.Rmd
     - 08-USGS.Rmd
-    - 09-FAQ.Rmd
+    - 09-OneHealth_PathogenSurveillance.Rmd
+    - 10-FAQ.Rmd
 
 
   repo-url: https://github.com/nau-ecoinformatics/INF550-textbook
