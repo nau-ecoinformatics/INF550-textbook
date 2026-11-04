@@ -1,5 +1,4 @@
 accession	date	region	country	division	location	state	host	host_genus	host_type	is_lab_host	authors	url	length	clade_membership	lineage
-KX646181	2014-XX-XX	Asia	India				"Culex tritaeniorhynchus"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646181	489		5
 KX646182	2014-XX-XX	Asia	India				"Culex quinquefasciatus"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646182	451		5
 KX646183	2014-XX-XX	Asia	India				"Culex quinquefasciatus"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646183	451		
 KX646184	2014-XX-XX	Asia	India				"Culex whitmorei"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646184	414		
@@ -4552,6 +4551,7 @@ PX471956	2025-08-30	"North America"	USA	Washington		WA	"Culex pipiens"	Culex	Mos
 PX471957	2025-08-20	"North America"	USA	Washington		WA	"Culex pipiens"	Culex	Mosquito		"Dykema et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX471957	10751	SW03	1A
 PX471958	2023-07-06	"North America"	USA	Washington		WA	"Culex pipiens"	Culex	Mosquito		"Dykema et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX471958	10548	SW03	1A
 PX471959	2023-08-09	"North America"	USA	Washington		WA	"Culex pipiens"	Culex	Mosquito		"Dykema et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX471959	10751	SW03	1A
+PX482656	2018-XX-XX	Europe	Romania	Bucharest			"Homo sapiens"	Homo	Human		"Iulia et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX482656	9799		2
 PX487094	2005-XX-XX	"North America"	Canada	Quebec			"Culex pipiens"	Culex	Mosquito		"Therrien et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX487094	10374	WN02	1A
 PX487095	2014-XX-XX	"North America"	Canada	Quebec			"Culex pipiens"	Culex	Mosquito		"Therrien et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX487095	10732	WN02	1A
 PX569566	2023-07-17	Europe	Germany	Berlin			"Culex pipiens"	Culex	Mosquito		"Patzina-Mehling et al."	https://www.ncbi.nlm.nih.gov/nuccore/PX569566	10528		2
@@ -4999,7 +4999,6 @@ QP768941	XXXX-XX-XX										?	https://www.ncbi.nlm.nih.gov/nuccore/QP768941	649
 QQ327457	XXXX-XX-XX										?	https://www.ncbi.nlm.nih.gov/nuccore/QQ327457	41		
 QQ327458	XXXX-XX-XX										?	https://www.ncbi.nlm.nih.gov/nuccore/QQ327458	40		
 QQ327467	XXXX-XX-XX										?	https://www.ncbi.nlm.nih.gov/nuccore/QQ327467	1209	NY99	1A
-HA074316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074316	17		
 HA074317	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074317	17		
 HA074318	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074318	17		
 HA074319	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074319	17		
@@ -9999,7 +9998,7 @@ KX646177	2014-XX-XX	Asia	India				"Culex vishnui"	Culex	Mosquito		"Khan et al."	
 KX646178	2014-XX-XX	Asia	India				"Culex tritaeniorhynchus"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646178	466		5
 KX646179	2014-XX-XX	Asia	India				"Culex pseudovishnui"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646179	482		5
 KX646180	2014-XX-XX	Asia	India				"Mansonia uniformis"	Mansonia	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646180	492		5
-HA069316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069316	17		
+KX646181	2014-XX-XX	Asia	India				"Culex tritaeniorhynchus"	Culex	Mosquito		"Khan et al."	https://www.ncbi.nlm.nih.gov/nuccore/KX646181	489		5
 HA069317	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069317	17		
 HA069318	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069318	17		
 HA069319	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069319	17		
@@ -14999,7 +14998,7 @@ HA074312	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore
 HA074313	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074313	17		
 HA074314	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074314	17		
 HA074315	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074315	17		
-HA064316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064316	17		
+HA074316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA074316	17		
 HA064317	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064317	17		
 HA064318	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064318	17		
 HA064319	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064319	17		
@@ -19999,7 +19998,7 @@ HA069312	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore
 HA069313	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069313	17		
 HA069314	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069314	17		
 HA069315	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069315	17		
-AY187012	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY187012	645	pre-NY	1A
+HA069316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA069316	17		
 AY187013	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY187013	645	pre-NY	1A
 AY187014	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY187014	645	pre-NY	1A
 AY187015	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY187015	645	pre-NY	1A
@@ -24999,6 +24998,7 @@ HA064312	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore
 HA064313	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064313	17		
 HA064314	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064314	17		
 HA064315	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064315	17		
+HA064316	XXXX-XX-XX										"Blatt et al."	https://www.ncbi.nlm.nih.gov/nuccore/HA064316	17		
 AB185914	XXXX-XX-XX										"Shirato et al."	https://www.ncbi.nlm.nih.gov/nuccore/AB185914	11029	NY99	1A
 AB185915	XXXX-XX-XX										"Shirato et al."	https://www.ncbi.nlm.nih.gov/nuccore/AB185915	11029	NY99	1A
 AB185916	XXXX-XX-XX										"Shirato et al."	https://www.ncbi.nlm.nih.gov/nuccore/AB185916	11029	NY99	1A
@@ -25344,6 +25344,7 @@ AY185911	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et
 AY185912	XXXX-XX-XX	"North America"	USA	Texas	"Montgomery County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY185912	2004	WN02	1A
 AY185913	XXXX-XX-XX	"North America"	USA	Texas	"Galveston County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY185913	2004	pre-NY	1A
 AY185914	XXXX-XX-XX	"North America"	USA	Texas	"Galveston County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY185914	2004	pre-NY	1A
+AY187012	XXXX-XX-XX	"North America"	USA	Texas	"Harris County"	TX					"Beasley et al."	https://www.ncbi.nlm.nih.gov/nuccore/AY187012	645	pre-NY	1A
 PP445046															1A
 HG994351															1A
 HG994352															1A

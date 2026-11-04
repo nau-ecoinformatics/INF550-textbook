@@ -331,8 +331,12 @@ div.csl-indent {
 <li>One Health Initiative (OHI) <a href="https://onehealthinitiative.com/" class="uri">https://onehealthinitiative.com/</a></li>
 </ul>
 <p>In addition, One Health is increasingly referenced and cited in the scientific community, for more information, see: <span class="citation" data-cites="Mackenzie_2019 ohhleppat2022 ZINSSTAG2011148 Destoumieux_2018 Queenan2017Roadmap">(<a href="#ref-Mackenzie_2019" role="doc-biblioref">Mackenzie and Jeggo 2019</a>; <a href="#ref-ohhleppat2022" role="doc-biblioref">(OHHLEP) et al. 2022</a>; <a href="#ref-ZINSSTAG2011148" role="doc-biblioref">Zinsstag et al. 2011</a>; <a href="#ref-Destoumieux_2018" role="doc-biblioref">Destoumieux-Garzón et al. 2018</a>; <a href="#ref-Queenan2017Roadmap" role="doc-biblioref">Queenan et al. 2017</a>)</span>, and the official One Health scientific journal, from the International Federation of Tropical Medicine <a href="https://www.sciencedirect.com/journal/one-health" class="uri">https://www.sciencedirect.com/journal/one-health</a></p>
-<p>For more information on One Health, the following video produced by the World Organisation for Animal Health gives a brief overview of the concept, and especially focuses on how changing environmental conditions can lead to altered zoonotic pathogen dynamics: <a href="https://www.youtube.com/watch?v=HNxVVsZ3vwA" class="uri">https://www.youtube.com/watch?v=HNxVVsZ3vwA</a></p>
-<p>Another great resource for more information on One Health comes from a Ted Talk by Dr.&nbsp;Sharon Deem, a DVM and PhD with a unique perspective on the effects of environmental disruptions that could lead to spillover of zoonotic pathogens into humans. Notably, this talk was given in June 2018, just months before the start of the COVID-19 pandemic. <a href="https://www.youtube.com/watch?v=weXJBFai5Os" class="uri">https://www.youtube.com/watch?v=weXJBFai5Os</a></p>
+<p>For more information on One Health, the following video produced by the World Organisation for Animal Health gives a brief overview of the concept, and especially focuses on how changing environmental conditions can lead to altered zoonotic pathogen dynamics:</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/HNxVVsZ3vwA?si=XfWd903QcaGtjDct" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
+<p>Another great resource for more information on One Health comes from a Ted Talk by Dr.&nbsp;Sharon Deem, a DVM and PhD with a unique perspective on the effects of environmental disruptions that could lead to spillover of zoonotic pathogens into humans. Notably, this talk was given in June 2018, just months before the start of the COVID-19 pandemic.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/weXJBFai5Os?si=45EgD6IpLGVm0Rmx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen="">
+</iframe>
 <p>Although often discussed conceptually, One Health increasingly depends on data availability, and requires knowledge of tools in informatics and big-data management. Monitoring disease risks across host species, vector populations (i.e, intermediary hosts that can transmit pathogens, like mosquitoes or ticks), landscapes, ecosystems, and climates, requires integrating diverse information streams, often in near real time. This challenge makes One Health not only a biological framework, but also an informatics problem.</p>
 </section>
 <section id="one-health-as-an-ecoinformatics-problem" class="level2" data-number="10.2">
@@ -522,27 +526,27 @@ div.csl-indent {
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(wnv_metadata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  accession       date region country division location state
-1  KX646181 2014-XX-XX   Asia   India                        
-2  KX646182 2014-XX-XX   Asia   India                        
-3  KX646183 2014-XX-XX   Asia   India                        
-4  KX646184 2014-XX-XX   Asia   India                        
-5  KX646185 2015-XX-XX   Asia   India                        
-6  KX646186 2015-XX-XX   Asia   India                        
-                     host host_genus host_type is_lab_host     authors
-1 Culex tritaeniorhynchus      Culex  Mosquito             Khan et al.
-2  Culex quinquefasciatus      Culex  Mosquito             Khan et al.
-3  Culex quinquefasciatus      Culex  Mosquito             Khan et al.
-4         Culex whitmorei      Culex  Mosquito             Khan et al.
-5           Culex vishnui      Culex  Mosquito             Khan et al.
-6           Culex vishnui      Culex  Mosquito             Khan et al.
+<pre><code>  accession       date region country    division location state
+1  KX646182 2014-XX-XX   Asia   India                           
+2  KX646183 2014-XX-XX   Asia   India                           
+3  KX646184 2014-XX-XX   Asia   India                           
+4  KX646185 2015-XX-XX   Asia   India                           
+5  KX646186 2015-XX-XX   Asia   India                           
+6  KX869718 XXXX-XX-XX   Asia   India West Bengal               
+                    host host_genus host_type is_lab_host       authors
+1 Culex quinquefasciatus      Culex  Mosquito               Khan et al.
+2 Culex quinquefasciatus      Culex  Mosquito               Khan et al.
+3        Culex whitmorei      Culex  Mosquito               Khan et al.
+4          Culex vishnui      Culex  Mosquito               Khan et al.
+5          Culex vishnui      Culex  Mosquito               Khan et al.
+6                                                         Khatun et al.
                                             url length clade_membership lineage
-1 https://www.ncbi.nlm.nih.gov/nuccore/KX646181    489                        5
-2 https://www.ncbi.nlm.nih.gov/nuccore/KX646182    451                        5
-3 https://www.ncbi.nlm.nih.gov/nuccore/KX646183    451                         
-4 https://www.ncbi.nlm.nih.gov/nuccore/KX646184    414                         
-5 https://www.ncbi.nlm.nih.gov/nuccore/KX646185    420                        5
-6 https://www.ncbi.nlm.nih.gov/nuccore/KX646186    485                        5</code></pre>
+1 https://www.ncbi.nlm.nih.gov/nuccore/KX646182    451                        5
+2 https://www.ncbi.nlm.nih.gov/nuccore/KX646183    451                         
+3 https://www.ncbi.nlm.nih.gov/nuccore/KX646184    414                         
+4 https://www.ncbi.nlm.nih.gov/nuccore/KX646185    420                        5
+5 https://www.ncbi.nlm.nih.gov/nuccore/KX646186    485                        5
+6 https://www.ncbi.nlm.nih.gov/nuccore/KX869718    284                        5</code></pre>
 </div>
 </div>
 <p>The output shows the first six observations in our dataset. We can also examine the dimensions of the dataset to determine how many observations and variables it contains:</p>
@@ -553,7 +557,7 @@ div.csl-indent {
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(wnv_metadata)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 25417    16</code></pre>
+<pre><code>[1] 25418    16</code></pre>
 </div>
 </div>
 <p>In this case, the metadata contains 25,417 observations with 16 variables. Each observation represents a sequence record, while the variables contain additional information associated with that record.</p>

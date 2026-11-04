@@ -34,16 +34,12 @@ At the end of this activity, you will be able to:
   
 ### Guest Lectures
 
-#### PhenoCam, marrying phenology and fluxes
+#### Introduction to the PhenoCam Network
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6BC3kj8FlCs?si=P6DRyprGuk-A4BxW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/_4uHLXL1yZA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>(4 minutes)
 
-*This is not the correct video, it is a placeholder*
-
->(1 hour, 12 minutes)
-
-**Andrew Richardson**, Regents Professor at Northern Arizona University's Center of Ecosystem Science and Society ([Ecoss](https://ecoss.nau.edu/)) and School of Informatics, Computing and Cyber Systems ([SICCS](https://ecoinfo.nau.edu/)), and Principal Investigator of PhenoCam explains the background of PhenoCam, its conception, and its spacial design.
-
+**Andrew Richardson**, Regents Professor at Northern Arizona University’s Center of Ecosystem Science and Society ([Ecoss](https://ecoss.nau.edu/)) and School of Informatics, Computing and Cyber Systems ([SICCS](https://nau.edu/school-informatics-computing-cyber-systems/)), and Principal Investigator of PhenoCam explains the background and conception of the network. 
 
 #### Digital repeat photography methods
 
@@ -1611,6 +1607,3 @@ Once you have a subplot of grassland phenology across 2 climates answer the foll
 
 Write up a 1-page summary of a project that you might want to explore using PhenoCam data over the duration of this course. Include the types of PhenoCam (and other data) that you will need to implement this project. Save this summary as you will be refining and adding to your ideas over the course of the semester.
 
-## Known Issues
-
-The prerecorded guest lecture by Andrew Richardson (4.1.1.1) is missing. The video in section 4.1.1.1 currently is a placeholder. 

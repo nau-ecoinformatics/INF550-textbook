@@ -52,9 +52,6 @@ NASA’s Earth Observing System (EOS) is a coordinated series of polar-orbiting 
 
 * Future Missions
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pDvRE0iF9ME" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
->Credit: NASA's Goddard Space Flight Center
 
 ## NASA EOS Earth Data Account:
 

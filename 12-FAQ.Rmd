@@ -8,13 +8,15 @@ Updated the structure of NEON API calls to explicitly include the NEON API token
 ### Chapter 4 - PhenoCam
 Previous PhenoCam ROI package `xROI` is no longer maintained. Updated to modern workflow using `phenopix` package. 
 
-The prerecorded guest lecture by Andrew Richardson (4.1.1.1) is missing. The video in section 4.1.1.1 currently is a placeholder.
+A prerecorded guest lecture by Andrew Richardson titled "PhenoCam, marrying phenology and fluxes" (4.1.1.1) was missing. The short primer video is substituted as a placeholder. 
 
 ### Chapter 5 - Fluxes and Interoperability 
 Outdated dependencies caused the `eddy4R` package to be unusable. Section 5.6.9 from the first edition was removed. 
 
 ### Chapter 6 - NEON AOP 
 The `rgdal` package is retired and no longer supported by CRAN. Geospatial workflows were updated to utilize modern packages. 
+
+The `rGEDI` package no longer installs properly.
 
 ### Chapter 7 - NASA EOS
 Updated NASA AppEEARS API examples to reflect a more current R-based workflow, including revised HTTP POST requests, task submission, API endpoint construction, authentication token handling, and JSON request/response parsing. Migrated versions of data products, e.g., `MOD11A2.006` to `MOD11A2.061`. Updated geospatial workflows using outdated packages (`rgdal`). 

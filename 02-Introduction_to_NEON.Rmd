@@ -180,7 +180,7 @@ NEON Biorepository</a>.
 Watch this 4:02 minute video to better understand the NEON Airborne
 Observation Platform (AOP).
 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=etnU4xFMTQo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+<iframe width="560" height="315" src="https://youtu.be/iQZzN12Apuk?si=cMPst3pvX6xC-8X4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
 
 </iframe>
 
