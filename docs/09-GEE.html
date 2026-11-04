@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ogonna Eli">
+<meta name="author" content="Scott LaRocca">
+<meta name="author" content="Jalyn Gearries">
+<meta name="description" content="Course text for NAU INF 550">
+
+<title>9&nbsp; Introduction to Google Earth Engine (GEE) platform &amp; its tools – Environmental Informatics Using Research Infrastructures and their Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-OneHealth_PathogenSurveillance.html" rel="next">
+<link href="./08-USGS.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-GEE.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environmental Informatics Using Research Infrastructures and their Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Pre-Course_Skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Course Setup: EcoInformatics Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Introduction_to_NEON.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to NEON &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-USA-NPN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to USA-NPN &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-PhenoCam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PhenoCam: Digital Repeat Photography Networks &amp; Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Fluxes_and_Inter-operability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flux Measurements &amp; Inter-Operability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-NEON_AOP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON AOP</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-NASA_EOS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">NASA’s Earth Observing System (EOS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-GEE.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-FAQ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#gee-learning-objectives" id="toc-gee-learning-objectives" class="nav-link active" data-scroll-target="#gee-learning-objectives"><span class="header-section-number">9.1</span> GEE Learning Objectives</a></li>
+  <li><a href="#gee-project-mission-design" id="toc-gee-project-mission-design" class="nav-link" data-scroll-target="#gee-project-mission-design"><span class="header-section-number">9.2</span> GEE Project Mission &amp; Design:</a></li>
+  <li><a href="#vision-mission" id="toc-vision-mission" class="nav-link" data-scroll-target="#vision-mission"><span class="header-section-number">9.3</span> Vision &amp; Mission</a></li>
+  <li><a href="#data-available-on-gee" id="toc-data-available-on-gee" class="nav-link" data-scroll-target="#data-available-on-gee"><span class="header-section-number">9.4</span> Data Available on GEE:</a></li>
+  <li><a href="#how-to-access-gee-data" id="toc-how-to-access-gee-data" class="nav-link" data-scroll-target="#how-to-access-gee-data"><span class="header-section-number">9.5</span> How to Access GEE Data:</a></li>
+  <li><a href="#hands-on-satellite-change-detection-using-gee" id="toc-hands-on-satellite-change-detection-using-gee" class="nav-link" data-scroll-target="#hands-on-satellite-change-detection-using-gee"><span class="header-section-number">9.6</span> Hands on: Satellite Change Detection Using GEE</a></li>
+  <li><a href="#other-interfaces-to-the-earth-engine-api" id="toc-other-interfaces-to-the-earth-engine-api" class="nav-link" data-scroll-target="#other-interfaces-to-the-earth-engine-api"><span class="header-section-number">9.7</span> Other Interfaces to the Earth Engine API</a></li>
+  <li><a href="#gee-exercises" id="toc-gee-exercises" class="nav-link" data-scroll-target="#gee-exercises"><span class="header-section-number">9.8</span> GEE Exercises</a></li>
+  <li><a href="#gee-written-questions" id="toc-gee-written-questions" class="nav-link" data-scroll-target="#gee-written-questions"><span class="header-section-number">9.9</span> GEE Written Questions</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ogonna Eli </p>
+             <p>Scott LaRocca </p>
+             <p>Jalyn Gearries </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Estimated Time: 2 hours</p>
+</blockquote>
+<p><strong>Course participants</strong>: As you review this information, please consider the final course project that you will build upon over this semester. At the end of this section, you will document an initial research question or idea and associated data needed to address that question, that you may want to explore while pursuing this course.</p>
+<section id="gee-learning-objectives" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="gee-learning-objectives"><span class="header-section-number">9.1</span> GEE Learning Objectives</h2>
+<p>At the end of this activity, you will be able to:</p>
+<ul>
+<li><p>Understand the mission and purpose of Google Earth Engine (GEE) and the nature of the data program from which the data is derived</p></li>
+<li><p>Access key tools &amp; resources that are available to pull data from GEE</p></li>
+<li><p>Effectively use the GEE cloud platform/Python API to integrate and analyze data from environmental research infrastructures</p></li>
+<li><p>GEE does a lot of different things, so you will understand which of those things are most specifically useful and interesting for a researcher doing synthesis across multiple environmental research infrastructures.</p></li>
+</ul>
+</section>
+<section id="gee-project-mission-design" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="gee-project-mission-design"><span class="header-section-number">9.2</span> GEE Project Mission &amp; Design:</h2>
+<iframe width="560" height="315" src="https://youtu.be/gKGOeTFHnKY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<p>The <a href="https://earthengine.google.com/">Google Earth Engine (GEE)</a> platform combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities. Scientists, researchers, and developers use Earth Engine to detect changes, map trends, and quantify differences on the Earth’s surface. Earth Engine is now available for commercial use, and remains free for academic and research use.</p>
+</section>
+<section id="vision-mission" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="vision-mission"><span class="header-section-number">9.3</span> Vision &amp; Mission</h2>
+<p>GEE’s vision is to provide data and information on different open source earth observation (EO) systems, free access to ensure the continuous monitoring of ecosystems, and natural resources using a cloud-based platform for planetary-scale environmental data analysis. The mission of GEE is to collect, organize, and share EO data to researchers, governments, and non-profit organizations to enable change monitoring, time series analysis, and make well-informed decisions on global issues.</p>
+<iframe width="560" height="315" src="https://youtu.be/CgmScMh9AfY?si=1IuvxUnAigzqsWcD" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
+</iframe>
+<section id="relevant-documents-background-information" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="relevant-documents-background-information"><span class="header-section-number">9.3.1</span> Relevant documents &amp; background information:</h3>
+<ol type="1">
+<li><p><a href="https://earthengine.google.com/platform/">GEE platform overview</a></p></li>
+<li><p><a href="https://developers.google.com/earth-engine/">GEE documentation</a></p></li>
+<li><p><a href="https://developers.google.com/earth-engine/datasets/">GEE datasets</a></p></li>
+<li><p><a href="https://earthengine.google.com/case_studies/">Case studies</a></p></li>
+<li><p><a href="https://developers.google.com/earth-engine/tutorials">Tutorials</a></p></li>
+<li><p><a href="https://developers.google.com/earth-engine/guides/machine-learning">Machine learning in GEE</a></p></li>
+</ol>
+</section>
+</section>
+<section id="data-available-on-gee" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="data-available-on-gee"><span class="header-section-number">9.4</span> <a href="https://developers.google.com/earth-engine/datasets">Data Available on GEE</a>:</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/GEE_DATASET.png" class="img-fluid figure-img" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Basic</p>
+<ul>
+<li>Elevation &amp; Topography</li>
+<li>Imagery - Orthophotos (Aerial)</li>
+<li>Imagery - Satellite</li>
+<li>Land Use &amp; Land Cover</li>
+</ul></li>
+<li><p>Geography</p>
+<ul>
+<li>Atmosphere</li>
+<li>Atmospheric Water Vapor</li>
+<li>Climate</li>
+<li>Cryosphere</li>
+<li>Fire</li>
+<li>Oceans</li>
+<li>Precipitation</li>
+<li>Soil</li>
+<li>Surface and Ground Water</li>
+</ul></li>
+<li><p>Biosphere</p>
+<ul>
+<li>Ecosystems</li>
+<li>Forest &amp; Biomass</li>
+<li>Plant Productivity</li>
+<li>Vegetation Indices</li>
+</ul></li>
+<li><p>Human Dimensions</p>
+<ul>
+<li>Agriculture</li>
+<li>Infrastructure &amp; Boundaries</li>
+<li>Population</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-to-access-gee-data" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="how-to-access-gee-data"><span class="header-section-number">9.5</span> How to Access GEE Data:</h2>
+<p>GEE makes their data available through a number of different <a href="https://developers.google.com/earth-engine">channels and tools</a>. This flexibility reflects the way geospatial data are handled in Earth Engine: rather than downloading datasets locally, users send computational requests to remote servers where the data are stored and processed. These requests are made through a set of APIs and client libraries that translate user-written code into Earth Engine operations.</p>
+<p>Access to Earth Engine data is typically mediated through these client libraries, which provide interfaces in both JavaScript and Python. These libraries act as a bridge between user code and the Earth Engine servers, allowing complex geospatial analyses to be expressed in a relatively compact and high-level syntax. Users can also interact directly with Earth Engine through a REST API, although this is less commonly used for exploratory analysis.</p>
+<p>One of the most widely used interfaces is the JavaScript-based <a href="https://developers.google.com/earth-engine/guides/playground">Code Editor</a>, which provides an interactive, browser-based environment for working with Earth Engine data. The Python client library offers similar functionality, and can be used in environments such as Google Colab, local Python installations, or cloud-based platforms such as App Engine. Together, these interfaces allow users to choose a workflow that best fits their computational background and research needs.</p>
+<section id="setting-up-an-earth-engine-account" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="setting-up-an-earth-engine-account"><span class="header-section-number">9.5.1</span> Setting Up an Earth Engine Account</h3>
+<p>Before accessing any of the interfaces described above, a Google Earth Engine account is required. As of 2024, registration is no longera standalone process. Earth Engine access is granted at the level of a <strong>Google Cloud project</strong>, which is linked to your Google account. This change was made to support the platform’s commercial release while preserving free access for academic and research users.</p>
+<p>To register:</p>
+<ol type="1">
+<li>Sign in at <a href="https://code.earthengine.google.com/register" class="uri">https://code.earthengine.google.com/register</a> with the Google account you intend to use for Earth Engine (e.g., <span class="citation" data-cites="nau.edu">@nau.edu</span> email).</li>
+<li>Choose the <strong>noncommercial/academic</strong> use option when prompted.</li>
+<li>Either select an existing Google Cloud project or create a new one. Most new users will create a project at this stage; the project name (e.g., <code>ee-yourusername</code>) is what you will later pass to <code>ee.Initialize()</code> or <code>ee_Initialize()</code> from the Python and R client libraries.</li>
+<li>Confirm registration. Approval is typically immediate for noncommercial use.</li>
+</ol>
+<p><strong>A note on quotas:</strong> in 2026, Earth Engine introduced a tiered quota system for noncommercial projects. Projects that have not selected a tier are placed in the <em>Community Tier</em> by default, which is sufficient for coursework and exploratory analysis but applies stricter rate limits than higher tiers. If you find that long-running scripts begin to fail with <code>OverQuotaError</code>, the quota tier of your project is the first thing to check. Tier selection is done from the Earth Engine project management page at <a href="https://code.earthengine.google.com/register" class="uri">https://code.earthengine.google.com/register</a>.</p>
+<p>Once registered, the Code Editor at <a href="https://code.earthengine.google.com/" class="uri">https://code.earthengine.google.com/</a> is immediately accessible. No further authentication is required from the browser. The Python and R client libraries each require an additional local authentication step, which is described in the <em>Other Interfaces</em> section later in this chapter.</p>
+</section>
+<section id="the-gee-code-editor" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="the-gee-code-editor"><span class="header-section-number">9.5.2</span> The GEE Code Editor</h3>
+<p>GEE provides access to a Code Editor as an integrated development environment (IDE) for the Earth Engine JavaScript API. This IDE offers a platform to write and execute code, visualize results on an interactive map, and manage scripts and projects within a single web-based environment. The Code Editor is accessed through a dedicated webpage:</p>
+<p>https://code.earthengine.google.com/</p>
+<p>Access to Earth Engine data through the Code Editor is built around the JavaScript programming language, which serves as the primary scripting interface for this environment. JavaScript provides a lightweight and accessible syntax that acts as a direct bridge to the Earth Engine API, where all geospatial computations are performed. While JavaScript may not be the most familiar programming language for many researchers in the geosciences, it is the most mature and fully supported option within Earth Engine. Importantly, users do not need to become expert JavaScript programmers to use the platform effectively. Instead, a basic understanding of syntax is sufficient, since most operations in Earth Engine are performed by calling pre-built functions from the Earth Engine library. This <a href="https://developers.google.com/earth-engine/tutorials/tutorial_js_01">brief introduction</a> to JavaScript syntax for GEE provided by the GEE developer team is enough to get started for most use cases.</p>
+<p>When first accessing the Code Editor, you may be prompted to create a <em>home folder</em>. This folder is permanently linked to your Earth Engine account and serves as their personal workspace within the platform. It is good practice to choose a name that clearly identifies you, since this will be visible within shared Earth Engine environments and collaborative workflows.</p>
+<p>Within your home folder, you can organize and store <strong>scripts</strong> and <strong>repositories</strong>, which function similarly to projects and code files in other development environments.</p>
+<p>The Code Editor interface is divided into four main panels:</p>
+<ul>
+<li><strong>Script Manager (left panel):</strong> Organizes your saved scripts and repositories</li>
+<li><strong>Script Editor (center panel):</strong> Where you write and edit JavaScript code</li>
+<li><strong>Console (top-right panel):</strong> Displays printed outputs, errors, and logs</li>
+<li><strong>Map Display (bottom panel):</strong> Visualizes geospatial data and analysis results</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/GEE_CodeEditor1.png" class="img-fluid figure-img" width="904"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When learning a new programming environment, it is traditional to begin with a simple output such as “Hello World!”. In Earth Engine, we can adapt this to “Hello Earth!” to verify that the Code Editor is working and to become familiar with running scripts and viewing console output.</p>
+<p>To do this, enter the following code in the Script Editor and execute the script by clicking <strong>Run</strong> at the top of the panel, or by pressing <strong>Ctrl + Enter</strong>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">'Hello Earth!'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should see the text output appear in the upper-right panel under “Console”. This is basic JavaScript, which runs in your web browser on the client side. The power of GEE is in taking advantage of Google’s vast infrastructure of severs to both access data and perform calculations on the server side. This client-server distinction is important in GEE and can be read about <a href="https://developers.google.com/earth-engine/guides/client_server">here</a>. We can now begin using using GEE to access data on the server side, specifically, images and image collections.</p>
+</section>
+<section id="working-with-earth-engine-image-objects" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="working-with-earth-engine-image-objects"><span class="header-section-number">9.5.3</span> Working with Earth Engine Image Objects</h3>
+<p>Before writing any code, it is useful to know that Earth Engine functionality is organized through <strong>objects</strong> (e.g., Earth Engine images, image collections, features, feature collections), and built-in <strong>methods</strong> or functions which can be called upon these object types. Detailed documentation for these data types and functions is provided in the ‘Docs’ panel on the upper left of the Code Editor.</p>
+<p>Let’s now begin working with GEE objects by accessing an image from Landsat 8, one of the most widely used Earth Observation platforms. In the Script Editor, enter and run the following code:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> firstImage <span class="op">=</span> ee<span class="op">.</span><span class="fu">Image</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2/LC08_037035_20250619"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice the syntax. A new variable is declared using <code>var</code>, and each statement is terminated with a semicolon (<code>;</code>). Up to this point, this follows basic JavaScript conventions. Next, we assign the variable a GEE Image object using <code>ee.Image()</code>, passing the satellite image ID as an argument. Once the variable is created, we can add it to the map using <code>Map.addLayer()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(firstImage)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice that <code>Map</code> is another GEE object type, and methods such as <code>.addLayer()</code> provide means to interact with the Map Display of the Code Editor.</p>
+<p>The image should appear in your Map Display, however, we still need to adjust the image <strong>visualization parameters</strong> to make it visualize nicely. In this case, we can visualize the image using true color by entering the following at the beginning of the script:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> trueColorVis <span class="op">=</span> {              <span class="co">// a dictionary object </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">"SR_B4"</span><span class="op">,</span><span class="st">"SR_B3"</span><span class="op">,</span><span class="st">"SR_B2"</span>]<span class="op">,</span> <span class="co">// Use the Red, Green, Blue bands</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">8000</span><span class="op">,</span> <span class="co">// minimum pixel value range</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">18000</span>}<span class="op">;</span> <span class="co">// maximum pixel value range </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Then modify the <code>Map.addLayer()</code> statement to include the visualization parameters and a title for the image. The argument order is: (image object, visualization parameters, layer title).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(firstImage<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"First Image"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You should now be able to see your first satellite image, visualized over Flagstaff, Arizona and the Grand Canyon.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/Landsat_image.png" class="img-fluid figure-img" width="292"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With an image now loaded into the GEE development environment, we can inspect it in various ways. In the upper-right panel, click the <em>Inspector</em> tab. Then with your cursor, click on a pixel of the satellite image on the Map Display. You will see some information populate the Inspector panel.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/inspector_panel.png" class="img-fluid figure-img" width="319"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In the Inspector panel, open the <em>Objects</em> section, and click on <em>bands</em>. We can see that this Landsat 8 image contains 19 bands. Under <em>properties</em>, we can see that the image also includes a lot of metadata, such as <code>CLOUD_COVER</code>, <code>DATE_ACQUIRED</code>, <code>SUN_AZIMUTH</code>, etc. These properties will be useful for filtering image collections in the future.</p>
+</section>
+<section id="working-with-image-collections" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="working-with-image-collections"><span class="header-section-number">9.5.4</span> Working With Image Collections</h3>
+<p>We previously loaded one single Landsat image to the map. But the true power of GEE is in working with <strong>image collections</strong>, which can represent an entire catalogue of data from a specific satellite or database.</p>
+<p>Let’s use Landsat 8 once again. We can type the ID of the satellite into an <code>ee.ImageCollection()</code> object, much as we did above. But this time we can search for this collection using the search bar. In the upper search bar at the top of the code editor webpage, type “Landsat 8” and click Enter. There will be several results representing different processing levels. Find the one that says USGS Landsat 8 Level 2, Collection 2, Tier 1.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/search_results.png" class="img-fluid figure-img" width="312"></p>
+<figcaption>Note: You can access any of the datasets in Google Earth Engine this way. The search bar is a way to explore GEE’s petabytes of Earth data!</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This dataset contains already pre-processed atmospherically corrected <strong>surface reflectance</strong> data, which is what we want to work with. Click on this search result to inspect the details of this dataset. Inside, we have a <em>Description</em>, list of <em>Bands</em>, <em>Properties</em>, and <em>Terms of Use</em>. By clicking on the <em>Bands</em> tab, we can inspect which of the bands we saw earlier correspond to which sections of the electromagnetic spectrum (blue, green, red, near infrared, shortwave infrared, etc.). We can also see the spatial resolution of the data, which here is 30 meters<sup>2</sup>.</p>
+<p>Scrolling down, we can see on the lefthand side the period of <em>Dataset Availability</em> (2013-03-18 to present), the <em>Dataset Provider</em> (USGS), and a <em>Collection Snippet</em> which we can use to programatically bring the dataset into our script. Copy the collection snippet, close this window, and let’s paste the snippet into the script.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/collection_view.png" class="img-fluid figure-img" width="252"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This code snippet creates a GEE <strong>image collection</strong> object, and we need only provide a variable name to contain it. In this case, we can assign this object the name <code>landsat8</code>. With one line of code, <code>landsat8</code> now contains ALL data in the Landsat 8 catalogue, spanning 2013 to present and covering the entire globe!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="filtering-an-image-collection" class="level4" data-number="9.5.4.1">
+<h4 data-number="9.5.4.1" class="anchored" data-anchor-id="filtering-an-image-collection"><span class="header-section-number">9.5.4.1</span> Filtering an Image Collection</h4>
+<p>While having all of the data from Landsat 8 in one object is interesting, it’s not very useful. We need to filter the image collection to focus on the time and location of interest. We can filter spatially to focus on an area of interest, and temporally to narrow in on a particular timeframe.</p>
+<p>To apply a <strong>spatial filter</strong>, we will create an Earth Engine <strong>Feature</strong> object. The Map Display allows one way to do this manually. On the map panel, click the <em>Point</em> icon, then click a point of interest where you would like to see satellite imagery on your map. I’ll choose southern California near Los Angeles.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/geom_point.png" class="img-fluid figure-img" width="159"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Once a point is placed, notice that it is automatically converted to a <strong>Geometry Import</strong>. It will appear under <em>Geometry Imports</em> on the map, and will also appear as <em>var geometry</em> at the imports section above your scripting panel. The same feature could have been created programmatically as well, for example: for example: <code>var geometry = ee.Geometry.Point([-118.64,34.10]);</code>.</p>
+<p>We can use now use this feature to filter the image collection to only images which spatially intersect the new point. This is done by applying the method <code>.filterBounds()</code> to the Image Collection.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>With the Image Collection filtered spatially, the next step is to apply a <strong>temporal filter</strong>. To perform this, the method <code>.filterDate()</code> can be called and passed a date range as arguments. In this case the image collection will be filtered for dates in between <code>2024-11-01</code> and <code>2024-12-31</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">"2024-11-01"</span><span class="op">,</span> <span class="st">"2024-12-31"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Notice how each filter can build on the last. With the spatial and temporal filter applied, we can now add the collection to the map and inspect it using the following command, and including the image visualization parameters from above.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat8<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"Landsat 8 Collection"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>An image collection consists of multiple independent image objects. To inspect them, click on the <em>Inspector</em> tab of the upper-right panel. Then click on the data on your map. In this case, we can see in the Inspector panel that there are four image objects in the image collection.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/ic_inspect.png" class="img-fluid figure-img" width="200"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="dealing-with-clouds" class="level3" data-number="9.5.5">
+<h3 data-number="9.5.5" class="anchored" data-anchor-id="dealing-with-clouds"><span class="header-section-number">9.5.5</span> Dealing with Clouds</h3>
+<p>Take a look at your image collection on the map. You will likely only see the first image in the collection. Does it have any clouds?</p>
+<p>Clouds are an ever-present challenge when working with satellite data. Even if your area of interest is clear in the topmost image, there’s no guarantee it’s unobstructed in the other images of the collection. To handle this, we’ll explore three methods:</p>
+<ol type="1">
+<li><strong>Median compositing:</strong> Calculate the median pixel value across the collection. This often removes bright pixels caused by clouds, especially when there is a lot of data.</li>
+<li><strong>Filtering by attributes:</strong> Remove images with high cloud cover using the metadata property.</li>
+<li><strong>Cloud masking:</strong> Apply a mask that identifies and removes clouds at the pixel level.</li>
+</ol>
+<section id="median-compositing" class="level4" data-number="9.5.5.1">
+<h4 data-number="9.5.5.1" class="anchored" data-anchor-id="median-compositing"><span class="header-section-number">9.5.5.1</span> Median Compositing</h4>
+<p>The simplest way to reduce clouds in an image collection is to apply a mathematical operation across the entire collection. While this may sound complex, Earth Engine makes it straightforward.</p>
+<p>Each band in an image can be thought of as a 2D array of pixel values, which allows mathematical operations to be applied across images. For an image collection, the <code>.median()</code> method reduces the collection to a single image by computing the median value at each pixel location.</p>
+<p>Because clouds tend to have high reflectance in optical imagery, they often appear as unusually bright values within a time series. By taking the median at each pixel, these outliers are suppressed, resulting in a composite image close to the true median surface reflectance values–particularly when there are many cloud-free images.</p>
+<p>Each band of an image is just a 2D array of numbers, so we can perform mathematical operations on them. For an image collection, we can use the <code>.median()</code> method to collapse all the images into a single image, where each pixel represents the median value of that location across the collection. Since clouds reflect sunlight brightly across the bands of an optical satellite image, taking the median pixel value across time removes their influence from the image, particularly if there are many cloud-free values at that pixel in the collection.</p>
+<p>We can implement this by creating a new object called <code>landsat8_median</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8_median <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">"2024-11-01"</span><span class="op">,</span> <span class="st">"2024-12-31"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">median</span>()<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The result of this operation is no longer an image collection, but a single image object. In GEE parlance, moving from a collection to a single image is referred to as <strong>reducing</strong> the image collection.</p>
+<p>Visualize the resulting image using the same visualization parameters as above. Did the clouds disappear?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/image_compositing.png" class="img-fluid figure-img" width="178"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case, not entirely. This is due to the fact that there were only four images in the collection. However, in a sunny region like California, compositing across a longer time span would result in a much sharper image. What would it look like had we collapsed a year of data using this method?</p>
+<p>This approach is quick and effective for producing a general visual overview, but it can also introduce distortions and leads to the loss of potentially valuable temporal information. To handle clouds more precisely while preserving information through time, we can explore alternative methods.</p>
+</section>
+<section id="filtering-by-attributes" class="level4" data-number="9.5.5.2">
+<h4 data-number="9.5.5.2" class="anchored" data-anchor-id="filtering-by-attributes"><span class="header-section-number">9.5.5.2</span> Filtering by attributes</h4>
+<p>Recall that each image includes a set of properties, which are metadata associated with the scene. Landsat data include the property CLOUD_COVER, which represents the estimated percentage of cloud cover for a given image. For example, if an image has CLOUD_COVER = 40, then approximately 40% of the scene is estimated to be obscured by clouds based on USGS processing algorithms.</p>
+<p>We can use this property to filter out images that are too cloudy for analysis. To do so, we append an additional filter step to the image collection:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2024-11-01'</span><span class="op">,</span> <span class="st">'2024-12-31'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUD_COVER'</span><span class="op">,</span> <span class="dv">20</span>))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Here, the <code>.filter()</code> method is called to apply a new general filter to the image collection. This filter is defined using</p>
+<p>Here, we use the <code>.filter()</code> method to apply a condition to the image collection, defined using <code>ee.Filter.lt()</code>, which selects images where a given property is less than a specified threshold. In this case, we retain only images with <code>CLOUD_COVER</code> less than 20%.</p>
+<p>The result of this command will be an image collection which has been filtered for images below the cloud cover threshold. For relatively cloud-free regions such as southern California, this threshold will be sufficient, however, it can be adjusted depending on local climate and analysis needs.</p>
+</section>
+<section id="cloud-masking" class="level4" data-number="9.5.5.3">
+<h4 data-number="9.5.5.3" class="anchored" data-anchor-id="cloud-masking"><span class="header-section-number">9.5.5.3</span> Cloud Masking</h4>
+<p>A more robust way to handle clouds is by applying a <strong>cloud mask</strong>. Unlike simple filtering, which removes entire images, cloud masking operates at the pixel level, allowing us to retain useful observations within partially cloudy scenes.</p>
+<p>To implement this approach, we first define a cloud masking function. This introduces an important Earth Engine concept: applying a function across all images in a collection using the <code>.map()</code> method.</p>
+<p>For widely used sensors such as Landsat and Sentinel, well-tested cloud masking functions are readily available in the Earth Engine community and documentation. Here, we use a standard Landsat approach that leverages the <code>QA_PIXEL</code> band to identify clouds and cloud shadows based on quality assessment flags.</p>
+<p>To implement this, we first define the masking function. Add the following code at the top of your script:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">maskL8sr</span>(image) {  <span class="co">// intake an image</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> qa <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'QA_PIXEL'</span>)<span class="op">;</span> <span class="co">// select the QA pixel band</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> cloudMask <span class="op">=</span> qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">3</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// bitmap to identify clouds </span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">and</span>(qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">5</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>))<span class="op">;</span> <span class="co">// bitmap to identify cloud shadows</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(cloudMask)<span class="op">;</span> <span class="co">// return a masked image </span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now that we have defined a cloud masking function, we can apply it to every image in the collection. In GEE, this is known as mapping a function over an image collection.</p>
+<p>This is done using the <code>.map()</code> method, which applies a function to each image in the collection and returns a new, processed collection as output. The following code applies both the cloudiness atrribute filter and the cloud masking function, which is a robust way to deal with the problem of cloud cover.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2024-11-01'</span><span class="op">,</span> <span class="st">'2024-12-31'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUD_COVER'</span><span class="op">,</span> <span class="dv">20</span>)) </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">map</span>(maskL8sr)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>How does the data look now with both the cloud cover filter and the cloud mask applied?</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/cloud_filter_mask.png" class="img-fluid figure-img" width="211"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The resulting image collection is now much cleaner and ready for analysis.</p>
+<p>The dates and region selected here are intentional. The image precedes the destructive wildfires near Los Angeles in January 2025, which caused widespread damage across several communities. In the next exercise, we will use spectral band indices and change detection to map the extent and severity of this wildfire event and its impact on communities in the wildland-urban interface.</p>
+</section>
+</section>
+</section>
+<section id="hands-on-satellite-change-detection-using-gee" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="hands-on-satellite-change-detection-using-gee"><span class="header-section-number">9.6</span> Hands on: Satellite Change Detection Using GEE</h2>
+<p>GEE is particularly well suited for change detection, as it provides seamless access to large temporal ranges of satellite imagery and efficient tools for comparing observations across dates.</p>
+<p>Change detection is a widely applied method in satellite image analysis, and and enables the identification and quantification of environmental changes across space and time. This method is applied across several domains, including:</p>
+<ul>
+<li><strong>Wildfire assessment:</strong> Mapping burn extent and severity before and after fire events</li>
+<li><strong>Deforestation and forest degradation:</strong> Detecting tree cover loss, logging activity, or forest recovery</li>
+<li><strong>Urban expansion:</strong> Tracking growth of cities and infrastructure over time</li>
+<li><strong>Agricultural dynamics:</strong> Monitoring crop cycles, planting/harvest timing, and field abandonment</li>
+<li><strong>Flood mapping:</strong> Identifying inundated areas during and after flood events</li>
+<li><strong>Drought impacts:</strong> Observing vegetation stress and landscape drying over time</li>
+<li><strong>Glacier and snow cover change:</strong> Measuring retreat or seasonal variability</li>
+<li><strong>Coastal change:</strong> Tracking shoreline erosion, sediment movement, and sea level impacts</li>
+</ul>
+<p>In this section, we will use change detection techniques to analyze wildfire severity and assess the extent of damage to communities in the wildland-urban interface during the 2025 Los Angeles wildfire.</p>
+<section id="pre-fire-imagery" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="pre-fire-imagery"><span class="header-section-number">9.6.1</span> Pre-Fire Imagery</h3>
+<p>In Section XX.XX, we learned how to create cloud-free composites using image collections, filtering, and masking techniques. We now apply these skills to analyze the 2025 Los Angeles wildfires by generating a high-quality pre-fire image composite image.</p>
+<p>To do this, we use Landsat 8 data, apply filters to the image collection, perform image-based operations, and implement a cloud masking function. The following script produces a ready-to-use pre-fire composite based on these steps:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Cloud Mask Function</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">maskL8sr</span>(image) {  <span class="co">// intake an image</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> qa <span class="op">=</span> image<span class="op">.</span><span class="fu">select</span>(<span class="st">'QA_PIXEL'</span>)<span class="op">;</span> <span class="co">// select the QA pixel band</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">var</span> cloudMask <span class="op">=</span> qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">3</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>) <span class="co">// bitmap to identify clouds </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">and</span>(qa<span class="op">.</span><span class="fu">bitwiseAnd</span>(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">5</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">0</span>))<span class="op">;</span> <span class="co">// bitmap to identify cloud shadows</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image<span class="op">.</span><span class="fu">updateMask</span>(cloudMask)<span class="op">;</span> }  <span class="co">// return a masked image </span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Define Area of Interest</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> geometry <span class="op">=</span> ee<span class="op">.</span><span class="at">Geometry</span><span class="op">.</span><span class="fu">Point</span>([<span class="op">-</span><span class="fl">118.64</span><span class="op">,</span><span class="fl">34.10</span>])<span class="op">;</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Landsat 8 Collection to Pre-fire Image</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat_pre <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2024-10-01'</span><span class="op">,</span> <span class="st">'2024-12-31'</span>)</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUD_COVER'</span><span class="op">,</span> <span class="dv">20</span>)) </span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">map</span>(maskL8sr)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">median</span>()<span class="op">;</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Visualization parameters</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> trueColorVis <span class="op">=</span> {</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">"SR_B4"</span><span class="op">,</span><span class="st">"SR_B3"</span><span class="op">,</span><span class="st">"SR_B2"</span>]<span class="op">,</span> <span class="co">// Red, Green, Blue bands</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">6000</span><span class="op">,</span></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">19000</span>}<span class="op">;</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co">// Visualize Pre-Fire Image </span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_pre<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"Pre-Fire Image"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="post-fire-imagery" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="post-fire-imagery"><span class="header-section-number">9.6.2</span> Post-Fire Imagery</h3>
+<p>To generate a post-fire image, we follow the same approach but select a time period after the fire event. The fires occurred between January 7 and 31, 2025, so we begin with February 2025 as our post-fire window. Using the same workflow, we can produce a clear post-fire composite.</p>
+<p>Add the following code to the end of your script:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Post-Fire Image</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat_post <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterBounds</span>(geometry)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filterDate</span>(<span class="st">'2025-02-01'</span><span class="op">,</span> <span class="st">'2025-03-30'</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(ee<span class="op">.</span><span class="at">Filter</span><span class="op">.</span><span class="fu">lt</span>(<span class="st">'CLOUD_COVER'</span><span class="op">,</span> <span class="dv">20</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">map</span>(maskL8sr)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">median</span>()<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Visualize Post-Fire Image </span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_post<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"Post-Fire Image"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="adjusting-visualization-parameters" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="adjusting-visualization-parameters"><span class="header-section-number">9.6.3</span> Adjusting Visualization Parameters</h3>
+<p>You should now be able to compare the pre- and post-fire images on the map. Open the Layers panel in the upper-right corner and use the transparency slider for each layer to explore differences between them. Adjust the post-fire layer and observe how the landscape has changed.</p>
+<p>Some of these differences are due to fire, while others reflect seasonal variation between the image acquisition dates. To better isolate fire-related changes, we can apply visualization techniques that specifically highlight burned areas.</p>
+<p>Burned surfaces exhibit high reflectance in the <em>shortwave infrared (SWIR)</em> region, making them easier to identify using false color composites. To emphasize these fire scars, we will create a <strong>false color visualization</strong>. Append the following code to your script:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">// False color visualization with the SWIR and NIR bands</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> swir_vis <span class="op">=</span> {</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">'SR_B7'</span><span class="op">,</span><span class="st">'SR_B5'</span><span class="op">,</span><span class="st">'SR_B4'</span>]<span class="op">,</span> <span class="co">// SWIR, NIR, Red</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="dv">7000</span><span class="op">,</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="dv">20000</span>}<span class="op">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Add new visualizations </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_pre<span class="op">,</span> swir_vis<span class="op">,</span><span class="st">"Pre-fire false color"</span>)<span class="op">;</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_post<span class="op">,</span> swir_vis<span class="op">,</span><span class="st">"Post-fire false color"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/false_color_vis.png" class="img-fluid figure-img" width="312"></p>
+<figcaption>False color visualizations take advantage of the multispectral nature of satellite data, and can help highlight features that our eyes struggle to see in the visible spectrum.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Toggle the post-fire false color layer on and off to compare it with the underlying imagery. You should observe areas where green vegetation gives way to bright red patches. These red regions indicate burned surfaces, which appear red in this visualization due to their high reflectance in the shortwave infrared (SWIR) region.</p>
+<p>In this band combination, SWIR reflectance is displayed in red, near-infrared (NIR) reflectance in green, and red reflectance in blue.</p>
+</section>
+<section id="calculating-indices-using-band-math" class="level3" data-number="9.6.4">
+<h3 data-number="9.6.4" class="anchored" data-anchor-id="calculating-indices-using-band-math"><span class="header-section-number">9.6.4</span> Calculating Indices Using Band Math</h3>
+<p>One of the most common transformations applied to multispectral satellite data is the calculation of spectral indices. A widely used example is the <strong>Normalized Difference Vegetation Index (NDVI)</strong>.</p>
+<p>As we have seen, individual spectral bands provide information about features on the Earth’s surface. However, additional insight can be gained by examining the relationship between bands, particularly through ratios of their values. In the case of vegetation, healthy plants strongly reflect radiation in the near-infrared (NIR) band while absorbing radiation in the red band.</p>
+<p>NDVI leverages this contrast to provide an indicator of vegetation presence and density, and is calculated using the following formula:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/ndvi.png" class="img-fluid figure-img" width="84"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this case, we are interested in burned areas. Here too, a useful index has been developed, the <strong>Normalized Burn Ratio (NBR)</strong>:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/nbr.png" class="img-fluid figure-img" width="108"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Since NIR reflectance is strongly associated with healthy vegetation, and SWIR reflectance increases over burned surfaces, the contrast between these bands provides a useful indicator of fire scars. This relationship is captured by the NBR, which is commonly used to map burned areas and estimate fire severity. (<a href="https://un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/in-detail/normalized-burn-ratio">Read more about NBR here.</a>)</p>
+<p>Earth Engine provides a built-in method for calculating normalized difference indices. The <code>.normalizedDifference()</code> method computes the normalized difference between two bands. In this case, we use band 5 (NIR) and band 7 (SWIR), and rename the result as a new band called NBR:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Calculate NBR in pre and post-fire images</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> nbr_pre <span class="op">=</span> landsat_pre<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">'SR_B5'</span><span class="op">,</span> <span class="st">'SR_B7'</span>])<span class="op">.</span><span class="fu">rename</span>(<span class="st">'NBR'</span>)<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> nbr_post <span class="op">=</span> landsat_post<span class="op">.</span><span class="fu">normalizedDifference</span>([<span class="st">'SR_B5'</span><span class="op">,</span> <span class="st">'SR_B7'</span>])<span class="op">.</span><span class="fu">rename</span>(<span class="st">'NBR'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="calculate-the-differenced-normalized-burn-ratio" class="level3" data-number="9.6.5">
+<h3 data-number="9.6.5" class="anchored" data-anchor-id="calculate-the-differenced-normalized-burn-ratio"><span class="header-section-number">9.6.5</span> Calculate the differenced Normalized Burn Ratio</h3>
+<p>The change between pre-fire and post-fire NBR is referred to as the <strong>differenced Normalized Burn Ratio (dNBR)</strong>. It is calculated by subtracting the post-fire NBR from the pre-fire NBR. In Earth Engine, as with other mathematical operations on images, this can be implemented using the <code>.subtract()</code> method.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Calculate dNBR (pre - post)</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dnbr <span class="op">=</span> nbr_pre<span class="op">.</span><span class="fu">subtract</span>(nbr_post)<span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(dNBR)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>dNBR</code> layer now represents change in NBR from pre- to post-fire.</p>
+</section>
+<section id="visualize-burn-severity" class="level3" data-number="9.6.6">
+<h3 data-number="9.6.6" class="anchored" data-anchor-id="visualize-burn-severity"><span class="header-section-number">9.6.6</span> Visualize Burn Severity</h3>
+<p>dNBR has been widely used as an indicator of burn severity, with higher values generally corresponding to more severe fire impacts. The USGS has developed a standard classification scheme that relates ranges of dNBR values to categories of burn severity.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/dnbr_table.png" class="img-fluid figure-img" width="312"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>To visualize the dNBR values for this area of interest, we can mask any values below 0.1 to isolate only the burned area. Then we can apply visualization parameters that roughly align with USGS recommendations. Since the vegetation type in this region is chaparral, dNBR values will differ somewhat from the recommendations above.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Mask areas of non-fire (dNBR &lt; 0.1) </span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dnbr_mask <span class="op">=</span> dnbr<span class="op">.</span><span class="fu">updateMask</span>(dnbr<span class="op">.</span><span class="fu">gt</span>(<span class="fl">0.1</span>))<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">// dNBR Visualization parameters</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> dnbrVis <span class="op">=</span> {</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bands</span><span class="op">:</span> [<span class="st">"NBR"</span>]<span class="op">,</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">max</span><span class="op">:</span> <span class="fl">0.6</span><span class="op">,</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">min</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">palette</span><span class="op">:</span> [<span class="st">"fcff2b"</span><span class="op">,</span><span class="st">"ffc010"</span><span class="op">,</span><span class="st">"ff2218"</span><span class="op">,</span><span class="st">"fb0eff"</span>]}<span class="op">;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Add the dNBR layer to the map</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(dnbr_mask<span class="op">,</span>dnbrVis<span class="op">,</span><span class="st">"Fire Severity"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/dnbr.png" class="img-fluid figure-img" width="312"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Explore the resulting dNBR map. From this data, it is apparent that two major fires occurred near Los Angeles: one to the north in the Altadena area, and another to the west of the city center, affecting regions including Pacific Palisades and Malibu. The dNBR product effectively highlights these burn scars and captures the spatial extent of both events.</p>
+<p>You may also notice some noise in the map, where isolated urban, forest, and particularly agricultural pixels appear as burned despite not being directly affected by wildfire. This type of “noisiness” is common in change detection workflows, especially when using simple differencing approaches. It can arise from seasonal differences, phenological change, atmospheric effects, or misregistration between images.</p>
+<p>These limitations can be reduced using more advanced approaches, such as improved cloud and quality masking, threshold tuning, spatial filtering, or machine learning-based classification methods.</p>
+</section>
+<section id="integrating-land-cover-and-burn-severity" class="level3" data-number="9.6.7">
+<h3 data-number="9.6.7" class="anchored" data-anchor-id="integrating-land-cover-and-burn-severity"><span class="header-section-number">9.6.7</span> Integrating Land Cover and Burn Severity</h3>
+<p>While burn severity maps derived from dNBR clearly show where wildfire activity has occurred, they do not distinguish between different types of affected landscapes. To better understand wildfire impacts at the human–environment interface, we can combine burn severity with land cover information.</p>
+<p>In particular, this allows us to identify where fire has intersected with urban areas, providing a direct view of impacts within the wildland–urban interface (WUI). By overlaying land cover classifications with burn severity, we can isolate burned urban pixels and more clearly assess how wildfire affected developed regions in and around Los Angeles.</p>
+<section id="land-cover-data" class="level4" data-number="9.6.7.1">
+<h4 data-number="9.6.7.1" class="anchored" data-anchor-id="land-cover-data"><span class="header-section-number">9.6.7.1</span> Land Cover Data</h4>
+<p>A suitable source of land cover information for this application is the USFS Landscape Change Monitoring System (LCMS). In Google Earth Engine, the LCMS provides land cover and land use classification products up to October 2024, immediately preceding the fire event analyzed here. The dataset is available at 30 m spatial resolution, which is consistent with the Landsat 8 imagery used for burn severity estimation, allowing for direct spatial comparison without resampling.</p>
+<p>In this analysis, LCMS is used to provide contextual land cover information, enabling interpretation of burn severity patterns within different landscape types, particularly in relation to the wildland–urban interface. This is important because spectral burn indices alone do not distinguish between urban infrastructure, vegetation, or mixed land use areas.</p>
+<p>The data can be accessed and displayed in a similar manner to the Landsat image collections:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landcover <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">'USFS/GTAC/LCMS/v2024-10'</span>)<span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> lcms <span class="op">=</span> landcover<span class="op">.</span><span class="fu">sort</span>(<span class="st">'system:time_start'</span><span class="op">,</span> <span class="kw">false</span>) <span class="co">// sort the collection so latest image is "first"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span><span class="fu">filter</span>(<span class="st">'study_area == "CONUS"'</span>) <span class="co">// filter to continental US </span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span><span class="fu">first</span>()<span class="op">;</span> <span class="co">// extract the first image </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(lcms<span class="op">.</span><span class="fu">select</span>(<span class="st">'Land_Use'</span>)<span class="op">,</span> {}<span class="op">,</span> <span class="st">'Land Use'</span>)<span class="op">;</span> <span class="co">// add the land use band using native visualization parameters</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Visual comparison with high-resolution basemap imagery suggests that the LCMS classification provides reasonable spatial agreement for the study region. Here, the Land Use layer is used rather than the Land Cover layer, as it better captures semi-urban and transitional areas characteristic of the wildland–urban interface. However, it is important to note that this layer also includes infrastructure-related features such as roads, which may not correspond directly to built-up residential areas.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/landcover.png" class="img-fluid figure-img" width="436"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="burned-areas-in-the-wildland-urban-interface" class="level3" data-number="9.6.8">
+<h3 data-number="9.6.8" class="anchored" data-anchor-id="burned-areas-in-the-wildland-urban-interface"><span class="header-section-number">9.6.8</span> Burned Areas in the Wildland-Urban Interface</h3>
+<p>With both burn severity (dNBR) and land use maps, we can now identify which neighborhoods in the WUI were burned in the 2025 Los Angeles fires. To accomplish this, we can simply update the <strong>mask</strong> of the dNBR data layer using the urban land use classification.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urban <span class="op">=</span> lcms<span class="op">.</span><span class="fu">select</span>(<span class="st">'Land_Use'</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">2</span>)<span class="op">;</span> <span class="co">// Select the land use band, then, urban land use is coded as 2</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urbanBurned <span class="op">=</span> dnbr_mask<span class="op">.</span><span class="fu">updateMask</span>(urban)<span class="op">;</span> <span class="co">// mask the dNBR layer by urban areas</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The result is a map of areas where urban land use class and burn areas indicated by dNBR coincide. Visualize the final result using the following command:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(urbanBurned<span class="op">,</span>{<span class="dt">palette</span><span class="op">:</span>[<span class="st">'ff150a'</span>]}<span class="op">,</span><span class="st">"Urban Burned Areas"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/urban_burn1.png" class="img-fluid figure-img" width="489"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/urban_burn2.png" class="img-fluid figure-img" width="281"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="images/final.png" class="img-fluid figure-img" width="204"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="other-interfaces-to-the-earth-engine-api" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="other-interfaces-to-the-earth-engine-api"><span class="header-section-number">9.7</span> Other Interfaces to the Earth Engine API</h2>
+<p>The Code Editor is the most convenient way to begin working with Earth Engine, but it is not the only one. The same Earth Engine backend can be accessed through several client libraries, each suited to a different workflow:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Interface</th>
+<th>Language</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Code Editor</td>
+<td>JavaScript</td>
+<td>Exploratory work, sharing scripts, learning GEE</td>
+</tr>
+<tr class="even">
+<td><code>earthengine-api</code></td>
+<td>Python</td>
+<td>Reproducible analysis, integration with Python scientific stack, batch processing</td>
+</tr>
+<tr class="odd">
+<td><code>rgee</code></td>
+<td>R</td>
+<td>R-based workflows, integration with the R spatial ecosystem (<code>sf</code>, <code>terra</code>, <code>stars</code>)</td>
+</tr>
+<tr class="even">
+<td>REST API</td>
+<td>Any</td>
+<td>Production pipelines, web applications, languages without a client library</td>
+</tr>
+</tbody>
+</table>
+<p>All four interfaces communicate with the same Earth Engine servers and produce identical results. The choice of interface is largely a matter of which ecosystem the rest of an analysis lives in.</p>
+<section id="the-python-api" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="the-python-api"><span class="header-section-number">9.7.1</span> The Python API</h3>
+<p>For analyses that combine Earth Engine outputs with other Python libraries (e.g., <code>pandas</code>, <code>xarray</code>, <code>scikit-learn</code>, <code>geopandas</code>), the Python API is the most natural fit. It is also the recommended interface for batch processing and scheduled jobs.</p>
+<section id="installation" class="level4" data-number="9.7.1.1">
+<h4 data-number="9.7.1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">9.7.1.1</span> Installation</h4>
+<p>The python client library is named <code>earthengine-api</code> and can be installed through <code>pip</code> or <code>conda</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install earthengine</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># conda</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> install <span class="at">-c</span> conda-forge earthengine-api</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For interactive map display in Jupyter notebooks, the <code>geemap</code> package is strongly recommended. It provides a Code-Editor-like map widget and a number of convenient functions:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install geemap</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>If you are using Google Colab, both packages are pre-installed.</p>
+</section>
+<section id="authentication-and-initialization" class="level4" data-number="9.7.1.2">
+<h4 data-number="9.7.1.2" class="anchored" data-anchor-id="authentication-and-initialization"><span class="header-section-number">9.7.1.2</span> Authentication and Initialization</h4>
+<p>The Python API requires a one-time authentication step per machine, followed by initialization with a Cloud project ID at the start of each session:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co"># One-time per machine (opens a browser tab for OAuth)</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>ee.Authenticate()</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Required at the start of every session</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>ee.Initialize(project<span class="op">=</span><span class="st">'your-project-id'</span>)</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify the connection</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ee.String(<span class="st">'Hello World!'</span>).getInfo())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The <code>project</code> argument should match the Cloud project ID created during account registration. If <code>ee.Initialize()</code> is called without a <code>project</code> argument, the call will fail with an error directing you to specify one.</p>
+</section>
+<section id="a-parallel-example-loading-and-filtering-an-image-collection" class="level4" data-number="9.7.1.3">
+<h4 data-number="9.7.1.3" class="anchored" data-anchor-id="a-parallel-example-loading-and-filtering-an-image-collection"><span class="header-section-number">9.7.1.3</span> A Parallel Example: Loading and Filtering an Image Collection</h4>
+<p>The Python API mirrors the JavaScript API closely. Object types, method names, and chaining patterns are nearly identical. The main syntactic differences are Python’s snake_case for some helper functions, the use of dictionaries instead of object literals, and the explicit <code>getInfo()</code> call required to pull values to the client.</p>
+<p>The same Landsat 8 cloud-masked composite produced earlier in this chapter can be produced as follows:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> geemap</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>ee.Initialize(project<span class="op">=</span><span class="st">'your-project-id'</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Cloud mask function - note the closer resemblance to the JS version</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mask_l8sr(image):</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  qa <span class="op">=</span> image.select(<span class="st">'QA_PIXEL'</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  cloud_mask <span class="op">=</span> (qa.bitwiseAnd(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">3</span>).eq(<span class="dv">0</span>)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                .And(qa.bitwiseAnd(<span class="dv">1</span> <span class="op">&lt;&lt;</span> <span class="dv">5</span>).eq(<span class="dv">0</span>)))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> image.updateMask(cloud_mask)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Define area of interest</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>geometry <span class="op">=</span> ee.Geometry.Point([<span class="op">-</span><span class="fl">118.64</span>, <span class="fl">34.10</span>])</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># build the pre-fire composite</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>landsat_pre <span class="op">=</span> (ee.ImageCollection(<span class="st">'LANDSAT/LC08/C02/T1_L2'</span>)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>               .filterBounds(geometry)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>               .filterDate(<span class="st">'2024-10-01'</span>, <span class="st">'2024-12-31'</span>)</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>               .<span class="bu">filter</span>(ee.Filter.lt(<span class="st">'CLOUD_COVER'</span>, <span class="dv">20</span>))</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>               .<span class="bu">map</span>(mask_l8sr)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>               .median())</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>               </span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization parameters</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>true_color_vis <span class="op">=</span> {</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  <span class="st">'bands'</span>: [<span class="st">'SR_B4'</span>, <span class="st">'SR_B3'</span>, <span class="st">'SR_B2'</span>],</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>  <span class="st">'min'</span>: <span class="dv">6000</span>,</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="st">'max'</span>: <span class="dv">19000</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Display in an interactive map</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>Map <span class="op">=</span> geemap.Map()</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>Map.centerObject(geometry, <span class="dv">9</span>)</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>Map.addLayer(landsat_pre, true_color_vis, <span class="st">'Pre-Fire Image'</span>)</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>Map</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>The structural similarity to the JavaScript version is intentional and reflects the fact that both client libraries are thin wrappers around the same underlying API.</p>
+</section>
+<section id="client-vs.-server-in-python" class="level4" data-number="9.7.1.4">
+<h4 data-number="9.7.1.4" class="anchored" data-anchor-id="client-vs.-server-in-python"><span class="header-section-number">9.7.1.4</span> Client vs.&nbsp;Server in Python</h4>
+<p>The client/server distinction introduced earlier in this chapter is particularly important to keep in mind when working in Python. Earth Engine objects are <code>server-side</code>: their values do not exist on the local machine and cannot be inspected directly with standard Python tools. For example, the following will not return what a Python user might expect:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints a description of the server-side object, NOT its value</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(landsat_pre)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this actually retrieves the value from the server</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(landsat_pre.bandNames().getInfo())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Calls to <code>.getInfo()</code> block execution until a response is received from the server, and can be slow or fail entirely for large objects. As a rule of thumb, <code>getInfo()</code> should be used sparingly and only on small, scalar results. For larger outputs, use <code>ee.batch.Export</code> to write results to Google Drive, Google Cloud Storage, or as Earth Engine Assets.</p>
+</section>
+</section>
+<section id="the-r-interface-rgee" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="the-r-interface-rgee"><span class="header-section-number">9.7.2</span> The R Interface: rgee</h3>
+<p>For users who prefer to remain in R, the <code>rgee</code> package provides an R binding for the Earth Engine API. <code>rgee</code> is a community-maintained package (part of the r-spatial ecosystem) rather than an official Google product, but it is well documented and stable, and integrates cleanly with the R spatial stack.</p>
+<p>A practical caveat: <code>rgee</code> is implemented as a <code>reticulate</code> wrapper around the Python <code>earthengine-api</code>. This means that a working Python installation and the <code>earthengine-api</code> Python package are both required, even when working entirely in R. Setup is non-trivial on a fresh machine and is the most common source of friction reported by <code>rgee</code> users.</p>
+<p>Installation and one-time setup:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rgee"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># installs Python dependencies (numpy, earthengine-api) into a managed Python environment</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_install</span>()</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># one-time authentication</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Authentication</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Once installed, the syntax mirrors the Python API, with <code>ee$</code> replacing <code>ee</code> for method access:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rgee)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ee_Initialize</span>(<span class="at">project =</span> <span class="st">"your-project-id"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>first_image <span class="ot">&lt;-</span> ee<span class="sc">$</span><span class="fu">Image</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2/LC08_037035_20250619"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>true_color_vis <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">bands =</span> <span class="fu">c</span>(<span class="st">"SR_B4"</span>, <span class="st">"SR_B3"</span>, <span class="st">"SR_B2"</span>),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">min =</span> <span class="dv">8000</span>,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> <span class="dv">18000</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>Map<span class="sc">$</span><span class="fu">addLayer</span>(first_image, true_color_vis, <span class="st">"First Image"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>For more on <code>rgee</code>, including examples of pulling Earth Engine outputs directly into <code>sf</code> and <code>stars</code> objects, see the package documentation at <a href="https://r-spatial.github.io/rgee/" class="uri">https://r-spatial.github.io/rgee/</a>.</p>
+</section>
+<section id="rest-api" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="rest-api"><span class="header-section-number">9.7.3</span> REST API</h3>
+<p>The REST API is the lowest-level interface to Earth Engine, exposing the service as a set of standard HTTPS endpoints that return JSON. Unlike the client libraries, the REST API has no language-specific bindings - it can be called from any environment capable of making authenticated HTTP requests, including web applications, mobile clients, or languages without a maintained Earth Engine library (e.g., Julia, Go, Rust).</p>
+<p>For most analytical work, the REST API is <em>not</em> the recommended entry point. The JavaScript, Python, and R client libraries handle a substantial amount of complexity (object serialization, request batching, error handling) that must be implemented manually when working directly with REST. The REST API is most appropriate when:</p>
+<ul>
+<li>Building a web application that needs to embed Earth Engine outputs</li>
+<li>Integrating Earth Engine into a production pipeline written in a language without a client library</li>
+<li>Calling Earth Engine from a serverless or edge environment where installing a full Python or Node.js stack is undesirable.</li>
+</ul>
+<p>A minimal authenticated request to retrieve metadata for a single image might look like this in Python:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> google.auth</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> google.auth.transport.requests</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># get application default credentials (set up via `gcloud auth login`)</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>credentials, project <span class="op">=</span> google.auth.default()</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>credentials.refresh(google.auth.transport.requests.Request())</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># construct the request</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>asset_id <span class="op">=</span> <span class="st">'LANDSAT/LC08/C02/T1_L2/LC08_037035_20250619'</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="ss">f'https://earthengine.googleapis.com/v1/projects/</span><span class="sc">{</span>project<span class="sc">}</span><span class="ss">/assets/</span><span class="sc">{</span>asset_id<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  url,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  headers <span class="op">=</span> {<span class="st">'Authorization'</span>: <span class="ss">f'Bearer </span><span class="sc">{</span>credentials<span class="sc">.</span>token<span class="sc">}</span><span class="ss">'</span>}</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(response.json())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>REST authentication is handled through standard Google Cloud OAuth2 flows and supports both user accounts and service accounts. Servicea accounts are typically preferred for automated or unattended workflows.</p>
+<p>Full documentation of available endpoints is provided in the <a href="https://developers.google.com/earth-engine/reference">GEE REST API Reference</a>.</p>
+</section>
+</section>
+<section id="gee-exercises" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="gee-exercises"><span class="header-section-number">9.8</span> GEE Exercises</h2>
+</section>
+<section id="gee-written-questions" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="gee-written-questions"><span class="header-section-number">9.9</span> GEE Written Questions</h2>
+<p><strong>Suggested timing: Complete before lecture 2 of GEE Hands on Coding Exercises</strong></p>
+<strong>Question 1:</strong> How might or does GEE intersect with your current research or future career goals? <em>(1 paragraph)</em>
+</section></main></div>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><div id="ds-challenge" data-markdown="1">
+<p><strong>Question 2:</strong> Consider either your current or future research, or a question you’d like to address during this course:</p>
+<p>· What climate data or additional phenological datasets would be valuable to address your research interests?</p>
+<p>· What challenges, if any, could you foresee when beginning to work with these data?</p>
+<p><strong>Question 3:</strong> Consider either your current or future research, or a question you would like to address during this course:</p>
+<ul>
+<li>What climate, remote sensing or other datasets available through GEE would be valuable for addressing your research interests?</li>
+<li>What challenges, if any, do you foresee when beginning to work with these data through Earth Engine?</li>
+</ul>
+<p><strong>Question 4:</strong> Compare the four interfaces to Earth Engine described in this chapter (Code Editor, Python API, <code>rgee</code>, REST API). For your own typical workflow, which interface would you choose, and why? Are there situations in which you would use more than one?</p>
+<p><strong>Question 5:</strong> The client/server distinction is one of the most important concepts to understand when working with Earth Engine. In your own words, explain what is meant by <em>client-side</em> vs.&nbsp;<em>server-side</em> operations, and give one example of each from the code in this chapter.</p>
+<section id="computational-exercise" class="level3" data-number="9.9.1">
+<h3 data-number="9.9.1" data-anchor-id="computational-exercise"><span class="header-section-number">9.9.1</span> Computational Exercise</h3>
+<p>Reproduce a simplified version of the wildfire change detection workflow from the <em>Hands On</em> section using the <strong>Python API</strong>, and compare your results to the JavaScript output.</p>
+<p>Specifically:</p>
+<ol type="1">
+<li>Open a new Google Colab notebook (or local Jupyter notebook with <code>earthengine-api</code> and <code>geemap</code> installed).</li>
+<li>Authenticate and initialize the Earth Engine Python client.</li>
+<li>Build pre-fire and post-fire Landsat 8 composites for the 2025 Los Angeles fire study area, using the same date ranges, area of interest, and cloud-masking function shown in this chapter.</li>
+<li>Calculate the differenced Normalized Burn Ratio (dNBR).</li>
+<li>Visualize the result using <code>geemap.Map()</code> with a similar visualization palette to the JavaScript example.</li>
+<li>Submit your notebook (<code>.ipynb</code>) along with a short (1-2 sentence) written comparison: did the Python output match the JavaScript output? What difference, if any, did you observe?</li>
+</ol>
+<p>This exercise is intended to reinforce that Earth Engine produces identical results across client libraries. The choice of interface affects workflow ergonomics but not the underlying analysis.</p>
+</section>
+<section id="culmination-activity" class="level3" data-number="9.9.2">
+<h3 data-number="9.9.2" data-anchor-id="culmination-activity"><span class="header-section-number">9.9.2</span> Culmination Activity</h3>
+<p>Write up a 1-page summary of a project you might want to explore using Google Earth Engine over the duration of this course. Your summary should include:</p>
+<ul>
+<li>A brief statement of the research question or applied problem</li>
+<li>The GEE datasets you would use, including spatial resolution, temporal range, and rationale</li>
+<li>Any non-GEE datasets you would integrate, and how they would be combined with GEE outputs</li>
+<li>The interface(s) you would use (Code Editor, Python, R, REST) and why</li>
+<li>Anticipated challenges, including data volume, cloud cover, processing time, or quota limitations</li>
+</ul>
+<p>Save this summary as you will be refining and adding to your ideas over the course of the semester.</p>
+
+
+</section>
+</div>
+
+
+ <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-USGS.html" class="pagination-link" aria-label="USGS National Water Information System (NWIS)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-OneHealth_PathogenSurveillance.html" class="pagination-link" aria-label="One Health, Pathogen Surveillance, and Nextstrain">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+ <!-- /content -->
+
+
+
+
+</body></html>

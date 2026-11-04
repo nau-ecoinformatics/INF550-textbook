@@ -3,9 +3,11 @@
 
 **United States Geological Survey's National Water Information System (NWIS)**
 
+> Estimated Time: 2 hours
+
 ## Learning Objectives
 
- * Work in progress
+By the end of this chapter, students will be able to locate, access, and retrieve hydrological and water-quality data from the U.S. Geological Survey (USGS) National Water Information System (NWIS) and its modern Water Data APIs using the `dataRetrieval` package in R. Students will learn to discover monitoring locations based on geographic boundaries and hydrologic units, retrieve daily and continuous streamflow observations, access groundwater and field measurements, and work with water-quality samples and associated metadata using modern USGS Water Data APIs.
   
 ### Guest Lectures
 
@@ -122,7 +124,7 @@ htmlTable(data.frame(Module, Description, Duration),
 See the [R installation instructions page](/installr) for how to install/upgrade R and RStudio, add GRAN to your settings, and install some basic packages. Then, execute these lines so that you have the most up-to-date version of the packages used in this course.
 
 ```{r eval=FALSE}
-install.packages(c('dataRetrieval', 'geoknife'))
+install.packages('dataRetrieval')
 ```
 
 
@@ -152,11 +154,6 @@ By the end of this lesson, the learner will be able to:
 - USGS Presentation: [dataRetrieval Tutorial](https://owi.usgs.gov/R/dataRetrieval.html#1)
 
 
-### Lesson Slide Deck
-
-![Browse the slide deck here](https://owi.usgs.gov/R/dataRetrieval.html#1)
-
-
 ## Introduction to USGS R Packages
 
 
@@ -166,6 +163,8 @@ Before continuing with this lesson, you should make sure that the `dataRetrieval
 # load the dataRetrival package
 library(dataRetrieval)
 ```
+
+The `dataRetrieval` package has undergone significant changes as legacy functions have been updated. Continued maintenance and changes to the package can be monitored at the [dataRetrieval Status page](https://doi-usgs.github.io/dataRetrieval/articles/Status.html). 
 
 There is an overwhelming amount of data and information stored in the National Water Information System (NWIS). This lesson will attempt to give an overview of what you can access. If you need more detail on a subject or have a question that is not answered here, please visit the [NWIS help system](https://help.waterdata.usgs.gov/). 
 
@@ -183,31 +182,17 @@ This is available for streamflow, groundwater levels, and water quality sensors.
 **Metadata types:** both NWIS and WQP contain metadata describing the site at which the data was collected (e.g. latitude, longitude, elevation, etc), and include information about the type of data being used (e.g. units, dissolved or not, collection method, etc). 
 
 ## Common NWIS function arguments
+*_`monitoring_location_id`_* All USGS water data are associated with geographic locations where measurements are collected. These are known as monitoring locations and include streamgages, groundwater wells, lakes, and other sites where water quantity and quality parameters are measured. Monitoring locations are identified using unique codes, typically an 8-digit identifier for surface-water sites or a 15-digit identifier for groundwater sites. In the new `dataRetrieval` functions, these are referred to as `monitoring_location_id`. Monitoring location identifiers include an agency prefix, such as `"USGS-05427948"`. Always treat monitoring location identifiers as character strings rather than numeric values to prevent leading zeros from being dropped.
 
-*_`siteNumber`_* All NWIS data are stored based on the geographic location of the equipment used to collected the data. These are known as streamgages and they take continuous timeseries measurements for a number of water quality and quantity parameters. Streamgages are identified based on an 8-digit (surface water) or 15-digit (groundwater) code. In `dataRetrieval`, we refer to this as the `siteNumber`. Any time you use a `siteNumber` in `dataRetrieval`, make sure it is a string and not numeric. Oftentimes, NWIS sites have leading zeroes which are dropped when treated as a numeric value. 
+*_`parameter_code`_* USGS uses 5-digit codes to refer to specific measurements or constituents of interest, called parameter codes (`parameter_code` in `dataRetrieval`). For example, the code `"00060"` specifies discharge data. If you'd like to explore the full list, see the [USGS Parameter Codes documentation](https://help.waterdata.usgs.gov/code/parameter_cd_query?fmt=rdb&inline=true&group_cd=%). The package also provides a built-in parameter code table that you can access using `read_waterdata_parameter_codes()`.
 
-*_`parameterCd`_* NWIS uses 5-digit codes to refer to specific data of interest called parameter codes, `parameterCd` in `dataRetrieval`. For example, you use the code '00060' to specify discharge data. If you'd like to explore the full list, see the [Parameter Groups Table](https://help.waterdata.usgs.gov/code/parameter_cd_query?fmt=rdb&inline=true&group_cd=%). The package also has a built in parameter code table that you can use by executing `parameterCdFile` in your console.
+*_`statistic_id`_* When retrieving daily values, `statistic_id` specifies the statistical summary associated with a measurement. For example, `"00001"` represents the maximum, `"00002"` the minimum, and `"00003"` the mean. Daily values are identified using both a parameter code and a statistic identifier. Continuous measurements generally do not require this argument.
 
-*_`service`_* Identifier referring to the time series frequencies explained above, or the type of data that should be returned. For more information, visit the [Water Services website](https://waterservices.usgs.gov/rest/Site-Service.html#outputDataTypeCd).
+*_`time`_* Many of the new data retrieval functions use the `time` argument to specify the beginning and ending dates of a requested dataset. The argument accepts a character vector containing two dates in the format `"YYYY-MM-DD"`. For example, `time = c("2023-10-01", "2024-09-30")`. Some functions instead use separate `start_date` and `end_date` arguments, so consult the documentation for the specific function being used.
 
-  - instaneous = "iv"
-  - daily values = "dv"
-  - groundwater levels = "gwlevels"
-  - water quality = "qw"
-  - statistics = "stat"
-  - site = "site"
+*_`state_name`_* When querying monitoring location information, `state_name` specifies the U.S. state associated with the monitoring locations being requested. State names are provided as character strings (e.g., `"Arizona"` or `"Wisconsin"`). Additional filtering options are available, including site type, county, and other monitoring location characteristics.
 
-*_`startDate`_* and *_`endDate`_* Strings in the format "YYYY-MM-DDTHH:SS:MM", either as a date or character class. The start and end date-times are inclusive. 
-
-*_`stateCd`_* Two character abbreviation for a US state or territory. Execute `state.abb` in the console to get a vector of US state abbreviations. Territories include: 
-
-- AS  (American Samoa)
-- GU  (Guam)
-- MP  (Northern Mariana Islands)
-- PR  (Puerto Rico)
-- VI  (U.S. Virgin Islands)
-
-For more query parameters, visit [NWIS service documentation](https://waterservices.usgs.gov/rest/Site-Service.html#Service).
+For more query parameters and examples, visit the [USGS Water Data API documentation](https://api.waterdata.usgs.gov/) and the [`dataRetrieval` package documentation](https://doi-usgs.github.io/dataRetrieval/).
 
 ## Discovering NWIS data
 
@@ -397,74 +382,52 @@ This brings the count down to a much more manageable `r prettyNum(nrow(wqpsites_
 
 We have learned how to discover data available in NWIS, but now we will look at how to retrieve data. There are many functions to do this, see the table below for a description of each. Each variation of `readNWIS` is accessing a different web service. For a definition and more information on each of these services, please see https://waterservices.usgs.gov/rest/. Also, refer to the previous lesson for a description of the major arguments to `readNWIS` functions.
 
-```{r eval=TRUE, echo=FALSE, message=FALSE}
-library(dataRetrieval)
-library(htmlTable)
+## USGS Water Data retrieval functions
 
-Function <- c(
-  "read_waterdata",
-  "read_waterdata_daily",
-  "read_waterdata_field_measurements",
-  "read_waterdata_channel",
-  "read_waterdata_parameter_codes",
-  "read_waterdata_peaks",
-  "read_waterdata_samples",
-  "read_waterdata_ratings",
-  "read_waterdata_monitoring_location",
-  "read_waterdata_stats_por",
-  "read_waterdata_continuous"
-)
+We have learned how to discover data available through USGS water data services, but now we will look at how to retrieve these data. The `dataRetrieval` package provides several functions for accessing different types of USGS water data through the new USGS Water Data APIs. Each function accesses a particular data service, such as daily values, continuous measurements, field measurements, or monitoring location metadata. The table below summarizes the primary functions available in `dataRetrieval`.
 
-Description <- c(
-  "Generalized USGS Water Data API retrieval function.",
-  "Returns USGS daily water data.",
-  "Returns USGS field measurement water data.",
-  "Returns USGS channel measurement data.",
-  "Returns USGS parameter code information.",
-  "Returns USGS peak data.",
-  "Returns USGS discrete water-quality sample data.",
-  "Returns USGS rating curve data.",
-  "Returns USGS monitoring location data.",
-  "Returns USGS daily statistics for the period of record.",
-  "Returns continuous USGS water data."
-)
+For additional information about each function and the services they access, see the [USGS Water Data API documentation](https://api.waterdata.usgs.gov/) and the [`dataRetrieval` function documentation](https://doi-usgs.github.io/dataRetrieval/articles/read_waterdata_functions.html).
 
-Arguments <- unlist(lapply(Function, function(f) {
-  paste(names(formals(get(f))), collapse = ", ")
-}))
+| **Function** | **Description** | **Common arguments** |
+| :--- | :--- | :--- |
+| `read_waterdata()` | Generalized USGS Water Data API retrieval function. | service, CQL, ..., convertType, limit |
+| `read_waterdata_daily()` | Returns USGS daily water data, such as mean daily discharge. | monitoring_location_id, parameter_code, statistic_id, time, approval_status, unit_of_measure, qualifier |
+| `read_waterdata_continuous()` | Returns continuous USGS water data, such as instantaneous discharge and water temperature measurements. | monitoring_location_id, parameter_code, time, approval_status, unit_of_measure, qualifier, method_category |
+| `read_waterdata_field_measurements()` | Returns discrete USGS field measurements, including groundwater and surface-water measurements. | monitoring_location_id, parameter_code, time, field_visit_id, observing_procedure_code, unit_of_measure |
+| `read_waterdata_channel()` | Returns USGS channel measurement data associated with field visits. | monitoring_location_id, field_visit_id, measurement_number, channel_name, channel_flow, channel_width |
+| `read_waterdata_samples()` | Returns USGS discrete water-quality sample data. | monitoringLocationIdentifier, characteristicGroup, characteristic, activityStartDateLower, activityStartDateUpper, dataProfile |
+| `read_waterdata_parameter_codes()` | Returns USGS parameter code information. | parameter_code, parameter_name, unit_of_measure, parameter_group_code |
+| `read_waterdata_monitoring_location()` | Returns information and metadata about USGS monitoring locations. | monitoring_location_id, agency_code, state_name, county_name, site_type, hydrologic_unit_code |
+| `read_waterdata_ts_meta()` | Returns metadata describing available USGS time series at monitoring locations. | monitoring_location_id, parameter_code, statistic_id |
+| `read_waterdata_field_meta()` | Returns metadata describing available USGS field measurements. | monitoring_location_id, parameter_code |
+| `read_waterdata_combined_meta()` | Combines available metadata for multiple types of USGS water data. | monitoring_location_id |
+| `read_waterdata_stats_por()` | Returns USGS daily statistics for the period of record. | monitoring_location_id, parameter_code, statistic_id, start_date, end_date |
+| `read_waterdata_stats_daterange()` | Returns USGS daily statistics for a specified date range. | monitoring_location_id, parameter_code, statistic_id, start_date, end_date |
+| `read_waterdata_latest_daily()` | Returns the latest available USGS daily values. | monitoring_location_id, parameter_code, statistic_id |
+| `read_waterdata_latest_continuous()` | Returns the latest available USGS continuous measurements. | monitoring_location_id, parameter_code |
 
-Function_fancy <- c(
-  '<a href="#read_waterdata">read_waterdata</a>',
-  '<a href="#read_waterdata_daily">read_waterdata_daily</a>',
-  '<a href="#read_waterdata_field_measurements">read_waterdata_field_measurements</a>',
-  '<a href="#read_waterdata_channel">read_waterdata_channel</a>',
-  '<a href="#read_waterdata_parameter_codes">read_waterdata_parameter_codes</a>',
-  '<a href="#read_waterdata_peaks">read_waterdata_peaks</a>',
-  '<a href="#read_waterdata_samples">read_waterdata_samples</a>',
-  '<a href="#read_waterdata_ratings">read_waterdata_ratings</a>',
-  '<a href="#read_waterdata_monitoring_location">read_waterdata_monitoring_location</a>',
-  '<a href="#read_waterdata_stats_por">read_waterdata_stats_por</a>',
-  '<a href="#read_waterdata_continuous">read_waterdata_continuous</a>'
-)
+The new Water Data API functions replace many of the legacy `readNWIS` functions. Unlike the previous approach, where individual functions were organized around NWIS web services, the new functions provide more specific access to different types of water data. Most functions accept a monitoring location identifier (`monitoring_location_id`) and additional filters such as parameter codes, statistic identifiers, and date ranges.
 
-htmlTable(
-  data.frame(
-    Function = Function_fancy,
-    Description = Description,
-    Arguments = Arguments
-  ),
-  caption = "<caption>Table 1. USGS Water Data retrieval functions</caption>",
-  rnames = FALSE,
-  align = c("l", "l", "l"),
-  col.rgroup = c("none", "#F7F7F7"),
-  css.cell = "padding-bottom: 0.5em; padding-right: 0.5em; padding-top: 0.5em;"
-)
+The generalized `read_waterdata()` function provides additional flexibility for constructing more complex queries. The service-specific functions provide a more straightforward approach when the type of data being retrieved is already known.
 
-source("arg_table_functions.R")
-```
+To discover what data are available at a particular monitoring location, use `read_waterdata_combined_meta()`, `read_waterdata_ts_meta()`, or `read_waterdata_field_meta()`. These functions return metadata describing the available data types, parameters, and periods of record.
 
+The new Water Data APIs also support additional query filters, including state, county, site type, and geographic bounding boxes. For more information about available query parameters, consult the [USGS Water Data API documentation](https://api.waterdata.usgs.gov/).
 
-\html{<br>}
+The following are examples of how to use the different families of `read_waterdata` functions. Don't forget to load the `dataRetrieval` library if you are in a new session.
+
+1. `read_waterdata_monitoring_location`: Discover monitoring locations.
+2. `read_waterdata_combined_meta`: Explore data availability at a monitoring location.
+3. `read_waterdata_daily`: Retrieve daily discharge measurements.
+4. `read_waterdata_continuous`: Retrieve continuous discharge measurements.
+5. `read_waterdata_field_measurements`: Retrieve discrete field measurements.
+6. `read_waterdata_channel`: Retrieve channel measurement data.
+7. `read_waterdata_parameter_codes`: Explore USGS parameter codes.
+8. `read_waterdata_samples`: Retrieve discrete water-quality samples.
+9. `read_waterdata_stats_por`: Retrieve daily statistics for the period of record.
+10. `read_waterdata_latest_daily`: Retrieve the latest available daily measurements.
+11. `read_waterdata_latest_continuous`: Retrieve the latest available continuous measurements.
+
 
 Each service-specific function is a wrapper for the more flexible `readNWISdata`. They set a default for the service argument and have limited user defined arguments. All `readNWIS` functions require a "major filter" as an argument, but `readNWISdata` can accept any major filter while others are limited to site numbers or state/county codes (see Table 1 for more info). 
 
@@ -490,26 +453,28 @@ The following are examples of how to use each of the readNWIS family of function
 16. [readNWISuse](#readnwisuse)
 17. [readNWISuv](#readnwisuv)
 
-
 ### read_waterdata
 
-This function is the generic, catch-all for pulling down NWIS data. It can accept a number of arguments, but the argument name must be included. To use this function, you need to specify at list one major filter (state, county, site number, huc, or bounding box) and the NWIS service (daily value, instantaneous, groundwater, etc). The rest are optional query parameters. Follow along with the three examples below or see `?read_waterdata` for more information.
+This function is the generalized retrieval function for accessing data through the new USGS Water Data APIs. It provides flexibility for constructing queries using different services and query parameters. Unlike the more specialized functions, `read_waterdata()` allows users to specify the service and additional query filters directly. For most common retrieval tasks, however, it is easier to use one of the service-specific functions, such as `read_waterdata_daily()` or `read_waterdata_continuous()`. See `?read_waterdata` for more information.
 
 <a name="read_waterdata-county"></a>
 
 **Historic mean daily streamflow for sites in Maui County, Hawaii.**
 
-```{r read_waterdata-county, message=FALSE, eval=FALSE}
-# Major filter: Maui County 
-## need to also include the state when using counties as the major filter
-# Service: daily value, dv
+To retrieve daily streamflow measurements for multiple sites in a county, we first need to identify the monitoring locations within that county. We can use `read_waterdata_monitoring_location()` to discover these sites and then pass their monitoring location identifiers to `read_waterdata_daily()`.
+
+```{r read_waterdata-county, message=FALSE, warning=FALSE}
+# Major filter: Maui County
+# Service: daily values
 # Parameter code: streamflow in cfs, 00060
 
 MauiCo_avgdailyQ <- read_waterdata_daily(
     county_name = "Maui County",
     state_name = "Hawaii",
     parameter_code = "00060",
-    statistic_id = "00003"
+    statistic_id = "00003",
+    time = c("2021-01-01", "2026-01-01"),
+    skipGeometry = TRUE
 )
 
 head(MauiCo_avgdailyQ)
@@ -521,24 +486,22 @@ length(unique(MauiCo_avgdailyQ$monitoring_location_id))
 <a name="readnwisdata-huc"></a>
 
 **Historic minimum water temperatures for the HUC8 corresponding to the island of Maui, Hawaii.**
+Hydrologic Unit Codes (HUCs) identify geographic areas that drain to a particular portion of the stream network. To retrieve data for a particular watershed, we can first identify monitoring locations within the HUC8 using `read_waterdata_monitoring_location()`. For a list of available HUCs, visit the USGS Watershed Boundary Dataset.
 
 To see all HUCs available, visit https://water.usgs.gov/GIS/huc_name.html. The default statistic for daily values in `readNWISdata` is to return the max (00001), min (00002), and mean (00003). We will specify the minimum only for this example. You will need to use the statistic code, not the name. For all the available statistic codes, see the [statType web service documentation](https://waterservices.usgs.gov/rest/Statistics-Service.html#statType) and [NWIS table mapping statistic names to codes](https://help.waterdata.usgs.gov/stat_code). Caution! In `readNWISdata` and `readNWISdv` the argument is called `statCd`, but in `readNWISstat` the argument is `statType`.
 ```{r}
-# Major filter: Maui County, Hawaii
-# Statistic: minimum, 00002
-# Parameter code: water temperature in deg C, 00010
+# Specify the HUC8 corresponding to Maui
+maui_huc8 <- "20020000"
 
-Maui_mindailyT <- read_waterdata_daily(
-  state_name = "Hawaii",
-  county_name = "Maui County",
-  statistic_id = "00002",
-  parameter_code = "00010"
+# Discover stream monitoring locations within the HUC8
+Maui_huc_sites <- read_waterdata_monitoring_location(
+  hydrologic_unit_code = maui_huc8,
+  site_type = "Stream",
+  skipGeometry = TRUE
 )
 
-head(Maui_mindailyT)
-
-# How many sites are returned?
-length(unique(Maui_mindailyT$monitoring_location_id))
+# How many locations were returned?
+nrow(Maui_huc_sites)
 ```
 
 <a name="readnwisdata-bbox"></a>
@@ -547,7 +510,7 @@ length(unique(Maui_mindailyT$monitoring_location_id))
 
 This example uses `Sys.Date` to get the most recent date, so your dates will differ. To get any data around Great Salt Lake, we will use a bounding box as the major filter. The bounding box must be a vector of decimal numbers indicating the western longitude, southern latitude, eastern longitude, and northern latitude. The vector must be in that order.
 
-```{r readnwisdata-bbox, message=FALSE, warning=FALSE}
+```{r readnwisdata-bbox, message=FALSE, eval=FALSE}
 # Major filter: bounding box around Great Salt Lake 
 # Service: water quality, qw
 # Parameter code: total nitrogen in mg/L, 00600
@@ -743,7 +706,7 @@ There are also a number of attributes associated with the data.frame returned - 
 
 **Rating tables for Mississippi River at St. Louis, MO**
 
-```{r readnwisrating-base, message=FALSE, warning=FALSE, cache=FALSE}
+```{r readnwisrating-base, message=FALSE, eval=FALSE, cache=FALSE}
 # Major filter: site number, 07010000
 # Type: default, base 
 
@@ -883,7 +846,7 @@ head(ca_site_do)
 
 `dataRetrieval` returns a lot of useful information as "attributes" to the data returned. This includes site metadata information, the NWIS url used, date and time the query was performed, and more. First, you want to use `attributes()` to see what information is available. It returns a list of all the metadata information. Then you can use `attr()` to actually get that information. Let's use the base rating table example from before to illustrate this. It has a special attribute called "RATING".
 
-```{r readnwis-attributes, message=FALSE, warning=FALSE}
+```{r readnwis-attributes, message=FALSE, eval=FALSE}
 # Major filter: site number, 07010000
 # Type: default, base 
 miss_rating_base <- readNWISrating(siteNumber="07010000")
@@ -898,10 +861,10 @@ attr(miss_rating_base, "siteInfo")
 # now look at the special RATING attribute
 attr(miss_rating_base, "RATING")
 ```
-
+  
 All attributes are an R object once you extract them. They can be lists, data.frames, vectors, etc. If we want to use information from one of the attributes, index it just like you would any other object of that type. For example, we want the drainage area for this Mississippi site:
 
-```{r readnwis-attributes2, message=FALSE, warning=FALSE}
+```{r readnwis-attributes2, message=FALSE, eval=FALSE}
 # save site info metadata as its own object
 miss_site_info <- attr(miss_rating_base, "siteInfo")
 class(miss_site_info)

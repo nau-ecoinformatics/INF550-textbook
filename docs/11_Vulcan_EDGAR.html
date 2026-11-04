@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Kora Cai">
+<meta name="author" content="Victoria Hope">
+<meta name="dcterms.date" content="2026-04-20">
+<meta name="description" content="Course text for NAU INF 550">
+
+<title>10&nbsp; High-Resolution Carbon Emissions Using the Vulcan Dataset – Environmental Informatics Using Research Infrastructures and their Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./12-FAQ.html" rel="next">
+<link href="./10-OneHealth_PathogenSurveillance.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./11_Vulcan_EDGAR.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environmental Informatics Using Research Infrastructures and their Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Pre-Course_Skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Course Setup: EcoInformatics Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Introduction_to_NEON.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to NEON &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-USA-NPN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to USA-NPN &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-PhenoCam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PhenoCam: Digital Repeat Photography Networks &amp; Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Fluxes_and_Inter-operability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flux Measurements &amp; Inter-Operability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-NEON_AOP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON AOP</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-NASA_EOS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">NASA’s Earth Observing System (EOS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-FAQ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#overview-purpose" id="toc-overview-purpose" class="nav-link active" data-scroll-target="#overview-purpose"><span class="header-section-number">10.1</span> Overview / Purpose</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">10.2</span> Learning Objectives</a></li>
+  <li><a href="#what-is-vulcan" id="toc-what-is-vulcan" class="nav-link" data-scroll-target="#what-is-vulcan"><span class="header-section-number">10.3</span> What is Vulcan?</a></li>
+  <li><a href="#global-fossil-fuel-co₂-emission-datasets" id="toc-global-fossil-fuel-co₂-emission-datasets" class="nav-link" data-scroll-target="#global-fossil-fuel-co₂-emission-datasets"><span class="header-section-number">10.4</span> Global Fossil Fuel CO₂ Emission Datasets</a></li>
+  <li><a href="#how-vulcan-estimates-emissions-data-sources-and-methodology" id="toc-how-vulcan-estimates-emissions-data-sources-and-methodology" class="nav-link" data-scroll-target="#how-vulcan-estimates-emissions-data-sources-and-methodology"><span class="header-section-number">10.5</span> How Vulcan Estimates Emissions: Data Sources and Methodology</a></li>
+  <li><a href="#bottom-up-framework" id="toc-bottom-up-framework" class="nav-link" data-scroll-target="#bottom-up-framework"><span class="header-section-number">10.6</span> Bottom-Up Framework</a></li>
+  <li><a href="#edgar-industrial-co2-netcdf-global-2021" id="toc-edgar-industrial-co2-netcdf-global-2021" class="nav-link" data-scroll-target="#edgar-industrial-co2-netcdf-global-2021"><span class="header-section-number">10.7</span> EDGAR industrial CO2 NetCDF (global, 2021)</a></li>
+  <li><a href="#point-vs.-nonpoint-emissions" id="toc-point-vs.-nonpoint-emissions" class="nav-link" data-scroll-target="#point-vs.-nonpoint-emissions"><span class="header-section-number">10.8</span> Point vs.&nbsp;Nonpoint Emissions</a></li>
+  <li><a href="#spatial-downscaling" id="toc-spatial-downscaling" class="nav-link" data-scroll-target="#spatial-downscaling"><span class="header-section-number">10.9</span> Spatial Downscaling</a></li>
+  <li><a href="#temporal-downscaling" id="toc-temporal-downscaling" class="nav-link" data-scroll-target="#temporal-downscaling"><span class="header-section-number">10.10</span> Temporal Downscaling</a></li>
+  <li><a href="#multi-year-scaling-and-consistency" id="toc-multi-year-scaling-and-consistency" class="nav-link" data-scroll-target="#multi-year-scaling-and-consistency"><span class="header-section-number">10.11</span> Multi-Year Scaling and Consistency</a></li>
+  <li><a href="#sectoral-structure" id="toc-sectoral-structure" class="nav-link" data-scroll-target="#sectoral-structure"><span class="header-section-number">10.12</span> Sectoral Structure</a></li>
+  <li><a href="#tools-and-setup" id="toc-tools-and-setup" class="nav-link" data-scroll-target="#tools-and-setup"><span class="header-section-number">10.13</span> Tools and Setup</a></li>
+  <li><a href="#coding-lab-exploring-high-resolution-emissions-data" id="toc-coding-lab-exploring-high-resolution-emissions-data" class="nav-link" data-scroll-target="#coding-lab-exploring-high-resolution-emissions-data"><span class="header-section-number">11</span> Coding Lab: Exploring High-Resolution Emissions Data</a>
+  <ul class="collapse">
+  <li><a href="#loading-and-exploring-emissions-data" id="toc-loading-and-exploring-emissions-data" class="nav-link" data-scroll-target="#loading-and-exploring-emissions-data"><span class="header-section-number">11.1</span> Loading and Exploring Emissions Data</a></li>
+  <li><a href="#spatial-comparison-of-emissions-city-sector" id="toc-spatial-comparison-of-emissions-city-sector" class="nav-link" data-scroll-target="#spatial-comparison-of-emissions-city-sector"><span class="header-section-number">11.2</span> Spatial Comparison of Emissions (City &amp; Sector)</a></li>
+  <li><a href="#conceptual-questions" id="toc-conceptual-questions" class="nav-link" data-scroll-target="#conceptual-questions"><span class="header-section-number">11.3</span> Conceptual Questions</a></li>
+  <li><a href="#applied-mini-project-guided" id="toc-applied-mini-project-guided" class="nav-link" data-scroll-target="#applied-mini-project-guided"><span class="header-section-number">11.4</span> Applied Mini Project (Guided)</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">11.5</span> Conclusion</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/11_Vulcan_EDGAR.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Kora Cai </p>
+             <p>Victoria Hope </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 20, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview-purpose" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="overview-purpose"><span class="header-section-number">10.1</span> Overview / Purpose</h2>
+<p>This chapter introduces the Vulcan Project, a high-resolution, bottom-up dataset of fossil fuel CO2 emissions across the United States. The purpose of this chapter is to help students understand how anthropogenic carbon emissions are structured, quantified, visualized, and interpreted across space, time, and sector.</p>
+<p>To support comparison and broader context, this chapter also introduces the EDGAR emissions dataset. Together, these datasets provide an opportunity to explore differences in spatial resolution, geographic extent, and emissions structure while building practical skills in handling raster and NetCDF data in R.</p>
+</section>
+<section id="learning-objectives" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">10.2</span> Learning Objectives</h2>
+<p>After completing this chapter, students will be able to:</p>
+<ul>
+<li>Define the Vulcan carbon emissions dataset and its purpose</li>
+<li>Explain how fossil fuel CO₂ emissions are quantified and categorized</li>
+<li>Describe spatial and temporal resolution in emissions datasets</li>
+<li>Identify major emission sectors (transportation, industry, residential, electricity)</li>
+</ul>
+<p>Load and explore large geospatial datasets (e.g., NetCDF or raster formats):</p>
+<ul>
+<li>Aggregate emissions across sectors, space, and time</li>
+<li>Visualize emissions using maps and plots</li>
+<li>Interpret spatial and temporal emission patterns</li>
+</ul>
+</section>
+<section id="what-is-vulcan" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="what-is-vulcan"><span class="header-section-number">10.3</span> What is Vulcan?</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hv-UYmCcC9U" frameborder="0" allowfullscreen="">
+</iframe>
+<p>
+<a href="https://www.youtube.com/watch?v=hv-UYmCcC9U">Open Video 1 in YouTube</a>
+</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eJpj8UUMTaI" frameborder="0" allowfullscreen="">
+</iframe>
+<p>
+<a href="https://youtu.be/eJpj8UUMTaI">Open Video 2 in YouTube</a>
+</p>
+<p>For more information, visit: <a href="https://vulcan.rc.nau.edu">Vulcan Project Website</a>.</p>
+<p>The Vulcan Project is a high-resolution effort to quantify fossil fuel carbon dioxide (CO₂) emissions across the United States in both space and time. Unlike coarser global inventories, Vulcan disaggregates emissions by sector, including power generation, industrial activity, transportation, and residential and commercial sources, and maps them onto a fine spatial grid (e.g., ~10 km). This detailed framework allows for a more precise representation of where and when emissions occur, capturing daily (diurnal) cycles and spatial heterogeneity associated with urban centers, industrial regions, and transportation networks.</p>
+<p>When coupled with atmospheric transport models, Vulcan data can also be used to simulate how CO₂ disperses through the atmosphere, providing insights into emission patterns, boundary layer dynamics, and regional transport processes. As illustrated in the accompanying video, these capabilities make Vulcan a valuable tool for linking emission inventories with observed atmospheric concentrations and for improving climate and air quality analyses.</p>
+</section>
+<section id="global-fossil-fuel-co₂-emission-datasets" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="global-fossil-fuel-co₂-emission-datasets"><span class="header-section-number">10.4</span> Global Fossil Fuel CO₂ Emission Datasets</h2>
+<p>The Emissions Database for Global Atmospheric Research (EDGAR) is one of the most widely used global inventories of anthropogenic greenhouse gas (GHG) and air pollutant emissions. Developed by the European Commission’s Joint Research Centre, EDGAR provides independent emission estimates using consistent IPCC-based methodologies and international statistical data.</p>
+<p>For more information visit: <a href="https://edgar.jrc.ec.europa.eu/dataset_ghg80">EDGAR dataset</a></p>
+<p>It offers long-term time series from 1970 to the present, with outputs available as national totals and global gridded maps at 0.1° × 0.1° spatial resolution. In addition, EDGAR includes detailed sectoral information and temporal resolution, making it a key resource for both scientific research and policy-relevant climate analyses. In addition to EDGAR, several other emission datasets have been developed with different methodological approaches and objectives. A brief comparison of these products is provided in Table X.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dataset_comparison <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dataset =</span> <span class="fu">c</span>(<span class="st">"EDGAR"</span>, <span class="st">"ODIAC"</span>, <span class="st">"FFDAS"</span>, <span class="st">"CDIAC-FF"</span>),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Main_Focus =</span> <span class="fu">c</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Global GHG &amp; air pollutants"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global)"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global)"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global &amp; national)"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Methodology =</span> <span class="fu">c</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"IPCC-based inventory using international statistics"</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Downscaling using nightlight data + point sources"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Data assimilation (Kaya identity + observations)"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Energy statistics-based (fuel consumption &amp; cement production)"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Spatial_Resolution =</span> <span class="fu">c</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~0.1° (~10 km)"</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~1 km"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~0.25°"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"National / coarse"</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">Temporal_Coverage =</span> <span class="fu">c</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1970–present"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~2000–present"</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1997–2015 (updates ongoing)"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1751–recent"</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Key_Strength =</span> <span class="fu">c</span>(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Consistent global coverage"</span>,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"High spatial resolution"</span>,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Incorporates uncertainty"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Longest historical record"</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dataset_comparison,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Dataset"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Main Focus"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Methodology"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Spatial Resolution"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Temporal Coverage"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Key Strength"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 19%">
+<col style="width: 34%">
+<col style="width: 10%">
+<col style="width: 15%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Dataset</th>
+<th style="text-align: left;">Main Focus</th>
+<th style="text-align: left;">Methodology</th>
+<th style="text-align: left;">Spatial Resolution</th>
+<th style="text-align: left;">Temporal Coverage</th>
+<th style="text-align: left;">Key Strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">EDGAR</td>
+<td style="text-align: left;">Global GHG &amp; air pollutants</td>
+<td style="text-align: left;">IPCC-based inventory using international statistics</td>
+<td style="text-align: left;">~0.1° (~10 km)</td>
+<td style="text-align: left;">1970–present</td>
+<td style="text-align: left;">Consistent global coverage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ODIAC</td>
+<td style="text-align: left;">Fossil fuel CO2 (global)</td>
+<td style="text-align: left;">Downscaling using nightlight data + point sources</td>
+<td style="text-align: left;">~1 km</td>
+<td style="text-align: left;">~2000–present</td>
+<td style="text-align: left;">High spatial resolution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FFDAS</td>
+<td style="text-align: left;">Fossil fuel CO2 (global)</td>
+<td style="text-align: left;">Data assimilation (Kaya identity + observations)</td>
+<td style="text-align: left;">~0.25°</td>
+<td style="text-align: left;">1997–2015 (updates ongoing)</td>
+<td style="text-align: left;">Incorporates uncertainty</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CDIAC-FF</td>
+<td style="text-align: left;">Fossil fuel CO2 (global &amp; national)</td>
+<td style="text-align: left;">Energy statistics-based (fuel consumption &amp; cement production)</td>
+<td style="text-align: left;">National / coarse</td>
+<td style="text-align: left;">1751–recent</td>
+<td style="text-align: left;">Longest historical record</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>These datasets are complementary, differing in their spatial detail, temporal extent, and methodological frameworks. The choice among them depends on the specific research objective, such as long-term trend analysis, high-resolution spatial mapping, or uncertainty-aware modeling.</p>
+</section>
+<section id="how-vulcan-estimates-emissions-data-sources-and-methodology" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="how-vulcan-estimates-emissions-data-sources-and-methodology"><span class="header-section-number">10.5</span> How Vulcan Estimates Emissions: Data Sources and Methodology</h2>
+<p>The Vulcan dataset is built using a bottom-up, data-integrated approach that combines multiple observational and statistical data sources to estimate fossil fuel CO₂ (FFCO₂) emissions across the United States. Rather than relying on aggregated national statistics alone, Vulcan compiles detailed sector-specific datasets and distributes emissions in both space and time using scientifically informed methods.</p>
+</section>
+<section id="bottom-up-framework" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="bottom-up-framework"><span class="header-section-number">10.6</span> Bottom-Up Framework</h2>
+<p>At its core, Vulcan follows a bottom-up methodology, where emissions are estimated based on activity data (e.g., fuel consumption, traffic volume, industrial output) and emission factors (i.e., the amount of CO₂ emitted per unit of activity). This approach allows emissions to be linked directly to real-world processes such as electricity generation, transportation, and building energy use.</p>
+<section id="table-1-emissions-sectors-and-distributions" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="table-1-emissions-sectors-and-distributions"><span class="header-section-number">10.6.1</span> Table 1: Emissions sectors and distributions</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>emissions_table <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Sector =</span> <span class="fu">c</span>(<span class="st">"Electricity production"</span>,<span class="st">"Onroad"</span>,<span class="st">"Residential"</span>,<span class="st">"Nonroad"</span>),</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Emissions_Data_Source =</span> <span class="fu">c</span>(<span class="st">"EPA + DOE"</span>,<span class="st">"EMFAC"</span>,<span class="st">"EPA"</span>,<span class="st">"EPA"</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Original_Resolution =</span> <span class="fu">c</span>(<span class="st">"Lat/lon"</span>,<span class="st">"County"</span>,<span class="st">"County"</span>,<span class="st">"County"</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Final_Spatial =</span> <span class="fu">c</span>(<span class="st">"Lat/Lon"</span>,<span class="st">"Road network"</span>,<span class="st">"Census block"</span>,<span class="st">"Surrogates"</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Final_Temporal =</span> <span class="fu">c</span>(<span class="st">"Hourly"</span>,<span class="st">"Hourly"</span>,<span class="st">"Hourly"</span>,<span class="st">"Hourly"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(emissions_table, <span class="at">booktabs =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 23%">
+<col style="width: 21%">
+<col style="width: 14%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Sector</th>
+<th style="text-align: left;">Emissions_Data_Source</th>
+<th style="text-align: left;">Original_Resolution</th>
+<th style="text-align: left;">Final_Spatial</th>
+<th style="text-align: left;">Final_Temporal</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Electricity production</td>
+<td style="text-align: left;">EPA + DOE</td>
+<td style="text-align: left;">Lat/lon</td>
+<td style="text-align: left;">Lat/Lon</td>
+<td style="text-align: left;">Hourly</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Onroad</td>
+<td style="text-align: left;">EMFAC</td>
+<td style="text-align: left;">County</td>
+<td style="text-align: left;">Road network</td>
+<td style="text-align: left;">Hourly</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Residential</td>
+<td style="text-align: left;">EPA</td>
+<td style="text-align: left;">County</td>
+<td style="text-align: left;">Census block</td>
+<td style="text-align: left;">Hourly</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Nonroad</td>
+<td style="text-align: left;">EPA</td>
+<td style="text-align: left;">County</td>
+<td style="text-align: left;">Surrogates</td>
+<td style="text-align: left;">Hourly</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="table-2-comparison-of-emissions-datasets" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="table-2-comparison-of-emissions-datasets"><span class="header-section-number">10.6.2</span> Table 2: Comparison of emissions datasets</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dataset_comparison <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dataset =</span> <span class="fu">c</span>(<span class="st">"EDGAR"</span>, <span class="st">"ODIAC"</span>, <span class="st">"FFDAS"</span>, <span class="st">"CDIAC-FF"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Main_Focus =</span> <span class="fu">c</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Global GHG &amp; air pollutants"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global)"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global)"</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fossil fuel CO2 (global &amp; national)"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">Methodology =</span> <span class="fu">c</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"IPCC-based inventory using international statistics"</span>,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Downscaling using nightlight data + point sources"</span>,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Data assimilation (Kaya identity + observations)"</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Energy statistics-based (fuel consumption &amp; cement production)"</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Spatial_Resolution =</span> <span class="fu">c</span>(</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~0.1° (~10 km)"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~1 km"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~0.25°"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"National / coarse"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">Temporal_Coverage =</span> <span class="fu">c</span>(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1970–present"</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"~2000–present"</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1997–2015 (updates ongoing)"</span>,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1751–recent"</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Key_Strength =</span> <span class="fu">c</span>(</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Consistent global coverage with detailed sectoral and temporal data"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Very high spatial resolution, strong urban representation"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Incorporates uncertainty and multiple data constraints"</span>,</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Longest historical time series of emissions"</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="table-1-overview-of-data-sources-used-in-generating-the-spacetime-resolved-vulcan-v4.0-ffco2-emissions-footnotes-provide-acronym-explanations." class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="table-1-overview-of-data-sources-used-in-generating-the-spacetime-resolved-vulcan-v4.0-ffco2-emissions-footnotes-provide-acronym-explanations."><span class="header-section-number">10.6.3</span> Table 1 Overview of data sources used in generating the space/time-resolved Vulcan v4.0 FFCO2 emissions (footnotes provide acronym explanations).</h3>
+<section id="gurney-k.-r.-dass-p.-kato-a.-gawuc-l.-aslam-b.-sun-h.-2025.-vulcan-version-4.0-high-resolution-annual-carbon-dioxide-emissions-in-the-us-for-the-20102022-time-period.-scientific-data-121-1946." class="level5" data-number="10.6.3.0.1">
+<h5 data-number="10.6.3.0.1" class="anchored" data-anchor-id="gurney-k.-r.-dass-p.-kato-a.-gawuc-l.-aslam-b.-sun-h.-2025.-vulcan-version-4.0-high-resolution-annual-carbon-dioxide-emissions-in-the-us-for-the-20102022-time-period.-scientific-data-121-1946."><span class="header-section-number">10.6.3.0.1</span> Gurney, K. R., Dass, P., Kato, A., Gawuc, L., Aslam, B., &amp; Sun, H. (2025). Vulcan version 4.0 high-resolution annual carbon dioxide emissions in the US for the 2010–2022 time period. Scientific Data, 12(1), 1946.</h5>
+</section>
+</section>
+</section>
+<section id="edgar-industrial-co2-netcdf-global-2021" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="edgar-industrial-co2-netcdf-global-2021"><span class="header-section-number">10.7</span> EDGAR industrial CO2 NetCDF (global, 2021)</h2>
+<p>The dataset integrates information from major U.S. agencies, including:</p>
+<ul>
+<li>Environmental Protection Agency (EPA)</li>
+<li>Department of Energy / Energy Information Administration (EIA)</li>
+<li>Federal Highway Administration (FHWA)</li>
+<li>U.S. Census Bureau</li>
+<li>Federal Emergency Management Agency (FEMA)</li>
+</ul>
+<p>By combining these sources, Vulcan produces consistent estimates of emissions across multiple sectors and fuel types (coal, oil/petroleum, and natural gas).</p>
+</section>
+<section id="point-vs.-nonpoint-emissions" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="point-vs.-nonpoint-emissions"><span class="header-section-number">10.8</span> Point vs.&nbsp;Nonpoint Emissions</h2>
+<p>A key conceptual distinction in Vulcan is between point sources and nonpoint (area) sources:</p>
+<ul>
+<li><p>Point sources are emissions from identifiable locations such as power plants, industrial facilities, and airports. These are often measured or reported directly and geolocated using latitude and longitude coordinates.</p></li>
+<li><p>Nonpoint sources represent diffuse emissions spread across space, such as residential buildings, commercial energy use, and onroad transportation. These emissions are typically reported at aggregated levels (e.g., county scale) and must be spatially distributed using proxy data.</p></li>
+</ul>
+<p>This distinction is important because it determines how emissions are processed and mapped.</p>
+</section>
+<section id="spatial-downscaling" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="spatial-downscaling"><span class="header-section-number">10.9</span> Spatial Downscaling</h2>
+<p>Many input datasets are available only at coarse spatial scales (e.g., counties or states). Vulcan refines these into high-resolution maps using spatial proxies, including:</p>
+<ul>
+<li>Road networks and traffic data for onroad emissions</li>
+<li>Building floor area and energy use intensity for residential and commercial sectors</li>
+<li>Industrial facility locations for manufacturing emissions</li>
+<li>Shipping lanes and rail networks for transportation sectors</li>
+</ul>
+<p>These proxies allow emissions to be distributed to fine spatial units such as U.S. Census blocks, and ultimately to a 1 km × 1 km grid, capturing detailed spatial variability across landscapes.</p>
+</section>
+<section id="temporal-downscaling" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="temporal-downscaling"><span class="header-section-number">10.10</span> Temporal Downscaling</h2>
+<p>In addition to spatial detail, Vulcan provides high temporal resolution. While many emissions datasets are reported annually, Vulcan converts these into hourly estimates using temporal profiles and activity patterns.</p>
+<p>Examples include:</p>
+<ul>
+<li>Hourly power plant emissions from continuous monitoring systems</li>
+<li>Traffic patterns to distribute onroad emissions throughout the day</li>
+<li>Building energy models to simulate hourly heating and cooling demand</li>
+</ul>
+<p>Temporal scaling ensures that emissions reflect real-world variability, such as daily commuting cycles or seasonal energy demand.</p>
+</section>
+<section id="multi-year-scaling-and-consistency" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="multi-year-scaling-and-consistency"><span class="header-section-number">10.11</span> Multi-Year Scaling and Consistency</h2>
+<p>To produce a consistent time series (2010–2022), Vulcan applies multi-year scaling techniques using energy consumption data from the EIA State Energy Data System (SEDS). This ensures that emissions trends remain consistent across years, even when underlying datasets are available only for specific time points.</p>
+<p>Additional smoothing techniques are applied to reduce artificial jumps between reporting years, improving temporal continuity.</p>
+</section>
+<section id="sectoral-structure" class="level2" data-number="10.12">
+<h2 data-number="10.12" class="anchored" data-anchor-id="sectoral-structure"><span class="header-section-number">10.12</span> Sectoral Structure</h2>
+<p>Vulcan organizes emissions into major economic sectors, including:</p>
+<ul>
+<li>Electricity production</li>
+<li>Transportation (onroad, nonroad, rail, aviation, marine)</li>
+<li>Industrial processes</li>
+<li>Residential and commercial buildings</li>
+<li>Cement production</li>
+</ul>
+<p>Each sector uses tailored data sources and processing methods, reflecting differences in how emissions are generated and reported.</p>
+</section>
+<section id="tools-and-setup" class="level2" data-number="10.13">
+<h2 data-number="10.13" class="anchored" data-anchor-id="tools-and-setup"><span class="header-section-number">10.13</span> Tools and Setup</h2>
+<p>This section introduces the computational workflow used to process, harmonize, and compare Vulcan and EDGAR emissions datasets. The workflow includes data loading, preprocessing, spatial alignment, visualization, and regional analysis.</p>
+<section id="required-packages" class="level3" data-number="10.13.1">
+<h3 data-number="10.13.1" class="anchored" data-anchor-id="required-packages"><span class="header-section-number">10.13.1</span> Required Packages</h3>
+<p>The following R packages are used for raster processing, visualization, and spatial data handling:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="define-file-paths-and-analysis-settings" class="level3" data-number="10.13.2">
+<h3 data-number="10.13.2" class="anchored" data-anchor-id="define-file-paths-and-analysis-settings"><span class="header-section-number">10.13.2</span> Define File Paths and Analysis Settings</h3>
+<p>Set the working directories and define the temporal range for analysis:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define analysis settings</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>vulcan_dir <span class="ot">&lt;-</span> <span class="st">"TOT_CO2_USA_mosaic_grid_1km_mn_2021.tif_undefined"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>edgar_dir  <span class="ot">&lt;-</span> <span class="st">"IND_emi_nc"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>years_all  <span class="ot">&lt;-</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>years_plot <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>These parameters control which files are loaded and which years are used for visualization.</p>
+</section>
+<section id="load-and-standardize-emissions-data" class="level3" data-number="10.13.3">
+<h3 data-number="10.13.3" class="anchored" data-anchor-id="load-and-standardize-emissions-data"><span class="header-section-number">10.13.3</span> Load and Standardize Emissions Data</h3>
+<section id="vulcan-dataset-raster-stack" class="level4" data-number="10.13.3.1">
+<h4 data-number="10.13.3.1" class="anchored" data-anchor-id="vulcan-dataset-raster-stack"><span class="header-section-number">10.13.3.1</span> Vulcan Dataset (Raster Stack)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vulcan_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  vulcan_dir,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"IND_.*</span><span class="sc">\\</span><span class="st">.tif$"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">full.names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">recursive =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>vulcan_stack <span class="ot">&lt;-</span> <span class="fu">rast</span>(vulcan_files)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vulcan_years_extracted <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">".*_(20[0-9]{2})</span><span class="sc">\\</span><span class="st">.tif$"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1"</span>, <span class="fu">basename</span>(vulcan_files)))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(vulcan_stack) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, vulcan_years_extracted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="edgar-dataset-netcdf-stack" class="level4" data-number="10.13.3.2">
+<h4 data-number="10.13.3.2" class="anchored" data-anchor-id="edgar-dataset-netcdf-stack"><span class="header-section-number">10.13.3.2</span> EDGAR Dataset (NetCDF Stack)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>edgar_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  edgar_dir,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.nc$"</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">full.names =</span> <span class="cn">TRUE</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>edgar_sel <span class="ot">&lt;-</span> edgar_files[</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="fu">paste</span>(years_all, <span class="at">collapse =</span> <span class="st">"|"</span>), <span class="fu">basename</span>(edgar_files))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>edgar_stack <span class="ot">&lt;-</span> <span class="fu">rast</span>(edgar_sel)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>edgar_years_extracted <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gsub</span>(<span class="st">".*(20[0-9]{2}).*"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1"</span>, <span class="fu">basename</span>(edgar_sel))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(edgar_stack) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, edgar_years_extracted)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="coordinate-reference-systems-and-units" class="level3" data-number="10.13.4">
+<h3 data-number="10.13.4" class="anchored" data-anchor-id="coordinate-reference-systems-and-units"><span class="header-section-number">10.13.4</span> Coordinate Reference Systems and Units</h3>
+<section id="projection-check" class="level4" data-number="10.13.4.1">
+<h4 data-number="10.13.4.1" class="anchored" data-anchor-id="projection-check"><span class="header-section-number">10.13.4.1</span> Projection Check</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(vulcan_stack)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GEOGCRS[\"WGS 84\",\n    ENSEMBLE[\"World Geodetic System 1984 ensemble\",\n        MEMBER[\"World Geodetic System 1984 (Transit)\"],\n        MEMBER[\"World Geodetic System 1984 (G730)\"],\n        MEMBER[\"World Geodetic System 1984 (G873)\"],\n        MEMBER[\"World Geodetic System 1984 (G1150)\"],\n        MEMBER[\"World Geodetic System 1984 (G1674)\"],\n        MEMBER[\"World Geodetic System 1984 (G1762)\"],\n        MEMBER[\"World Geodetic System 1984 (G2139)\"],\n        MEMBER[\"World Geodetic System 1984 (G2296)\"],\n        ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n            LENGTHUNIT[\"metre\",1]],\n        ENSEMBLEACCURACY[2.0]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"geodetic latitude (Lat)\",north,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"geodetic longitude (Lon)\",east,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    USAGE[\n        SCOPE[\"Horizontal component of 3D system.\"],\n        AREA[\"World.\"],\n        BBOX[-90,-180,90,180]],\n    ID[\"EPSG\",4326]]"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">crs</span>(edgar_stack)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "GEOGCRS[\"WGS 84 (CRS84)\",\n    DATUM[\"World Geodetic System 1984\",\n        ELLIPSOID[\"WGS 84\",6378137,298.257223563,\n            LENGTHUNIT[\"metre\",1]]],\n    PRIMEM[\"Greenwich\",0,\n        ANGLEUNIT[\"degree\",0.0174532925199433]],\n    CS[ellipsoidal,2],\n        AXIS[\"geodetic longitude (Lon)\",east,\n            ORDER[1],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n        AXIS[\"geodetic latitude (Lat)\",north,\n            ORDER[2],\n            ANGLEUNIT[\"degree\",0.0174532925199433]],\n    USAGE[\n        SCOPE[\"unknown\"],\n        AREA[\"World\"],\n        BBOX[-90,-180,90,180]],\n    ID[\"OGC\",\"CRS84\"]]"</code></pre>
+</div>
+</div>
+<p>Both datasets use the WGS 84 coordinate system, but differ slightly in axis ordering (EPSG:4326 vs.&nbsp;CRS84). While mathematically equivalent, this distinction requires careful handling during spatial operations.</p>
+</section>
+<section id="unit-comparison" class="level4" data-number="10.13.4.2">
+<h4 data-number="10.13.4.2" class="anchored" data-anchor-id="unit-comparison"><span class="header-section-number">10.13.4.2</span> Unit Comparison</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">describe</span>(edgar_stack)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Driver: netCDF/Network Common Data Format"                                                                         
+ [2] "Files: C:/Users/Scott/Documents/INF550-textbook-temp/INF550-textbook/IND_emi_nc/EDGAR_2025_GHG_CO2_2010_IND_emi.nc"
+ [3] "Size is 3600, 1800"                                                                                                
+ [4] "Origin = (-180.000000000000000,90.000000000000000)"                                                                
+ [5] "Pixel Size = (0.100000000000000,-0.100000000000000)"                                                               
+ [6] "Metadata:"                                                                                                         
+ [7] "  emissions#ChunkSizes={1,1800,3600}"                                                                              
+ [8] "  emissions#description=Combustion for manufacturing"                                                              
+ [9] "  emissions#global_total=6.07Gt"                                                                                   
+[10] "  emissions#long_name=Combustion for manufacturing"                                                                
+[11] "  emissions#release=EDGAR_2025_GHG"                                                                                
+[12] "  emissions#substance=CO2"                                                                                         
+[13] "  emissions#units=Tonnes"                                                                                          
+[14] "  emissions#year=2010"                                                                                             
+[15] "  emissions#_FillValue=nan"                                                                                        
+[16] "  lat#long_name=latitude"                                                                                          
+[17] "  lat#standard_name=latitude"                                                                                      
+[18] "  lat#units=degrees_north"                                                                                         
+[19] "  lon#long_name=longitude"                                                                                         
+[20] "  lon#standard_name=longitude"                                                                                     
+[21] "  lon#units=degrees_east"                                                                                          
+[22] "  NC_GLOBAL#contacts=https://edgar.jrc.ec.europa.eu/dataset_ghg2025#info JRC-EDGAR@ec.europa.eu"                   
+[23] "  NC_GLOBAL#copyright_notice=https://edgar.jrc.ec.europa.eu/dataset_ghg2025#conditions"                            
+[24] "  NC_GLOBAL#how_to_cite=https://edgar.jrc.ec.europa.eu/dataset_ghg2025#howtocite"                                  
+[25] "  NC_GLOBAL#institution=European Commission, Joint Research Centre"                                                
+[26] "  NC_GLOBAL#source=https://edgar.jrc.ec.europa.eu/dataset_ghg2025"                                                 
+[27] "Corner Coordinates:"                                                                                               
+[28] "Upper Left  (-180.0000000,  90.0000000) "                                                                          
+[29] "Lower Left  (-180.0000000, -90.0000000) "                                                                          
+[30] "Upper Right ( 180.0000000,  90.0000000) "                                                                          
+[31] "Lower Right ( 180.0000000, -90.0000000) "                                                                          
+[32] "Center      (  -0.0000000,   0.0000000) "                                                                          
+[33] "Band 1 Block=3600x1 Type=Float32, ColorInterp=Undefined"                                                           
+[34] "  NoData Value=nan"                                                                                                
+[35] "  Unit Type: Tonnes"                                                                                               
+[36] "  Metadata:"                                                                                                       
+[37] "    NETCDF_VARNAME=emissions"                                                                                      
+[38] "    _FillValue=nan"                                                                                                
+[39] "    global_total=6.07Gt"                                                                                           
+[40] "    substance=CO2"                                                                                                 
+[41] "    year=2010"                                                                                                     
+[42] "    units=Tonnes"                                                                                                  
+[43] "    release=EDGAR_2025_GHG"                                                                                        
+[44] "    long_name=Combustion for manufacturing"                                                                        
+[45] "    description=Combustion for manufacturing"                                                                      
+[46] "    ChunkSizes={1,1800,3600}"                                                                                      </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">describe</span>(vulcan_stack)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "Driver: GTiff/GeoTIFF"                                                                                                                                         
+ [2] "Files: C:/Users/Scott/Documents/INF550-textbook-temp/INF550-textbook/TOT_CO2_USA_mosaic_grid_1km_mn_2021.tif_undefined/IND_CO2_USA_mosaic_grid_1km_mn_2010.tif"
+ [3] "Size is 5831, 2649"                                                                                                                                            
+ [4] "Coordinate System is:"                                                                                                                                         
+ [5] "GEOGCRS[\"WGS 84\","                                                                                                                                           
+ [6] "    ENSEMBLE[\"World Geodetic System 1984 ensemble\","                                                                                                         
+ [7] "        MEMBER[\"World Geodetic System 1984 (Transit)\"],"                                                                                                     
+ [8] "        MEMBER[\"World Geodetic System 1984 (G730)\"],"                                                                                                        
+ [9] "        MEMBER[\"World Geodetic System 1984 (G873)\"],"                                                                                                        
+[10] "        MEMBER[\"World Geodetic System 1984 (G1150)\"],"                                                                                                       
+[11] "        MEMBER[\"World Geodetic System 1984 (G1674)\"],"                                                                                                       
+[12] "        MEMBER[\"World Geodetic System 1984 (G1762)\"],"                                                                                                       
+[13] "        MEMBER[\"World Geodetic System 1984 (G2139)\"],"                                                                                                       
+[14] "        MEMBER[\"World Geodetic System 1984 (G2296)\"],"                                                                                                       
+[15] "        ELLIPSOID[\"WGS 84\",6378137,298.257223563,"                                                                                                           
+[16] "            LENGTHUNIT[\"metre\",1]],"                                                                                                                         
+[17] "        ENSEMBLEACCURACY[2.0]],"                                                                                                                               
+[18] "    PRIMEM[\"Greenwich\",0,"                                                                                                                                   
+[19] "        ANGLEUNIT[\"degree\",0.0174532925199433]],"                                                                                                            
+[20] "    CS[ellipsoidal,2],"                                                                                                                                        
+[21] "        AXIS[\"geodetic latitude (Lat)\",north,"                                                                                                               
+[22] "            ORDER[1],"                                                                                                                                         
+[23] "            ANGLEUNIT[\"degree\",0.0174532925199433]],"                                                                                                        
+[24] "        AXIS[\"geodetic longitude (Lon)\",east,"                                                                                                               
+[25] "            ORDER[2],"                                                                                                                                         
+[26] "            ANGLEUNIT[\"degree\",0.0174532925199433]],"                                                                                                        
+[27] "    USAGE["                                                                                                                                                    
+[28] "        SCOPE[\"Horizontal component of 3D system.\"],"                                                                                                        
+[29] "        AREA[\"World.\"],"                                                                                                                                     
+[30] "        BBOX[-90,-180,90,180]],"                                                                                                                               
+[31] "    ID[\"EPSG\",4326]]"                                                                                                                                        
+[32] "Data axis to CRS axis mapping: 2,1"                                                                                                                            
+[33] "Origin = (-128.226548967589963,51.440879477249069)"                                                                                                            
+[34] "Pixel Size = (0.010790152113297,-0.010790152113297)"                                                                                                           
+[35] "Metadata:"                                                                                                                                                     
+[36] "  OVR_RESAMPLING_ALG=AVERAGE"                                                                                                                                  
+[37] "  AREA_OR_POINT=Area"                                                                                                                                          
+[38] "Image Structure Metadata:"                                                                                                                                     
+[39] "  LAYOUT=COG"                                                                                                                                                  
+[40] "  COMPRESSION=DEFLATE"                                                                                                                                         
+[41] "  INTERLEAVE=BAND"                                                                                                                                             
+[42] "Corner Coordinates:"                                                                                                                                           
+[43] "Upper Left  (-128.2265490,  51.4408795) (128d13'35.58\"W, 51d26'27.17\"N)"                                                                                     
+[44] "Lower Left  (-128.2265490,  22.8577665) (128d13'35.58\"W, 22d51'27.96\"N)"                                                                                     
+[45] "Upper Right ( -65.3091720,  51.4408795) ( 65d18'33.02\"W, 51d26'27.17\"N)"                                                                                     
+[46] "Lower Right ( -65.3091720,  22.8577665) ( 65d18'33.02\"W, 22d51'27.96\"N)"                                                                                     
+[47] "Center      ( -96.7678605,  37.1493230) ( 96d46' 4.30\"W, 37d 8'57.56\"N)"                                                                                     
+[48] "Band 1 Block=512x512 Type=Float32, ColorInterp=Gray"                                                                                                           
+[49] "  NoData Value=-9999"                                                                                                                                          
+[50] "  Overviews: 2916x1325, 1458x663, 729x332, 365x166, 183x83, 92x42, 46x21, 23x11, 12x6"                                                                         </code></pre>
+</div>
+</div>
+<ul>
+<li><strong>EDGAR:</strong> Total emissions per grid cell (~0.1° resolution)</li>
+<li><strong>Vulcan:</strong> Emissions per unit area (1 km resolution)</li>
+</ul>
+<p>This difference requires unit harmonization before comparison.</p>
+</section>
+</section>
+<section id="spatial-harmonization-edgar-vulcan-grid" class="level3" data-number="10.13.5">
+<h3 data-number="10.13.5" class="anchored" data-anchor-id="spatial-harmonization-edgar-vulcan-grid"><span class="header-section-number">10.13.5</span> Spatial Harmonization (EDGAR → Vulcan Grid)</h3>
+<p>To enable direct comparison, EDGAR data are reprojected, converted to emission density, and resampled to match the Vulcan grid.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: Reproject EDGAR to match Vulcan CRS</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>edgar_proj <span class="ot">&lt;-</span> <span class="fu">project</span>(edgar_stack, <span class="fu">crs</span>(vulcan_stack))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+|---------|---------|---------|---------|
+=========================================
+                                          </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: Crop to study extent</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>edgar_crop <span class="ot">&lt;-</span> <span class="fu">crop</span>(edgar_proj, <span class="fu">ext</span>(vulcan_stack))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Convert to density</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>area_edgar_km2 <span class="ot">&lt;-</span> <span class="fu">cellSize</span>(edgar_crop, <span class="at">unit =</span> <span class="st">"km"</span>)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>edgar_density <span class="ot">&lt;-</span> edgar_crop <span class="sc">/</span> area_edgar_km2</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 4: Align to Vulcan grid</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>edgar_final <span class="ot">&lt;-</span> <span class="fu">resample</span>(</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  edgar_density,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  vulcan_stack[[<span class="dv">1</span>]],</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"bilinear"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+|---------|---------|---------|---------|
+=========================================
+                                          </code></pre>
+</div>
+</div>
+</section>
+<section id="national-scale-emissions-visualization" class="level3" data-number="10.13.6">
+<h3 data-number="10.13.6" class="anchored" data-anchor-id="national-scale-emissions-visualization"><span class="header-section-number">10.13.6</span> National-Scale Emissions Visualization</h3>
+<p>To compare spatial patterns, three representative years are selected.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>v_years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>vulcan_3 <span class="ot">&lt;-</span> vulcan_stack[[<span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, v_years)]]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>edgar_3  <span class="ot">&lt;-</span> edgar_final[[<span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, v_years)]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="quartile-classification-function" class="level4" data-number="10.13.6.1">
+<h4 data-number="10.13.6.1" class="anchored" data-anchor-id="quartile-classification-function"><span class="header-section-number">10.13.6.1</span> Quartile Classification Function</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>make_quartile <span class="ot">&lt;-</span> <span class="cf">function</span>(r) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  qs <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">values</span>(r), <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">classify</span>(</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    r,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rcl =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>      <span class="sc">-</span><span class="cn">Inf</span>, qs[<span class="dv">2</span>], <span class="dv">1</span>,</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>      qs[<span class="dv">2</span>], qs[<span class="dv">3</span>], <span class="dv">2</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>      qs[<span class="dv">3</span>], qs[<span class="dv">4</span>], <span class="dv">3</span>,</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>      qs[<span class="dv">4</span>], <span class="cn">Inf</span>, <span class="dv">4</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    ), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vulcan_q <span class="ot">&lt;-</span> <span class="fu">lapply</span>(vulcan_3, make_quartile)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>edgar_q  <span class="ot">&lt;-</span> <span class="fu">lapply</span>(edgar_3, make_quartile)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="figure-1-national-emissions-comparison-quartiles" class="level4" data-number="10.13.6.2">
+<h4 data-number="10.13.6.2" class="anchored" data-anchor-id="figure-1-national-emissions-comparison-quartiles"><span class="header-section-number">10.13.6.2</span> Figure 1: National Emissions Comparison (Quartiles)</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vulcan_q[[<span class="dv">1</span>]], <span class="at">main =</span> <span class="st">"Vulcan 2010 (Quartiles)"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edgar_q[[<span class="dv">1</span>]],  <span class="at">main =</span> <span class="st">"EDGAR 2010 (Quartiles)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vulcan_q[[<span class="dv">2</span>]], <span class="at">main =</span> <span class="st">"Vulcan 2015 (Quartiles)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edgar_q[[<span class="dv">2</span>]],  <span class="at">main =</span> <span class="st">"EDGAR 2015 (Quartiles)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(vulcan_q[[<span class="dv">3</span>]], <span class="at">main =</span> <span class="st">"Vulcan 2020 (Quartiles)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(edgar_q[[<span class="dv">3</span>]],  <span class="at">main =</span> <span class="st">"EDGAR 2020 (Quartiles)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-15-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>These maps highlight differences in spatial resolution and emission distribution between datasets.</p>
+</section>
+</section>
+<section id="dataset-differences-vulcan-edgar" class="level3" data-number="10.13.7">
+<h3 data-number="10.13.7" class="anchored" data-anchor-id="dataset-differences-vulcan-edgar"><span class="header-section-number">10.13.7</span> Dataset Differences (Vulcan − EDGAR)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>vulcan_sel <span class="ot">&lt;-</span> vulcan_stack[[<span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, years)]]</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>edgar_sel  <span class="ot">&lt;-</span> edgar_final[[<span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, years)]]</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>diff_stack <span class="ot">&lt;-</span> vulcan_sel <span class="sc">-</span> edgar_sel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+|---------|---------|---------|---------|
+=========================================
+                                          </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(diff_stack) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Diff_"</span>, years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plot_quartile_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(r, title) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">values</span>(r)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> vals[<span class="sc">!</span><span class="fu">is.na</span>(vals)]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  brks <span class="ot">&lt;-</span> <span class="fu">quantile</span>(vals, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  brks[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">min</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  brks[<span class="fu">length</span>(brks)] <span class="ot">&lt;-</span> <span class="fu">max</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    r,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> brks,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">4</span>, <span class="st">"RdBu"</span>),</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> title</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="figure-2-national-difference-maps" class="level4" data-number="10.13.7.1">
+<h4 data-number="10.13.7.1" class="anchored" data-anchor-id="figure-2-national-difference-maps"><span class="header-section-number">10.13.7.1</span> Figure 2: National Difference Maps</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(diff_stack[[<span class="st">"Diff_2010"</span>]], <span class="st">"Vulcan − EDGAR (2010)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(diff_stack[[<span class="st">"Diff_2015"</span>]], <span class="st">"Vulcan − EDGAR (2015)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(diff_stack[[<span class="st">"Diff_2020"</span>]], <span class="st">"Vulcan − EDGAR (2020)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="regional-analysis-california" class="level3" data-number="10.13.8">
+<h3 data-number="10.13.8" class="anchored" data-anchor-id="regional-analysis-california"><span class="header-section-number">10.13.8</span> Regional Analysis: California</h3>
+<section id="load-state-boundary" class="level4" data-number="10.13.8.1">
+<h4 data-number="10.13.8.1" class="anchored" data-anchor-id="load-state-boundary"><span class="header-section-number">10.13.8.1</span> Load State Boundary</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">states</span>(<span class="at">cb =</span> <span class="cn">TRUE</span>, <span class="at">year =</span> <span class="dv">2020</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  |                                                                            
+  |                                                                      |   0%
+  |                                                                            
+  |=                                                                     |   1%
+  |                                                                            
+  |=                                                                     |   2%
+  |                                                                            
+  |==                                                                    |   2%
+  |                                                                            
+  |==                                                                    |   3%
+  |                                                                            
+  |===                                                                   |   4%
+  |                                                                            
+  |===                                                                   |   5%
+  |                                                                            
+  |====                                                                  |   5%
+  |                                                                            
+  |====                                                                  |   6%
+  |                                                                            
+  |=====                                                                 |   7%
+  |                                                                            
+  |=====                                                                 |   8%
+  |                                                                            
+  |======                                                                |   8%
+  |                                                                            
+  |======                                                                |   9%
+  |                                                                            
+  |=======                                                               |  10%
+  |                                                                            
+  |=======                                                               |  11%
+  |                                                                            
+  |========                                                              |  11%
+  |                                                                            
+  |========                                                              |  12%
+  |                                                                            
+  |=========                                                             |  12%
+  |                                                                            
+  |=========                                                             |  13%
+  |                                                                            
+  |==========                                                            |  14%
+  |                                                                            
+  |==========                                                            |  15%
+  |                                                                            
+  |===========                                                           |  15%
+  |                                                                            
+  |===========                                                           |  16%
+  |                                                                            
+  |============                                                          |  17%
+  |                                                                            
+  |============                                                          |  18%
+  |                                                                            
+  |=============                                                         |  18%
+  |                                                                            
+  |=============                                                         |  19%
+  |                                                                            
+  |==============                                                        |  19%
+  |                                                                            
+  |==============                                                        |  20%
+  |                                                                            
+  |===============                                                       |  21%
+  |                                                                            
+  |===============                                                       |  22%
+  |                                                                            
+  |================                                                      |  22%
+  |                                                                            
+  |================                                                      |  23%
+  |                                                                            
+  |================                                                      |  24%
+  |                                                                            
+  |=================                                                     |  24%
+  |                                                                            
+  |=================                                                     |  25%
+  |                                                                            
+  |==================                                                    |  25%
+  |                                                                            
+  |==================                                                    |  26%
+  |                                                                            
+  |===================                                                   |  27%
+  |                                                                            
+  |===================                                                   |  28%
+  |                                                                            
+  |====================                                                  |  28%
+  |                                                                            
+  |====================                                                  |  29%
+  |                                                                            
+  |=====================                                                 |  30%
+  |                                                                            
+  |=====================                                                 |  31%
+  |                                                                            
+  |======================                                                |  31%
+  |                                                                            
+  |======================                                                |  32%
+  |                                                                            
+  |=======================                                               |  32%
+  |                                                                            
+  |=======================                                               |  33%
+  |                                                                            
+  |========================                                              |  34%
+  |                                                                            
+  |========================                                              |  35%
+  |                                                                            
+  |=========================                                             |  35%
+  |                                                                            
+  |=========================                                             |  36%
+  |                                                                            
+  |==========================                                            |  37%
+  |                                                                            
+  |===========================                                           |  38%
+  |                                                                            
+  |===========================                                           |  39%
+  |                                                                            
+  |============================                                          |  39%
+  |                                                                            
+  |============================                                          |  40%
+  |                                                                            
+  |=============================                                         |  41%
+  |                                                                            
+  |=============================                                         |  42%
+  |                                                                            
+  |==============================                                        |  43%
+  |                                                                            
+  |==============================                                        |  44%
+  |                                                                            
+  |===============================                                       |  44%
+  |                                                                            
+  |===============================                                       |  45%
+  |                                                                            
+  |================================                                      |  45%
+  |                                                                            
+  |================================                                      |  46%
+  |                                                                            
+  |=================================                                     |  47%
+  |                                                                            
+  |=================================                                     |  48%
+  |                                                                            
+  |==================================                                    |  48%
+  |                                                                            
+  |==================================                                    |  49%
+  |                                                                            
+  |===================================                                   |  50%
+  |                                                                            
+  |====================================                                  |  51%
+  |                                                                            
+  |====================================                                  |  52%
+  |                                                                            
+  |=====================================                                 |  52%
+  |                                                                            
+  |=====================================                                 |  53%
+  |                                                                            
+  |=====================================                                 |  54%
+  |                                                                            
+  |======================================                                |  54%
+  |                                                                            
+  |=======================================                               |  55%
+  |                                                                            
+  |=======================================                               |  56%
+  |                                                                            
+  |========================================                              |  56%
+  |                                                                            
+  |========================================                              |  57%
+  |                                                                            
+  |========================================                              |  58%
+  |                                                                            
+  |=========================================                             |  58%
+  |                                                                            
+  |=========================================                             |  59%
+  |                                                                            
+  |==========================================                            |  60%
+  |                                                                            
+  |==========================================                            |  61%
+  |                                                                            
+  |===========================================                           |  61%
+  |                                                                            
+  |===========================================                           |  62%
+  |                                                                            
+  |============================================                          |  62%
+  |                                                                            
+  |============================================                          |  63%
+  |                                                                            
+  |=============================================                         |  64%
+  |                                                                            
+  |=============================================                         |  65%
+  |                                                                            
+  |==============================================                        |  65%
+  |                                                                            
+  |==============================================                        |  66%
+  |                                                                            
+  |===============================================                       |  67%
+  |                                                                            
+  |===============================================                       |  68%
+  |                                                                            
+  |================================================                      |  68%
+  |                                                                            
+  |================================================                      |  69%
+  |                                                                            
+  |=================================================                     |  70%
+  |                                                                            
+  |=================================================                     |  71%
+  |                                                                            
+  |==================================================                    |  71%
+  |                                                                            
+  |==================================================                    |  72%
+  |                                                                            
+  |===================================================                   |  72%
+  |                                                                            
+  |===================================================                   |  73%
+  |                                                                            
+  |====================================================                  |  74%
+  |                                                                            
+  |====================================================                  |  75%
+  |                                                                            
+  |=====================================================                 |  75%
+  |                                                                            
+  |=====================================================                 |  76%
+  |                                                                            
+  |======================================================                |  77%
+  |                                                                            
+  |======================================================                |  78%
+  |                                                                            
+  |=======================================================               |  78%
+  |                                                                            
+  |=======================================================               |  79%
+  |                                                                            
+  |========================================================              |  79%
+  |                                                                            
+  |========================================================              |  80%
+  |                                                                            
+  |=========================================================             |  81%
+  |                                                                            
+  |=========================================================             |  82%
+  |                                                                            
+  |==========================================================            |  82%
+  |                                                                            
+  |==========================================================            |  83%
+  |                                                                            
+  |==========================================================            |  84%
+  |                                                                            
+  |===========================================================           |  84%
+  |                                                                            
+  |===========================================================           |  85%
+  |                                                                            
+  |============================================================          |  85%
+  |                                                                            
+  |============================================================          |  86%
+  |                                                                            
+  |=============================================================         |  87%
+  |                                                                            
+  |=============================================================         |  88%
+  |                                                                            
+  |==============================================================        |  88%
+  |                                                                            
+  |==============================================================        |  89%
+  |                                                                            
+  |===============================================================       |  90%
+  |                                                                            
+  |================================================================      |  91%
+  |                                                                            
+  |================================================================      |  92%
+  |                                                                            
+  |=================================================================     |  92%
+  |                                                                            
+  |=================================================================     |  93%
+  |                                                                            
+  |==================================================================    |  94%
+  |                                                                            
+  |==================================================================    |  95%
+  |                                                                            
+  |===================================================================   |  95%
+  |                                                                            
+  |===================================================================   |  96%
+  |                                                                            
+  |====================================================================  |  97%
+  |                                                                            
+  |====================================================================  |  98%
+  |                                                                            
+  |===================================================================== |  98%
+  |                                                                            
+  |===================================================================== |  99%
+  |                                                                            
+  |======================================================================|  99%
+  |                                                                            
+  |======================================================================| 100%</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>ca <span class="ot">&lt;-</span> states[states<span class="sc">$</span>NAME <span class="sc">==</span> <span class="st">"California"</span>, ]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>ca <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(ca, <span class="fu">crs</span>(vulcan_stack))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="crop-and-mask" class="level4" data-number="10.13.8.2">
+<h4 data-number="10.13.8.2" class="anchored" data-anchor-id="crop-and-mask"><span class="header-section-number">10.13.8.2</span> Crop and Mask</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ca_vect <span class="ot">&lt;-</span> <span class="fu">vect</span>(ca)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>vulcan_ca <span class="ot">&lt;-</span> <span class="fu">crop</span>(vulcan_stack, ca_vect)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>vulcan_ca <span class="ot">&lt;-</span> <span class="fu">mask</span>(vulcan_ca, ca_vect)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>edgar_ca <span class="ot">&lt;-</span> <span class="fu">crop</span>(edgar_final, ca_vect)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>edgar_ca <span class="ot">&lt;-</span> <span class="fu">mask</span>(edgar_ca, ca_vect)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="california-emissions-comparison" class="level3" data-number="10.13.9">
+<h3 data-number="10.13.9" class="anchored" data-anchor-id="california-emissions-comparison"><span class="header-section-number">10.13.9</span> California Emissions Comparison</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plot_quartile <span class="ot">&lt;-</span> <span class="cf">function</span>(r, title) {</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> <span class="fu">values</span>(r)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  vals <span class="ot">&lt;-</span> vals[<span class="sc">!</span><span class="fu">is.na</span>(vals)]</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  brks <span class="ot">&lt;-</span> <span class="fu">quantile</span>(vals, <span class="at">probs =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  brks[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">min</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  brks[<span class="fu">length</span>(brks)] <span class="ot">&lt;-</span> <span class="fu">max</span>(vals, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    r,</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> brks,</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="fu">hcl.colors</span>(<span class="dv">4</span>, <span class="st">"YlOrRd"</span>),</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> title</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="figure-3-california-emissions-maps" class="level4" data-number="10.13.9.1">
+<h4 data-number="10.13.9.1" class="anchored" data-anchor-id="figure-3-california-emissions-maps"><span class="header-section-number">10.13.9.1</span> Figure 3: California Emissions Maps</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2010</span>, <span class="dv">2015</span>, <span class="dv">2020</span>)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (yr <span class="cf">in</span> years) {</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_quartile</span>(</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    vulcan_ca[[<span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, yr)]],</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"Vulcan CA"</span>, yr)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_quartile</span>(</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    edgar_ca[[<span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, yr)]],</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste</span>(<span class="st">"EDGAR CA"</span>, yr)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="california-difference-analysis" class="level3" data-number="10.13.10">
+<h3 data-number="10.13.10" class="anchored" data-anchor-id="california-difference-analysis"><span class="header-section-number">10.13.10</span> California Difference Analysis</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>vulcan_ca_sel <span class="ot">&lt;-</span> vulcan_ca[[<span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, years)]]</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>edgar_ca_sel  <span class="ot">&lt;-</span> edgar_ca[[<span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, years)]]</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>ca_diff_stack <span class="ot">&lt;-</span> vulcan_ca_sel <span class="sc">-</span> edgar_ca_sel</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ca_diff_stack) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CA_Diff_"</span>, years)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="figure-4-california-difference-maps" class="level4" data-number="10.13.10.1">
+<h4 data-number="10.13.10.1" class="anchored" data-anchor-id="figure-4-california-difference-maps"><span class="header-section-number">10.13.10.1</span> Figure 4: California Difference Maps</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(ca_diff_stack[[<span class="st">"CA_Diff_2010"</span>]], <span class="st">"California: Vulcan − EDGAR (2010)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(ca_diff_stack[[<span class="st">"CA_Diff_2015"</span>]], <span class="st">"California: Vulcan − EDGAR (2015)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-26-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_quartile_diff</span>(ca_diff_stack[[<span class="st">"CA_Diff_2020"</span>]], <span class="st">"California: Vulcan − EDGAR (2020)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-26-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="temporal-trends-in-emissions" class="level3" data-number="10.13.11">
+<h3 data-number="10.13.11" class="anchored" data-anchor-id="temporal-trends-in-emissions"><span class="header-section-number">10.13.11</span> Temporal Trends in Emissions</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>vulcan_total <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(years))</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>edgar_total  <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(years))</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(years)) {</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  yr <span class="ot">&lt;-</span> years[i]</span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  v_layer <span class="ot">&lt;-</span> vulcan_ca[[<span class="fu">paste0</span>(<span class="st">"Vulcan_"</span>, yr)]]</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  vulcan_total[i] <span class="ot">&lt;-</span> <span class="fu">global</span>(v_layer, <span class="st">"sum"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>  e_layer <span class="ot">&lt;-</span> edgar_ca[[<span class="fu">paste0</span>(<span class="st">"EDGAR_"</span>, yr)]]</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>  edgar_total[i] <span class="ot">&lt;-</span> <span class="fu">global</span>(e_layer, <span class="st">"sum"</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df_total <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> <span class="fu">rep</span>(<span class="dv">2010</span><span class="sc">:</span><span class="dv">2020</span>, <span class="dv">2</span>),</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Emissions =</span> <span class="fu">c</span>(vulcan_total, edgar_total),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Dataset =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Vulcan"</span>, <span class="st">"EDGAR"</span>), <span class="at">each =</span> <span class="fu">length</span>(vulcan_total))</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="figure-5-california-emissions-time-series" class="level4" data-number="10.13.11.1">
+<h4 data-number="10.13.11.1" class="anchored" data-anchor-id="figure-5-california-emissions-time-series"><span class="header-section-number">10.13.11.1</span> Figure 5: California Emissions Time Series</h4>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_total, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Emissions, <span class="at">color =</span> Dataset)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"California Industrial CO₂ Emissions (2010–2020)"</span>,</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Total Emissions"</span>,</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Dataset"</span></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="11_Vulcan_EDGAR_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="coding-lab-exploring-high-resolution-emissions-data" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Coding Lab: Exploring High-Resolution Emissions Data</h1>
+<p>This lab guides students through loading, comparing, and interpreting fossil fuel CO₂ emissions from the Vulcan and EDGAR datasets.</p>
+<section id="loading-and-exploring-emissions-data" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="loading-and-exploring-emissions-data"><span class="header-section-number">11.1</span> Loading and Exploring Emissions Data</h2>
+<ol type="1">
+<li>Load the Vulcan and EDGAR datasets using the provided code.</li>
+<li>Inspect the structure of each dataset:</li>
+</ol>
+<ul>
+<li>What is the spatial resolution of each dataset?</li>
+<li>What are the units of each dataset?</li>
+</ul>
+<ol start="3" type="1">
+<li>Compare the spatial extent:</li>
+</ol>
+<ul>
+<li>Why does EDGAR require cropping to match Vulcan?</li>
+</ul>
+</section>
+<section id="spatial-comparison-of-emissions-city-sector" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="spatial-comparison-of-emissions-city-sector"><span class="header-section-number">11.2</span> Spatial Comparison of Emissions (City &amp; Sector)</h2>
+<p>In this exercise, you will compare CO₂ emissions from Vulcan and EDGAR for a city and sector of your choice.</p>
+<section id="step-1-choose-a-city-and-sector" class="level3" data-number="11.2.1">
+<h3 data-number="11.2.1" class="anchored" data-anchor-id="step-1-choose-a-city-and-sector"><span class="header-section-number">11.2.1</span> Step 1: Choose a City and Sector</h3>
+<ol type="1">
+<li>Pick one city either boundary/ citycenter point.</li>
+<li>Pick one sector that is identical in both vulcan and edgar</li>
+</ol>
+</section>
+<section id="step-2-select-two-years" class="level3" data-number="11.2.2">
+<h3 data-number="11.2.2" class="anchored" data-anchor-id="step-2-select-two-years"><span class="header-section-number">11.2.2</span> Step 2: Select Two Years</h3>
+<p>Choose two years to compare (e.g., 2010 and 2020).</p>
+</section>
+<section id="step-3-create-maps" class="level3" data-number="11.2.3">
+<h3 data-number="11.2.3" class="anchored" data-anchor-id="step-3-create-maps"><span class="header-section-number">11.2.3</span> Step 3: Create Maps</h3>
+<p>Using the provided code: 1. Zoom in on your selected city. 2. Visualize maps / line charts</p>
+</section>
+<section id="step-4-answer-the-questions" class="level3" data-number="11.2.4">
+<h3 data-number="11.2.4" class="anchored" data-anchor-id="step-4-answer-the-questions"><span class="header-section-number">11.2.4</span> Step 4: Answer the Questions</h3>
+<ol type="1">
+<li><strong>Do Vulcan and EDGAR look similar or different?</strong></li>
+</ol>
+<ul>
+<li>Briefly describe one similarity and one difference</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>Why might they be different? (choose at least one)</strong></li>
+</ol>
+<ul>
+<li>Different spatial resolution</li>
+<li>Different data sources</li>
+<li>Different methods</li>
+</ul>
+<ol start="3" type="1">
+<li><strong>Did emissions change over time?</strong></li>
+</ol>
+<ul>
+<li>Did both datasets show the same trend?</li>
+</ul>
+</section>
+</section>
+<section id="conceptual-questions" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="conceptual-questions"><span class="header-section-number">11.3</span> Conceptual Questions</h2>
+<ol type="1">
+<li>Why are <strong>bottom-up approaches</strong> (like Vulcan) important for emissions estimation?</li>
+<li>What are the advantages and disadvantages of:</li>
+</ol>
+<ul>
+<li>High-resolution datasets (Vulcan)</li>
+<li>Coarse global datasets (EDGAR)</li>
+</ul>
+<ol start="3" type="1">
+<li>Explain the difference between:</li>
+</ol>
+<ul>
+<li>Point sources</li>
+<li>Nonpoint sources</li>
+</ul>
+<ol start="4" type="1">
+<li>Why is <strong>temporal downscaling</strong> necessary in emissions modeling?</li>
+<li>How might spatial resolution influence:</li>
+</ol>
+<ul>
+<li>Policy decisions?</li>
+<li>Urban planning?</li>
+</ul>
+</section>
+<section id="applied-mini-project-guided" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="applied-mini-project-guided"><span class="header-section-number">11.4</span> Applied Mini Project (Guided)</h2>
+<p>Choose <strong>one</strong> of the following analyses:</p>
+<section id="option-a-urban-emissions-analysis" class="level3" data-number="11.4.1">
+<h3 data-number="11.4.1" class="anchored" data-anchor-id="option-a-urban-emissions-analysis"><span class="header-section-number">11.4.1</span> Option A: Urban Emissions Analysis</h3>
+<ul>
+<li>Select a major U.S. city</li>
+<li>Compare Vulcan and EDGAR emissions spatially and temporally</li>
+<li>Identify emission hotspots</li>
+</ul>
+</section>
+<section id="option-b-state-level-comparison" class="level3" data-number="11.4.2">
+<h3 data-number="11.4.2" class="anchored" data-anchor-id="option-b-state-level-comparison"><span class="header-section-number">11.4.2</span> Option B: State-Level Comparison</h3>
+<ul>
+<li>Compare emissions across two states</li>
+<li>Analyze spatial distribution and total emissions</li>
+</ul>
+</section>
+<section id="option-c-dataset-sensitivity-analysis" class="level3" data-number="11.4.3">
+<h3 data-number="11.4.3" class="anchored" data-anchor-id="option-c-dataset-sensitivity-analysis"><span class="header-section-number">11.4.3</span> Option C: Dataset Sensitivity Analysis</h3>
+<ul>
+<li>Compare Vulcan vs EDGAR across multiple locations</li>
+<li>Evaluate how dataset choice affects interpretation</li>
+</ul>
+</section>
+<section id="deliverables" class="level3" data-number="11.4.4">
+<h3 data-number="11.4.4" class="anchored" data-anchor-id="deliverables"><span class="header-section-number">11.4.4</span> Deliverables</h3>
+<ul>
+<li>1–2 figures (maps or plots)</li>
+<li>Short written interpretation (½–1 page)</li>
+</ul>
+</section>
+</section>
+<section id="conclusion" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">11.5</span> Conclusion</h2>
+<p>This chapter introduced students to high-resolution carbon emissions data using the Vulcan dataset and a complementary EDGAR comparison. Through data loading, unit harmonization, sector analysis, spatial mapping, and regional interpretation, students gained experience working with real emissions products and learned how dataset structure, spatial scale, and sector definitions shape the conclusions that can be drawn from carbon emissions analyses.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-OneHealth_PathogenSurveillance.html" class="pagination-link" aria-label="One Health, Pathogen Surveillance, and Nextstrain">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./12-FAQ.html" class="pagination-link" aria-label="Appendix">
+        <span class="nav-page-text">Appendix</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/11_Vulcan_EDGAR.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

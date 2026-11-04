@@ -1,0 +1,698 @@
+---
+title: "High-Resolution Carbon Emissions Using the Vulcan Dataset"
+author:
+- Kora Cai
+- Victoria Hope
+---
+ 
+```{r setup, include=FALSE}
+library(terra)
+library(ncdf4)
+library(dplyr)
+library(ggplot2)
+library(tibble)
+library(tidyr)
+library(scales)
+library(tigris)
+library(knitr)
+
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+## Overview / Purpose
+This chapter introduces the Vulcan Project, a high-resolution, bottom-up dataset of fossil fuel CO2 emissions across the United States. The purpose of this chapter is to help students understand how anthropogenic carbon emissions are structured, quantified, visualized, and interpreted across space, time, and sector.
+
+To support comparison and broader context, this chapter also introduces the EDGAR emissions dataset. Together, these datasets provide an opportunity to explore differences in spatial resolution, geographic extent, and emissions structure while building practical skills in handling raster and NetCDF data in R.
+
+## Learning Objectives
+After completing this chapter, students will be able to:
+
+- Define the Vulcan carbon emissions dataset and its purpose
+- Explain how fossil fuel CO₂ emissions are quantified and categorized
+- Describe spatial and temporal resolution in emissions datasets
+- Identify major emission sectors (transportation, industry, residential, electricity)
+
+Load and explore large geospatial datasets (e.g., NetCDF or raster formats):
+
+- Aggregate emissions across sectors, space, and time
+- Visualize emissions using maps and plots
+- Interpret spatial and temporal emission patterns
+
+## What is Vulcan?
+```{r video-links, results='asis', echo=FALSE}
+if (knitr::is_html_output()) {
+  cat('
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hv-UYmCcC9U" frameborder="0" allowfullscreen></iframe>
+
+<p><a href="https://www.youtube.com/watch?v=hv-UYmCcC9U">Open Video 1 in YouTube</a></p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eJpj8UUMTaI" frameborder="0" allowfullscreen></iframe>
+
+<p><a href="https://youtu.be/eJpj8UUMTaI">Open Video 2 in YouTube</a></p>
+')
+} else if (knitr::is_latex_output()) {
+  cat('
+## Videos
+
+\\noindent\\href{https://www.youtube.com/watch?v=hv-UYmCcC9U}{\\fbox{\\parbox{0.9\\linewidth}{\\centering\\textbf{▶ Click here to watch Video 1: Vulcan Overview}}}}
+
+\\vspace{0.5em}
+
+\\noindent\\href{https://youtu.be/eJpj8UUMTaI}{\\fbox{\\parbox{0.9\\linewidth}{\\centering\\textbf{▶ Click here to watch Video 2: Emissions Overview}}}}
+')
+}
+```
+
+For more information, visit:
+[Vulcan Project Website](https://vulcan.rc.nau.edu).
+
+The Vulcan Project is a high-resolution effort to quantify fossil fuel carbon dioxide (CO₂) emissions across the United States in both space and time. Unlike coarser global inventories, Vulcan disaggregates emissions by sector, including power generation, industrial activity, transportation, and residential and commercial sources, and maps them onto a fine spatial grid (e.g., ~10 km). This detailed framework allows for a more precise representation of where and when emissions occur, capturing daily (diurnal) cycles and spatial heterogeneity associated with urban centers, industrial regions, and transportation networks.
+
+When coupled with atmospheric transport models, Vulcan data can also be used to simulate how CO₂ disperses through the atmosphere, providing insights into emission patterns, boundary layer dynamics, and regional transport processes. As illustrated in the accompanying video, these capabilities make Vulcan a valuable tool for linking emission inventories with observed atmospheric concentrations and for improving climate and air quality analyses.
+
+## Global Fossil Fuel CO₂ Emission Datasets
+
+The Emissions Database for Global Atmospheric Research (EDGAR) is one of the most widely used global inventories of anthropogenic greenhouse gas (GHG) and air pollutant emissions. Developed by the European Commission’s Joint Research Centre, EDGAR provides independent emission estimates using consistent IPCC-based methodologies and international statistical data. 
+
+For more information visit:
+[EDGAR dataset](https://edgar.jrc.ec.europa.eu/dataset_ghg80)
+
+It offers long-term time series from 1970 to the present, with outputs available as national totals and global gridded maps at 0.1° × 0.1° spatial resolution. In addition, EDGAR includes detailed sectoral information and temporal resolution, making it a key resource for both scientific research and policy-relevant climate analyses.
+In addition to EDGAR, several other emission datasets have been developed with different methodological approaches and objectives. A brief comparison of these products is provided in Table X.
+
+```{r}
+
+dataset_comparison <- tibble::tibble(
+  Dataset = c("EDGAR", "ODIAC", "FFDAS", "CDIAC-FF"),
+  Main_Focus = c(
+    "Global GHG & air pollutants",
+    "Fossil fuel CO2 (global)",
+    "Fossil fuel CO2 (global)",
+    "Fossil fuel CO2 (global & national)"
+  ),
+  Methodology = c(
+    "IPCC-based inventory using international statistics",
+    "Downscaling using nightlight data + point sources",
+    "Data assimilation (Kaya identity + observations)",
+    "Energy statistics-based (fuel consumption & cement production)"
+  ),
+  Spatial_Resolution = c(
+    "~0.1° (~10 km)",
+    "~1 km",
+    "~0.25°",
+    "National / coarse"
+  ),
+  Temporal_Coverage = c(
+    "1970–present",
+    "~2000–present",
+    "1997–2015 (updates ongoing)",
+    "1751–recent"
+  ),
+  Key_Strength = c(
+    "Consistent global coverage",
+    "High spatial resolution",
+    "Incorporates uncertainty",
+    "Longest historical record"
+  )
+)
+```
+
+```{r dataset-comparison-kable}
+knitr::kable(
+  dataset_comparison,
+  col.names = c(
+    "Dataset",
+    "Main Focus",
+    "Methodology",
+    "Spatial Resolution",
+    "Temporal Coverage",
+    "Key Strength"
+  ),
+  booktabs = TRUE
+)
+
+```
+
+These datasets are complementary, differing in their spatial detail, temporal extent, and methodological frameworks. The choice among them depends on the specific research objective, such as long-term trend analysis, high-resolution spatial mapping, or uncertainty-aware modeling. 
+
+## How Vulcan Estimates Emissions: Data Sources and Methodology
+The Vulcan dataset is built using a bottom-up, data-integrated approach that combines multiple observational and statistical data sources to estimate fossil fuel CO₂ (FFCO₂) emissions across the United States. Rather than relying on aggregated national statistics alone, Vulcan compiles detailed sector-specific datasets and distributes emissions in both space and time using scientifically informed methods.
+
+## Bottom-Up Framework
+At its core, Vulcan follows a bottom-up methodology, where emissions are estimated based on activity data (e.g., fuel consumption, traffic volume, industrial output) and emission factors (i.e., the amount of CO₂ emitted per unit of activity). This approach allows emissions to be linked directly to real-world processes such as electricity generation, transportation, and building energy use.
+
+### Table 1: Emissions sectors and distributions
+
+```{r emissions-table-data}
+emissions_table <- tibble::tibble(
+  Sector = c("Electricity production","Onroad","Residential","Nonroad"),
+  Emissions_Data_Source = c("EPA + DOE","EMFAC","EPA","EPA"),
+  Original_Resolution = c("Lat/lon","County","County","County"),
+  Final_Spatial = c("Lat/Lon","Road network","Census block","Surrogates"),
+  Final_Temporal = c("Hourly","Hourly","Hourly","Hourly")
+)
+
+knitr::kable(emissions_table, booktabs = TRUE)
+```
+
+### Table 2: Comparison of emissions datasets
+
+```{r dataset-comparison-data}
+dataset_comparison <- tibble::tibble(
+  Dataset = c("EDGAR", "ODIAC", "FFDAS", "CDIAC-FF"),
+  Main_Focus = c(
+    "Global GHG & air pollutants",
+    "Fossil fuel CO2 (global)",
+    "Fossil fuel CO2 (global)",
+    "Fossil fuel CO2 (global & national)"
+  ),
+  Methodology = c(
+    "IPCC-based inventory using international statistics",
+    "Downscaling using nightlight data + point sources",
+    "Data assimilation (Kaya identity + observations)",
+    "Energy statistics-based (fuel consumption & cement production)"
+  ),
+  Spatial_Resolution = c(
+    "~0.1° (~10 km)",
+    "~1 km",
+    "~0.25°",
+    "National / coarse"
+  ),
+  Temporal_Coverage = c(
+    "1970–present",
+    "~2000–present",
+    "1997–2015 (updates ongoing)",
+    "1751–recent"
+  ),
+  Key_Strength = c(
+    "Consistent global coverage with detailed sectoral and temporal data",
+    "Very high spatial resolution, strong urban representation",
+    "Incorporates uncertainty and multiple data constraints",
+    "Longest historical time series of emissions"
+  )
+)
+```
+
+### Table 1 Overview of data sources used in generating the space/time-resolved Vulcan v4.0 FFCO2 emissions (footnotes provide acronym explanations).
+
+##### Gurney, K. R., Dass, P., Kato, A., Gawuc, L., Aslam, B., & Sun, H. (2025). Vulcan version 4.0 high-resolution annual carbon dioxide emissions in the US for the 2010–2022 time period. Scientific Data, 12(1), 1946.
+
+## EDGAR industrial CO2 NetCDF (global, 2021)
+The dataset integrates information from major U.S. agencies, including:
+
+- Environmental Protection Agency (EPA)
+- Department of Energy / Energy Information Administration (EIA)
+- Federal Highway Administration (FHWA)
+- U.S. Census Bureau
+- Federal Emergency Management Agency (FEMA)
+
+By combining these sources, Vulcan produces consistent estimates of emissions across multiple sectors and fuel types (coal, oil/petroleum, and natural gas).
+
+## Point vs. Nonpoint Emissions
+
+A key conceptual distinction in Vulcan is between point sources and nonpoint (area) sources:
+
+- Point sources are emissions from identifiable locations such as power plants, industrial facilities, and airports. These are often measured or reported directly and geolocated using latitude and longitude coordinates.
+
+- Nonpoint sources represent diffuse emissions spread across space, such as residential buildings, commercial energy use, and onroad transportation. These emissions are typically reported at aggregated levels (e.g., county scale) and must be spatially distributed using proxy data.
+
+This distinction is important because it determines how emissions are processed and mapped.
+
+## Spatial Downscaling
+
+Many input datasets are available only at coarse spatial scales (e.g., counties or states). Vulcan refines these into high-resolution maps using spatial proxies, including:
+
+- Road networks and traffic data for onroad emissions
+- Building floor area and energy use intensity for residential and commercial sectors
+- Industrial facility locations for manufacturing emissions
+- Shipping lanes and rail networks for transportation sectors
+
+These proxies allow emissions to be distributed to fine spatial units such as U.S. Census blocks, and ultimately to a 1 km × 1 km grid, capturing detailed spatial variability across landscapes.
+
+## Temporal Downscaling
+
+In addition to spatial detail, Vulcan provides high temporal resolution. While many emissions datasets are reported annually, Vulcan converts these into hourly estimates using temporal profiles and activity patterns.
+
+Examples include:
+
+- Hourly power plant emissions from continuous monitoring systems
+- Traffic patterns to distribute onroad emissions throughout the day
+- Building energy models to simulate hourly heating and cooling demand
+
+Temporal scaling ensures that emissions reflect real-world variability, such as daily commuting cycles or seasonal energy demand.
+
+## Multi-Year Scaling and Consistency
+To produce a consistent time series (2010–2022), Vulcan applies multi-year scaling techniques using energy consumption data from the EIA State Energy Data System (SEDS). This ensures that emissions trends remain consistent across years, even when underlying datasets are available only for specific time points.
+
+Additional smoothing techniques are applied to reduce artificial jumps between reporting years, improving temporal continuity.
+
+## Sectoral Structure
+
+Vulcan organizes emissions into major economic sectors, including:
+
+- Electricity production
+- Transportation (onroad, nonroad, rail, aviation, marine)
+- Industrial processes
+- Residential and commercial buildings
+- Cement production
+
+Each sector uses tailored data sources and processing methods, reflecting differences in how emissions are generated and reported.
+
+
+  
+## Tools and Setup
+  
+  This section introduces the computational workflow used to process, harmonize, and compare Vulcan and EDGAR emissions datasets. The workflow includes data loading, preprocessing, spatial alignment, visualization, and regional analysis.
+
+### Required Packages
+
+The following R packages are used for raster processing, visualization, and spatial data handling:
+  
+```{r}
+library(terra)
+library(ggplot2)
+library(tigris)
+```
+
+
+### Define File Paths and Analysis Settings
+  
+  Set the working directories and define the temporal range for analysis:
+  
+```{r}
+# Define analysis settings
+vulcan_dir <- "TOT_CO2_USA_mosaic_grid_1km_mn_2021.tif_undefined"
+edgar_dir  <- "IND_emi_nc"
+
+years_all  <- 2010:2020
+years_plot <- c(2010, 2015, 2020)
+```
+
+These parameters control which files are loaded and which years are used for visualization.
+
+  
+### Load and Standardize Emissions Data
+  
+#### Vulcan Dataset (Raster Stack)
+  
+```{r}
+vulcan_files <- list.files(
+  vulcan_dir,
+  pattern = "IND_.*\\.tif$",
+  full.names = TRUE,
+  recursive = TRUE
+)
+
+vulcan_stack <- rast(vulcan_files)
+```
+
+```{r}
+vulcan_years_extracted <- as.numeric(gsub(".*_(20[0-9]{2})\\.tif$", "\\1", basename(vulcan_files)))
+names(vulcan_stack) <- paste0("Vulcan_", vulcan_years_extracted)
+```
+
+#### EDGAR Dataset (NetCDF Stack)
+
+```{r}
+edgar_files <- list.files(
+  edgar_dir,
+  pattern = "\\.nc$",
+  full.names = TRUE
+)
+
+edgar_sel <- edgar_files[
+  grepl(paste(years_all, collapse = "|"), basename(edgar_files))
+]
+
+edgar_stack <- rast(edgar_sel)
+
+edgar_years_extracted <- as.numeric(
+  gsub(".*(20[0-9]{2}).*", "\\1", basename(edgar_sel))
+)
+
+names(edgar_stack) <- paste0("EDGAR_", edgar_years_extracted)
+```
+
+  
+### Coordinate Reference Systems and Units
+  
+#### Projection Check
+  
+```{r}
+crs(vulcan_stack)
+crs(edgar_stack)
+```
+
+Both datasets use the WGS 84 coordinate system, but differ slightly in axis ordering (EPSG:4326 vs. CRS84). While mathematically equivalent, this distinction requires careful handling during spatial operations.
+
+#### Unit Comparison
+
+```{r}
+terra::describe(edgar_stack)
+terra::describe(vulcan_stack)
+```
+
+* **EDGAR:** Total emissions per grid cell (~0.1° resolution)
+* **Vulcan:** Emissions per unit area (1 km resolution)
+
+This difference requires unit harmonization before comparison.
+
+
+  
+### Spatial Harmonization (EDGAR → Vulcan Grid)
+  
+  To enable direct comparison, EDGAR data are reprojected, converted to emission density, and resampled to match the Vulcan grid.
+
+```{r}
+# Step 1: Reproject EDGAR to match Vulcan CRS
+edgar_proj <- project(edgar_stack, crs(vulcan_stack))
+
+# Step 2: Crop to study extent
+edgar_crop <- crop(edgar_proj, ext(vulcan_stack))
+
+# Step 3: Convert to density
+area_edgar_km2 <- cellSize(edgar_crop, unit = "km")
+edgar_density <- edgar_crop / area_edgar_km2
+
+# Step 4: Align to Vulcan grid
+edgar_final <- resample(
+  edgar_density,
+  vulcan_stack[[1]],
+  method = "bilinear"
+)
+```
+
+  
+### National-Scale Emissions Visualization
+  
+  To compare spatial patterns, three representative years are selected.
+
+```{r}
+v_years <- c(2010, 2015, 2020)
+
+vulcan_3 <- vulcan_stack[[paste0("Vulcan_", v_years)]]
+edgar_3  <- edgar_final[[paste0("EDGAR_", v_years)]]
+```
+
+#### Quartile Classification Function
+
+```{r}
+make_quartile <- function(r) {
+  qs <- quantile(values(r), probs = seq(0, 1, 0.25), na.rm = TRUE)
+  
+  classify(
+    r,
+    rcl = matrix(c(
+      -Inf, qs[2], 1,
+      qs[2], qs[3], 2,
+      qs[3], qs[4], 3,
+      qs[4], Inf, 4
+    ), ncol = 3, byrow = TRUE)
+  )
+}
+```
+
+```{r}
+vulcan_q <- lapply(vulcan_3, make_quartile)
+edgar_q  <- lapply(edgar_3, make_quartile)
+```
+
+#### Figure 1: National Emissions Comparison (Quartiles)
+
+```{r}
+par(mfrow = c(3,2), mar = c(3,3,2,2))
+
+plot(vulcan_q[[1]], main = "Vulcan 2010 (Quartiles)")
+plot(edgar_q[[1]],  main = "EDGAR 2010 (Quartiles)")
+```
+
+```{r}
+plot(vulcan_q[[2]], main = "Vulcan 2015 (Quartiles)")
+plot(edgar_q[[2]],  main = "EDGAR 2015 (Quartiles)")
+```
+
+```{r}
+plot(vulcan_q[[3]], main = "Vulcan 2020 (Quartiles)")
+plot(edgar_q[[3]],  main = "EDGAR 2020 (Quartiles)")
+```
+
+These maps highlight differences in spatial resolution and emission distribution between datasets.
+
+
+  
+### Dataset Differences (Vulcan − EDGAR)
+  
+```{r}
+years <- c(2010, 2015, 2020)
+
+vulcan_sel <- vulcan_stack[[paste0("Vulcan_", years)]]
+edgar_sel  <- edgar_final[[paste0("EDGAR_", years)]]
+
+diff_stack <- vulcan_sel - edgar_sel
+names(diff_stack) <- paste0("Diff_", years)
+```
+
+```{r}
+plot_quartile_diff <- function(r, title) {
+  
+  vals <- values(r)
+  vals <- vals[!is.na(vals)]
+  
+  brks <- quantile(vals, probs = seq(0, 1, 0.25), na.rm = TRUE)
+  brks[1] <- min(vals, na.rm = TRUE)
+  brks[length(brks)] <- max(vals, na.rm = TRUE)
+  
+  plot(
+    r,
+    breaks = brks,
+    col = hcl.colors(4, "RdBu"),
+    main = title
+  )
+}
+```
+
+#### Figure 2: National Difference Maps
+
+
+```{r}
+plot_quartile_diff(diff_stack[["Diff_2010"]], "Vulcan − EDGAR (2010)")
+```
+
+```{r}
+plot_quartile_diff(diff_stack[["Diff_2015"]], "Vulcan − EDGAR (2015)")
+```
+
+```{r}
+plot_quartile_diff(diff_stack[["Diff_2020"]], "Vulcan − EDGAR (2020)")
+```
+
+
+### Regional Analysis: California
+  
+#### Load State Boundary
+
+```{r}
+library(sf)
+
+states <- tigris::states(cb = TRUE, year = 2020)
+ca <- states[states$NAME == "California", ]
+ca <- st_transform(ca, crs(vulcan_stack))
+```
+
+#### Crop and Mask
+
+```{r}
+ca_vect <- vect(ca)
+
+vulcan_ca <- crop(vulcan_stack, ca_vect)
+vulcan_ca <- mask(vulcan_ca, ca_vect)
+
+edgar_ca <- crop(edgar_final, ca_vect)
+edgar_ca <- mask(edgar_ca, ca_vect)
+```
+
+
+  
+### California Emissions Comparison
+  
+```{r}
+plot_quartile <- function(r, title) {
+  
+  vals <- values(r)
+  vals <- vals[!is.na(vals)]
+  
+  brks <- quantile(vals, probs = seq(0, 1, 0.25), na.rm = TRUE)
+  brks[1] <- min(vals, na.rm = TRUE)
+  brks[length(brks)] <- max(vals, na.rm = TRUE)
+  
+  plot(
+    r,
+    breaks = brks,
+    col = hcl.colors(4, "YlOrRd"),
+    main = title
+  )
+}
+```
+
+#### Figure 3: California Emissions Maps
+
+
+```{r}
+years <- c(2010, 2015, 2020)
+
+par(mfrow = c(3,2), mar = c(3,3,2,2))
+
+for (yr in years) {
+  
+  plot_quartile(
+    vulcan_ca[[paste0("Vulcan_", yr)]],
+    paste("Vulcan CA", yr)
+  )
+  
+  plot_quartile(
+    edgar_ca[[paste0("EDGAR_", yr)]],
+    paste("EDGAR CA", yr)
+  )
+}
+```
+
+
+  
+### California Difference Analysis
+  
+```{r}
+vulcan_ca_sel <- vulcan_ca[[paste0("Vulcan_", years)]]
+edgar_ca_sel  <- edgar_ca[[paste0("EDGAR_", years)]]
+
+ca_diff_stack <- vulcan_ca_sel - edgar_ca_sel
+names(ca_diff_stack) <- paste0("CA_Diff_", years)
+```
+
+#### Figure 4: California Difference Maps
+
+```{r}
+plot_quartile_diff(ca_diff_stack[["CA_Diff_2010"]], "California: Vulcan − EDGAR (2010)")
+plot_quartile_diff(ca_diff_stack[["CA_Diff_2015"]], "California: Vulcan − EDGAR (2015)")
+plot_quartile_diff(ca_diff_stack[["CA_Diff_2020"]], "California: Vulcan − EDGAR (2020)")
+```
+
+
+  
+### Temporal Trends in Emissions
+  
+```{r}
+years <- 2010:2020
+
+vulcan_total <- numeric(length(years))
+edgar_total  <- numeric(length(years))
+
+for (i in seq_along(years)) {
+  
+  yr <- years[i]
+  
+  v_layer <- vulcan_ca[[paste0("Vulcan_", yr)]]
+  vulcan_total[i] <- global(v_layer, "sum", na.rm = TRUE)[1,1]
+  
+  e_layer <- edgar_ca[[paste0("EDGAR_", yr)]]
+  edgar_total[i] <- global(e_layer, "sum", na.rm = TRUE)[1,1]
+}
+```
+
+```{r}
+df_total <- data.frame(
+  Year = rep(2010:2020, 2),
+  Emissions = c(vulcan_total, edgar_total),
+  Dataset = rep(c("Vulcan", "EDGAR"), each = length(vulcan_total))
+)
+```
+
+#### Figure 5: California Emissions Time Series
+
+```{r}
+ggplot(df_total, aes(x = Year, y = Emissions, color = Dataset)) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2) +
+  labs(
+    title = "California Industrial CO₂ Emissions (2010–2020)",
+    x = "Year",
+    y = "Total Emissions",
+    color = "Dataset"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+# Coding Lab: Exploring High-Resolution Emissions Data
+
+This lab guides students through loading, comparing, and interpreting fossil fuel CO₂ emissions from the Vulcan and EDGAR datasets.
+
+## Loading and Exploring Emissions Data
+
+1. Load the Vulcan and EDGAR datasets using the provided code.
+2. Inspect the structure of each dataset:
+- What is the spatial resolution of each dataset?
+- What are the units of each dataset?
+3. Compare the spatial extent:
+- Why does EDGAR require cropping to match Vulcan?
+
+## Spatial Comparison of Emissions (City & Sector)
+In this exercise, you will compare CO₂ emissions from Vulcan and EDGAR for a city and sector of your choice.
+
+### Step 1: Choose a City and Sector
+1. Pick one city either boundary/ citycenter point.
+2. Pick one sector that is identical in both vulcan and edgar
+
+### Step 2: Select Two Years
+Choose two years to compare (e.g., 2010 and 2020).
+
+### Step 3: Create Maps
+Using the provided code:
+1. Zoom in on your selected city.
+2. Visualize maps / line charts
+
+### Step 4: Answer the Questions
+1. **Do Vulcan and EDGAR look similar or different?**
+- Briefly describe one similarity and one difference
+2. **Why might they be different? (choose at least one)**
+- Different spatial resolution
+- Different data sources
+- Different methods
+3. **Did emissions change over time?**
+- Did both datasets show the same trend?
+
+## Conceptual Questions
+1. Why are **bottom-up approaches** (like Vulcan) important for emissions estimation?
+2. What are the advantages and disadvantages of:
+- High-resolution datasets (Vulcan)
+- Coarse global datasets (EDGAR)
+3. Explain the difference between:
+- Point sources
+- Nonpoint sources
+4. Why is **temporal downscaling** necessary in emissions modeling?
+5. How might spatial resolution influence:
+- Policy decisions?
+- Urban planning?
+
+## Applied Mini Project (Guided)
+Choose **one** of the following analyses:
+
+### Option A: Urban Emissions Analysis
+- Select a major U.S. city
+- Compare Vulcan and EDGAR emissions spatially and temporally
+- Identify emission hotspots
+
+### Option B: State-Level Comparison
+- Compare emissions across two states
+- Analyze spatial distribution and total emissions
+
+### Option C: Dataset Sensitivity Analysis
+- Compare Vulcan vs EDGAR across multiple locations
+- Evaluate how dataset choice affects interpretation
+
+### Deliverables
+- 1–2 figures (maps or plots)
+- Short written interpretation (½–1 page)
+
+## Conclusion
+This chapter introduced students to high-resolution carbon emissions data using the Vulcan dataset and a complementary EDGAR comparison. Through data loading, unit harmonization, sector analysis, spatial mapping, and regional interpretation, students gained experience working with real emissions products and learned how dataset structure, spatial scale, and sector definitions shape the conclusions that can be drawn from carbon emissions analyses.
+
+

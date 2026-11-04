@@ -1,16 +1,41 @@
 --- 
 title: "Environmental Informatics Using Research Infrastructures and their Data"
-author: "Dr. Katharyn Duffy, Dr. Ben Ruddell"
-#date: "2026"
 cover-image: "images/EcoInfo4.png"
 github-repo: 'nau-ecoinformatics/INF550-textbook'
-description: "Course text for NAU INF 550"
+description: "Graduate Texbook for NAU INF550"
 always_allow_html: true
 ---
 
-> 2nd Edition (2026)
+*First Edition (2020)*  
+Edited by Dr. Katharyn Duffy and Dr. Ben Ruddell
 
-# Preface {-}
+*Second Edition (2026)*  
+Edited by Dr. Ben Ruddell and Scott LaRocca
+
+## Table of Contents {-}
+
+#### Pre-Course Materials {-}
+
+1. [Pre-Course Setup: Ecoinformatics Tools](01-Pre-Course_Skills.Rmd)
+
+#### Chapters {-}
+
+2. [Introduction to NEON & Its Data](02-Introduction-to-NEON.Rmd)
+3. [Introduction to USA-NPN & Its Data](03-USA-NPN.Rmd)
+4. [PhenoCam: Digital Repeat Photography Networks & Methods](04-PhenoCam.Rmd)
+5. [Flux Measurements & Interoperability](05-Fluxes_and_Inter-operability.Rmd)
+6. [NEON Airborne Observation Platform (AOP)](06-NEON-AOP.Rmd)
+7. [NASA's Earth Observing System (EOS)](07-NASA-EOS.Rmd)
+8. [USGS National Water Information System (NWIS)](08-USGS.Rmd) 
+9. [Introduction to Google Earth Engine (GEE) Platform & Its Tools](09-GEE.Rmd)
+10. [One Health, Pathogen Surveillance, and Nextstrain](10-OneHealth_PathogenSurveillance.Rmd)
+11. [High-Resolution Carbon Emissions Using the Vulcan Dataset](11-Vulcan.Rmd)
+
+#### Supplementary Materials {-}
+
+[Appendix](12-FAQ.Rmd)
+
+## Preface {-}
 
 
 This textbook provides an introduction to environmental and ecological informatics in the context of "big science"- that is, in the context of research infrastructures and observatories that collect and publish reams of observations and derived data products about the earth and its environment. The reader will learn how to make use of environmental infrastructures' data products. 
@@ -31,13 +56,9 @@ Efforts have been made to select activities using data products, software, and t
 Informatics is arguably *the key scientific discipline* of the 21st century, and research infrastructures are the source of the raw natural resource fueling the informatics revolution: observational data. Most 21st century scientists and scientific staff will spend their careers immersed in the data revolution. We sincerely hope that this textbook provides the launchpad you need for your career or for your next project in environmental science.
 
 ## Second Edition {-}
-This second edition represents a substantial effort to bring the textbook's computational examples and workflows into alignment with the current environmental informatics landscape. While the underlying scientific and computational concepts and learning objectives remain the same, the software packages, APIs, data products, and research infrastructures have continued to evolve. By six years after the first edition, an estimated 20-30% of the executable code required revision, with some sections needing to be rewritten entirely to utilize modern packages and workflows. This experience illustrates a key challenge in informatics, and particularly in the fast evolving field of ecoinformatics: software tools require continual maintenance or face becoming obsolete or non-functional. Maintaining reproducible educational resources in this field therefore requires ongoing revision as the surrounding research infrastructure evolves. In addition to updating the existing workflows, this second edition introduces additional research infrastructures which broaden the scope of the textbook while continuing to advance its original purpose. 
+This second edition represents a substantial effort to bring the textbook's computational examples and workflows into alignment with the current environmental informatics landscape. While the underlying scientific and computational concepts and learning objectives remain the same, the software packages, APIs, data products, and research infrastructures have continued to evolve. By six years after the first edition, an estimated 20-30% of the executable code required revision, with some sections needing to be rewritten entirely to utilize modern packages and workflows. This experience illustrates a key challenge in informatics, and particularly in the fast evolving field of ecoinformatics: software tools require continual maintenance or face becoming obsolete or non-functional. Maintaining reproducible educational resources in this field therefore requires ongoing revision as the surrounding research infrastructure evolves. In addition to updating the existing workflows, this second edition introduces several additional research infrastructures which broaden the scope of the textbook while continuing to advance its original purpose. 
 
-## Acknowledgements {-}
-
-This first version of the textbook was developed to offer INF550, a graduate course in the School of Informatics Computing and Cyber Systems at Northern Arizona University in Fall 2020, with funding and leadership from the National Science Foundation funded National Research Traineeship "T3" option in Ecological and Environmental Informatics within a PhD program in Informatics and Computing *(NRT-HDR #1829075, PI's Ogle, Barber, Richardson, Ruddell, and Sankey)*. Our research infrastructure partners were critical to the creation of the material. Our partners at NEON - Battelle deserve special gratitude for anchoring the project. The opinions expressed are those of the researchers, and not necessarily the funding agencies.  Special thanks to Megan Jones and Donal O'Leary at NEON-Battelle for their support in pulling NEON materials. 
-
-### Key Contributors {-}
+## Authors {-}
 
 *Alphabetized by organization, then last name:*
 
@@ -50,8 +71,21 @@ This first version of the textbook was developed to offer INF550, a graduate cou
 * Kate Thibault, *NEON - Battelle*
 * Andrew Richardson,  *PhenoCam - NAU*
 * Bijan Seyednasrollah,  *PhenoCam - NAU*
+* Kora Cai, *NAU*
+* Andrew Carlino, *NAU*
+* Ogonna Eli, *NAU*
+* Jalyn Gearries, *NAU*
+* Victoria Hope, *NAU*
+* Scott LaRocca, *NAU*
+* Hugh Raggett, *NAU*
 * Theresa Crimmons, *USA-NPN*
 * Kathy Gerst, *USA-NPN*
 * Lee Marsh,  *USA-NPN*
+
+
+## Acknowledgements {-}
+
+This first version of the textbook was developed to offer INF550, a graduate course in the School of Informatics Computing and Cyber Systems at Northern Arizona University in Fall 2020, with funding and leadership from the National Science Foundation funded National Research Traineeship "T3" option in Ecological and Environmental Informatics within a PhD program in Informatics and Computing *(NRT-HDR #1829075, PI's Ogle, Barber, Richardson, Ruddell, and Sankey)*. Our research infrastructure partners were critical to the creation of the material. Our partners at NEON - Battelle deserve special gratitude for anchoring the project. The opinions expressed are those of the researchers, and not necessarily the funding agencies.  Special thanks to Megan Jones and Donal O'Leary at NEON-Battelle for their support in pulling NEON materials. 
+
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
