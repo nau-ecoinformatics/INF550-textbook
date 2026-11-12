@@ -1,7 +1,6 @@
+# NEON Airborne Observation Plaform (AOP)
 
-# NEON AOP
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/f5e-X9dMnXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+>Estimated time: 3 hours
 
 ## Learning Objectives
 After completing this tutorial, you will be able to:
@@ -12,6 +11,10 @@ After completing this tutorial, you will be able to:
   hyperspectral remote sensing data in tools like R or Python.
 * Describe what a "band" is.
 
+### NEON's Data Pipeline
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/f5e-X9dMnXs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ### Guest Lectures
 
 #### Introduction to NEON Airborne Observation Platform
@@ -20,7 +23,7 @@ After completing this tutorial, you will be able to:
 
 > 1 hour, 10 minutes
 
-*John Musinsky*, Researd Scientist, Remote Sensing, NEON-Battelle, introduces the NEON Airborne Observation Platform, and describes the various data products and quality control metrics offered by the platform.
+*John Musinsky*, Research Scientist, Remote Sensing, NEON-Battelle, introduces the NEON Airborne Observation Platform, and describes the various data products and quality control metrics offered by the platform.
 
 #### NEON AOP: Introduction to LiDAR Data
 
@@ -30,7 +33,7 @@ After completing this tutorial, you will be able to:
 
 *Dr. Tristan Goulden*, Lead Research Scientist, Remote Sensing, NEON-Battelle, introduces LiDAR data, including data processing, quality assurance, vertical and horizontal accuracy, and data validation and uncertainty. 
 
-#### NEON AOP: Introcudtion to Hyperspectral Data
+#### NEON AOP: Introduction to Hyperspectral Data
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qdZavuSUAfk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -44,7 +47,7 @@ After completing this tutorial, you will be able to:
 
 1 hour, 11 minutes
 
-*Dr. Donal O'Leary*, Reserach Scientist, Education and Outreach, NEON-Battelle, covers NEON LiDAR GEDI Fusion.
+*Dr. Donal O'Leary*, Research Scientist, Education and Outreach, NEON-Battelle, covers NEON LiDAR GEDI Fusion.
 
 ### Assignments in this chapter
 
@@ -172,7 +175,7 @@ Download NEON Teaching Data Subset: Imaging Spectrometer Data - HDF5 </a></h3>
 These hyperspectral remote sensing data provide information on the
 <a href="https://www.neonscience.org/" target="_blank"> National Ecological Observatory Network's</a> 
 <a href="https://www.neonscience.org/field-sites/field-sites-map/SJER" target="_blank" > San Joaquin 
-Exerimental Range field site</a> in March of 2019.
+Experimental Range field site</a> in March of 2019.
 The data were collected over the San Joaquin field site located in California 
 (Domain 17) and processed at NEON headquarters. This data subset is derived from 
 the mosaic tile named NEON_D17_SJER_DP3_257000_4112000_reflectance.h5. 
@@ -317,7 +320,7 @@ vector that we just imported and check out the data located at index 6 -
 >482 nanometers falls within the blue portion of the electromagnetic spectrum. Source: National Ecological Observatory Network 
 
 
-Band 6 has a associate wavelength center of 481.7032 nanometers (nm) which is 
+Band 6 has a associated wavelength center of 481.7032 nanometers (nm) which is 
 in the blue portion of the visible electromagnetic spectrum (~ 400-700 nm). 
 
 ### Bands and Wavelengths
@@ -758,7 +761,7 @@ After completing this tutorial, you will be able to:
 
 * Read a NEON LiDAR file (laz) into R
 * Visualize a spatial subset of the LiDAR tile
-* Correct a spatial subset of the LiDAR tile for topographic varation
+* Correct a spatial subset of the LiDAR tile for topographic variation
 * Calculate 13 structural diversity metrics described in <a href="https://doi.org/10.3390/rs12091407" target="_blank">LaRue, Wagner, et al. (2020) </a>
 
 
@@ -788,9 +791,9 @@ AOP point clouds for 1km tiles from the <a href="https://www.neonscience.org/fie
 ### Recommended Skills
 
 For this tutorial, you should have an understanding of Light Detection 
-And Ranging (LiDAR) technology, specifically how discrete return lidar 
+And Ranging (LiDAR) technology, specifically how discrete return LiDAR 
 data are collected and represented in las/laz files. For more information 
-on how lidar works, please see NEON's
+on how LiDAR works, please see NEON's
 <a href="https://www.neonscience.org/intro-lidar-r-series" target="_blank"> Introduction to Lidar Tutorial Series.</a>
 
 
@@ -830,7 +833,7 @@ collected at two field sites of the
 <a href="https://www.neonscience.org/" target="_blank"> 
 National Ecological Observatory Network</a>. 
 
-## NEON AOP Discrete Return LIDAR
+## NEON AOP Discrete Return LiDAR
 <a href="https://www.neonscience.org/data-collection/airborne-remote-sensing" target="_blank"> The NEON Airborne Observation Platform (AOP) </a>. 
 has several sensors including discrete-return LiDAR, which is useful for measuring forest structural diversity that can be summarized into four categories of metrics: (1) canopy height, (2) canopy cover and openness, and (3) canopy heterogeneity (internal and external), and (4) vegetation area.
 
@@ -843,7 +846,7 @@ Second, we will look at <a href="https://www.neonscience.org/field-sites/field-s
 As you can imagine, these two forest types will have both similarities and differences in their structural attributes. We can quantify these attributes by calculating several different structural diversity metrics, and comparing 
 the results.
 
-### Loading the LIDAR Products
+### Loading the LiDAR Products
 To begin, we first need to load our required R packages, and set our working 
 directory to the location where we saved the input LiDAR .laz files that can be 
 downloaded from the NEON Data Portal.
@@ -1356,7 +1359,7 @@ Download Dataset</a>
 ### Getting Started
 In this section we will compare NEON and GEDI LiDAR data by comparing the information that they both capture in the same location. NEON data are actually one of the datasets used by the GEDI mission to calibrate and validate GEDI waveforms, so this makes for a valuable comparison! 
 
-In order to compare these data, we will need to download GEDI data that overlap a NEON site. Fortunately, Carlos Silva et al. have made a convenient R package clled `rGEDI` and <a href="https://cran.r-project.org/web/packages/rGEDI/vignettes/tutorial.html">this excellent tutorial hosted on CRAN</a> desribing how to work with GEDI data in R. [tutorial not currently available]
+In order to compare these data, we will need to download GEDI data that overlap a NEON site. Fortunately, Carlos Silva et al. have made a convenient R package called `rGEDI` and <a href="https://cran.r-project.org/web/packages/rGEDI/vignettes/tutorial.html">this excellent tutorial hosted on CRAN</a> describing how to work with GEDI data in R. [tutorial not currently available]
 
 However, GEDI data are currently only available to download per complete orbit, which means that the vast majority of the orbit's data does not fall within a NEON site. The GEDI orbit datasets come in HDF5 data format, and contain about 7Gb of data, so you may want to run the first few sections of this tutorial to get the GEDI download started, and refresh your memory of HDF5 files with NEON's <a href="https://www.neonscience.org/intro-hdf5-r-series">Intro to HDF5 series</a>.
 
@@ -1379,7 +1382,7 @@ library(maptools)
 
 ```
 
-Next, we will download a Canopy Height Model (CHM) tile from the Wind River Experiemental Forest (WREF) using the `byTileAOP()` function to use as a preliminary map on which to overlay the GEDI data. There is one particularly interesting mosaic tile which we will select using the `easting` and `northing` arguments. We then load the raster into R and make a simple plot. For more information about CHMs, please see our tutorial <a href="https://www.neonscience.org/chm-dsm-dtm-gridded-lidar-data">What is a CHM?</a>
+Next, we will download a Canopy Height Model (CHM) tile from the Wind River Experimental Forest (WREF) using the `byTileAOP()` function to use as a preliminary map on which to overlay the GEDI data. There is one particularly interesting mosaic tile which we will select using the `easting` and `northing` arguments. We then load the raster into R and make a simple plot. For more information about CHMs, please see our tutorial <a href="https://www.neonscience.org/chm-dsm-dtm-gridded-lidar-data">What is a CHM?</a>
 
 ```{r download-chm, eval=F, message=FALSE}
 
@@ -1403,7 +1406,7 @@ As you can see, this particular CHM is showing a conspicuous, triangle-shaped cl
 This next section on downloading and working with GEDI data is loosely based on the excellent `rGEDI` package tutorial <a href="https://cran.r-project.org/web/packages/rGEDI/vignettes/tutorial.html">posted on CRAN here</a> [link broken]. If you would prefer to avoid a large download (>7Gb) of a full GEDI orbit, you can forego these steps and use the <a href="https://ndownloader.figshare.com/files/24978809">
 example GEDI dataset here</a>, and skip to the `readLevel1B()` function below.
 
-The Global Ecosystem Dynamics Investigation (GEDI) is a NASA mission with the primary data collection being performed by a novel waveform lidar instrument mounted on the International Space Station (ISS). Please see <a href="https://www.sciencedirect.com/science/article/pii/S2666017220300018">this open-access paper</a> published in Science of Remote Sensing that describes this mission in detail. The ISS orbits around the world every 90 minutes, and can be tracked <a href="https://spotthestation.nasa.gov/tracking_map.cfm">on this cool NASA website</a>. 
+The Global Ecosystem Dynamics Investigation (GEDI) is a NASA mission with the primary data collection being performed by a novel waveform LiDAR instrument mounted on the International Space Station (ISS). Please see <a href="https://www.sciencedirect.com/science/article/pii/S2666017220300018">this open-access paper</a> published in Science of Remote Sensing that describes this mission in detail. The ISS orbits around the world every 90 minutes, and can be tracked <a href="https://spotthestation.nasa.gov/tracking_map.cfm">on this cool NASA website</a>. 
 
 As described <a href="https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/gedi-overview/">here</a> on the Land Processes Distributed Active Archive Center (LP DAAC), "the sole GEDI observable is the waveform from which all other data products are derived. Each waveform is captured with a nominal ~30 m diameter." As of the date of publication, GEDI data are only offered in HDF5 format, with each file containing the data for a full orbit. The LP DAAC has developed a tool that allows researchers to input a bounding box, which will return a list of every orbit that has a "shot" (waveform return) that falls within that box. Unfortunately, at this time, the tool will not subset out the specific shots that fall within that bounding box; you must download the entire orbit (~7Gb). This functionality may be improved in the future.
 
@@ -1422,7 +1425,7 @@ lr_lon<- extent(chm_WGS)[2]
 
 ```
 
-Next, we use that bounding box information as an input to the `gedifinder()` funciton.
+Next, we use that bounding box information as an input to the `gedifinder()` function.
 
 ```{r find-GEDI-orbits, eval=FALSE}
 
@@ -1549,7 +1552,7 @@ par(oldpar)
 This waveform shows some noise above and below the main ecosystem return, with a fairly dense canopy around 370m elevation, and a characteristic ground return spike at about 340m. While the GEDI data are extremely valuable and offer a near-global coverage, it is hard to get a good sense of what the ecosystem really looks like from this GEDI waveform. Let's download some NEON AOP pointcloud data to pair up with this waveform to get a better sense of what GEDI is reporting.
 
 ### Download and Plot NEON AOP LiDAR pointcloud data
-Here, we will use the `byTileAOP()` function from the 'neonUtilities' package to download the classified pointcloud mosaic data (DP1.30003.001). Since this is a mosaic tile like the CHM, we can just pass this function the lower left corner of the CHM tile to get the corresponding lidar pointcloud mosaic tile for our analysis.
+Here, we will use the `byTileAOP()` function from the 'neonUtilities' package to download the classified pointcloud mosaic data (DP1.30003.001). Since this is a mosaic tile like the CHM, we can just pass this function the lower left corner of the CHM tile to get the corresponding LiDAR pointcloud mosaic tile for our analysis.
 
 ```{r download-AOP-lidar, eval=FALSE}
 
@@ -1562,7 +1565,7 @@ if (!file.exists('./data/DP1.30003.001/2017/FullSite/D16/2017_WREF_1/L1/Discrete
 
 ```
 
-After downloading the point cloud data, let's read them into our R session using the `readLAS()` function from the `lidaR` package, and plot them in 3D. Note, you may need to update your 'XQuartz' if you are using a Mac.
+After downloading the point cloud data, let's read them into our R session using the `readLAS()` function from the `lidR` package, and plot them in 3D. Note, you may need to update your 'XQuartz' if you are using a Mac.
 
 ```{r plot-lidar-pointcloud-bad, eval=FALSE}
 
@@ -1575,7 +1578,7 @@ lidR::plot(WREF_LAS)
 ```{r, echo=FALSE}
 knitr::include_graphics('./images/GEDI_AOP1.png')
 ```
-Oh, yikes! There are a lot of outliers above the actual forest, and a few below. Let's use some simple statistics to throw out those outliers. We will first calculate the mean and standard deviation for the verical axis, and then use the 'filter' options of the `readLAS()` function to eliminate the vertical outliers.
+Oh, yikes! There are a lot of outliers above the actual forest, and a few below. Let's use some simple statistics to throw out those outliers. We will first calculate the mean and standard deviation for the vertical axis, and then use the 'filter' options of the `readLAS()` function to eliminate the vertical outliers.
 
 ```{r plot-lidar-pointcloud-good, eval=FALSE}
 
@@ -1666,22 +1669,22 @@ Whoa, it looks like there is a bad vertical mismatch between those two data sour
 We are seeing a vertical mismatch between the NEON and GEDI LiDAR data sources because they are using different standards for measuring the Earth. Here, we will briefly describe the main differences between these two datum models, and then show how to correct for this discrepancy.
 
 #### WGS84
-As described in <a href="https://en.wikipedia.org/wiki/World_Geodetic_System">this great Wikipedia article</a> the World Geodedic System (WGS) is a global standard for cartography, geodesy, and navigation including GPS. Most people refer to "WGS84," which is the latest revision to this system in 1984. To describe elevation, WGS84 uses an idealized mathematical model to describe the 'oblate spheroid' of the Earth (basically, it looks kind of like a sphere that is wider around the equator and shorter from pole to pole). This model, called a 'datum,' defines the relative elevational surface of the Earth. However, the Earth isn't exactly this idealized shape - it has a lot of undulations caused by topogrophy and local differences in its gravitational field. In the locations where the natural variations of the Earth do not coencide with the mathematical model, it can be harder to accurately describe the elevation of certain landforms and structures. Still, for a global datum, WGS84 does a great job overall.
+As described in <a href="https://en.wikipedia.org/wiki/World_Geodetic_System">this great Wikipedia article</a> the World Geodetic System (WGS) is a global standard for cartography, geodesy, and navigation including GPS. Most people refer to "WGS84," which is the latest revision to this system in 1984. To describe elevation, WGS84 uses an idealized mathematical model to describe the 'oblate spheroid' of the Earth (basically, it looks kind of like a sphere that is wider around the equator and shorter from pole to pole). This model, called a 'datum,' defines the relative elevational surface of the Earth. However, the Earth isn't exactly this idealized shape - it has a lot of undulations caused by topography and local differences in its gravitational field. In the locations where the natural variations of the Earth do not coincide with the mathematical model, it can be harder to accurately describe the elevation of certain landforms and structures. Still, for a global datum, WGS84 does a great job overall.
 
 #### GEOID12A
-While WGS84 is a convenient global standard, precisely describing location information is a common problem in geography, and is often remedied by using a local datum or projection. For latitude and longitude spatial information in North America, this is often done by using the <a href="https://www.ngs.noaa.gov/datums/horizontal/north-american-datum-1983.shtml">North American Datum (NAD83)</a> or various Universal Transverse Mercator (UTM) or State Plane projections based on the NAD83 datum. The NAD83 Datum was developed in 1983 as the horizontal and geometric control datum for the United States, Canada, Mexico, and Central America. This is the official datum for the government of the United States of America, and therefore many public datasets that are specific to this geographic region use this datum. In order to further refine the vertical precision over a wide geographic area, we can model the gravitational field of the Earth - this surface is called a "Geoid". <a href="https://geodesy.noaa.gov/GEOID/geoid_def.html">According to NOAA</a>, a geoid can be defined as "the equipotential surface of the Earth’s gravity field which best fits, in a least squares sense, global mean sea level." For a nice description of the North American geoid, please <a href="https://geodesy.noaa.gov/GEOID/geophysics.shtml">see this page on the NOAA website</a> written by Dr. Allen Joel Anderson. As described by Dr. Anderson, this gravitational field is changing all the time, as can global mean sea level (due to melting glaciers, etc.). Therefore local and regional geoids must be updated regularly to reflect these changes, as shown <a href="https://geodesy.noaa.gov/GEOID/models.shtml">in this list of NOAA geoids</a>. One recent standard from 2012 is <<a href="https://geodesy.noaa.gov/GEOID/GEOID12A/">GEOID12A</a> - this is the geoid selected by NEON as the vertical reference for the Z-dimension of our LiDAR data. Note that GEOID12B superscedes GEOID12A, however they are identical everywhere except for Puerto Rico and the US Virgin Islands <a href="https://geodesy.noaa.gov/GEOID/GEOID12B/">according to NOAA</a>. If you are working with any NEON data from Puerto Rico, please be aware that these data are delivered in GEOID12A format and may need to be converted to GEOID12B for some purposes.
+While WGS84 is a convenient global standard, precisely describing location information is a common problem in geography, and is often remedied by using a local datum or projection. For latitude and longitude spatial information in North America, this is often done by using the <a href="https://www.ngs.noaa.gov/datums/horizontal/north-american-datum-1983.shtml">North American Datum (NAD83)</a> or various Universal Transverse Mercator (UTM) or State Plane projections based on the NAD83 datum. The NAD83 Datum was developed in 1983 as the horizontal and geometric control datum for the United States, Canada, Mexico, and Central America. This is the official datum for the government of the United States of America, and therefore many public datasets that are specific to this geographic region use this datum. In order to further refine the vertical precision over a wide geographic area, we can model the gravitational field of the Earth - this surface is called a "Geoid". <a href="https://geodesy.noaa.gov/GEOID/geoid_def.html">According to NOAA</a>, a geoid can be defined as "the equipotential surface of the Earth’s gravity field which best fits, in a least squares sense, global mean sea level." For a nice description of the North American geoid, please <a href="https://geodesy.noaa.gov/GEOID/geophysics.shtml">see this page on the NOAA website</a> written by Dr. Allen Joel Anderson. As described by Dr. Anderson, this gravitational field is changing all the time, as can global mean sea level (due to melting glaciers, etc.). Therefore local and regional geoids must be updated regularly to reflect these changes, as shown <a href="https://geodesy.noaa.gov/GEOID/models.shtml">in this list of NOAA geoids</a>. One recent standard from 2012 is <<a href="https://geodesy.noaa.gov/GEOID/GEOID12A/">GEOID12A</a> - this is the geoid selected by NEON as the vertical reference for the Z-dimension of our LiDAR data. Note that GEOID12B supersedes GEOID12A, however they are identical everywhere except for Puerto Rico and the US Virgin Islands <a href="https://geodesy.noaa.gov/GEOID/GEOID12B/">according to NOAA</a>. If you are working with any NEON data from Puerto Rico, please be aware that these data are delivered in GEOID12A format and may need to be converted to GEOID12B for some purposes.
 
 For more information about these standards, please see <a href="https://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/about-the-geoid-ellipsoid-spheroid-and-datum-and-h.htm">this ESRI help document</a>.
 
 ### Aligning the Vertical Datum
-AOP data have a relatively small area of coverage, and are therefore delivered with the coordinate reference system (CRS) in the UTM zone in which they were collected, set to the GEOID12A vertical datum (roughly equaling mean sea level). Meanwhile, GEDI data are global, so they are delivered with the common WGS84 ellipsoidal refrence datum. We need to align these vertical datums to ensure that the two data products line up correctly. However, this is not a trivial step, nor as simple as a reprojection. In this example, we will keep the NEON LiDAR data in its current datum, and convert the vertical position of the GEDI data from WGS84 into GEOID12A vertical position.
+AOP data have a relatively small area of coverage, and are therefore delivered with the coordinate reference system (CRS) in the UTM zone in which they were collected, set to the GEOID12A vertical datum (roughly equaling mean sea level). Meanwhile, GEDI data are global, so they are delivered with the common WGS84 ellipsoidal reference datum. We need to align these vertical datums to ensure that the two data products line up correctly. However, this is not a trivial step, nor as simple as a reprojection. In this example, we will keep the NEON LiDAR data in its current datum, and convert the vertical position of the GEDI data from WGS84 into GEOID12A vertical position.
 
 NOAA has a useful <a href="https://www.ngs.noaa.gov/INFO/facts/vdatum.shtml">tool called Vdatum</a> that will convert from one datum to another. For this example, we will use Vdatum to convert from WGS84 to NAD83. Seeing as GEOID12A is based on the NAD83 datum, we can first convert the GEDI data's vertical position from WGS84 to NAD83 datum, then apply the offset between NAD83 and GEOID12A. Rather than use the Vdatum tool for each point, we will use a raster created by NEON scientists that reports the vertical difference between WGS84 and NAD83 for all points in the conterminous USA.
 
 You can access this dataset by <a href="https://ndownloader.figshare.com/files/24994703">clicking here to download the WGS84-NAD83 datum offset raster</a>.
 
 ### GEOID12A Height Model
-GEOID12A is a surface model that is described in terms of its relative height compared to NAD83. You can use <a href="https://www.ngs.noaa.gov/cgi-bin/GEOID_STUFF/geoid12A_prompt1.prl">this interactive webpage</a> to find the geoid height for any location within North America. However, that would be combersome to have to use this webpage for every location. Instead, you can download a <a href="https://www.ngs.noaa.gov/GEOID/GEOID12A/GEOID12A_CONUS.shtml>binary file from the NOAA website</a> that describes this geoid's height, and convert that into a raster similar to the one that we just downloaded above. To simplify things here, we have already gone through the process of downloading the binary file and converting it to a raster for you to download, which can now easily be read into your R environment.
+GEOID12A is a surface model that is described in terms of its relative height compared to NAD83. You can use <a href="https://www.ngs.noaa.gov/cgi-bin/GEOID_STUFF/geoid12A_prompt1.prl">this interactive webpage</a> to find the geoid height for any location within North America. However, that would be cumbersome to have to use this webpage for every location. Instead, you can download a <a href="https://www.ngs.noaa.gov/GEOID/GEOID12A/GEOID12A_CONUS.shtml>binary file from the NOAA website</a> that describes this geoid's height, and convert that into a raster similar to the one that we just downloaded above. To simplify things here, we have already gone through the process of downloading the binary file and converting it to a raster for you to download, which can now easily be read into your R environment.
 
 You can access this dataset by <a href="https://ndownloader.figshare.com/files/24994697">clicking here to download the GEOID12A-NAD83 datum offset raster</a>.
 
@@ -1703,7 +1706,7 @@ plot(WGS84_diff_rast, main="WGS84 minus NAD83 (m)")
 
 ```
 
-As you can see, the differences between the GEOID12A geoid, and the NAD83 sphereoid vary quite a lot across space, especially in mountainous areas. The magnitude of these differences is also large, upwards of 35m in some areas. Meanwhile, the differences between the NAD83 and WGS84 sphereoids shows a smooth gradient that is relatively small, with total difference less than 2m across the Conterminous USA. 
+As you can see, the differences between the GEOID12A geoid, and the NAD83 spheroid vary quite a lot across space, especially in mountainous areas. The magnitude of these differences is also large, upwards of 35m in some areas. Meanwhile, the differences between the NAD83 and WGS84 sphereoids shows a smooth gradient that is relatively small, with total difference less than 2m across the Conterminous USA. 
 
 ### Extract vertical offset for GEDI shots
 Now that we know the relative vertical offsets between WGS84, NAD83, and GEOID12A for all of the conterminous USA, we can use the `extract()` function to retrieve those relative offsets for any location. By combining those offsets together, we can finally rectify the vertical position of the NEON and GEDI LiDAR data.
@@ -1776,7 +1779,7 @@ knitr::include_graphics('./images/GEDI_AOP3.png')
 ```
 
 ### Optional - NEON base plots
-You may also be interested to see if any of the GEDI footprints intersect a NEON base plot, which would allow for a direct comparison of the GEDI waveform with many of the datasets which are collected within the base plots, such as the vegetation structure data product containing height, DBH, and species identification of all trees >10cm DBH. While it is statistically pretty unlikely that a GEDI footprint will intersect with your base plot of interest, it is possible that _some_ GEDI footprint will intersetc with _some_ base plot in your study area, so we may as well take a look:
+You may also be interested to see if any of the GEDI footprints intersect a NEON base plot, which would allow for a direct comparison of the GEDI waveform with many of the datasets which are collected within the base plots, such as the vegetation structure data product containing height, DBH, and species identification of all trees >10cm DBH. While it is statistically pretty unlikely that a GEDI footprint will intersect with your base plot of interest, it is possible that _some_ GEDI footprint will intersect with _some_ base plot in your study area, so we may as well take a look:
 
 ```{r import and plot base plots, eval=F}
 
@@ -1815,7 +1818,7 @@ plot(base_crop$geometry, border = 'blue', add=T)
 3) When using NEON AOP data, when should you use `byTileAOP` versus `byFileAOP`?  What additional processing might you need to do if you worked with the `byFileAOP` data?
 *Hint: try pulling the data in both formats (this will take a while)*
 
-4) How do the additional bands in NEON AOP improve our contraint of Biodiversity and Ecosystem Structure relative to satelite-derived data?
+4) How do the additional bands in NEON AOP improve our constraint of Biodiversity and Ecosystem Structure relative to satellite-derived data?
 
 5) What role do campaigns such as NEON AOP play in 'filling the sampling gap' of essential *in situ* data such as FLUXNET (Eddy Co-Variance) data?
 
@@ -1841,7 +1844,7 @@ For the purpose of this coding lab we will evaluate 2 different forested sites i
 
 *A few places to start if you need them.  You don't have to address these, just in case you need some hints:*
 *Climate?  How that could affect vegetation structure?*
-*Heterogeniety of the ecossytems?*
+*Heterogeneity of the ecosystems?*
 *How seasonal are they? (hint:PhenoCam)*
 *Something else?*
 
@@ -1861,7 +1864,7 @@ For the purpose of this coding lab we will evaluate 2 different forested sites i
 ```
 **Write 2-3 sentences summarizing your findings and thoughts.**
 
-**3:** Use the `byTileAOP` function of the `neonUtilities` package to pull a subset of the descrete LiDAR pointcloud for each forest (*Hint: You can feed `byTileAOP` Easting and Northing from your `Vegetation Structure` dataframe(s)*).  Use the `structural_diversity_metrics` function that you defined in section 6.5 of the textbook to process discrete return LiDAR for each site and generte structural diversity metrics.  
+**3:** Use the `byTileAOP` function of the `neonUtilities` package to pull a subset of the discrete LiDAR pointcloud for each forest (*Hint: You can feed `byTileAOP` Easting and Northing from your `Vegetation Structure` dataframe(s)*).  Use the `structural_diversity_metrics` function that you defined in section 6.5 of the textbook to process discrete return LiDAR for each site and generate structural diversity metrics.  
   
   * Using `lidR` generate a labeled 2-panel plot of your canopy height model for each forest
   * Using `lidR` generate a labeled 2-panel plot of a cross-section for each forest

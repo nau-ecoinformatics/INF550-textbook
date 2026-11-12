@@ -240,8 +240,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#pre-course-skills-setup" id="toc-pre-course-skills-setup" class="nav-link active" data-scroll-target="#pre-course-skills-setup">Pre-Course Skills &amp; Setup</a></li>
   <li><a href="#linux-rrstudio-setup" id="toc-linux-rrstudio-setup" class="nav-link" data-scroll-target="#linux-rrstudio-setup">Linux R/RStudio Setup</a></li>
   <li><a href="#installing-and-setting-up-git-github-on-your-machine" id="toc-installing-and-setting-up-git-github-on-your-machine" class="nav-link" data-scroll-target="#installing-and-setting-up-git-github-on-your-machine">Installing and Setting up Git &amp; Github on Your Machine</a></li>
-  <li><a href="#installing-atom" id="toc-installing-atom" class="nav-link" data-scroll-target="#installing-atom">Installing Atom</a></li>
   <li><a href="#linking-rstudio-to-git" id="toc-linking-rstudio-to-git" class="nav-link" data-scroll-target="#linking-rstudio-to-git">Linking RStudio to Git</a></li>
+  <li><a href="#code-editors-and-development-environments" id="toc-code-editors-and-development-environments" class="nav-link" data-scroll-target="#code-editors-and-development-environments">Code Editors and Development Environments</a></li>
   <li><a href="#how-we-will-be-conducting-this-course" id="toc-how-we-will-be-conducting-this-course" class="nav-link" data-scroll-target="#how-we-will-be-conducting-this-course">How we will be Conducting this Course</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises">Exercises:</a></li>
   <li><a href="#why-ecoinformatics" id="toc-why-ecoinformatics" class="nav-link" data-scroll-target="#why-ecoinformatics">Why ‘EcoInformatics’?</a>
@@ -296,21 +296,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="reuse-existing-code.">5. Reuse existing code.</h4>
 <p>Pull code from others’ public repositories.</p>
 <p>More thoughts on the benefits and power of reproducibility <a href="https://github.com/katharynduffy/ECOSS_reproducible_science">can be found here</a></p>
-<p>To be successful, both in this course and in your careers you will need these skills. This is why <strong>they are a requirement</strong> for this course. If you are already using these skills on a daily basis, fantastic! If you don’t feel that you have mastery in the workflows listed above we have placed lesson links throughout this chapter so that you can build these skills and be successful in this course.</p>
+<p>To be successful, both in this course and in your careers, you will need these skills. This is why <strong>they are a requirement</strong> for this course. If you are already using these skills on a daily basis, fantastic! If you don’t feel that you have mastery in the workflows listed above we have placed lesson links throughout this chapter so that you can build these skills and be successful in this course.</p>
 </section>
 <section id="pre-course-skills-setup" class="level2">
 <h2 class="anchored" data-anchor-id="pre-course-skills-setup">Pre-Course Skills &amp; Setup</h2>
 <p>For the purpose of this course we will largely be using the following tools to access, pull, and explore data:</p>
 <ol type="1">
 <li>R &amp; Rstudio</li>
-<li>Git, GitHub, &amp; Atom.io</li>
+<li>Git &amp; GitHub or VScode</li>
 <li>Markdown &amp; Rmarkdown</li>
 </ol>
 <p>As such we will need to install and/or update these tools on your personal computer <em>before</em> our first day of class. While we chose R for this course, nearly all of the packages and data are fully available and transferable to Python or other languages. If you’d like to brush up on your R skills I highly recommend Data Carpentry Boot camp’s free <a href="http://swcarpentry.github.io/r-novice-gapminder">R for Reproducible Scientific Analysis</a> course.</p>
 <section id="installing-or-updating-r" class="level3">
 <h3 class="anchored" data-anchor-id="installing-or-updating-r">Installing or Updating R</h3>
-<p>Please check your version of R. You will need R 3.6.0+</p>
-<p>How to check your version in R or RStudio if you already have it:</p>
+<p>Please check which version of R you currently have installed. We recommend using a recent release of R to ensure compatibility with the packages and workflows used throughout this course. If your installation is several versions behind, please update R before proceeding.</p>
+<p>You can check your current version by following the instructions below.</p>
 <pre><code>    &gt; version
                    _                           
     platform       x86_64-apple-darwin15.6.0   
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="mac-rrstudio-setup" class="level3">
 <h3 class="anchored" data-anchor-id="mac-rrstudio-setup">Mac R/RStudio Setup</h3>
-<p>After you have downloaded R, double click on the file that was downloaded and R will install Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio Download page</a> Under Installers select RStudio 1.2.1135 - Mac OS X XX.X (64-bit) to download it. Once it’s downloaded, double click the file to install it. Once R and RStudio are installed, click to open RStudio. If you don’t get any error messages you are set. If there is an error message, you will need to re-install the program.</p>
+<p>After you have downloaded R, double click on the file that was downloaded and R will install. Go to the <a href="https://www.rstudio.com/products/rstudio/download/#download">RStudio Download page</a>. Under Installers select RStudio 1.2.1135 - Mac OS X XX.X (64-bit) to download it. Once it’s downloaded, double click the file to install it. Once R and RStudio are installed, click to open RStudio. If you don’t get any error messages you are set. If there is an error message, you will need to re-install the program.</p>
 </section>
 </section>
 <section id="linux-rrstudio-setup" class="level2">
@@ -373,35 +373,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># load all of the required libraries</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(list.of.packages, library, <span class="at">character.only =</span> T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Note</strong>: On some operating systems, you may need to install the Geospatial Data Abstraction Library (GDAL). More information about GDAL can be found from <a href="https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries">here</a>.</p>
+<p><strong>Note</strong>: On some operating systems, you may need to install the Geospatial Data Abstraction Library (GDAL). More information about GDAL can be found <a href="https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries">here</a>.</p>
 </section>
 </section>
 <section id="installing-and-setting-up-git-github-on-your-machine" class="level2">
 <h2 class="anchored" data-anchor-id="installing-and-setting-up-git-github-on-your-machine">Installing and Setting up Git &amp; Github on Your Machine</h2>
-<p>For this course you will need: 1. Git installed on your local machine 2. Very basic bash scripting 3. A linked GitHub account 4. To link RStudio to git via RStudio or Atom.io</p>
-<p>As we will be using these skills constantly, they are a <em>pre-requisite</em> for this course. If you don’t yet have these skills it’s okay! You can learn everything that you need to know via the following freely available resources:</p>
+<p>For this course you will need: 1. Git installed on your local machine 2. Very basic Bash scripting 3. A linked GitHub account 4. To link RStudio to git via RStudio or VScode</p>
+<p>As we will be using these skills constantly, they are a <em>prerequisite</em> for this course. If you don’t yet have these skills it’s okay! You can learn everything that you need to know via the following freely available resources:</p>
 <ul>
 <li><p><a href="http://swcarpentry.github.io/shell-novice">The Unix Shell</a></p></li>
 <li><p><a href="http://swcarpentry.github.io/git-novice">Version Control with Git</a></p></li>
 <li><p><a href="https://happygitwithr.com/">Happy Git with R</a></p></li>
 </ul>
-<p>If you are learning these skills from scratch I estimate that you will need to devote ~4-6 hours to get set up and comfortable with the various workflows. Also remember that I have code office hours every week and that Stack Exchange is your friend.</p>
-</section>
-<section id="installing-atom" class="level2">
-<h2 class="anchored" data-anchor-id="installing-atom">Installing Atom</h2>
-<p><a href="https://atom.io/">Atom.io</a> is a powerful and useful text editor for the following reasons:</p>
-<ol type="1">
-<li><p>It is language agnostic</p></li>
-<li><p>It fully integrates with git and github + You can use it to push/pull/resolve conflicts and write code all in one space.</p></li>
-</ol>
+<p>If you are learning these skills from scratch I estimate that you will need to devote ~4-6 hours to get set up and comfortable with the various workflows. Regular course support sessions provide an opportunity to ask questions and troubleshoot problems collaboratively. Online communities such as Stack Exchange are also valuable resources for finding solutions to common programming and computational challenges.</p>
 </section>
 <section id="linking-rstudio-to-git" class="level2">
 <h2 class="anchored" data-anchor-id="linking-rstudio-to-git">Linking RStudio to Git</h2>
 <p><a href="https://happygitwithr.com/rstudio-git-github.html">Happy Git with R</a> has a fantastic tutorial to help you link Rstudio-Git-Github on your local machine and push/pull from or to public repositories.</p>
 </section>
+<section id="code-editors-and-development-environments" class="level2">
+<h2 class="anchored" data-anchor-id="code-editors-and-development-environments">Code Editors and Development Environments</h2>
+<p>Throughout this course, we will primarily use RStudio as our development environment. RStudio provides an integrated code editor, Git version control, and tools for working with R Markdown, making it sufficient for the workflows introduced in this course.</p>
+<p>As you develop your skills in ecoinformatics, you may find it useful to explore other development environments. <a href="https://code.visualstudio.com/">Visual Studio Code (VS Code)</a>, for example, is a popular, extensible code editor with support for R, Python, Git, Markdown, and many other tools used in scientific computing.</p>
+<p>Although not required for this course, becoming familiar with alternative development environments can be valuable as you expand your computational toolkit.</p>
+</section>
 <section id="how-we-will-be-conducting-this-course" class="level2">
 <h2 class="anchored" data-anchor-id="how-we-will-be-conducting-this-course">How we will be Conducting this Course</h2>
-<p>If you find a <strong>broken link or error</strong> in this course text <a href="https://github.com/katharynduffy/katharynduffy.github.io/issues">submit an issue on the course github repository</a>.</p>
+<p>If you find a <strong>broken link or error</strong> in this course text <a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/">submit an issue on the course github repository</a>.</p>
 <p>At the end of each chapter you will find a set of <strong>Exercises</strong>. At the end of the assigned chapter you will be expected to submit two files to the course webdrive:</p>
 <ol type="1">
 <li><p>An <a href="https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown file</a> with the naming convention: LASTNAME_COURSECODE_Section#.Rmd, and</p></li>
@@ -410,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To generate these files you have two options:</p>
 <ol type="1">
 <li><p>Click on the pencil and pad logo in the top of this text, copy the exercise section code, and drop it into your own .Rmd.</p></li>
-<li><p>Git clone our <a href="https://github.com/katharynduffy/katharynduffy.github.io">course Github Repository</a>, navigate to the ‘_Exercises’ folder, and use that .Rmd as a template.</p></li>
+<li><p>Git clone our <a href="https://github.com/nau-ecoinformatics/INF550-textbook">course Github Repository</a>, navigate to the ‘_Exercises’ folder, and use that .Rmd as a template.</p></li>
 </ol>
 <p><em>Note: Exercises submitted in any other format, or those missing questions will not be graded</em></p>
 <p>To generate your .PDF to upload, in your RMarkdown file simply push the ‘Knit’ button at the top of your document.</p>
@@ -420,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exercise-0.1-a-git-introduction" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-0.1-a-git-introduction">Exercise 0.1: A git introduction</h3>
 <ol type="1">
-<li>Navigate to our <a href="https://github.com/katharynduffy/Environmental-Informatics-Using-Research-Infrastructures-and-their-Data">course github</a></li>
+<li>Navigate to our <a href="https://github.com/nau-ecoinformatics/INF550-textbook">course github</a></li>
 <li><code>git fork</code> our repo onto your own personal github account.</li>
 <li><code>git clone</code> the repo onto your own personal machine in a place that is functional and not temporary <em>(e.g.&nbsp;not your downloads folder)</em>.</li>
 </ol>
@@ -432,9 +430,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <pre><code>Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizona University.  Over the past two years I've worked as an open-source software engineer in the PhenoCam lab, and now I'm the coding and lab support for your course.  I really look forward to working with all of you!</code></pre>
 <!-- -->
-<pre><code>***
-Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizona University.  Over the past two years I've worked as an open-source software engineer in the PhenoCam lab, and now I'm the coding and lab support for your course.  I really look forward to working with all of you!
-***</code></pre>
 <ol start="5" type="1">
 <li>Submit a <code>pull request</code> to add your introduction to our course participants folder.</li>
 </ol>
@@ -446,15 +441,15 @@ git status....
 git push --set-upstream
 git remote -v
 git remote add upstream...</code></pre>
-<p><strong>Note:</strong> <em>You may complete these either on the command line or via a program like Atom.io. If you haven’t yet made commits to a remote repository or submitted pull requests please reference the resources listed above.</em></p>
+<p><strong>Note:</strong> <em>You may complete these either on the command line. If you haven’t yet made commits to a remote repository or submitted pull requests please reference the resources listed above.</em></p>
 </section>
 </section>
 <section id="why-ecoinformatics" class="level1">
 <h1>Why ‘EcoInformatics’?</h1>
-<p><em>Portions of the following introduction were adapted from <a href="https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(11)00339-9">Michener &amp; Jones 2012, Trends in Ecology &amp; Evolution ’Ecoinformatics: supporting ecology as a data-intensive science</a></em></p>
-<p>Ecology is increasingly becoming a data-intensive science, relying on massive amounts of data collected by both remote-sensing platforms and sensor networks embedded in the environment. New observatory networks, such as the US National Ecological Observatory Network (NEON), provide research platforms that enable scientists to examine phenomena across diverse ecosystem types through access to thousands of sensors collecting diverse environmental observations. These networks spatially and temporaly overlap with a number of other networks and infrastructures ranging from remote sensing, to citizen science, and so on.</p>
+<p><em>Portions of the following introduction were adapted from <a href="https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(11)00339-9">Michener &amp; Jones (2012), “Ecoinformatics: supporting ecology as a data-intensive science”, Trends in Ecology &amp; Evolution</a></em></p>
+<p>Ecology is increasingly becoming a data-intensive science, relying on massive amounts of data collected by both remote sensing platforms and sensor networks embedded in the environment. New observatory networks, such as the US National Ecological Observatory Network (NEON), provide research platforms that enable scientists to examine phenomena across diverse ecosystem types through access to thousands of sensors collecting diverse environmental observations. These networks spatially and temporally overlap with a number of other networks and infrastructures ranging from remote sensing, to citizen science, and so on.</p>
 <p>It has been argued that <strong>data-intensive science represents the fourth scientific paradigm</strong> following the empirical <em>(i.e.&nbsp;description of natural phenomena)</em>, theoretical <em>(e.g.&nbsp;modeling and generalization)</em> and computational <em>(e.g.&nbsp;simulation)</em> scientific approaches, and comprises an approach for unifying theory, experimentation and simulation.</p>
-<p>Ecologists increasingly address questions at broader scales that have both scientific and societal relevance. For example, the <a href="https://academic.oup.com/bioscience/article/61/4/290/324883">40 top priorities for science that can inform conservation and management policy in the USA</a> rely principally on a sound foundation of ecological research, and the ability to scale knowledge and inter-connect data.</p>
+<p>Ecologists increasingly address questions at broader scales that have both scientific and societal relevance. For example, the <a href="https://academic.oup.com/bioscience/article/61/4/290/324883">40 top priorities for science that can inform conservation and management policy in the USA</a> rely principally on a sound foundation of ecological research, and the ability to scale knowledge and interconnect data.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -493,7 +488,7 @@ git remote add upstream...</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
-<p>A proposed high-level architecture for ecological and environmental data management is shown consisting of three primary levels. Data stored within distributed data repositories (a) is mediated by standard metadata and ontologies (b) to power software tools used by scientists and data managers (c). Software applications use community-endorsed ontologies and metadata standards from the middle level to provide tools that are more effective for publishing, querying, integrating and analyzing data. Ontologies are separated into framework ontologies and domain-specific extensions, enabling contributions from multiple research groups, disciplines and individuals. Cross-disciplinary data are maintained in local repositories, but made accessible to the broader research community through distributed systems based on shared, open protocols (such as Metacat). Example repositories include the LTER network, National Ecological Observatory Network, United States Geographical Survey and SEEK’s EarthGrid. <a href="https://www.sciencedirect.com/science/article/pii/S0169534708000384?casa_token=b8GX-9jkuLwAAAAA:nQtJlhAUGyZdcokpQLEtho3OfVeDUKhENueO0k8H7dWPmPmXOUFYhGR6sKNtT04rEgJNR_HNlqg">Madin et al. 2008,</a></p>
+<p>A proposed high-level architecture for ecological and environmental data management is shown consisting of three primary levels. Data stored within distributed data repositories (a) is mediated by standard metadata and ontologies (b) to power software tools used by scientists and data managers (c). Software applications use community-endorsed ontologies and metadata standards from the middle level to provide tools that are more effective for publishing, querying, integrating and analyzing data. Ontologies are separated into framework ontologies and domain-specific extensions, enabling contributions from multiple research groups, disciplines and individuals. Cross-disciplinary data are maintained in local repositories, but made accessible to the broader research community through distributed systems based on shared, open protocols (such as Metacat). Example repositories include the LTER network, National Ecological Observatory Network, United States Geological Survey and SEEK’s EarthGrid. <a href="https://www.sciencedirect.com/science/article/pii/S0169534708000384?casa_token=b8GX-9jkuLwAAAAA:nQtJlhAUGyZdcokpQLEtho3OfVeDUKhENueO0k8H7dWPmPmXOUFYhGR6sKNtT04rEgJNR_HNlqg">Madin et al. (2008)</a></p>
 </blockquote>
 <p><strong>Ecoinformatics is a framework</strong> that enables scientists to generate new knowledge through innovative tools and approaches for:</p>
 <ul>
@@ -508,14 +503,14 @@ git remote add upstream...</code></pre>
 <p>And that, course participants, is why we are here.</p>
 <section id="the-framework-of-this-course" class="level2">
 <h2 class="anchored" data-anchor-id="the-framework-of-this-course">The Framework of this Course</h2>
-<p>Over the duration of this course we will survey a wide array of observation platforms and networks and build hands-on experience with the framework of Ecoinformatics. For coherance we will cover the following overarching themes:</p>
+<p>Over the duration of this course we will survey a wide array of observation platforms and networks and build hands-on experience with the framework of Ecoinformatics. For coherence we will cover the following overarching themes:</p>
 <blockquote class="blockquote">
 <ol type="1">
 <li>Each network’s <strong>mission and design</strong></li>
 <li>Each network’s <strong>spatial design</strong></li>
 </ol>
 <ul>
-<li>e.g.&nbsp;opprtunistic vs.&nbsp;planned, citizen science vs.&nbsp;orbital sensors</li>
+<li>e.g.&nbsp;opportunistic vs.&nbsp;planned, citizen science vs.&nbsp;orbital sensors</li>
 </ul>
 <ol start="3" type="1">
 <li>The <strong>types of data</strong> that stream from each network</li>
@@ -540,7 +535,7 @@ git remote add upstream...</code></pre>
 </section>
 <section id="final-course-project-proposed-derived-data-product" class="level2">
 <h2 class="anchored" data-anchor-id="final-course-project-proposed-derived-data-product">Final Course Project: Proposed Derived Data Product</h2>
-<p>For your final project, you will present a <strong>4-6 minute IGNITE-style derived data product pitch</strong>, followed by <em>2-3 minutes of questions from your audience</em> (which will include members from the infrastrures we’ve covered). Think of this project as your <em>‘sales pitch’</em> to the research infrastructure whose data you are using, and/or the scientific community as a whole. In the IGNITE theme of <em>‘Enlighten us but make it quick’</em>, you will construct a series of slides that auto-advance every 30 seconds. Specific instructions for the content of each slide are below.</p>
+<p>For your final project, you will present a <strong>4-6 minute IGNITE-style derived data product pitch</strong>, followed by <em>2-3 minutes of questions from your audience</em> (which will include members from the infrastructures we’ve covered). Think of this project as your <em>‘sales pitch’</em> to the research infrastructure whose data you are using, and/or the scientific community as a whole. In the IGNITE theme of <em>‘Enlighten us but make it quick’</em>, you will construct a series of slides that auto-advance every 30 seconds. Specific instructions for the content of each slide are below.</p>
 <p>Ideally, this final presentation will feed upon a number of the ‘culmination write-ups’ you have conducted over the course of the semester. Ideally, this derived data product will utilize data from a number of sources, either covered within this course or external to it. Ideally, it will also convince your audience that your idea is <strong>novel, useful,</strong> <em>and</em> <strong>possible</strong>.</p>
 <p>In order to complete this presentation, you will need to have worked with the various data products you propose, have an in-depth understanding of them, and their challenges, along with original, clean, high-level summary graphics. Further, giving an IGNITE-style presentation takes practice. IGNITE-style presentations are powerful, as they keep <em>you</em> moving forward, and give your audience a <em>high-level understanding</em> of your topic. We fully recommend rehearsing your presentation <strong>many times</strong> before giving it live and recording yourself to learn how you can improve.</p>
 <p>Here’s an example (of an even faster) ignite talk from one of your book’s authors:</p>

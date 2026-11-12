@@ -4,12 +4,12 @@ output:
   pdf_document: default
 ---
 
-# Flux Measurements & Inter-Operability
+# Flux Measurements & Interoperability
 
 > Estimated Time: 3 hours
 
 **Course participants**: As you review this information, please consider
-the final course project that you will work on at the over this
+the final course project that you will work on over the course of this
 semester. At the end of this section, you will document an initial
 research question or idea and associated data needed to address that
 question, that you may want to explore while pursuing this course.
@@ -29,7 +29,7 @@ At the end of this activity, you will be able to:
 
 ### Guest Lectures
 
-#### NEON Flux Data and Inter-operability, Part 1
+#### NEON Flux Data and Interoperability, Part 1
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/InHBx_Bl6gc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -38,7 +38,7 @@ At the end of this activity, you will be able to:
 **Chris Florian**, Research Scientist, Surface-Atmosphere Exchange,
 NEON-Battelle introduces NEON flux data and explains flux towers, Eddy Covariance, NEON-AmeriFlux collaborations, and future directions for the project.
 
-#### NEON Flux Data and Inter-operability, Part 2
+#### NEON Flux Data and Interoperability, Part 2
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/1LpS3ClbnOU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -52,7 +52,7 @@ NEON-Battelle provides an in-depth demonstration of how to access and work with 
 -   [*NEON Flux Coding Lab*](#neon-flux-coding-lab) Use the NEON flux workflow described in this
     chapter to merge data from NEON and AmeriFlux (5.6).
 
-## Eddy Co_variance Data: What does it actually measure?
+## Eddy Covariance Data: What does it actually measure?
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CR4Anc8Mkas" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
@@ -64,7 +64,7 @@ NEON-Battelle provides an in-depth demonstration of how to access and work with 
 
 </iframe>
 
-## Examples of Other Flux Networks: AMERIFLUX & FLUXNET
+## Examples of Other Flux Networks: AmeriFlux & FLUXNET
 
 AmeriFlux is a network of PI-managed sites measuring ecosystem CO2,
 water, and energy fluxes in [North, Central and South
@@ -106,7 +106,7 @@ regional, and continental scales.
 Given that [AmeriFlux](https://ameriflux.lbl.gov/) has been collecting
 and coordinating eddy covariance data across the Americas since 1996.
 The network provides a common platform for data sharing and
-collaboration for organizations and individual private investigators
+collaboration for organizations and individual principal investigators
 collecting flux tower data. There are now \>470 registered flux tower
 sites in North, Central, and South America in the AmeriFlux network,
 many operated by individual researchers or universities. The towers
@@ -191,7 +191,7 @@ algorithm document</a>.
 
 Briefly, the data levels are:
 
--   Level 0' (dp0p): Calibrated raw observations
+-   Level 0 (dp0p): Calibrated raw observations
 -   Level 1 (dp01): Time-aggregated observations, e.g. 30-minute mean
     gas concentrations
 -   Level 2 (dp02): Time-interpolated data, e.g. rate of change of a gas
@@ -404,7 +404,7 @@ get those data out of the bundle.
 
 ### Vertical profile data (Level 3)
 
-The Level 3 (`dp03`) data are the spatially interpolated profiles of the
+The Level 3 (`dp03`) data are the spatially interpolated vertical profiles of the
 rates of change of CO<sub>2</sub>, H<sub>2</sub>O, and temperature.
 Extract the Level 3 data from the HDF5 file using `stackEddy()` with the
 same syntax as for the Level 4 data.
@@ -418,7 +418,7 @@ prof <- stackEddy(filepath="./data/filesToStack00200/",
 knitr::kable(head(prof$NIWO))
 ```
 
-### Un-interpolated vertical profile data (Level 2)
+### Uninterpolated vertical profile data (Level 2)
 
 The Level 2 data are interpolated in time but not in space. They contain
 the rates of change at the measurement heights.
@@ -447,7 +447,7 @@ atmospheric stable isotopes.
 
 Using `stackEddy()` to extract Level 1 data requires additional inputs.
 The Level 1 files are too large to simply pull out all the variables by
-default, and they include mutiple averaging intervals, which can't be
+default, and they include multiple averaging intervals, which can't be
 merged. So two additional inputs are needed:
 
 -   `avg`: The averaging interval to extract
@@ -546,7 +546,7 @@ day the different colors represent.
     NEON site by downloading existing data from the AmeriFlux website
     and recently published HDF5 files from the NEON data portal. Process
     the NEON data such that it is in AmeriFlux format and plot the
-    entire timerseries.
+    entire time series.
 
 *Hint: NEON sites start with US-x*
 

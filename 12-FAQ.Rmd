@@ -2,8 +2,11 @@
 
 ## Versioned changes and known issues 
 
+### Pre-Course Setup
+Atom.io was discontinued in 2022. For an optional alternative development environment to R Studio, students are recommended to use [Virtual Studio Code](https://code.visualstudio.com/).
+
 ### Chapter 2 - Introduction to NEON
-Updated the structure of NEON API calls to explicitly include the NEON API token in request headers (e.g., `add_headers(\X-API-Token = NEON_TOKEN)`).
+The structure of NEON API calls were updated to explicitly include the NEON API tokens in request headers following recent conventions.
 
 ### Chapter 4 - PhenoCam
 Previous PhenoCam ROI package `xROI` is no longer maintained. Updated to modern workflow using `phenopix` package. 

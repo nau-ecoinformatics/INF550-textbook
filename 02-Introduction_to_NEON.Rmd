@@ -12,7 +12,7 @@ output:
 > Estimated Time: 2 hours
 
 **Course participants**: As you review this information, please consider
-the final course project that you will work on the over this semester.
+the final course project that you will work on over the course of this semester.
 At the end of this section you will document an initial research
 question, or idea and associated data needed to address that question,
 that you may want to explore while pursuing this course.
@@ -23,15 +23,14 @@ At the end of this activity, you will be able to:
 
 -   Explain the mission of the National Ecological Observatory Network
     (NEON).
--   Explain the how sites are located within the NEON project design.
--   Determine how the different types of data that are collected and
-    provided by NEON, and how they align with your own research.
--   Pull NEON data from the API and `neonUtilities` package
-    [@R-neonUtilites]
+-   Explain how the sites are located within the NEON project design.
+-   Identify the different types of data collected and provided by NEON and evaluate how they align with your research.
+-   Pull NEON data from the NEON API and the `neonUtilities` package
+    [@R-neonUtilities]
 
 ### Guest Lectures
 
-#### Introduction to the National Ecological Observatory Netowrk (NEON)
+#### Introduction to the National Ecological Observatory Network (NEON)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/in8UWOC08HI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
 
@@ -61,20 +60,20 @@ NEON's online platform and RStudio.
 -   [*NEON Coding Lab - TOS Vegetation
     Structure*](#neon-coding-lab---tos-vegetation-structure)
     Obtain a NEON API token and use to access and analyze woody plant
-    vegetation structure from NEON's Terrestrial Observation Sampling
-    (TOS) data using the `neonUtilities` package (2.10).
+    vegetation structure from NEON's Terrestrial Observation System
+    (TOS) data using the `neonUtilities` package (2.9.1).
 
 -   [*NEON Written Questions*](#neon-written-questions) Demonstrate your knowledge of NEON's data
     philosophies and identify ways in which NEON data could be used in
-    your own research (2.14.1).
+    your own research (2.13.1).
 
 -   [*NEON Coding Lab - Further Exploration of NEON Data*](#neon-coding-lab---further-exploration-of-neon-data) Demonstrate
     your mastery of NEON's data interface in `R` by accessing and
     analyzing NEON data that intersects with your research interests
-    (2.14.2).
+    (2.13.2).
 
 -   [*Intro to NEON Culmination Activity*](#intro-to-neon-culmination-activity) Summarize a research project or
-    data product you might pursue using NEON data (2.14.3).
+    data product you might pursue using NEON data (2.13.3).
 
 ## The NEON Project Mission & Design
 
@@ -299,8 +298,8 @@ After completing this section, you will be able to:
 
 ### Things You'll Need To Complete This Tutorial
 
-You will need a version of R (3.4.1 or higher) and `RStudio` loaded on
-your computer.
+You will need a recent version of R and `RStudio` loaded on
+your computer. If your installation is several versions behind, update R before proceeding to ensure compatibility with the packages and workflows used in this tutorial.
 
 ### Install R Packages
 
@@ -326,7 +325,7 @@ and then use it in neonUtilities when downloading data.
 
 ### Get a NEON API Token
 
-The first step is create a NEON user account, if you don't have one.
+The first step is to create a NEON user account, if you don't have one.
 Follow the instructions on the
 <a href="https://www.neonscience.org/data/about-data/data-portal-user-accounts" target="_blank">Data
 Portal User Accounts</a> page. If you do already have an account, go to
@@ -435,7 +434,7 @@ NEON_TOKEN <- "PASTE YOUR TOKEN HERE"
 ```
 
 Save this file within your current R project and call the file
-`neon_token_source.R`. So that you don't accidently push your token up
+`neon_token_source.R`. So that you don't accidentally push your token up
 to GitHub, move over to the command line or Atom.io and add it to your
 `.gitignore` file:
 
@@ -454,7 +453,7 @@ Then you'll be able to use `token=NEON_TOKEN` when you run
 `neonUtilities` functions, and you can share your code without
 accidentally sharing your token.
 
-#### Option 2: Save your toekn to your R environment
+#### Option 2: Save your token to your R environment
 
 Instructions for finding and editing your .Renviron can be found in this
 tutorial in [NEON's Data Tutorials
@@ -465,7 +464,7 @@ section.](https://www.neonscience.org/neon-api-tokens-tutorial)
 ### Pull in Tree Data from NEON's TOS and investigate relationships
 
 > Adapted from [Claire Lunch's 'Compare tree height measured from the
-> ground to a Lidar-based Canopy Height
+> ground to a LiDAR-based Canopy Height
 > Model'](https://www.neonscience.org/tree-heights-veg-structure-chm)
 > tutorial
 
@@ -487,8 +486,8 @@ knitr::include_graphics('./images/NEON_TOS_Sampling.png')
 
 The [vegetation structure
 data](https://data.neonscience.org/data-products/DP1.10098.001) are
-collected by by field staff on the ground. This data product contains
-the quality-controlled, native sampling resolution data from in-situ
+collected by field staff on the ground. This data product contains
+the quality-controlled, native sampling resolution data from in situ
 measurements of live and standing dead woody individuals and shrub
 groups, from all terrestrial NEON sites with qualifying woody
 vegetation. The exact measurements collected per individual depend on
@@ -536,7 +535,7 @@ Let's begin by:
 
 1.  Installing the `geoNEON` package
 2.  Making sure that the packages that we need are loaded, and
-3.  Supressing 'strings as factors' in R, as factors make all sorts of
+3.  Suppressing 'strings as factors' in R, as factors make all sorts of
     functions in R 'cranky'.
 
 ```{r}
@@ -717,7 +716,7 @@ ggplot(iris, aes(x=Sepal.Length, y=Petal.Length, color=Species)) +
 
 7.  Answer the following questions:
 
--   What do you think about your simile linear model? What are its
+-   What do you think about your simple linear model? What are its
     limitations?
 -   How many `unique` species are present at `WREF`?
 -   What are the `top_5` trees based on height? Diameter?
@@ -737,7 +736,7 @@ approaches.
 2.  Instrumentation - Data collected by an automated, streaming sensor,
     e.g. net radiation, soil carbon dioxide
 3.  Remote sensing - Data collected by the airborne observation
-    platform, e.g. LIDAR, surface reflectance
+    platform, e.g. LiDAR, surface reflectance
 
 This lab covers all three types of data, it is required to complete
 these sections in order and not skip ahead, since the query principles
@@ -1316,7 +1315,7 @@ plot(parMean$x, parMean$Group.1, type="b", pch=20,
 #### Observational data - Terrestrial
 
 Latitude, longitude, elevation, and associated uncertainties are
-included in data downloads *(Remember NEON COding Lab part 1?)*. These
+included in data downloads *(Remember NEON Coding Lab part 1?)*. These
 are the coordinates and uncertainty of the sampling plot; for many
 protocols it is possible to calculate a more precise location.
 Instructions for doing this are in the respective data product user
@@ -1552,7 +1551,7 @@ on and answer each of the following questions:
 
 ::: {markdown="1"}
 **Question 4:** Consider either your current or future research, or a
-question you'd like to address durring this course and answer *each* of
+question you'd like to address during this course and answer *each* of
 the following questions:
 
 -   Which types of NEON data may be more useful to address these
@@ -1582,7 +1581,7 @@ previous sections and answer *each* of the following questions:
 ### NEON Coding Lab - Further Exploration of NEON Data
 
 **Suggested Timing: Complete this exercise a few days before your NEON
-clumination write up**
+culmination write up**
 
 1.  Use the answers that you've provided above in Exercise 2.2 to select
     a *single* NEON site.
@@ -1591,14 +1590,14 @@ e.g. `ONAQ`
 
 2.  Use the answers that you've provided above to select **3 NEON data
     products** from either the TOS, TIS or ARS (AOP) collection methods.
-    Sumarize each product with its NEON identifier, along with a
-    sumarry.
+    Summarize each product with its NEON identifier, along with a
+    summary.
 
 e.g.:
 
-`**DP1.10055.001**: Plant phenology observations: phenophase status and insensity of tagged plants.  This data product contains the quality-controlled, native sampling resolution data from in-situ observations of plant leaf development and reproductive phenophases, at **D15.ONAQ**.`
+`**DP1.10055.001**: Plant phenology observations: phenophase status and intensity of tagged plants.  This data product contains the quality-controlled, native sampling resolution data from in situ observations of plant leaf development and reproductive phenophases, at **D15.ONAQ**.`
 
-3.  Using the NEON Ulitites package or the API pull in those data along
+3.  Using the NEON Utilities package or the API pull in those data along
     with metadata.
 
 4.  Organize your data into `data.frames` and produce summaries for each
@@ -1608,7 +1607,7 @@ e.g.:
 
 > **DP1.10055.001**: Plant phenology observations: phenophase status and
 > intensity of tagged plants. This data product contains the
-> quality-controlled, native sampling resolution data from in-situ
+> quality-controlled, native sampling resolution data from in situ
 > observations of plant leaf development and reproductive phenophases,
 > at **D15.ONAQ**. Here I will focus on the phenophase intensity data,
 > which is a measure of how prevalent that particular phenophase is in
@@ -1663,10 +1662,10 @@ phe_statusintensity=phe_statusintensity%>%
 9.  Create minimum of 1 plot per data type (minimum of 3 plots total).
     These will vary based on that data that you've chosen.
 
-A non-exhastive list of ideas: 1. Your data as a function of height on
+A non-exhaustive list of ideas: 1. Your data as a function of height on
 the tower (FPAR example) 2. A map of the locations where your data is
 sampled (TOS tree example, bird example) 3. A model based on the data
-you're interested in working work (Coding lab 1 example) 4. A timeseries
+you're interested in working work (Coding lab 1 example) 4. A time series
 of your data (example below)
 
 10. What is the temporal frequency of observations in the data you
@@ -1686,7 +1685,7 @@ using NEON** data over the duration of this course. Include:
     this project, including data product id numbers.
 2.  If in your NEON coding lab part 2 you highlighted challenges to
     using these data, discuss methods to address those challenges.
-    \*e.g. If your site doesn't yet have a long data recocrd, is it
+    \*e.g. If your site doesn't yet have a long data record, is it
     located close to a longer lived site from another network? (LTER,
     Ameriflux, LTAR etc)
 3.  One high-level summary graphic including all of your data from the

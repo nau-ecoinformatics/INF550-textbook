@@ -50,15 +50,15 @@ At the end of this activity, you will be able to:
 
 >43 minutes
 
-*Luke Zachmann*, Senior Scientist, Conservation Science Partners, explains data censorship, interval data, and data truncation, and shares pro tips and useful techniques when dealing wit citizen science data.
+*Luke Zachmann*, Senior Scientist, Conservation Science Partners, explains data censorship, interval data, and data truncation, and shares pro tips and useful techniques when dealing with citizen science data.
 
 ### Assignments in this Chapter
 
 - [*USA-NPN Written Questions*](#usa-npn-written-questions) Identify ways in which USA-NPN's data and philosophy intersect with your research interests (3.7),
 
-- [*USA-NPN Coding Lab - Modeling AGGD*](#usa-npn-coding-lab---modeling-aggd) Explore the relationship between phenology and various environmental drivers using `rnpn` and `neonUtilities` (3.14).
+- [*USA-NPN Coding Lab - Modeling AGDD*](#usa-npn-coding-lab---modeling-agdd) Explore the relationship between phenology and various environmental drivers using `rnpn` and `neonUtilities` (3.14).
 
-- [*USA-NPN Culmination Activity*](#usa-npn-culmination-activity) Identify a research project or data product you might persue using USA-NPN data (3.18).
+- [*USA-NPN Culmination Activity*](#usa-npn-culmination-activity) Identify a research project or data product you might pursue using USA-NPN data (3.18).
 
 ## USA-NPN Project Mission & Design:
 
@@ -97,7 +97,7 @@ broader understanding of phenology from a diversity of perspectives.
 3.  [2019 USA-NPN Annual
     Report](https://www.usanpn.org/files/npn/reports/USA-NPN_AnnualReport2021.pdf)
 
-## USA-NPN's Spatial design:
+## USA-NPN's Spatial Design:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VqyCUlXxFQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
 
@@ -148,7 +148,7 @@ products.
 
 Observation protocols consist of status monitoring, in which observers
 visit a site at regular intervals to evaluate the phenological status of
-marked individual plants (or patches of plants) and animal species The
+marked individual plants (or patches of plants) and animal species. The
 protocols are described fully in [Denny et al.
 (2014)](https://link.springer.com/article/10.1007/s00484-014-0789-5).
 
@@ -165,9 +165,9 @@ full with "Leaves," or 12 "Active individual" robins are seen.
 USA-NPN observational data and derivative products are described in USA
 National Phenology Network Observational Data Documentation [(Rosemartin
 et al. 2018)](https://pubs.usgs.gov/of/2018/1060/ofr20181060.pdf). The
-three formats in which the USA-NPN observational data are made available
-include: *status and intensity data*, *individual phenometrics*, and
-*site-level phenometrics*.
+four formats in which the USA-NPN observational data are made available
+include: *status and intensity data*, *individual phenometrics*,
+*site-level phenometrics*, and **magnitude phenometrics**. 
 
 ```{r, echo=FALSE}
 knitr::include_graphics('./images/npn_data_exampe.png')
@@ -256,7 +256,7 @@ documentation [(Crimmins et al.
 include real-time maps and short-term forecasts of insect pest activity
 at management-relevant spatial and temporal resolutions and are based on
 accumulated temperature thresholds associated with critical life-cycle
-stages of econmically important pests. Pheno Forecasts indicate, for a
+stages of economically important pests. Pheno-Forecasts indicate, for a
 specified day, the status of the insect's target life-cycle stage in
 real time across the contiguous United States. The maps are available
 for 12 insect pest species including the invasive emerald ash borer,
@@ -269,10 +269,10 @@ hemlock woolly adelgid, and gypsy moth. These products are described in
 knitr::include_graphics('./images/wolly_adleg.png')
 ```
 
-> Example of USA-NPN's Hemlock Wolly Adelgid Pheno-Forecast for August,
+> Example of USA-NPN's Hemlock Woolly Adelgid Pheno-Forecast for August,
 > 2020.
 
-Pheno-Forecasts are also available for an invasive grasses, such as
+Pheno-Forecasts are also available for invasive grasses, such as
 buffelgrass. The [buffelgrass
 Pheno-Forecast](https://usanpn.org/data/forecasts/Buffelgrass) is based
 on known precipitation thresholds for triggering green-up to a level
@@ -367,11 +367,9 @@ accessible to GIS applications.
 ### Visualization Tool
 
 [The Visualization Tool](https://data.usanpn.org/vis-tool/#/) provides
-an easier way to explore phenology data and maps. The user-friendly
-interface is intended to allow for searching for comparing general
-trends and quick-and-easy access to map data/products.
+an easier way to explore phenology data and maps. The user-friendly interface allows users to explore and compare general trends and quickly access phenological maps and data products.
 
-## USA-NPN Exercies Part 1
+## USA-NPN Exercises Part 1
 
 ### USA-NPN Written Questions
 
@@ -433,7 +431,6 @@ work with all USA-NPN data types.
 install.packages("devtools")
 library('devtools')
 devtools::install_github("usa-npn/rnpn")
-
 ```
 
 ```{r}
@@ -470,7 +467,7 @@ format, see the vignette by the same name.
 A few considerations and functions apply across all USA-NPN
 Observational data types.
 
-#### Basic format for for Observational data calls
+#### Basic format for Observational data calls
 
 The basic format for an observational data call in the rnpn library is:
 
@@ -840,8 +837,8 @@ If you are interested in how many GDDs had accumulated when the red
 maple in your backyard leafed out, or what day the Spring Index
 requirements for leaf out were met for your location, you may wish to
 query the layers for these values, based on location and date. There are
-two ways to accomplish this, using the npn_get_point_data function which
-works for all layers and the npn_get_AGDD_point_data function, which
+two ways to accomplish this, using the `npn_get_point_data` function which
+works for all layers and the `npn_get_agdd_point_data` function, which
 only works for AGDD layers and provides a more precise result.
 
 ```{r, eval=FALSE}
@@ -1285,7 +1282,7 @@ add_fields <- npn_download_status_data(
 
 ## USA-NPN Exercises Part 2
 
-### USA-NPN Coding Lab - Modeling AGGD
+### USA-NPN Coding Lab - Modeling AGDD
 
 ```{r, quiet=TRUE, warnings=FALSE, results=FALSE}
 library(rnpn)
@@ -1362,11 +1359,11 @@ for plotting? Could you `count` data? Summarize your strategy.
 
 4.  Using dpid **DP1.00002.001** Single Aspirated Air Temperature
     calculate AGDD based on NEON tower data over the time period you
-    decidided upon in question 1. To save you time and frustration I've
+    decided upon in question 1. To save you time and frustration I've
     placed some **mostly complete** example code for *one* height on the
     tower *just for Harvard*. **You will need to determine which height
-    you think it best and conmplete these calculations for both sites.**
-    You will also need to consder things like filtering your temperature
+    you think it best and complete these calculations for both sites.**
+    You will also need to consider things like filtering your temperature
     data for quality flags, and converting from GMT (Greenwich Mean
     Time) to [your location's
     time](https://stackoverflow.com/questions/1395117/how-do-you-convert-dates-times-from-one-time-zone-to-another-in-r):
@@ -1451,7 +1448,7 @@ day_temp <- df%>%
 day_temp$mean2 <- (day_temp$dayMinTemp + day_temp$dayMaxTemp)/2
 ```
 
-**Caluculate daily GDD for a true mean**
+**Calculate daily GDD for a true mean**
 
 *50 degrees F is a common base temperature used to calculate plant
 specific GDD. When might you select a different base temp?*
@@ -1475,7 +1472,7 @@ sumr.2 <- function(x) {
 	sapply(1:length(x), function(i) sum(x[1:i]))
 }
 
-#calculate Accumlated GDD
+#calculate Accumulated GDD
 day_temp$AGDD3 <- sumr.2(x=day_temp$GDD3)
 day_temp$AGDD2 <- sumr.2(x=day_temp$GDD2)
 day_temp$AGDD1 <- sumr.2(x=day_temp$GDD1)
@@ -1539,7 +1536,7 @@ relevant.
 
 One of the bonuses of a GAM is that it will tell you which variables are
 relevant and which aren't so you can iterate a bit on your model and
-revise it. You might want to test a few positions on your asipirated air
+revise it. You might want to test a few positions on your aspirated air
 temperature, or a few other additional variables. Your selection is up
 to you, but you must document and justify your decision.
 
@@ -1730,7 +1727,7 @@ phenological forcings.
 
 ### USA-NPN Culmination Activity
 
-**Note: Phenology data may not be relevant everyone. Here are a couple of suggestions:**
+**Note: Phenological data may not be relevant to everyone's research interests. Here are a couple of suggestions:**
 
 
 1.  Be creative, example: Say you work with ground water hydrology, how
@@ -1747,11 +1744,11 @@ Include the types of USA-NPN (and other data) that you will need to
 implement this project. Save this summary as you will be refining and
 adding to your ideas over the course of the semester.
 
-Sugestions:
+Suggestions:
 
 1.  Tables or bullet lists of **specific** data products
 
 2.  An **overarching high-quality figure** to show how these data align
 
-3.  One paragaph summarizing *how* this data or analysis is useful to
+3.  One paragraph summarizing *how* this data or analysis is useful to
     **you and/or the infrastructure**.

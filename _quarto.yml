@@ -41,6 +41,11 @@ format:
     toc-depth: 2
     number-sections: true
     search: true
+    grid:
+      body-width: 800px
+      sidebar-width: 250px
+      margin-width: 200px
+      gutter-width: 1.5em
 
 execute:
   freeze: false

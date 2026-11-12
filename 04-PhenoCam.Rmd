@@ -6,7 +6,7 @@
 
 **Course participants**: As you review this information, please
 consider the final course project
-that you will work on at the over this semester. At the end of this section, you will
+that you will work on over the course of this semester. At the end of this section, you will
 document an initial research question or idea and associated data needed to
 address that question, that you may want to explore while pursuing this course.
 
@@ -26,11 +26,9 @@ At the end of this activity, you will be able to:
 
   4. Estimate image haziness as an indication of fog, cloud or other natural or artificial factors using the `hazer`R package.
 
-  5. Define and use a Region of Interest, or ROI, for digitial repeat photography methods.
+  5. Define and use a Region of Interest, or ROI, for digital repeat photography methods.
 
-  6. Handle Field-of-View (FOV) shifts in digital repeat photography.
-
-  7. Extract timeseries data from a stack of images using color-based metrics.
+  6. Extract timeseries data from a stack of images using color-based metrics.
   
 ### Guest Lectures
 
@@ -52,11 +50,11 @@ At the end of this activity, you will be able to:
 
 ### Assignments in this chapter
 
-  - [*Digital Repeat Photography Written Questions*](#digital-repeat-photography-written-questions) Demonstrate your knowledge of PhenoCam's philosophy and practices, and identify how these intersect with your own research interests (4.4).
+  - [*Digital Repeat Photography Written Questions*](#digital-repeat-photography-written-questions) Demonstrate your knowledge of PhenoCam's philosophy and practices, and identify how these intersect with your own research interests.
   
-  - [*Digital Repeat Photography Coding Lab*](#digital-repeat-photography-coding-lab) Download and Manipulate digital repeat photography data using the R packages covered in this chapter (4.13.1).
+  - [*Digital Repeat Photography Coding Lab*](#digital-repeat-photography-coding-lab) Download and Manipulate digital repeat photography data using the R packages covered in this chapter.
   
-  - [*PhenoCam Culmination Activity*](#phenocam-culmination-activity) Summarize a project you might explore using PhenoCam (4.13.2). 
+  - [*PhenoCam Culmination Activity*](#phenocam-culmination-activity) Summarize a project you might explore using PhenoCam. 
   
 ## The PhenoCam Network Mission & Design
 
@@ -93,7 +91,7 @@ The PhenoCam Network is:
 
 The project is largely run by the Richardson Lab at NAU, with support from key collaborators at the University of New Hampshire who provide server and website management.
 
-Anyone can buy a relatively inexpensive camera, run some simple scripts to correct for things like auto-white balance (which we will cover later), and patch in to the netowrk.  PhenoCam then retrieves, archieves and processess imagery for distribution.
+Anyone can buy a relatively inexpensive camera, run some simple scripts to correct for things like auto-white balance (which we will cover later), and patch in to the network.  PhenoCam then retrieves, archives and processes imagery for distribution.
 
 
 
@@ -113,7 +111,7 @@ Anyone can buy a relatively inexpensive camera, run some simple scripts to corre
 * PhenoCams provide a direct link between what is happening on the ground and what is seen by satellites
 PhenoCams cover a wide array of:
 
-* Plant Funtional Types (PFTs)
+* Plant Functional Types (PFTs)
 
 ```{r, echo=FALSE}
 knitr::include_graphics('./images/phenocams.png')
@@ -220,13 +218,13 @@ data?
 
 ## Introduction to Digital Repeat Photography Methods
 
-The concept of repeat photography for studying environmental has been
-introduced to scientists long time ago (See Stephens et al., 1987).
+The concept of repeat photography for studying the environment has been
+introduced to scientists a long time ago (See Stephens et al., 1987).
 But in the past decade the idea has gained much popularity for monitoring
 environmental change (e.g., Sonnentag et al., 2012).
 One of the main applications of digital repeat photography is studying vegetation
 phenology for a diverse range of ecosystems and biomes (Richardson et al., 2019).
-The methods has also shown great applicability in other fields such as:
+The method has also shown great applicability in other fields such as:
 
 1. assessing the seasonality of gross primary production,
 
@@ -239,7 +237,7 @@ The methods has also shown great applicability in other fields such as:
 5. evaluating phenological data products derived from satellite remote sensing.
 
 Obtaining quantitative data from digital repeat photography images is usually
-performed by defining appropriate region of interest, also know as ROI's,
+performed by defining an appropriate region of interest, also known as ROIs,
 and for the red (R), green (G) and blue (B) color channels, calculating
 pixel value (intensity) statistics across the pixels within each ROI.
 ROI boundaries are delineated by mask files which define which pixels
@@ -254,7 +252,7 @@ phenological phases are calculated.
 In this chapter we explain this process by starting from general
 image processing tools and then to phenocam-based software applications.
 
-For more details about digital repeat photogrpahy you can check out the following publications:
+For more details about digital repeat photography you can check out the following publications:
 - <a href="https://bnasr.github.io/papers/Seyednasrollah_et_al_2019_SciData.pdf">Seyednarollah, et al. 2019, "Tracking vegetation phenology across diverse biomes using Version 2.0 of the PhenoCam Dataset "</a>.
 - <a href="https://bnasr.github.io/papers/Seyednasrollah_et_al_2019_PRS.pdf">Seyednarollah, et al. 2019, "Data extraction from digital repeat photography using xROI: An interactive framework to facilitate the process"</a>.
 
@@ -267,7 +265,7 @@ is developed to simplify interacting with the
 dataset and perform data wrangling steps on PhenoCam sites' data and metadata.
 
 This tutorial will show you the basic commands for accessing PhenoCam data
-through the PhenoCam API. The *phenocampapi* R package is developed and maintained by
+through the PhenoCam API. The *phenocamapi* R package is developed and maintained by
 <a href="https://bnasr.github.io/" target="_blank">Bijan Seyednarollah</a>.
 The most recent release is available on GitHub (<a href="https://github.com/bnasr/phenocamapi" target="_blank">PhenocamAPI</a>).
 <a href="https://github.com/bnasr/phenocamapi/tree/master/vignettes" target ="_blank">Additional vignettes</a>
@@ -304,7 +302,7 @@ library(jpeg)
 
 
 We can obtain an up-to-date `data.frame` of the metadata of the entire PhenoCam
-network using the `get_phenos()` function. The returning value would be a
+network using the `get_phenos()` function. The returned value would be a
 `data.table` in order to simplify further data exploration.
 
 
@@ -329,7 +327,7 @@ We may want to explore some of the patterns in the metadata before we jump into
 specific locations.
 
 Let's look at Mean Annual Precipitation (MAP) and Mean Annual
-Temperature (MAT) across the different field site and classify those by the
+Temperature (MAT) across the different field sites and classify those by the
 primary vegetation type (`primary_veg_type`) for each site. We can find out what
 the abbreviations for the vegetation types mean from the following table:
 
@@ -356,7 +354,7 @@ plot the data.
 
 
 ```{r, cache=TRUE}
-# removing the sites with unkown MAT and MAP values
+# removing the sites with unknown MAT and MAP values
 phenos <- phenos[!((MAT_worldclim == -9999)|(MAP_worldclim == -9999))]
 
 # extracting the PhenoCam climate space based on the WorldClim dataset
@@ -624,8 +622,7 @@ does this correlate to on the RGB image?
 
 #### Darkness
 
-Darkness is determined by the minimum of the R, G or B color channel. In the
-Similarly, we can extract and show the darkness matrix using the `getDarkness()` function.
+Darkness is determined by the minimum of the R, G or B color channel. Similarly, we can extract and show the darkness matrix using the `getDarkness()` function.
 
 
 ```{r}
@@ -776,10 +773,10 @@ compare top three images with low and high haze values.
 
 
 ```{r}
-top10_high_haze <- haze_mat %>%
+top3_high_haze <- haze_mat %>%
   dplyr::arrange(desc(haze)) %>%
   slice(1:3)
-top10_low_haze <-  haze_mat %>%
+top3_low_haze <-  haze_mat %>%
   arrange(haze)%>%
   slice(1:3)
 
@@ -787,11 +784,11 @@ top10_low_haze <-  haze_mat %>%
 par(mar= c(0,0,0,0), mfrow=c(3,2), oma=c(0,0,3,0))
 
 for(i in 1:3){
-  img <- readJPEG(as.character(top10_low_haze$file[i]))
+  img <- readJPEG(as.character(top3_low_haze$file[i]))
   plot.new()
   rasterImage(img, par()$usr[1], par()$usr[3], par()$usr[2], par()$usr[4])
 
-  img <- readJPEG(as.character(top10_high_haze$file[i]))
+  img <- readJPEG(as.character(top3_high_haze$file[i]))
   plot.new()
   rasterImage(img, par()$usr[1], par()$usr[3], par()$usr[2], par()$usr[4])
 
@@ -1002,7 +999,7 @@ The red polygon shows the pixels that will be used to calculate vegetation green
 
 ### Extracting vegetation index time series 
 
-One we have a suitable ROI for the imagery, we can utilize this boundary to extract time series of a particular color channel from the data. By default, this is performed using an average of pixel values in the ROI at each time step. These data are extracted using the `extractVIs()` function.
+Once we have a suitable ROI for the imagery, we can utilize this boundary to extract time series of a particular color channel from the data. By default, this is performed using an average of pixel values in the ROI at each time step. These data are extracted using the `extractVIs()` function.
 
 ```{r, eval=FALSE}
 vi.data <- extractVIs(
@@ -1022,7 +1019,7 @@ str(vi.data)
 We can see that the `extractVIs()` function returns a dataframe with several values. These include the average and standard deviation across red, green, and blue channels at each time step, as well as for set of additional calculated indices. 
 
 These indices are: image brightness (br), the green chromatic coordinate (gi), red chromatic coordinate (ri), blue chromatic coordinate (bi), and the green excess index (gei). 
-In vegetation phenology, the green chromatic coordinate (g~cc~) is widely used as an indicator of vegetation grenness, and represents the proportion of green reflectance releative to total brightness. 
+In vegetation phenology, the green chromatic coordinate (g~cc~) is widely used as an indicator of vegetation grenness, and represents the proportion of green reflectance relative to total brightness. 
 
 ![](images/gcc-formula.png)
 
@@ -1041,7 +1038,7 @@ plot(vi.df$date, vi.df$gi.av, type = "b", col = "darkgreen", pch = 16,
 
 ![](images/phenopix-timeseries.png)
 
-Finally, we can assess how the different color channels relate to one another, in this case by ploting the g~cc~ against the red chromatic coordinate (r~cc~) during the summer-fall phenological transition. 
+Finally, we can assess how the different color channels relate to one another, in this case by plotting the g~cc~ against the red chromatic coordinate (r~cc~) during the summer-fall phenological transition. 
 
 ```{r, eval=FALSE}
 # Plot the three chromatic coordinates
@@ -1548,7 +1545,7 @@ Generate a plot of smoothed gcc and transition dates for your two sites and subp
 
 ### In Class Hands-on Coding: Comparing phenology of the same plant function type (PFT) across climate space
 
-As Dr. Richardson mentioned in his introduction lecture, the same plant functional types (e.g. grasslands) can have very different phenologogical cycles.  Let's pick two phenocam grassland sites: one from a tropical climate (kamuela), and one from an arid climate (konza):
+As Dr. Richardson mentioned in his introduction lecture, the same plant functional types (e.g. grasslands) can have very different phenological cycles.  Let's pick two phenocam grassland sites: one from a tropical climate (kamuela), and one from an arid climate (konza):
 
 
 ```{r, eval=FALSE}
@@ -1574,7 +1571,7 @@ Now let's create a subplot of your grasslands to compare phenology, some hint co
 
 Once you have a subplot of grassland phenology across 2 climates answer the following questions in your markdown:
 1. What seasonal patterns do you see?
-2. Do you think you set your thresholds correctly for transition dates/phenophases?  How might that very as a function of climate?
+2. Do you think you set your thresholds correctly for transition dates/phenophases?  How might that vary as a function of climate?
 3. What are the challenges of forecasting or modeling tropical versus arid grasslands?
 
 
@@ -1596,7 +1593,7 @@ Once you have a subplot of grassland phenology across 2 climates answer the foll
 
 6. Answer the following questions:
 
-  + Does the `hazeR` package pick up smokey images?
+  + Does the `hazeR` package pick up smoky images?
   
   + If you were to use color coordinates, which color band would be most useful to highlight smoke and why?
   

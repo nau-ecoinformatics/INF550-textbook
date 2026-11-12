@@ -278,20 +278,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Estimated Time: 2 hours</p>
 </blockquote>
-<p><strong>Course participants</strong>: As you review this information, please consider the final course project that you will work on the over this semester. At the end of this section you will document an initial research question, or idea and associated data needed to address that question, that you may want to explore while pursuing this course.</p>
+<p><strong>Course participants</strong>: As you review this information, please consider the final course project that you will work on over the course of this semester. At the end of this section you will document an initial research question, or idea and associated data needed to address that question, that you may want to explore while pursuing this course.</p>
 <section id="learning-objectives" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">2.1</span> Learning Objectives</h2>
 <p>At the end of this activity, you will be able to:</p>
 <ul>
 <li>Explain the mission of the National Ecological Observatory Network (NEON).</li>
-<li>Explain the how sites are located within the NEON project design.</li>
-<li>Determine how the different types of data that are collected and provided by NEON, and how they align with your own research.</li>
-<li>Pull NEON data from the API and <code>neonUtilities</code> package <span class="citation" data-cites="R-neonUtilites">[@R-neonUtilites]</span></li>
+<li>Explain how the sites are located within the NEON project design.</li>
+<li>Identify the different types of data collected and provided by NEON and evaluate how they align with your research.</li>
+<li>Pull NEON data from the NEON API and the <code>neonUtilities</code> package <span class="citation" data-cites="R-neonUtilities">[@R-neonUtilities]</span></li>
 </ul>
 <section id="guest-lectures" class="level3" data-number="2.1.1">
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="guest-lectures"><span class="header-section-number">2.1.1</span> Guest Lectures</h3>
-<section id="introduction-to-the-national-ecological-observatory-netowrk-neon" class="level4" data-number="2.1.1.1">
-<h4 data-number="2.1.1.1" class="anchored" data-anchor-id="introduction-to-the-national-ecological-observatory-netowrk-neon"><span class="header-section-number">2.1.1.1</span> Introduction to the National Ecological Observatory Netowrk (NEON)</h4>
+<section id="introduction-to-the-national-ecological-observatory-network-neon" class="level4" data-number="2.1.1.1">
+<h4 data-number="2.1.1.1" class="anchored" data-anchor-id="introduction-to-the-national-ecological-observatory-network-neon"><span class="header-section-number">2.1.1.1</span> Introduction to the National Ecological Observatory Network (NEON)</h4>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/in8UWOC08HI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
 </iframe>
 <blockquote class="blockquote">
@@ -312,10 +312,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="assignments-in-this-chapter" class="level3" data-number="2.1.2">
 <h3 data-number="2.1.2" class="anchored" data-anchor-id="assignments-in-this-chapter"><span class="header-section-number">2.1.2</span> Assignments in this Chapter</h3>
 <ul>
-<li><p><a href="#neon-coding-lab---tos-vegetation-structure"><em>NEON Coding Lab - TOS Vegetation Structure</em></a> Obtain a NEON API token and use to access and analyze woody plant vegetation structure from NEON’s Terrestrial Observation Sampling (TOS) data using the <code>neonUtilities</code> package (2.10).</p></li>
-<li><p><a href="#neon-written-questions"><em>NEON Written Questions</em></a> Demonstrate your knowledge of NEON’s data philosophies and identify ways in which NEON data could be used in your own research (2.14.1).</p></li>
-<li><p><a href="#neon-coding-lab---further-exploration-of-neon-data"><em>NEON Coding Lab - Further Exploration of NEON Data</em></a> Demonstrate your mastery of NEON’s data interface in <code>R</code> by accessing and analyzing NEON data that intersects with your research interests (2.14.2).</p></li>
-<li><p><a href="#intro-to-neon-culmination-activity"><em>Intro to NEON Culmination Activity</em></a> Summarize a research project or data product you might pursue using NEON data (2.14.3).</p></li>
+<li><p><a href="#neon-coding-lab---tos-vegetation-structure"><em>NEON Coding Lab - TOS Vegetation Structure</em></a> Obtain a NEON API token and use to access and analyze woody plant vegetation structure from NEON’s Terrestrial Observation System (TOS) data using the <code>neonUtilities</code> package (2.9.1).</p></li>
+<li><p><a href="#neon-written-questions"><em>NEON Written Questions</em></a> Demonstrate your knowledge of NEON’s data philosophies and identify ways in which NEON data could be used in your own research (2.13.1).</p></li>
+<li><p><a href="#neon-coding-lab---further-exploration-of-neon-data"><em>NEON Coding Lab - Further Exploration of NEON Data</em></a> Demonstrate your mastery of NEON’s data interface in <code>R</code> by accessing and analyzing NEON data that intersects with your research interests (2.13.2).</p></li>
+<li><p><a href="#intro-to-neon-culmination-activity"><em>Intro to NEON Culmination Activity</em></a> Summarize a research project or data product you might pursue using NEON data (2.13.3).</p></li>
 </ul>
 </section>
 </section>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="things-youll-need-to-complete-this-tutorial" class="level3" data-number="2.7.3">
 <h3 data-number="2.7.3" class="anchored" data-anchor-id="things-youll-need-to-complete-this-tutorial"><span class="header-section-number">2.7.3</span> Things You’ll Need To Complete This Tutorial</h3>
-<p>You will need a version of R (3.4.1 or higher) and <code>RStudio</code> loaded on your computer.</p>
+<p>You will need a recent version of R and <code>RStudio</code> loaded on your computer. If your installation is several versions behind, update R before proceeding to ensure compatibility with the packages and workflows used in this tutorial.</p>
 </section>
 <section id="install-r-packages" class="level3" data-number="2.7.4">
 <h3 data-number="2.7.4" class="anchored" data-anchor-id="install-r-packages"><span class="header-section-number">2.7.4</span> Install R Packages</h3>
@@ -452,7 +452,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In the next sections, we’ll get an API token from the NEON Data Portal, and then use it in neonUtilities when downloading data.</p>
 <section id="get-a-neon-api-token" class="level3" data-number="2.7.6">
 <h3 data-number="2.7.6" class="anchored" data-anchor-id="get-a-neon-api-token"><span class="header-section-number">2.7.6</span> Get a NEON API Token</h3>
-<p>The first step is create a NEON user account, if you don’t have one. Follow the instructions on the <a href="https://www.neonscience.org/data/about-data/data-portal-user-accounts" target="_blank">Data Portal User Accounts</a> page. If you do already have an account, go to <a href="https://data.neonscience.org/home" target="_blank">the NEON Data Portal</a>, sign in, and go to your My Account profile page.</p>
+<p>The first step is to create a NEON user account, if you don’t have one. Follow the instructions on the <a href="https://www.neonscience.org/data/about-data/data-portal-user-accounts" target="_blank">Data Portal User Accounts</a> page. If you do already have an account, go to <a href="https://data.neonscience.org/home" target="_blank">the NEON Data Portal</a>, sign in, and go to your My Account profile page.</p>
 <p>Once you have an account, you can create an API token for yourself. At the bottom of the My Account page, you should see this bar:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -525,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>NEON_TOKEN <span class="ot">&lt;-</span> <span class="st">"PASTE YOUR TOKEN HERE"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Save this file within your current R project and call the file <code>neon_token_source.R</code>. So that you don’t accidently push your token up to GitHub, move over to the command line or Atom.io and add it to your <code>.gitignore</code> file:</p>
+<p>Save this file within your current R project and call the file <code>neon_token_source.R</code>. So that you don’t accidentally push your token up to GitHub, move over to the command line or Atom.io and add it to your <code>.gitignore</code> file:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"./images/git_ignore.png"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
@@ -542,8 +542,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Then you’ll be able to use <code>token=NEON_TOKEN</code> when you run <code>neonUtilities</code> functions, and you can share your code without accidentally sharing your token.</p>
 </section>
-<section id="option-2-save-your-toekn-to-your-r-environment" class="level4" data-number="2.7.8.2">
-<h4 data-number="2.7.8.2" class="anchored" data-anchor-id="option-2-save-your-toekn-to-your-r-environment"><span class="header-section-number">2.7.8.2</span> Option 2: Save your toekn to your R environment</h4>
+<section id="option-2-save-your-token-to-your-r-environment" class="level4" data-number="2.7.8.2">
+<h4 data-number="2.7.8.2" class="anchored" data-anchor-id="option-2-save-your-token-to-your-r-environment"><span class="header-section-number">2.7.8.2</span> Option 2: Save your token to your R environment</h4>
 <p>Instructions for finding and editing your .Renviron can be found in this tutorial in <a href="https://www.neonscience.org/neon-api-tokens-tutorial">NEON’s Data Tutorials section.</a></p>
 </section>
 </section>
@@ -553,7 +553,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="pull-in-tree-data-from-neons-tos-and-investigate-relationships" class="level3" data-number="2.8.1">
 <h3 data-number="2.8.1" class="anchored" data-anchor-id="pull-in-tree-data-from-neons-tos-and-investigate-relationships"><span class="header-section-number">2.8.1</span> Pull in Tree Data from NEON’s TOS and investigate relationships</h3>
 <blockquote class="blockquote">
-<p>Adapted from <a href="https://www.neonscience.org/tree-heights-veg-structure-chm">Claire Lunch’s ‘Compare tree height measured from the ground to a Lidar-based Canopy Height Model’</a> tutorial</p>
+<p>Adapted from <a href="https://www.neonscience.org/tree-heights-veg-structure-chm">Claire Lunch’s ‘Compare tree height measured from the ground to a LiDAR-based Canopy Height Model’</a> tutorial</p>
 </blockquote>
 <p>Later in this course we will be working with NEON’s LiDAR-based Canopy Height Model (CHM) data from their extensive Airborne Observation Platform (AOP). In this section we will pull in <strong>DP1.10098.001, Woody plant vegetation structure</strong> from NEON’s Terrestrial Observation Sampling (TOS) data and explore the data, from requesting it to plotting it.</p>
 <div class="cell">
@@ -568,7 +568,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Generalized TOS sampling schematic, showing the placement of Distributed, Tower, and Gradient Plots from the <a href="https://www.google.com/url?sa=i&amp;url=http%3A%2F%2Fdata.neonscience.org%2Fapi%2Fv0%2Fdocuments%2FNEON_vegStructure_userGuide_vA&amp;psig=AOvVaw32PujoEegMkzIWVuL_Scwn&amp;ust=1597765301177000&amp;source=images&amp;cd=vfe&amp;ved=0CA0QjhxqFwoTCOjFiN_JousCFQAAAAAdAAAAABAU">NEON GUIDE TO WOODY PLANT VEGETATION STRUCTURE, 2018</a></p>
 </blockquote>
-<p>The <a href="https://data.neonscience.org/data-products/DP1.10098.001">vegetation structure data</a> are collected by by field staff on the ground. This data product contains the quality-controlled, native sampling resolution data from in-situ measurements of live and standing dead woody individuals and shrub groups, from all terrestrial NEON sites with qualifying woody vegetation. The exact measurements collected per individual depend on growth form, and these measurements are focused on enabling biomass and productivity estimation, estimation of shrub volume and biomass, and calibration / validation of multiple NEON airborne remote-sensing data products. In general, comparatively large individuals that are visible to remote-sensing instruments are mapped, tagged and measured, and other smaller individuals are tagged and measured but not mapped. Smaller individuals may be subsampled according to a nested subplot approach in order to standardize the per plot sampling effort. Structure and mapping data are reported per individual per plot; sampling metadata, such as per growth form sampling area, are reported per plot.</p>
+<p>The <a href="https://data.neonscience.org/data-products/DP1.10098.001">vegetation structure data</a> are collected by field staff on the ground. This data product contains the quality-controlled, native sampling resolution data from in situ measurements of live and standing dead woody individuals and shrub groups, from all terrestrial NEON sites with qualifying woody vegetation. The exact measurements collected per individual depend on growth form, and these measurements are focused on enabling biomass and productivity estimation, estimation of shrub volume and biomass, and calibration / validation of multiple NEON airborne remote-sensing data products. In general, comparatively large individuals that are visible to remote-sensing instruments are mapped, tagged and measured, and other smaller individuals are tagged and measured but not mapped. Smaller individuals may be subsampled according to a nested subplot approach in order to standardize the per plot sampling effort. Structure and mapping data are reported per individual per plot; sampling metadata, such as per growth form sampling area, are reported per plot.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -599,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Installing the <code>geoNEON</code> package</li>
 <li>Making sure that the packages that we need are loaded, and</li>
-<li>Supressing ‘strings as factors’ in R, as factors make all sorts of functions in R ‘cranky’.</li>
+<li>Suppressing ‘strings as factors’ in R, as factors make all sorts of functions in R ‘cranky’.</li>
 </ol>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">stringsAsFactors=</span>F)</span>
@@ -1415,7 +1415,7 @@ Attaching package: 'dplyr'</code></pre>
 <li>Answer the following questions:</li>
 </ol>
 <ul>
-<li>What do you think about your simile linear model? What are its limitations?</li>
+<li>What do you think about your simple linear model? What are its limitations?</li>
 <li>How many <code>unique</code> species are present at <code>WREF</code>?</li>
 <li>What are the <code>top_5</code> trees based on height? Diameter?</li>
 <li>What proportion of sampled trees are dead?</li>
@@ -1430,7 +1430,7 @@ Attaching package: 'dplyr'</code></pre>
 <ol type="1">
 <li>Observational - Data collected by a human in the field, or in an analytical laboratory, e.g.&nbsp;beetle identification, foliar isotopes</li>
 <li>Instrumentation - Data collected by an automated, streaming sensor, e.g.&nbsp;net radiation, soil carbon dioxide</li>
-<li>Remote sensing - Data collected by the airborne observation platform, e.g.&nbsp;LIDAR, surface reflectance</li>
+<li>Remote sensing - Data collected by the airborne observation platform, e.g.&nbsp;LiDAR, surface reflectance</li>
 </ol>
 <p>This lab covers all three types of data, it is required to complete these sections in order and not skip ahead, since the query principles are explained in the first section, on observational data.</p>
 <div data-markdown="1">
@@ -1526,10 +1526,10 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>req</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Response [https://data.neonscience.org:443/api/v0/products/DP1.10003.001]
-  Date: 2026-11-04 22:21
+  Date: 2026-11-09 17:04
   Status: 200
   Content-Type: application/json
-  Size: 81.6 kB</code></pre>
+  Size: 82.5 kB</code></pre>
 </div>
 </div>
 <p>The object returned from <code>GET()</code> has many layers of information. Entering the name of the object gives you some basic information about what you downloaded.</p>
@@ -1769,6 +1769,7 @@ $data$changeLogs
 12 106704            NA 2025-11-20T00:00:00Z 2025-01-01T00:00:00Z
 13 106804        106704 2025-11-20T00:00:00Z 2025-01-01T00:00:00Z
 14 110504            NA 2026-01-29T00:00:00Z 2025-12-31T00:00:00Z
+15 117305            NA 2026-11-04T00:00:00Z 2026-12-31T00:00:00Z
          dateRangeStart         dateRangeEnd
 1  2013-01-01T00:00:00Z 2020-01-01T00:00:00Z
 2  2020-03-23T00:00:00Z 2021-12-31T00:00:00Z
@@ -1784,6 +1785,7 @@ $data$changeLogs
 12 2017-01-01T00:00:00Z 2023-12-31T00:00:00Z
 13 2017-01-01T00:00:00Z 2024-12-31T00:00:00Z
 14 2025-12-31T00:00:00Z 2025-12-31T00:00:00Z
+15 2013-01-01T00:00:00Z 2025-12-31T00:00:00Z
                                                                                                                                                                                                                                                        locationAffected
 1                                                                                                                                                                                                                                                                   All
 2                                                                                                                                                                                                                                                                   All
@@ -1799,6 +1801,7 @@ $data$changeLogs
 12                                                                                                                                                                                                                                                                 SOAP
 13                                                                                                                                                                                                                                                                 LAJA
 14                                                                                                                                                                                                                                                                 DELA
+15                                                                                                                                                                                                                                                                  All
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               issue
 1                                                                                                                                                                                                                                                                                                                                                                                                                           No sampling impractical: There was not a way to indicate that a scheduled sampling event did not occur.
 2                                                                                                                                                                                                                                                                                                                      Safety measures to protect personnel during the COVID-19 pandemic resulted in reduced or canceled sampling activities for extended periods at NEON sites. Data availability may be reduced during this time.
@@ -1814,6 +1817,7 @@ $data$changeLogs
 12                                                                                                                                                                                                                                                 Change to sampling plot quantity: bird point counts initially were sampled 16 Distributed Base Plots at both LAJA and SOAP field sites. In 2023 and 2024, logistical constraints required plot relocations that resulted in reducing the number of plots sampled at these sites.
 13                                                                                                                                                                                                                                                 Change to sampling plot quantity: bird point counts initially were sampled 16 Distributed Base Plots at both LAJA and SOAP field sites. In 2023 and 2024, logistical constraints required plot relocations that resulted in reducing the number of plots sampled at these sites.
 14                                        NEON Operations ended at the Dead Lake (DELA) terrestrial site in the fall of 2025, at the request of the site host. Instrument Systems (IS) data collection discontinued as of Oct. 6, 2025, and Observation Systems (OS) data collection discontinued as of Dec 31, 2025. Airborne Observation Platform (AOP) data will continue to be collected. For more details, see  https://www.neonscience.org/impact/observatory-blog/neon-operations-coming-close-dead-lake-alabama-field-site.
+15                                                                                                                                                                                                                                                                                                                                                                                 identifiedDate field added: Prior to 2026, we were unable to document the date associated with a bird identification in the brd_countdata table.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 resolution
 1                                                                                                                                                                                                                                                                                                               The fields samplingImpracticalRemarks and samplingImpractical were added prior to the 2020 field season. The contractor supplies the samplingImpracticalRemarks field, and this field autopopulates the samplingImpractical field. The samplingImpractical field has a value other than OK if something prevented sampling from occurring.
 2                                                                                                                                                                                                                                The primary impact of the pandemic on observational data was reduced data collection. Training procedures and data quality reviews were maintained throughout the pandemic, although some previously in-person training was conducted virtually.  Scheduled measurements and sampling that were not carried out due to COVID-19 or any other causes are indicated in data records via the samplingImpractical data field.
@@ -1829,6 +1833,7 @@ $data$changeLogs
 12                                                                                                                                                                                                                                                                                                                                                                                                                                                     To maintain the minimum of 250m between sampling points within the site, sampling at LAJA is performed at 13 Distributed Base Plots and sampling at SOAP is performed at 15 Distributed Base Plots.
 13                                                                                                                                                                                                                                                                                                                                                                                                                                                     To maintain the minimum of 250m between sampling points within the site, sampling at LAJA is performed at 13 Distributed Base Plots and sampling at SOAP is performed at 15 Distributed Base Plots.
 14                                                                                                                                                                                                                                                                                                                                                                                                                                                                          All data and samples collected at DELA up until the site decommissioning will remain available on the NEON Data Portal and Biorepository Data Portal for the lifetime of NEON.
+15                                                                                                                                   Starting in 2026, the identifiedDate field will record the date of the current bird identification. Initial identifications are expected to match the startDate. If an identification is later revised, the identifiedDate will reflect the date of the updated bird identification. \nThis field has not been backfilled; in pre-2026 data, the identifiedDate will remain blank and should be assumed to match the startDate. If a bird identification has been updated, an identifiedDate value will be populated.
 
 $data$specs
    specId               specNumber        specType specSize
@@ -2521,7 +2526,7 @@ $data$siteCodes
 </section>
 <section id="observational-data---terrestrial" class="level4" data-number="2.11.6.2">
 <h4 data-number="2.11.6.2" class="anchored" data-anchor-id="observational-data---terrestrial"><span class="header-section-number">2.11.6.2</span> Observational data - Terrestrial</h4>
-<p>Latitude, longitude, elevation, and associated uncertainties are included in data downloads <em>(Remember NEON COding Lab part 1?)</em>. These are the coordinates and uncertainty of the sampling plot; for many protocols it is possible to calculate a more precise location. Instructions for doing this are in the respective data product user guides, and code is in the <code>geoNEON</code> package on GitHub.</p>
+<p>Latitude, longitude, elevation, and associated uncertainties are included in data downloads <em>(Remember NEON Coding Lab part 1?)</em>. These are the coordinates and uncertainty of the sampling plot; for many protocols it is possible to calculate a more precise location. Instructions for doing this are in the respective data product user guides, and code is in the <code>geoNEON</code> package on GitHub.</p>
 </section>
 </section>
 <section id="querying-a-single-named-location" class="level3" data-number="2.11.7">
@@ -3146,7 +3151,7 @@ $data$locationChildrenUrls
 </ul>
 </div>
 <div data-markdown="1">
-<p><strong>Question 4:</strong> Consider either your current or future research, or a question you’d like to address durring this course and answer <em>each</em> of the following questions:</p>
+<p><strong>Question 4:</strong> Consider either your current or future research, or a question you’d like to address during this course and answer <em>each</em> of the following questions:</p>
 <ul>
 <li>Which types of NEON data may be more useful to address these questions?</li>
 <li>What non-NEON data resources could be combined with NEON data to help address your question?</li>
@@ -3172,23 +3177,23 @@ $data$locationChildrenUrls
 <div id="ds-challenge" data-markdown="1">
 <section id="neon-coding-lab---further-exploration-of-neon-data" class="level3" data-number="2.13.2">
 <h3 data-number="2.13.2" data-anchor-id="neon-coding-lab---further-exploration-of-neon-data"><span class="header-section-number">2.13.2</span> NEON Coding Lab - Further Exploration of NEON Data</h3>
-<p><strong>Suggested Timing: Complete this exercise a few days before your NEON clumination write up</strong></p>
+<p><strong>Suggested Timing: Complete this exercise a few days before your NEON culmination write up</strong></p>
 <ol type="1">
 <li>Use the answers that you’ve provided above in Exercise 2.2 to select a <em>single</em> NEON site.</li>
 </ol>
 <p>e.g.&nbsp;<code>ONAQ</code></p>
 <ol start="2" type="1">
-<li>Use the answers that you’ve provided above to select <strong>3 NEON data products</strong> from either the TOS, TIS or ARS (AOP) collection methods. Sumarize each product with its NEON identifier, along with a sumarry.</li>
+<li>Use the answers that you’ve provided above to select <strong>3 NEON data products</strong> from either the TOS, TIS or ARS (AOP) collection methods. Summarize each product with its NEON identifier, along with a summary.</li>
 </ol>
 <p>e.g.:</p>
-<p><code>**DP1.10055.001**: Plant phenology observations: phenophase status and insensity of tagged plants.  This data product contains the quality-controlled, native sampling resolution data from in-situ observations of plant leaf development and reproductive phenophases, at **D15.ONAQ**.</code></p>
+<p><code>**DP1.10055.001**: Plant phenology observations: phenophase status and intensity of tagged plants.  This data product contains the quality-controlled, native sampling resolution data from in situ observations of plant leaf development and reproductive phenophases, at **D15.ONAQ**.</code></p>
 <ol start="3" type="1">
-<li><p>Using the NEON Ulitites package or the API pull in those data along with metadata.</p></li>
+<li><p>Using the NEON Utilities package or the API pull in those data along with metadata.</p></li>
 <li><p>Organize your data into <code>data.frames</code> and produce summaries for each of your data:</p></li>
 <li><p>Filter your data based on metadata and quality flags:</p></li>
 </ol>
 <blockquote class="blockquote">
-<p><strong>DP1.10055.001</strong>: Plant phenology observations: phenophase status and intensity of tagged plants. This data product contains the quality-controlled, native sampling resolution data from in-situ observations of plant leaf development and reproductive phenophases, at <strong>D15.ONAQ</strong>. Here I will focus on the phenophase intensity data, which is a measure of how prevalent that particular phenophase is in the sampled plants.</p>
+<p><strong>DP1.10055.001</strong>: Plant phenology observations: phenophase status and intensity of tagged plants. This data product contains the quality-controlled, native sampling resolution data from in situ observations of plant leaf development and reproductive phenophases, at <strong>D15.ONAQ</strong>. Here I will focus on the phenophase intensity data, which is a measure of how prevalent that particular phenophase is in the sampled plants.</p>
 </blockquote>
 <ol start="6" type="1">
 <li>Using the NEON Ulitites package or the API pull in those data along with metadata.</li>
@@ -3235,7 +3240,7 @@ $data$locationChildrenUrls
 <ol start="9" type="1">
 <li>Create minimum of 1 plot per data type (minimum of 3 plots total). These will vary based on that data that you’ve chosen.</li>
 </ol>
-<p>A non-exhastive list of ideas: 1. Your data as a function of height on the tower (FPAR example) 2. A map of the locations where your data is sampled (TOS tree example, bird example) 3. A model based on the data you’re interested in working work (Coding lab 1 example) 4. A timeseries of your data (example below)</p>
+<p>A non-exhaustive list of ideas: 1. Your data as a function of height on the tower (FPAR example) 2. A map of the locations where your data is sampled (TOS tree example, bird example) 3. A model based on the data you’re interested in working work (Coding lab 1 example) 4. A time series of your data (example below)</p>
 <ol start="10" type="1">
 <li>What is the temporal frequency of observations in the data you decided was of interest? How do the data align to answer a central question? What challenges did you run into when investigating these data? How will you address these challenges and document your code? <em>One to two paragraphs</em></li>
 </ol>
@@ -3246,7 +3251,7 @@ $data$locationChildrenUrls
 <p>Write up a 1-page summary of <strong>a project that you might want to explore using NEON</strong> data over the duration of this course. Include:</p>
 <ol type="1">
 <li>the types of NEON (and other data) that you will need to implement this project, including data product id numbers.</li>
-<li>If in your NEON coding lab part 2 you highlighted challenges to using these data, discuss methods to address those challenges. *e.g.&nbsp;If your site doesn’t yet have a long data recocrd, is it located close to a longer lived site from another network? (LTER, Ameriflux, LTAR etc)</li>
+<li>If in your NEON coding lab part 2 you highlighted challenges to using these data, discuss methods to address those challenges. *e.g.&nbsp;If your site doesn’t yet have a long data record, is it located close to a longer lived site from another network? (LTER, Ameriflux, LTAR etc)</li>
 <li>One high-level summary graphic including all of your data from the NEON Coding Lab Part 2</li>
 </ol>
 <p>Save this summary as you will be refining and adding to your ideas over the course of the semester.</p>

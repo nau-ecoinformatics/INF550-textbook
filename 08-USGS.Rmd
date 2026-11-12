@@ -1,6 +1,5 @@
 # USGS National Water Information System (NWIS)
 
-
 **United States Geological Survey's National Water Information System (NWIS)**
 
 > Estimated Time: 2 hours
@@ -33,7 +32,7 @@ By the end of this chapter, students will be able to locate, access, and retriev
 
 > 52 minutes
 
-*Dr. Jordan Reed*, Chief, U.S. Geological Survey's Data Science Branch of the Water Resources Mission Area, introduces the geoknife package, its interface, and how to use it t oconnect data and resources, including examples in R.
+*Dr. Jordan Reed*, Chief, U.S. Geological Survey's Data Science Branch of the Water Resources Mission Area, introduces the geoknife package, its interface, and how to use it to connect data and resources, including examples in R.
 
 ### Assignments in this chapter
 
@@ -86,7 +85,7 @@ The [NWIS web site](https://waterdata.usgs.gov/nwis) serves current and historic
 > Contributors: Jordan Read, Lindsay Carr
 > Adapted from USGS ['Getting Started with USGS R Packages' course materials](https://owi.usgs.gov/R/training-curriculum/usgs-packages/GettingStartedUSGS/)
 
-Recently, the USGS has built a suite of software packages and tutorials for R users to to interact with their data and streamline workflows.  Here we have adapted course materials from thier USGS R packages course materials written and developed by Lindsay R. Carr.  
+Recently, the USGS has built a suite of software packages and tutorials for R users to interact with their data and streamline workflows.  Here we have adapted course materials from their USGS R packages course materials written and developed by Lindsay R. Carr.  
 
 
 The common workflow for completing the data processing pipeline is subject to human error at every step: accessing data, analyzing data, and producing final figures. Multi-site analyses are especially error-prone because the same workflow needs to be repeated many times. This course teaches a modular approach to the common data analysis workflow by building on basic R data analysis skills and leveraging existing USGS R packages that can create advanced, reproducible workflows, such as for accessing gridded climate data, analyzing high frequency water observations, and for taking full advantage of the USGS ScienceBase repository. The USGS packages covered in this course span a variety of applications: accessing web data, accessing personally stored data, and releasing data for publication. 
@@ -103,7 +102,7 @@ This course assumes a moderate to advanced knowledge of the statistical programm
 
 ### Course outline
 
-```{r eval=TRUE, echo=FALSE, message=FALSE, warnings=FALSE}
+```{r eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
 Module <- c("dataRetrieval", "geoknife",  "Application")
 Description <- c(
   "Accessing time series data.",
@@ -121,7 +120,7 @@ htmlTable(data.frame(Module, Description, Duration),
 
 ### Software requirements
 
-See the [R installation instructions page](/installr) for how to install/upgrade R and RStudio, add GRAN to your settings, and install some basic packages. Then, execute these lines so that you have the most up-to-date version of the packages used in this course.
+See the [R installation instructions page](/installr) for how to install/upgrade R and RStudio, add CRAN to your settings, and install some basic packages. Then, execute these lines so that you have the most up-to-date version of the packages used in this course.
 
 ```{r eval=FALSE}
 install.packages('dataRetrieval')
@@ -132,7 +131,7 @@ install.packages('dataRetrieval')
 
 This lesson will focus on finding and retrieving hydrologic time series data using the USGS R package, `dataRetrieval`. The package was created to make querying and downloading hydrologic data from the web easier, less error-prone, and reproducible. The package allows users to easily access data stored in the USGS National Water Information System (NWIS) and the multi-agency database, Water Quality Portal (WQP). NWIS only contains data collected by or for the USGS. Conversely, WQP is a database that aggregates water quality data from multiple agencies, including USGS, Environmental Protection Agency (EPA), US Department of Agriculture (USDA), and many state, tribal, and local agencies.
 
-`dataRetrieval` functions take user-defined arguments and construct web service calls. The web service returns the data as XML (a standard data structure), and `dataRetrieval` takes care of parsing that into a useable R data.frame, complete with metadata. When web services change, `dataRetrieval` users aren't affected because the package maintainers will update the functions to handle these modifications. This is what makes `dataRetrieval` so user-friendly. 
+`dataRetrieval` functions take user-defined arguments and construct web service calls. The web service returns the data as XML (a standard data structure), and `dataRetrieval` takes care of parsing that into a usable R data.frame, complete with metadata. When web services change, `dataRetrieval` users aren't affected because the package maintainers will update the functions to handle these modifications. This is what makes `dataRetrieval` so user-friendly. 
 
 Neither NWIS nor WQP are static databases. Users should be aware that data is constantly being added, so a query one week might return differing amounts of data from the next. For more information about NWIS, please visit [waterdata.usgs.gov/nwis](waterdata.usgs.gov/nwis). For more information about WQP, visit their site www.waterqualitydata.us or read about WQP for aquatic research applications in the publication, *[Water quality data for national-scale aquatic research: The Water Quality Portal](http://onlinelibrary.wiley.com/doi/10.1002/2016WR019993/abstract)*. 
 
@@ -274,7 +273,7 @@ This means you would have `r prettyNum(nrow(data_sc_stream_temp_avg_applicable),
 
 *_`siteType`_* Specify the hydrologic location the sample was taken, e.g. streams, lakes, groundwater sources. These should be listed as a string. Available types can be found [here](https://www.waterqualitydata.us/Codes/Sitetype?mimeType=xml).
 
-*_`organization`_* The ID of the reporting organization. All USGS science centers are written "USGS-" and then the two-letter state abbrevation. For example, the Wisconsin Water Science Center would be written "USGS-WI". For all available organization IDs, please see [this list of org ids](https://www.waterqualitydata.us/Codes/Organization?mimeType=xml). The id is listed in the "value" field, but they are accompanied by the organization name in the "desc" (description) field. 
+*_`organization`_* The ID of the reporting organization. All USGS science centers are written "USGS-" and then the two-letter state abbreviation. For example, the Wisconsin Water Science Center would be written "USGS-WI". For all available organization IDs, please see [this list of org ids](https://www.waterqualitydata.us/Codes/Organization?mimeType=xml). The id is listed in the "value" field, but they are accompanied by the organization name in the "desc" (description) field. 
 *_`siteid`_* This is the unique identification number associated with a data collection station. Site IDs for the same location may differ depending on the reporting organization. The site ID string is written as the agency code then the site number separated by a hyphen. For example, the USGS site 01594440 would be written as "USGS-01594440".
 
 *_`characteristicName`_* and *_`characteristicType`_* Unlike NWIS, WQP does not have codes for each parameter. Instead, you need to search based on the name of the water quality constituent (referred to as `characteristicName` in `dataRetrieval`) or a group of parameters (`characteristicType` in `dataRetrieval`). For example, "Nitrate" is a `characteristicName` and "Nutrient" is the `characteristicType` that it fits into. For a complete list of water quality types and names, see [characteristicType list](https://www.waterqualitydata.us/Codes/Characteristictype?mimeType=xml) and [characteristicName list](https://www.waterqualitydata.us/Codes/Characteristicname?mimeType=xml). 
@@ -289,7 +288,7 @@ Let's follow a similar pattern to NWIS data discovery sections and explore avail
 
 ### readWQPdata + querySummary
 
-`readWQPdata` is the function used to actually download WQP data. In this application, we are just querying for a count of sites and results that match our criteria. Since WQP expect state and county codes as their FIPS code, you will need to use the string "US:45" for South Carolina. 
+`readWQPdata` is the function used to actually download WQP data. In this application, we are just querying for a count of sites and results that match our criteria. Since WQP expects state and county codes as their FIPS code, you will need to use the string "US:45" for South Carolina. 
 
 ```{r wqpcounts_sc, message=FALSE, warning=FALSE}
 wqpcounts_sc <- readWQPdata(statecode="US:45", querySummary = TRUE)
@@ -325,7 +324,7 @@ wqpcounts_sc_stream_temp[['Total-Site-Count']]
 wqpcounts_sc_stream_temp[['Total-Result-Count']]
 ```
 
-`r prettyNum(wqpcounts_sc_stream_temp[['Total-Result-Count']], big.mark=",")` is little more manageble. We can also easily compare avilable stream temperature and lake temperature data.
+`r prettyNum(wqpcounts_sc_stream_temp[['Total-Result-Count']], big.mark=",")` is little more manageable. We can also easily compare available stream temperature and lake temperature data.
 
 ```{r wqpcounts_sc_streamVSlake, message=FALSE, warning=FALSE}
 wqpcounts_sc_lake_temp <- readWQPdata(statecode="US:45", 
@@ -745,7 +744,7 @@ head(miss_rating_exsa$ratings)
 
 ### readNWISsite
 
-This function is pulls data from a USGS site file. It only has one argument - the site number. Follow along with the example below or see `?readNWISsite` for more information.
+This function retrieves data from a USGS site file. It only has one argument - the site number. Follow along with the example below or see `?readNWISsite` for more information.
 
 <a name="readnwissite"></a>
 
@@ -911,7 +910,7 @@ ftworth_qt_july_renamed <- renameNWISColumns(ftworth_qt_july)
 names(ftworth_qt_july_renamed)
 ```
 
-Now try with a pipe. Remember to load a packge that uses `%>%`.
+Now try with a pipe. Remember to load a package that uses `%>%`.
 
 ```{r renameNWIScolumns-pipe, message=FALSE, warning=FALSE}
 library(magrittr)
@@ -1115,15 +1114,15 @@ knitr::include_graphics('./images/09sep20_jja20p.png')
 ```
 
 
-Recently NOAA published a press release demonstrating that 2020 was *both* the hottest *and* driest summer on record for Arizona.  In this lab we will look at USGS NWIS stream gauge and preciptitation data to investigate just how anomalous 2020 data are. 
+Recently NOAA published a press release demonstrating that 2020 was *both* the hottest *and* driest summer on record for Arizona.  In this lab we will look at USGS NWIS stream gauge and precipitation data to investigate just how anomalous 2020 data are. 
 
 **1:** Use the `readNWISstat` function to retrieve the following statewide data for 2015-2020:
 1. Precipitation total (inches/week)
 2. Streamflow (ft^3/s)
 
-**2:** Create two timeseries plots (one for preciptitation, one for streamflow), where color is a function of year (e.g. the x axis is month, the y axis is precipitation, legend shows color by year).
+**2:** Create two time series plots (one for preciptitation, one for streamflow), where color is a function of year (e.g. the x axis is month, the y axis is precipitation, legend shows color by year).
 
-**3.** Calculate the monthly mean precipitation and streamflow from 2015-2019, and use that mean to calculate a 2020 anomaly timeseries.  Create two new plots (like #2 above) with the 2015-2019 mean as a thick black line, and 2020 anomaly as a thin red line.
+**3.** Calculate the monthly mean precipitation and streamflow from 2015-2019, and use that mean to calculate a 2020 anomaly time series.  Create two new plots (like #2 above) with the 2015-2019 mean as a thick black line, and 2020 anomaly as a thin red line.
 
 
 ## USGS Exercises Part 2
