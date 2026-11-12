@@ -2,7 +2,7 @@
 title: "Environmental Informatics Using Research Infrastructures and their Data"
 cover-image: "images/EcoInfo4.png"
 github-repo: 'nau-ecoinformatics/INF550-textbook'
-description: "Graduate Texbook for NAU INF550"
+description: "An open textbook for big science in ecology"
 always_allow_html: true
 ---
 
@@ -27,7 +27,7 @@ Edited by Dr. Ben Ruddell and Scott LaRocca
 6. [NEON Airborne Observation Platform (AOP)](06-NEON-AOP.Rmd)
 7. [NASA's Earth Observing System (EOS)](07-NASA-EOS.Rmd)
 8. [USGS National Water Information System (NWIS)](08-USGS.Rmd) 
-9. [Introduction to Google Earth Engine (GEE) Platform & Its Tools](09-GEE.Rmd)
+9. [Introduction to the Google Earth Engine (GEE) Platform and Interfaces](09-GEE.Rmd)
 10. [One Health, Pathogen Surveillance, and Nextstrain](10-OneHealth_PathogenSurveillance.Rmd)
 11. [High-Resolution Carbon Emissions Using the Vulcan Dataset](11-Vulcan.Rmd)
 
@@ -56,7 +56,9 @@ Efforts have been made to select activities using data products, software, and t
 Informatics is arguably *the key scientific discipline* of the 21st century, and research infrastructures are the source of the raw natural resource fueling the informatics revolution: observational data. Most 21st century scientists and scientific staff will spend their careers immersed in the data revolution. We sincerely hope that this textbook provides the launchpad you need for your career or for your next project in environmental science.
 
 ## Second Edition {-}
-This second edition represents a substantial effort to bring the textbook's computational examples and workflows into alignment with the current environmental informatics landscape. While the underlying scientific and computational concepts and learning objectives remain the same, the software packages, APIs, data products, and research infrastructures have continued to evolve. By six years after the first edition, an estimated 20-30% of the executable code required revision, with some sections needing to be rewritten entirely to utilize modern packages and workflows. This experience illustrates a key challenge in informatics, and particularly in the fast evolving field of ecoinformatics: software tools require continual maintenance or face becoming obsolete or non-functional. Maintaining reproducible educational resources in this field therefore requires ongoing revision as the surrounding research infrastructure evolves. In addition to updating the existing workflows, this second edition introduces several additional research infrastructures which broaden the scope of the textbook while continuing to advance its original purpose. 
+This second edition represents a substantial effort to update the textbook’s computational examples and workflows to reflect the evolving landscape of environmental informatics. While the underlying scientific concepts and learning objectives remain largely unchanged, the software packages, APIs, data products, and research infrastructures supporting environmental research have continued to evolve. In the six years since the first edition, an estimated 20–30% of the executable code required revision, with some sections needing to be rewritten entirely. This illustrates a fundamental challenge in ecoinformatics: computational tools and workflows require continual maintenance to remain functional, reproducible, and relevant.
+
+Beyond updating existing material, this edition introduces several new chapters featuring research infrastructures from a broader range of organizations. These additions reflect the diversity of institutions and scientific initiatives that rely on a common set of core ecoinformatics skills, including accessing and managing environmental data, developing computational workflows, and conducting reproducible analyses. Together, they demonstrate the broad applicability of these skills while maintaining the textbook’s original emphasis on working with environmental research infrastructures and their data.
 
 ## Authors {-}
 

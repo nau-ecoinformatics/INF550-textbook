@@ -32,7 +32,7 @@ Pull code from others' public repositories.
 More thoughts on the benefits and power of reproducibility [can be found
 here](https://github.com/katharynduffy/ECOSS_reproducible_science)
 
-To be successful, both in this course and in your careers you will need
+To be successful, both in this course and in your careers, you will need
 these skills. This is why **they are a requirement** for this course. If
 you are already using these skills on a daily basis, fantastic! If you
 don't feel that you have mastery in the workflows listed above we have
@@ -45,7 +45,7 @@ For the purpose of this course we will largely be using the following
 tools to access, pull, and explore data:
 
 1.  R & Rstudio
-2.  Git, GitHub, & Atom.io
+2.  Git & GitHub or VScode
 3.  Markdown & Rmarkdown
 
 As such we will need to install and/or update these tools on your
@@ -58,9 +58,10 @@ Analysis](http://swcarpentry.github.io/r-novice-gapminder) course.
 
 ### Installing or Updating R
 
-Please check your version of R. You will need R 3.6.0+
+Please check which version of R you currently have installed. We recommend using a recent release of R to ensure compatibility with the packages and workflows used throughout this course. If your installation is several versions behind, please update R before proceeding.
 
-How to check your version in R or RStudio if you already have it:
+You can check your current version by following the instructions below.
+
 
 ```
     > version
@@ -97,8 +98,8 @@ is an error message, you will need to re-install the program.
 ### Mac R/RStudio Setup
 
 After you have downloaded R, double click on the file that was
-downloaded and R will install Go to the [RStudio Download
-page](https://www.rstudio.com/products/rstudio/download/#download) Under
+downloaded and R will install. Go to the [RStudio Download
+page](https://www.rstudio.com/products/rstudio/download/#download). Under
 Installers select RStudio 1.2.1135 - Mac OS X XX.X (64-bit) to download
 it. Once it's downloaded, double click the file to install it. Once R
 and RStudio are installed, click to open RStudio. If you don't get any
@@ -163,16 +164,16 @@ sapply(list.of.packages, library, character.only = T)
 
 **Note**: On some operating systems, you may need to install the
 Geospatial Data Abstraction Library (GDAL). More information about GDAL
-can be found from
+can be found 
 [here](https://trac.osgeo.org/gdal/wiki/DownloadingGdalBinaries).
 
 ## Installing and Setting up Git & Github on Your Machine
 
 For this course you will need: 1. Git installed on your local machine 2.
-Very basic bash scripting 3. A linked GitHub account 4. To link RStudio
-to git via RStudio or Atom.io
+Very basic Bash scripting 3. A linked GitHub account 4. To link RStudio
+to git via RStudio or VScode
 
-As we will be using these skills constantly, they are a *pre-requisite*
+As we will be using these skills constantly, they are a *prerequisite*
 for this course. If you don't yet have these skills it's okay! You can
 learn everything that you need to know via the following freely
 available resources:
@@ -185,18 +186,7 @@ available resources:
 
 If you are learning these skills from scratch I estimate that you will
 need to devote \~4-6 hours to get set up and comfortable with the
-various workflows. Also remember that I have code office hours every
-week and that Stack Exchange is your friend.
-
-## Installing Atom
-
-[Atom.io](https://atom.io/) is a powerful and useful text editor for the
-following reasons:
-
-1.  It is language agnostic
-
-2.  It fully integrates with git and github + You can use it to
-    push/pull/resolve conflicts and write code all in one space.
+various workflows. Regular course support sessions provide an opportunity to ask questions and troubleshoot problems collaboratively. Online communities such as Stack Exchange are also valuable resources for finding solutions to common programming and computational challenges.
 
 ## Linking RStudio to Git
 
@@ -204,11 +194,19 @@ following reasons:
 has a fantastic tutorial to help you link Rstudio-Git-Github on your
 local machine and push/pull from or to public repositories.
 
+## Code Editors and Development Environments
+
+Throughout this course, we will primarily use RStudio as our development environment. RStudio provides an integrated code editor, Git version control, and tools for working with R Markdown, making it sufficient for the workflows introduced in this course.
+
+As you develop your skills in ecoinformatics, you may find it useful to explore other development environments. [Visual Studio Code (VS Code)](https://code.visualstudio.com/), for example, is a popular, extensible code editor with support for R, Python, Git, Markdown, and many other tools used in scientific computing.
+
+Although not required for this course, becoming familiar with alternative development environments can be valuable as you expand your computational toolkit.
+
 ## How we will be Conducting this Course
 
 If you find a **broken link or error** in this course text [submit an
 issue on the course github
-repository](https://github.com/katharynduffy/katharynduffy.github.io/issues).
+repository](https://github.com/nau-ecoinformatics/INF550-textbook/issues/).
 
 At the end of each chapter you will find a set of **Exercises**. At the
 end of the assigned chapter you will be expected to submit two files to
@@ -227,7 +225,7 @@ To generate these files you have two options:
     exercise section code, and drop it into your own .Rmd.
 
 2.  Git clone our [course Github
-    Repository](https://github.com/katharynduffy/katharynduffy.github.io),
+    Repository](https://github.com/nau-ecoinformatics/INF550-textbook),
     navigate to the '\_Exercises' folder, and use that .Rmd as a
     template.
 
@@ -242,7 +240,7 @@ To generate your .PDF to upload, in your RMarkdown file simply push the
 ### Exercise 0.1: A git introduction
 
 1.  Navigate to our [course
-    github](https://github.com/katharynduffy/Environmental-Informatics-Using-Research-Infrastructures-and-their-Data)
+    github](https://github.com/nau-ecoinformatics/INF550-textbook)
 2.  `git fork` our repo onto your own personal github account.
 3.  `git clone` the repo onto your own personal machine in a place that
     is functional and not temporary *(e.g. not your downloads folder)*.
@@ -263,9 +261,6 @@ Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizon
 
 <!-- -->
 
-    ***
-    Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizona University.  Over the past two years I've worked as an open-source software engineer in the PhenoCam lab, and now I'm the coding and lab support for your course.  I really look forward to working with all of you!
-    ***
 
 5.  Submit a `pull request` to add your introduction to our course
     participants folder.
@@ -280,26 +275,25 @@ Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizon
     git remote -v
     git remote add upstream...
 
-**Note:** *You may complete these either on the command line or via a
-program like Atom.io. If you haven't yet made commits to a remote
+**Note:** *You may complete these either on the command line. If you haven't yet made commits to a remote
 repository or submitted pull requests please reference the resources
 listed above.*
 
 # Why 'EcoInformatics'?
 
 *Portions of the following introduction were adapted from [Michener &
-Jones 2012, Trends in Ecology & Evolution 'Ecoinformatics: supporting
+Jones (2012), "Ecoinformatics: supporting
 ecology as a data-intensive
-science](https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(11)00339-9)*
+science", Trends in Ecology & Evolution](https://www.cell.com/trends/ecology-evolution/fulltext/S0169-5347(11)00339-9)*
 
 Ecology is increasingly becoming a data-intensive science, relying on
-massive amounts of data collected by both remote-sensing platforms and
+massive amounts of data collected by both remote sensing platforms and
 sensor networks embedded in the environment. New observatory networks,
 such as the US National Ecological Observatory Network (NEON), provide
 research platforms that enable scientists to examine phenomena across
 diverse ecosystem types through access to thousands of sensors
 collecting diverse environmental observations. These networks spatially
-and temporaly overlap with a number of other networks and
+and temporally overlap with a number of other networks and
 infrastructures ranging from remote sensing, to citizen science, and so
 on.
 
@@ -316,7 +310,7 @@ priorities for science that can inform conservation and management
 policy in the
 USA](https://academic.oup.com/bioscience/article/61/4/290/324883) rely
 principally on a sound foundation of ecological research, and the
-ability to scale knowledge and inter-connect data.
+ability to scale knowledge and interconnect data.
 
 ```{r, echo=FALSE}
 knitr::include_graphics('./images/interconnect_data.png')
@@ -399,9 +393,9 @@ knitr::include_graphics('./images/data-ontology.png')
 > repositories, but made accessible to the broader research community
 > through distributed systems based on shared, open protocols (such as
 > Metacat). Example repositories include the LTER network, National
-> Ecological Observatory Network, United States Geographical Survey and
+> Ecological Observatory Network, United States Geological Survey and
 > SEEK's EarthGrid. [Madin et al.
-> 2008,](https://www.sciencedirect.com/science/article/pii/S0169534708000384?casa_token=b8GX-9jkuLwAAAAA:nQtJlhAUGyZdcokpQLEtho3OfVeDUKhENueO0k8H7dWPmPmXOUFYhGR6sKNtT04rEgJNR_HNlqg)
+> (2008)](https://www.sciencedirect.com/science/article/pii/S0169534708000384?casa_token=b8GX-9jkuLwAAAAA:nQtJlhAUGyZdcokpQLEtho3OfVeDUKhENueO0k8H7dWPmPmXOUFYhGR6sKNtT04rEgJNR_HNlqg)
 
 **Ecoinformatics is a framework** that enables scientists to generate
 new knowledge through innovative tools and approaches for:
@@ -426,13 +420,13 @@ And that, course participants, is why we are here.
 
 Over the duration of this course we will survey a wide array of
 observation platforms and networks and build hands-on experience with
-the framework of Ecoinformatics. For coherance we will cover the
+the framework of Ecoinformatics. For coherence we will cover the
 following overarching themes:
 
 > 1.  Each network's **mission and design**
 > 2.  Each network's **spatial design**
 >
-> -   e.g. opprtunistic vs. planned, citizen science vs. orbital sensors
+> -   e.g. opportunistic vs. planned, citizen science vs. orbital sensors
 >
 > 3.  The **types of data** that stream from each network
 >
@@ -460,7 +454,7 @@ cross-walks*.
 
 For your final project, you will present a **4-6 minute IGNITE-style
 derived data product pitch**, followed by *2-3 minutes of questions from
-your audience* (which will include members from the infrastrures we've
+your audience* (which will include members from the infrastructures we've
 covered). Think of this project as your *'sales pitch'* to the research
 infrastructure whose data you are using, and/or the scientific community
 as a whole. In the IGNITE theme of *'Enlighten us but make it quick'*,

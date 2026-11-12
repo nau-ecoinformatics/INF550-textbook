@@ -182,13 +182,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-Fluxes_and_Inter-operability.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flux Measurements &amp; Inter-Operability</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flux Measurements &amp; Interoperability</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-NEON_AOP.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON AOP</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON Airborne Observation Plaform (AOP)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">7.1</span> Learning Objectives</a></li>
   <li><a href="#nasa-eos-project-mission-design" id="toc-nasa-eos-project-mission-design" class="nav-link" data-scroll-target="#nasa-eos-project-mission-design"><span class="header-section-number">7.2</span> NASA EOS Project Mission &amp; Design</a></li>
-  <li><a href="#nasa-eos-earth-data-account" id="toc-nasa-eos-earth-data-account" class="nav-link" data-scroll-target="#nasa-eos-earth-data-account"><span class="header-section-number">7.3</span> NASA EOS Earth Data Account:</a></li>
+  <li><a href="#nasa-eos-earthdata-account" id="toc-nasa-eos-earthdata-account" class="nav-link" data-scroll-target="#nasa-eos-earthdata-account"><span class="header-section-number">7.3</span> NASA EOS Earthdata Account:</a></li>
   <li><a href="#nasa-eos-exercises-part-1" id="toc-nasa-eos-exercises-part-1" class="nav-link" data-scroll-target="#nasa-eos-exercises-part-1"><span class="header-section-number">7.4</span> NASA EOS Exercises Part 1</a></li>
   <li><a href="#distributed-active-archive-centers" id="toc-distributed-active-archive-centers" class="nav-link" data-scroll-target="#distributed-active-archive-centers"><span class="header-section-number">7.5</span> Distributed Active Archive Centers</a></li>
   <li><a href="#the-lpdaac-mission-process-archive-distribute-apply" id="toc-the-lpdaac-mission-process-archive-distribute-apply" class="nav-link" data-scroll-target="#the-lpdaac-mission-process-archive-distribute-apply"><span class="header-section-number">7.6</span> The LPDAAC Mission: Process, Archive, Distribute, Apply</a></li>
@@ -260,10 +260,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#load-a-csv" id="toc-load-a-csv" class="nav-link" data-scroll-target="#load-a-csv"><span class="header-section-number">7.21</span> Load a CSV</a></li>
   <li><a href="#plot-results-linescatter-plots" id="toc-plot-results-linescatter-plots" class="nav-link" data-scroll-target="#plot-results-linescatter-plots"><span class="header-section-number">7.22</span> Plot Results (Line/Scatter Plots)</a></li>
   <li><a href="#submit-an-area-request" id="toc-submit-an-area-request" class="nav-link" data-scroll-target="#submit-an-area-request"><span class="header-section-number">7.23</span> Submit an Area Request</a></li>
-  <li><a href="#submit-an-area-request-using-a-neon-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" id="toc-submit-an-area-request-using-a-neon-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" class="nav-link" data-scroll-target="#submit-an-area-request-using-a-neon-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data"><span class="header-section-number">7.24</span> Submit an area request using a NEON site boundary as the region of interest for extracting elevation, vegetation and land surface temperature data</a></li>
+  <li><a href="#submit-an-area-request-using-a-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" id="toc-submit-an-area-request-using-a-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" class="nav-link" data-scroll-target="#submit-an-area-request-using-a-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data"><span class="header-section-number">7.24</span> Submit an area request using a site boundary as the region of interest for extracting elevation, vegetation and land surface temperature data</a></li>
   <li><a href="#getting-started-with-an-area-request" id="toc-getting-started-with-an-area-request" class="nav-link" data-scroll-target="#getting-started-with-an-area-request"><span class="header-section-number">7.25</span> Getting Started with an Area Request</a></li>
   <li><a href="#set-up-the-output-directory-1" id="toc-set-up-the-output-directory-1" class="nav-link" data-scroll-target="#set-up-the-output-directory-1"><span class="header-section-number">7.26</span> Set Up the Output Directory</a></li>
-  <li><a href="#load-your-earth-data-token" id="toc-load-your-earth-data-token" class="nav-link" data-scroll-target="#load-your-earth-data-token"><span class="header-section-number">7.27</span> Load your Earth Data Token</a></li>
+  <li><a href="#load-your-earthdata-token" id="toc-load-your-earthdata-token" class="nav-link" data-scroll-target="#load-your-earthdata-token"><span class="header-section-number">7.27</span> Load your Earthdata Token</a></li>
   <li><a href="#query-available-products-1" id="toc-query-available-products-1" class="nav-link" data-scroll-target="#query-available-products-1"><span class="header-section-number">7.28</span> Query Available Products</a></li>
   <li><a href="#search-and-explore-available-products-1" id="toc-search-and-explore-available-products-1" class="nav-link" data-scroll-target="#search-and-explore-available-products-1"><span class="header-section-number">7.29</span> Search and Explore Available Products</a></li>
   <li><a href="#search-and-explore-available-layers-1" id="toc-search-and-explore-available-layers-1" class="nav-link" data-scroll-target="#search-and-explore-available-layers-1"><span class="header-section-number">7.30</span> Search and Explore Available Layers</a></li>
@@ -316,7 +316,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Describe the mission of NASA EOS</li>
 <li>Describe the roles of DAACs in distributing data</li>
 <li>Interact with the AppEEARS API to query the list of available products</li>
-<li>Submit and download submitting a point and area sample requests, download the request</li>
+<li>Submit and download submitting point and area sample requests, download the request</li>
 <li>Filter data based on quality</li>
 </ul>
 <section id="guest-lectures" class="level3" data-number="7.1.1">
@@ -330,21 +330,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p><em>Dr.&nbsp;Tom Maiersperger</em>, Project Scientist, LP DAAC, describes the structure and goals of NASA EOS, and outlines the platform’s operations, users, products, outreach, and current and future missions.</p>
 </section>
-<section id="accesssing-data-from-the-lp-daac" class="level4" data-number="7.1.1.2">
-<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="accesssing-data-from-the-lp-daac"><span class="header-section-number">7.1.1.2</span> Accesssing Data from the LP DAAC</h4>
+<section id="accessing-data-from-the-lp-daac" class="level4" data-number="7.1.1.2">
+<h4 data-number="7.1.1.2" class="anchored" data-anchor-id="accessing-data-from-the-lp-daac"><span class="header-section-number">7.1.1.2</span> Accessing Data from the LP DAAC</h4>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/nnQ44SoTIvo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
 </iframe>
 <blockquote class="blockquote">
 <p>1 hour, 5 minutes</p>
 </blockquote>
-<p><em>Aaron Friez</em>, Science Coordination Lead, LP DAAC, introduces the AppEEars application and explains how to access data products from the AppEEars database.</p>
+<p><em>Aaron Friez</em>, Science Coordination Lead, LP DAAC, introduces the AppEEARS application and explains how to access data products from the AppEEARS database.</p>
 </section>
 </section>
 <section id="assignments-in-this-chapter" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="assignments-in-this-chapter"><span class="header-section-number">7.1.2</span> Assignments in this chapter</h3>
 <ul>
-<li><p><a href="#nasa-eos-coding-assignment"><em>NASA EOS Coding Assignment</em></a> Obtain an Earth Data account and write a short R script to prove that you have a working username and password (7.4)</p></li>
-<li><p><a href="#nasa-eos-coding-lab---ndvi-in-appeears"><em>NASA EOS Coding Lab - NDVI in AppEEars</em></a> Use your Earth Data account to pull and analyze data via the AppEARs API (7.45.1)</p></li>
+<li><p><a href="#nasa-eos-coding-assignment"><em>NASA EOS Coding Assignment</em></a> Obtain an Earthdata account and write a short R script to prove that you have a working username and password (7.4)</p></li>
+<li><p><a href="#nasa-eos-coding-lab---ndvi-in-appeears"><em>NASA EOS Coding Lab - NDVI in AppEEARS</em></a> Use your Earthdata account to pull and analyze data via the AppEARs API (7.45.1)</p></li>
 <li><p><a href="#nasa-eos-culmination-activity"><em>NASA EOS Culmination Activity</em></a> Summarize a project you might explore using data from NASA EOS (7.45.2)</p></li>
 </ul>
 <div class="cell">
@@ -368,8 +368,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Future Missions</p></li>
 </ul>
 </section>
-<section id="nasa-eos-earth-data-account" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="nasa-eos-earth-data-account"><span class="header-section-number">7.3</span> NASA EOS Earth Data Account:</h2>
+<section id="nasa-eos-earthdata-account" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="nasa-eos-earthdata-account"><span class="header-section-number">7.3</span> NASA EOS Earthdata Account:</h2>
 <p>The EOSDIS Earthdata Login provides a centralized and simplified mechanism for user registration and profile management for all EOSDIS system components. End users may register and edit their profile information in one location allowing them access to the wide array of EOSDIS data and services. The EOSDIS Earthdata Login also helps the EOSDIS program better understand the user demographics and access patterns in support of planning for new value-added features and customized services that can be directed to specific users or user groups resulting in better user experience.</p>
 <p>Earthdata Login provides user registration and authentication services and a common set of user information to all EOSDIS data centers in a manner that permits the data center to integrate their additional requirements with the Earthdata Login services. Below is a brief description of services provided by the Earthdata Login.</p>
 </section>
@@ -380,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Suggested completion: following lecture 1 on NASA EOS</em></p>
 <p><strong>To submit via BBLearn:</strong></p>
 <ol type="1">
-<li><p>Follow the <a href="https://urs.earthdata.nasa.gov/documentation">steps in the NASA EOSDIS documentation</a> to sign up for an Earth Data account.</p></li>
+<li><p>Follow the <a href="https://urs.earthdata.nasa.gov/documentation">steps in the NASA EOSDIS documentation</a> to sign up for an Earthdata account.</p></li>
 <li><p>Write an R script that stores your <code>user</code> and <code>password</code> called <code>EARTHDATA_Token.R</code> and submit the following line of code via .Rmd and PDF:</p></li>
 </ol>
 <pre><code>source('./Tokens/EARTHDATA_Token.R') #path will change based on where you stored it
@@ -392,7 +392,7 @@ exists('user')</code></pre>
 <section id="lp-daac" class="level3" data-number="7.5.1">
 <h3 data-number="7.5.1" class="anchored" data-anchor-id="lp-daac"><span class="header-section-number">7.5.1</span> LP DAAC</h3>
 <p>The <a href="https://lpdaac.usgs.gov/about/">Land Processes Distributed Active Archive Center (LP DAAC)</a> is one of several discipline-specific data centers within the NASA EOS Data and Information System <a href="https://earthdata.nasa.gov/about-eosdis?_ga=2.174168546.1999623198.1596733217-204014717.1592177507">(EOSDIS)</a>. The LP DAAC operates as a partnership between the U.S. Geological Survey (USGS) and the National Aeronautics and Space Administration (NASA). Data specialists, system engineers, user service representatives, and science communicators work in collaboration to support LP DAAC activities.</p>
-<p><strong>Watch this 4:02 minute video on LP DAAC’s 2019-2021 Prosectus</strong></p>
+<p><strong>Watch this 4:02 minute video on LP DAAC’s 2019-2021 Prospectus</strong></p>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/pCuE007qEqI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 </iframe>
 </section>
@@ -435,7 +435,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <p>Run the following chunk to install any packages you will need for this section:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages you will need for AppEEARS API Tutorials</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'getPass'</span>,<span class="st">'httr'</span>,<span class="st">'jsonlite'</span>,<span class="st">'ggplot2'</span>,<span class="st">'dplyr'</span>,<span class="st">'tidyr'</span>,<span class="st">'readr'</span>,<span class="st">'geojsonio'</span>,<span class="st">'geojsonR'</span>,<span class="st">'rgdal'</span>,<span class="st">'sp'</span>, <span class="st">'sf'</span>, <span class="st">'raster'</span>, <span class="st">'rasterVis'</span>, <span class="st">'RColorBrewer'</span>, <span class="st">'jsonlite'</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'getPass'</span>,<span class="st">'httr'</span>,<span class="st">'jsonlite'</span>,<span class="st">'ggplot2'</span>,<span class="st">'dplyr'</span>,<span class="st">'tidyr'</span>,<span class="st">'readr'</span>,<span class="st">'geojsonio'</span>,<span class="st">'geojsonR'</span>,<span class="st">'sp'</span>, <span class="st">'sf'</span>, <span class="st">'raster'</span>, <span class="st">'rasterVis'</span>, <span class="st">'RColorBrewer'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -468,12 +468,12 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <ul>
 <li>Combined MODIS Leaf Area Index (LAI)
 <ul>
-<li><a href="https://doi.org/10.5067/MODIS/MCD15A3H.006">MCD15A3H.006</a>, 500m, 4 day: ‘Lai_500m’<br>
+<li><a href="https://doi.org/10.5067/MODIS/MCD15A3H.061">MCD15A3H.061</a>, 500m, 4 day: ‘Lai_500m’<br>
 </li>
 </ul></li>
 <li>Terra MODIS Land Surface Temperature
 <ul>
-<li><a href="https://doi.org/10.5067/MODIS/MOD11A2.006">MOD11A2.006</a>, 1000m, 8 day: ‘LST_Day_1km’, ‘LST_Night_1km’</li>
+<li><a href="https://doi.org/10.5067/MODIS/MOD11A2.061">MOD11A2.061</a>, 1000m, 8 day: ‘LST_Day_1km’, ‘LST_Night_1km’</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -511,7 +511,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <h3 data-number="7.10.1" class="anchored" data-anchor-id="prerequisites"><span class="header-section-number">7.10.1</span> Prerequisites:</h3>
 <ul>
 <li><p>A <a href="https://urs.earthdata.nasa.gov/">NASA Earthdata Login</a> account is required to login to the AppEEARS API and submit a request . You can create an account at the link provided.</p></li>
-<li><p>R and RStudio. These tutorials have been tested on Windows and MAC systems using R Version 4.0.0, RStudio version 1.1.463, and the specifications listed below.</p>
+<li><p>R and RStudio. These tutorials have been tested on Windows and Mac systems using R Version 4.0.0, RStudio version 1.1.463, and the specifications listed below.</p>
 <ul>
 <li>Required packages:
 <ul>
@@ -521,7 +521,6 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </li>
 <li><code>jsonlite</code><br>
 </li>
-<li><code>warnings</code></li>
 </ul></li>
 <li>To read and visualize the tabular data:
 <ul>
@@ -578,8 +577,8 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </div>
 <hr>
 </section>
-<section id="login-to-earth-data" class="level3" data-number="7.11.3">
-<h3 data-number="7.11.3" class="anchored" data-anchor-id="login-to-earth-data"><span class="header-section-number">7.11.3</span> Login to Earth Data</h3>
+<section id="login-to-earthdata" class="level3" data-number="7.11.3">
+<h3 data-number="7.11.3" class="anchored" data-anchor-id="login-to-earthdata"><span class="header-section-number">7.11.3</span> Login to Earthdata</h3>
 <p>To submit a request, you must first login to the AppEEARS API. Use your private <code>R Script</code> to enter your NASA Earthdata login Username and Password.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'EARTHDATA_Token.R'</span>) <span class="co">#path will change based on where you stored it</span></span>
@@ -611,8 +610,8 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <div class="cell-output cell-output-stdout">
 <pre><code>{
     "token_type": "Bearer",
-    "token": "7eU8rfkQCgPULczEv7VpRipM4Fru3bEdcSmhv0bxKZh57N-Rvg9bp20HInV19fPavZRjN2hmRHyWK2WV6g9eqg",
-    "expiration": "2026-11-05T21:18:45Z"
+    "token": "fZLdgodrqDUsSlVviY15s7cqeSSEclJtuczOAogsqqy-FHJ5aDXAh-busvD-K7OdJ4UZ_jOmnLWz19iav6_NZQ",
+    "expiration": "2026-11-11T02:39:53Z"
 }
  </code></pre>
 </div>
@@ -852,7 +851,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </div>
 <p>The product service provides many useful details, including if a product is currently available in AppEEARS, a description, and information on the spatial and temporal resolution. Below, the product details are retrieved using ‘ProductAndVersion’.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the MCD15A3H.006 info to JSON object and print the prettified info</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the MCD15A3H.061 info to JSON object and print the prettified info</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prettify</span>(<span class="fu">toJSON</span>(products<span class="sc">$</span><span class="st">"MCD15A3H.061"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
@@ -942,7 +941,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </section>
 <section id="search-and-explore-available-layers" class="level2" data-number="7.14">
 <h2 data-number="7.14" class="anchored" data-anchor-id="search-and-explore-available-layers"><span class="header-section-number">7.14</span> Search and Explore Available Layers</h2>
-<p>This API call will list all of the layers available for a given product. Each product is referenced by its <code>ProductAndVersion</code> property which is also referred to as the product_id. First, request the layers for the <code>MCD15A3H.006</code> product.</p>
+<p>This API call will list all of the layers available for a given product. Each product is referenced by its <code>ProductAndVersion</code> property which is also referred to as the product_id. First, request the layers for the <code>MCD15A3H.061</code> product.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Request layers for the 1st product in the list: MCD15A3H.061</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>MCD15A3H_req <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="fu">paste0</span>(API_URL,<span class="st">"product/"</span>, desired_products[<span class="dv">1</span>]))  <span class="co"># Request the info of a product from product URL</span></span>
@@ -1670,7 +1669,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the MOD11A2 results</span></span>
 <span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">paste0</span>(outDir,<span class="st">"/"</span>, files))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Select the MOD11A2.006 LST Day column for the data from <code>SOAP</code> using the <code>dplyr</code> package.</p>
+<p>Select the MOD11A2.061 LST Day column for the data from <code>SOAP</code> using the <code>dplyr</code> package.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>lst_SOAP <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter df</span></span>
@@ -1822,8 +1821,8 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </blockquote>
 <p><strong>This tutorial demonstrates how to use R to connect to the AppEEARS API</strong> The Application for Extracting and Exploring Analysis Ready Samples (<a href="https://lpdaacsvc.cr.usgs.gov/appeears/">AppEEARS</a>) offers a simple and efficient way to access and transform <a href="https://lpdaacsvc.cr.usgs.gov/appeears/products">geospatial data</a> from a variety of federal data archives in an easy-to-use web application interface. AppEEARS enables users to subset geospatial data spatially, temporally, and by band/layer for point and area samples. AppEEARS returns not only the requested data, but also the associated quality values, and offers interactive visualizations with summary statistics in the web interface. The <a href="https://lpdaacsvc.cr.usgs.gov/appeears/api/">AppEEARS API</a> offers users <strong>programmatic access</strong> to all features available in AppEEARS, with the exception of visualizations. The API features are demonstrated in this tutorial.</p>
 </section>
-<section id="submit-an-area-request-using-a-neon-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" class="level2" data-number="7.24">
-<h2 data-number="7.24" class="anchored" data-anchor-id="submit-an-area-request-using-a-neon-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data"><span class="header-section-number">7.24</span> Submit an area request using a NEON site boundary as the region of interest for extracting elevation, vegetation and land surface temperature data</h2>
+<section id="submit-an-area-request-using-a-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data" class="level2" data-number="7.24">
+<h2 data-number="7.24" class="anchored" data-anchor-id="submit-an-area-request-using-a-site-boundary-as-the-region-of-interest-for-extracting-elevation-vegetation-and-land-surface-temperature-data"><span class="header-section-number">7.24</span> Submit an area request using a site boundary as the region of interest for extracting elevation, vegetation and land surface temperature data</h2>
 <p>In this section: * Connecting to the AppEEARS API, * Querying the list of available products, * Submitting an area sample request, downloading the request, * Working with the AppEEARS Quality API, and * Loading the results into R for visualization.</p>
 <p>AppEEARS area sample requests allow users to subset their desired data by spatial area via vector polygons (shapefiles or GeoJSONs). Users can also reproject and reformat the output data. AppEEARS returns the valid data from the parameters defined within the sample request.</p>
 <section id="data-used-in-this-example" class="level4" data-number="7.24.0.1">
@@ -1837,12 +1836,12 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </ul></li>
 <li>Combined MODIS Leaf Area Index (LAI)
 <ul>
-<li><a href="https://doi.org/10.5067/MODIS/MCD15A3H.006">MCD15A3H.006</a>, 500m, 4 day: ‘Lai_500m’<br>
+<li><a href="https://doi.org/10.5067/MODIS/MCD15A3H.061">MCD15A3H.061</a>, 500m, 4 day: ‘Lai_500m’<br>
 </li>
 </ul></li>
 <li>Terra MODIS Land Surface Temperature
 <ul>
-<li><a href="https://doi.org/10.5067/MODIS/MOD11A2.006">MOD11A2.006</a>, 1000m, 8 day: ‘LST_Day_1km’, ‘LST_Night_1km’</li>
+<li><a href="https://doi.org/10.5067/MODIS/MOD11A2.061">MOD11A2.061</a>, 1000m, 8 day: ‘LST_Day_1km’, ‘LST_Night_1km’</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -1957,12 +1956,12 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </div>
 <p>Next, assign the AppEEARS API URL to a static variable.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>API_URL <span class="ot">=</span> <span class="st">'https://lpdaacsvc.cr.usgs.gov/appeears/api/'</span>  <span class="co"># Set the AppEEARS API to a variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>API_URL <span class="ot">=</span> <span class="st">"https://appeears.earthdatacloud.nasa.gov/api/"</span>  <span class="co"># Set the AppEEARS API to a variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <hr>
 </section>
-<section id="load-your-earth-data-token" class="level2" data-number="7.27">
-<h2 data-number="7.27" class="anchored" data-anchor-id="load-your-earth-data-token"><span class="header-section-number">7.27</span> Load your Earth Data Token</h2>
+<section id="load-your-earthdata-token" class="level2" data-number="7.27">
+<h2 data-number="7.27" class="anchored" data-anchor-id="load-your-earthdata-token"><span class="header-section-number">7.27</span> Load your Earthdata Token</h2>
 <p>To submit a request, you must first login to the AppEEARS API. Use your <code>token</code> script to import your credentials.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">'EARTHDATA_Token.R'</span>) <span class="co">#path will change based on where you stored it</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1990,8 +1989,8 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <div class="cell-output cell-output-stdout">
 <pre><code>{
     "token_type": "Bearer",
-    "token": "7eU8rfkQCgPULczEv7VpRipM4Fru3bEdcSmhv0bxKZh57N-Rvg9bp20HInV19fPavZRjN2hmRHyWK2WV6g9eqg",
-    "expiration": "2026-11-05T21:18:45Z"
+    "token": "fZLdgodrqDUsSlVviY15s7cqeSSEclJtuczOAogsqqy-FHJ5aDXAh-busvD-K7OdJ4UZ_jOmnLWz19iav6_NZQ",
+    "expiration": "2026-11-11T02:39:53Z"
 }
  </code></pre>
 </div>
@@ -2230,7 +2229,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 </div>
 <p>The product service provides many useful details, including if a product is currently available in AppEEARS, a description, and information on the spatial and temporal resolution. Below, the product details are retrieved using ‘ProductAndVersion’.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the MCD15A3H.006 info to JSON object and print the prettified info</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert the MCD15A3H.061 info to JSON object and print the prettified info</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">prettify</span>(<span class="fu">toJSON</span>(products<span class="sc">$</span><span class="st">"MCD15A3H.061"</span>)) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
@@ -2322,7 +2321,7 @@ Sioux Falls, South Dakota, USA. Work performed under USGS contract G15PD00467 fo
 <h2 data-number="7.30" class="anchored" data-anchor-id="search-and-explore-available-layers-1"><span class="header-section-number">7.30</span> Search and Explore Available Layers</h2>
 <p>This API call will list all of the layers available for a given product. Each product is referenced by its <code>ProductAndVersion</code> property which is also referred to as the product_id. First, request the layers for the <code>MCD15A3H.061</code> product.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Request layers for the 1st product in the list: MCD15A3H.006</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Request layers for the 1st product in the list: MCD15A3H.061</span></span>
 <span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>MCD15A3H_req <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="fu">paste0</span>(API_URL,<span class="st">"product/"</span>, desired_products[<span class="dv">1</span>]))  <span class="co"># Request the info of a product from product URL</span></span>
 <span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>MCD15A3H_content <span class="ot">&lt;-</span> <span class="fu">content</span>(MCD15A3H_req)                             <span class="co"># Retrieve content of the request </span></span>
 <span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>MCD15A3H_response <span class="ot">&lt;-</span> <span class="fu">toJSON</span>(MCD15A3H_content, <span class="at">auto_unbox =</span> <span class="cn">TRUE</span>)      <span class="co"># Convert the content to JSON object</span></span>
@@ -2597,7 +2596,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a>relative_path <span class="ot">&lt;-</span> bundle<span class="sc">$</span>file_name            <span class="co"># Assign relative path to a variable</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Later in this tutorial, the <code>SRTMGL1_NC</code> GeoTIFF is loaded for visulalization. Below, the directory to this file is assigned to a variable.</p>
+<p>Later in this tutorial, the <code>SRTMGL1_NC</code> GeoTIFF is loaded for visualization. Below, the directory to this file is assigned to a variable.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>SRTMGL1_NC_dir <span class="ot">&lt;-</span> (<span class="st">'./data/NASADEM_NC.001_NASADEM_HGT_doy2000042_aid0001.tif'</span>)           <span class="co"># Assign absolute path to a variable</span></span>
 <span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>SRTMGL1_NC_dir                                                             <span class="co"># Print the absolute path</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2709,7 +2708,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <h2 data-number="7.39" class="anchored" data-anchor-id="list-quality-layers-1"><span class="header-section-number">7.39</span> List Quality Layers</h2>
 <p>This API call will list all of the quality layer information for a product. For more information visit <a href="https://lpdaacsvc.cr.usgs.gov/appeears/api/?language=R#quality">AppEEARS API documentation</a></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>productAndVersion <span class="ot">&lt;-</span> <span class="st">'MCD15A3H.006'</span>                                  <span class="co"># Assign productAndVersion to a variable</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>productAndVersion <span class="ot">&lt;-</span> <span class="st">'MCD15A3H.061'</span>                                  <span class="co"># Assign productAndVersion to a variable</span></span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>MCD15A3H_q_req <span class="ot">&lt;-</span> <span class="fu">GET</span>(<span class="fu">paste0</span>(API_URL, <span class="st">"quality/"</span>, productAndVersion))<span class="co"># Request quality info for a product</span></span>
 <span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>MCD15A3H_q_content <span class="ot">&lt;-</span> <span class="fu">content</span>(MCD15A3H_q_req)                        <span class="co"># Retrieve the content of request</span></span>
 <span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>MCD15A3H_quality <span class="ot">&lt;-</span> <span class="fu">toJSON</span>(MCD15A3H_q_content, <span class="at">auto_unbox =</span> <span class="cn">TRUE</span>)    <span class="co"># Convert the info to JSON object</span></span>
@@ -2718,9 +2717,9 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "Layer": "Fpar_500m",
-        "QualityProductAndVersion": "MCD15A3H.006",
+        "QualityProductAndVersion": "MCD15A3H.061",
         "QualityLayers": [
             "FparLai_QC",
             "FparExtra_QC"
@@ -2728,9 +2727,9 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         "VisibleToWorker": true
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "Layer": "FparStdDev_500m",
-        "QualityProductAndVersion": "MCD15A3H.006",
+        "QualityProductAndVersion": "MCD15A3H.061",
         "QualityLayers": [
             "FparLai_QC",
             "FparExtra_QC"
@@ -2738,9 +2737,9 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         "VisibleToWorker": true
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "Layer": "Lai_500m",
-        "QualityProductAndVersion": "MCD15A3H.006",
+        "QualityProductAndVersion": "MCD15A3H.061",
         "QualityLayers": [
             "FparLai_QC",
             "FparExtra_QC"
@@ -2748,9 +2747,9 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         "VisibleToWorker": true
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "Layer": "LaiStdDev_500m",
-        "QualityProductAndVersion": "MCD15A3H.006",
+        "QualityProductAndVersion": "MCD15A3H.061",
         "QualityLayers": [
             "FparLai_QC",
             "FparExtra_QC"
@@ -2777,7 +2776,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "MODLAND",
         "Value": 0,
@@ -2785,7 +2784,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         "Acceptable": true
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "MODLAND",
         "Value": 1,
@@ -2793,7 +2792,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         "Acceptable": false
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "Sensor",
         "Value": 0,
@@ -2803,7 +2802,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "Sensor",
         "Value": 1,
@@ -2813,7 +2812,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "DeadDetector",
         "Value": 0,
@@ -2823,7 +2822,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "DeadDetector",
         "Value": 1,
@@ -2833,7 +2832,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "CloudState",
         "Value": 0,
@@ -2843,7 +2842,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "CloudState",
         "Value": 1,
@@ -2853,7 +2852,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "CloudState",
         "Value": 2,
@@ -2863,7 +2862,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "CloudState",
         "Value": 3,
@@ -2873,7 +2872,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "SCF_QC",
         "Value": 0,
@@ -2883,7 +2882,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "SCF_QC",
         "Value": 1,
@@ -2893,7 +2892,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "SCF_QC",
         "Value": 2,
@@ -2903,7 +2902,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "SCF_QC",
         "Value": 3,
@@ -2913,7 +2912,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
         }
     },
     {
-        "ProductAndVersion": "MCD15A3H.006",
+        "ProductAndVersion": "MCD15A3H.061",
         "QualityLayer": "FparLai_QC",
         "Name": "SCF_QC",
         "Value": 4,
@@ -2973,7 +2972,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </section>
 <section id="load-a-geotiff" class="level2" data-number="7.43">
 <h2 data-number="7.43" class="anchored" data-anchor-id="load-a-geotiff"><span class="header-section-number">7.43</span> Load a GeoTIFF</h2>
-<p>First, created a raster object by calling the raster() function from the <code>raster</code> package.</p>
+<p>First, create a raster object by calling the raster() function from the <code>raster</code> package.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb122"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a raster object using the directory previously extracted</span></span>
 <span id="cb122-2"><a href="#cb122-2" aria-hidden="true" tabindex="-1"></a>dem <span class="ot">&lt;-</span> <span class="fu">raster</span>(SRTMGL1_NC_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -3005,7 +3004,7 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 <h3 data-number="7.45.1" class="anchored" data-anchor-id="nasa-eos-coding-lab---ndvi-in-appeears"><span class="header-section-number">7.45.1</span> NASA EOS Coding Lab - NDVI in AppEEars</h3>
 <ol type="1">
 <li><p>Choose two NEON sites in <em>different</em> ecoregions. Then complete the following for <strong>each</strong> of your two NEON sites:</p></li>
-<li><p>Using your Earth Data account submit a point-based request to AppEEARS to pull 250m NDVI from AQUA and TERA for 2017, 2018, &amp; 2019.</p></li>
+<li><p>Using your Earthdata account submit a point-based request to AppEEARS to pull 250m NDVI from AQUA and TERRA for 2017, 2018, &amp; 2019.</p></li>
 </ol>
 <p><em>Hint: How might you decide on the lat/lon to submit? Metadata for the site? NEON TOS data?</em></p>
 <ol start="3" type="1">
@@ -3013,15 +3012,15 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
 </ol>
 <p><em>Hint: Look at the QA/QC files that accompany your request</em></p>
 <ol start="4" type="1">
-<li><p>Plot 3 years of NDVI from MODIS AQUA and TERA as a timeseries.</p></li>
-<li><p>Constrain a 3-week window for ‘peak greeness’ from MODIS and highlight it on your timeseries plot.</p></li>
+<li><p>Plot 3 years of NDVI from MODIS AQUA and TERRA as a time series.</p></li>
+<li><p>Constrain a 3-week window for ‘peak greenness’ from MODIS and highlight it on your time series plot.</p></li>
 <li><p>Pull the canopy-level gcc90 from PhenoCam for the same site and the same time period as above.</p></li>
 </ol>
 <p><em>Hint: Check the numbering of your PhenoCam on the <a href="https://phenocam.sr.unh.edu/webcam/gallery/">PhenoCam gallery</a> </em></p>
 <ol start="7" type="1">
-<li><p>Plot the PhenoCam and MODIS timeseries on the same plot.</p></li>
-<li><p>Constrain a 3-week window for ‘peak greeness’ from PhenoCam and highlight it on your timeseries. <em>Hint: Remember our PhenoCam discussions regarding early ‘extra green’ leaves? You’ll need to use some logic for this, not just a <code>max</code> </em></p></li>
-<li><p>Find the timing of the AOP flights that have occured at your sites over the same time period. Add those dates as a vertical line.</p></li>
+<li><p>Plot the PhenoCam and MODIS time series on the same plot.</p></li>
+<li><p>Constrain a 3-week window for ‘peak greeness’ from PhenoCam and highlight it on your time series. <em>Hint: Remember our PhenoCam discussions regarding early ‘extra green’ leaves? You’ll need to use some logic for this, not just a <code>max</code> </em></p></li>
+<li><p>Find the timing of the AOP flights that have occurred at your sites over the same time period. Add those dates as a vertical line.</p></li>
 </ol>
 <p><strong>BONUS:</strong> If you’d like to submit an area-based request instead you can do so using the shapefiles for each NEON site <a href="https://drive.google.com/drive/folders/19MJee-UKY-McbxDuYYCINhWRbqn4bbGO?usp=sharing">in this folder</a></p>
 </section>
@@ -3442,8 +3441,8 @@ Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06-NEON_AOP.html" class="pagination-link" aria-label="NEON AOP">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON AOP</span></span>
+      <a href="./06-NEON_AOP.html" class="pagination-link" aria-label="NEON Airborne Observation Plaform (AOP)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON Airborne Observation Plaform (AOP)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

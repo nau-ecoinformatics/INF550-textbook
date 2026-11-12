@@ -1,5 +1,5 @@
 ---
-title: Introduction to Google Earth Engine (GEE) platform & its tools
+title: Introduction to the Google Earth Engine (GEE) Platform and Interfaces
 author: 
 - Ogonna Eli
 - Scott LaRocca
@@ -21,34 +21,45 @@ document an initial research question or idea and associated data needed to
 address that question, that you may want to explore while pursuing this course.
 
 
-
-
 ## GEE Learning Objectives
 
 At the end of this activity, you will be able to:
 
-  * Understand the mission and purpose of Google Earth Engine (GEE) and the nature of the data program from which the data is derived
-  
-  * Access key tools & resources that are available to pull data from GEE
+* Understand the structure and capabilities of Google Earth Engine (GEE), including its cloud-based infrastructure, data catalog, and computational resources
 
-  * Effectively use the GEE cloud platform/Python API to integrate and analyze data from environmental research infrastructures
+* Access data and apply fundamental processing techniques using the GEE Code Editor and JavaScript API
 
-  * GEE does a lot of different things, so you will understand which of those things are most specifically useful and interesting for a researcher doing synthesis across multiple environmental research infrastructures.
+* Utilize alternative programming interfaces (APIs), including the Python API and R interface (rgee)
+
+* Integrate Earth Engine into broader ecoinformatics workflows by accessing, processing, and analyzing cloud-hosted geospatial data within external computational environments
 
 
-## GEE Project Mission & Design:
+## GEE Overview:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gKGOeTFHnKY?si=V4ZwjGtbd8B_76cD" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-The [Google Earth Engine (GEE)](https://earthengine.google.com/) platform combines a multi-petabyte catalog of satellite imagery and geospatial datasets with planetary-scale analysis capabilities. Scientists, researchers, and developers use Earth Engine to detect changes, map trends, and quantify differences on the Earth's surface. Earth Engine is now available for commercial use, and remains free for academic and research use.
+The [Google Earth Engine (GEE)](https://earthengine.google.com/) platform combines a multi-petabyte catalog of satellite imagery and geospatial datasets with the massive computational power of Google's cloud infrastructure. Rather than downloading and processing large datasets locally, GEE users can leverage Google's distributed computing resources to perform complex analyses across large spatial and temporal scales. This architecture enables planetary-scale environmental monitoring and analysis that would otherwise require substantial local computing resources and data storage. 
 
-## Vision & Mission
-GEE’s vision is to provide data and information on different open source earth observation (EO)  systems, free access to ensure the continuous monitoring of ecosystems, and natural resources using a cloud-based platform for planetary-scale environmental data analysis. The mission of GEE is to collect, organize, and share EO data to researchers, governments, and non-profit organizations to enable change monitoring, time series analysis, and make well-informed decisions on global issues.
+Scientists, researchers, and developers use Earth Engine to detect environmental changes, identify trends, and quantify processes occurring across the Earth's surface. Students and academic researchers can access Earth Engine at no cost for eligible noncommercial educational and research activities. Commercial use is also supported through separate pricing arrangements.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CgmScMh9AfY?si=NZTvu4_kVokAn0qt" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+## Learning Materials
+Since its initial launch in 2010, Google Earth Engine has grown into one of the most widely used platforms in the remote sensing and geospatial research communities. Its capabilities and large international user base have generated a wealth of learning materials, including official documentation, tutorials, video lectures, textbooks, workshops, and community-developed tools and workflows. Students are encouraged to take advantage of these resources and explore the various ways that GEE can be applied to research tasks in their area of interest. 
+
+### Lecture: Google Earth Engine 101 
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/I-wFYm4Hnhg" title="Google Earth Engine 101 Part 1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+> Time: 1 hour, 17 minutes
+
+### Recommended Resources
+For students interested in developing a deeper understanding of GEE, the open textbook [Cloud-Based Remote Sensing with Google Earth Engine: Fundamentals and Applications](https://www.eefabook.org/) is an exceptional supplementary resource. Edited by over 100 researchers, practitioners, and Earth Engine experts (notably several Google engineers and developers directly involved in building the platform), this textbook is among the most comprehensive resources available for learning Earth Engine. It is highly recommended as a reference throughout this course and beyond. 
+
+```{r, echo=FALSE}
+knitr::include_graphics('images/gee-textbook.png')
+```
 
 
-### Relevant documents & background information:
+### Relevant Links:
 
 1. [GEE platform overview](https://earthengine.google.com/platform/)
 
@@ -99,25 +110,23 @@ knitr::include_graphics('images/GEE_DATASET.png')
   * Population
 
 
-## How to Access GEE Data:
+## Hands on: Using the GEE Code Editor
 
 GEE makes their data available through a number of different [channels and tools](https://developers.google.com/earth-engine). This flexibility reflects the way geospatial data are handled in Earth Engine: rather than downloading datasets locally, users send computational requests to remote servers where the data are stored and processed. These requests are made through a set of APIs and client libraries that translate user-written code into Earth Engine operations.
 
-Access to Earth Engine data is typically mediated through these client libraries, which provide interfaces in both JavaScript and Python. These libraries act as a bridge between user code and the Earth Engine servers, allowing complex geospatial analyses to be expressed in a relatively compact and high-level syntax. Users can also interact directly with Earth Engine through a REST API, although this is less commonly used for exploratory analysis.
+Access to Earth Engine data is typically mediated through these client libraries, which provide interfaces in both JavaScript and Python. These libraries act as a bridge between user-written code and the Earth Engine servers, allowing complex geospatial analyses to be expressed in a relatively compact and high-level syntax. Users can also interact directly with Earth Engine through a REST API, although this is less commonly used for exploratory analysis.
 
 One of the most widely used interfaces is the JavaScript-based [Code Editor](https://developers.google.com/earth-engine/guides/playground), which provides an interactive, browser-based environment for working with Earth Engine data. The Python client library offers similar functionality, and can be used in environments such as Google Colab, local Python installations, or cloud-based platforms such as App Engine. Together, these interfaces allow users to choose a workflow that best fits their computational background and research needs.
 
-
-
 ### Setting Up an Earth Engine Account
 
-Before accessing any of the interfaces described above, a Google Earth Engine account is required. As of 2024, registration is no longera standalone process. Earth Engine access is granted at the level of a **Google Cloud project**, which is linked to your Google account. This change was made to support the platform's commercial release while preserving free access for academic and research users.
+Before accessing any of the interfaces described above, a Google Earth Engine account is required. As of 2024, registration is no longer a standalone process. Earth Engine access is granted at the level of a **Google Cloud project**, which is linked to your Google account. This change was made to support the platform's commercial release while preserving free access for academic and research users.
 
 To register:
 
 1. Sign in at <https://code.earthengine.google.com/register> with the Google account you intend to use for Earth Engine (e.g., @nau.edu email).
 2. Choose the **noncommercial/academic** use option when prompted.
-3. Either select an existing Google Cloud project or create a new one. Most new users will create a project at this stage; the project name (e.g., `ee-yourusername`) is what you will later pass to `ee.Initialize()` or `ee_Initialize()` from  the Python and R client libraries.
+3. Either select an existing Google Cloud project or create a new one. Most new users will create a project at this stage; the project name (e.g., `ee-yourusername`) which you will later pass to `ee.Initialize()` or `ee_Initialize()` from  the Python and R client libraries.
 4. Confirm registration. Approval is typically immediate for noncommercial use.
 
 **A note on quotas:** in 2026, Earth Engine introduced a tiered quota system for noncommercial projects. Projects that have not selected a tier are placed in the *Community Tier* by default, which is sufficient for coursework and exploratory analysis but applies stricter rate limits than higher tiers. If you find that long-running scripts begin to fail with `OverQuotaError`, the quota tier of your project is the first thing to check. Tier selection is done from the Earth Engine project management page at <https://code.earthengine.google.com/register>.
@@ -131,9 +140,9 @@ GEE provides access to a Code Editor as an integrated development environment (I
 
 https://code.earthengine.google.com/
 
-Access to Earth Engine data through the Code Editor is built around the JavaScript programming language, which serves as the primary scripting interface for this environment. JavaScript provides a lightweight and accessible syntax that acts as a direct bridge to the Earth Engine API, where all geospatial computations are performed. While JavaScript may not be the most familiar programming language for many researchers in the geosciences, it is the most mature and fully supported option within Earth Engine. Importantly, users do not need to become expert JavaScript programmers to use the platform effectively. Instead, a basic understanding of syntax is sufficient, since most operations in Earth Engine are performed by calling pre-built functions from the Earth Engine library. This [brief introduction](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) to JavaScript syntax for GEE provided by the GEE developer team is enough to get started for most use cases.
+Access to Earth Engine data through the Code Editor is built around the JavaScript programming language, which serves as the primary scripting interface for this environment. JavaScript provides a lightweight and accessible syntax that acts as a direct bridge to the Earth Engine API, where all geospatial computations are performed. Although JavaScript may not be the most familiar programming language for many researchers in the geosciences, it is the most mature and fully supported option within Earth Engine. Importantly, users do not need to become expert JavaScript programmers to use the platform effectively. Instead, a basic understanding of syntax is sufficient, since most operations in Earth Engine are performed by calling pre-built functions from the Earth Engine library. This [brief introduction](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) to JavaScript syntax for GEE provided by the GEE developer team is enough to get started for most use cases.
 
-When first accessing the Code Editor, you may be prompted to create a *home folder*. This folder is permanently linked to your Earth Engine account and serves as their personal workspace within the platform. It is good practice to choose a name that clearly identifies you, since this will be visible within shared Earth Engine environments and collaborative workflows.
+When first accessing the Code Editor, you may be prompted to create a *home folder*. This folder is permanently linked to your Earth Engine account and serves as your personal workspace within the platform. It is good practice to choose a name that clearly identifies you, since this will be visible within shared Earth Engine environments and collaborative workflows.
 
 Within your home folder, you can organize and store **scripts** and **repositories**, which function similarly to projects and code files in other development environments.
 
@@ -155,10 +164,10 @@ To do this, enter the following code in the Script Editor and execute the script
 print('Hello Earth!');
 ```
 
-You should see the text output appear in the upper-right panel under “Console”. This is basic JavaScript, which runs in your web browser on the client side. The power of GEE is in taking advantage of Google's vast infrastructure of severs to both access data and perform calculations on the server side. This client-server distinction is important in GEE and can be read about [here](https://developers.google.com/earth-engine/guides/client_server). We can now begin using using GEE to access data on the server side, specifically, images and image collections.
+You should see the text output appear in the upper-right panel under “Console”. This is basic JavaScript, which runs in your web browser on the client side. The power of GEE is in taking advantage of Google's vast infrastructure of servers to both access data and perform calculations on the server side. This client-server distinction is important in GEE and can be read about [here](https://developers.google.com/earth-engine/guides/client_server). We can now begin using GEE to access data on the server side, specifically, images and image collections.
 
 ### Working with Earth Engine Image Objects 
-Before writing any code, it is useful to know that Earth Engine functionality is organized through **objects** (e.g., Earth Engine images, image collections, features, feature collections), and built-in **methods** or functions which can be called upon these object types. Detailed documentation for these data types and functions is provided in the 'Docs' panel on the upper left of the Code Editor. 
+Before writing any code, it is useful to understand that the Earth Engine API's functionality is organized around **objects** (e.g., Earth Engine images, image collections, features, and feature collections) and associated **methods**, which are built-in functions that operate on these object types. Detailed documentation for these object types and their methods is provided in the 'Docs' panel on the upper left of the Code Editor. (See here for [more information on GEE objects and methods](https://developers.google.com/earth-engine/guides/objects_methods_overview)). 
 
 Let's now begin working with GEE objects by accessing an image from Landsat 8, one of the most widely used Earth Observation platforms. In the Script Editor, enter and run the following code: 
 
@@ -173,7 +182,7 @@ Map.addLayer(firstImage);
 ```
 Notice that `Map` is another GEE object type, and methods such as `.addLayer()` provide means to interact with the Map Display of the Code Editor. 
 
-The image should appear in your Map Display, however, we still need to adjust the image **visualization parameters** to make it visualize nicely. In this case, we can visualize the image using true color by entering the following at the beginning of the script:
+The image should appear in your Map Display, however, we still need to adjust the image **visualization parameters** to make it visualize nicely. In this case, we can visualize the image using true color by entering the following parameters at the beginning of the script:
 ```{js, eval=FALSE}
 var trueColorVis = {              // a dictionary object 
   bands: ["SR_B4","SR_B3","SR_B2"], // Use the Red, Green, Blue bands
@@ -203,15 +212,15 @@ In the Inspector panel, open the *Objects* section, and click on *bands*. We can
 ### Working With Image Collections 
 We previously loaded one single Landsat image to the map. But the true power of GEE is in working with **image collections**, which can represent an entire catalogue of data from a specific satellite or database. 
 
-Let’s use Landsat 8 once again. We can type the ID of the satellite into an `ee.ImageCollection()` object, much as we did above. But this time we can search for this collection using the search bar. In the upper search bar at the top of the code editor webpage, type “Landsat 8” and click Enter. There will be several results representing different processing levels. Find the one that says USGS Landsat 8 Level 2, Collection 2, Tier 1. 
+Let’s use Landsat 8 once again. We can type the ID of the satellite into an `ee.ImageCollection()` object, much as we did above. But this time we can search for this collection using the search bar. In the upper search bar at the top of the code editor webpage, type “Landsat 8” and click Enter. There will be several results representing different processing levels. Find the dataset titled `USGS Landsat 8 Level 2, Collection 2, Tier 1`. 
 
 ```{r, echo=FALSE, fig.cap="Note: You can access any of the datasets in Google Earth Engine this way. The search bar is a way to explore GEE's petabytes of Earth data!"}
 knitr::include_graphics('images/search_results.png')
 ```
 
-This dataset contains already pre-processed atmospherically corrected **surface reflectance** data, which is what we want to work with. Click on this search result to inspect the details of this dataset. Inside, we have a *Description*, list of *Bands*, *Properties*, and *Terms of Use*. By clicking on the *Bands* tab, we can inspect which of the bands we saw earlier correspond to which sections of the electromagnetic spectrum (blue, green, red, near infrared, shortwave infrared, etc.). We can also see the spatial resolution of the data, which here is 30 meters^2^.
+This dataset contains already pre-processed atmospherically corrected **surface reflectance** data, which is what we want to work with. Click on this search result to inspect the details of this dataset. Inside, there is a *Description*, list of *Bands*, *Properties*, and *Terms of Use*. By clicking on the *Bands* tab, we can inspect which of the bands we saw earlier correspond to which sections of the electromagnetic spectrum (blue, green, red, near infrared, shortwave infrared, etc.). We can also see the spatial resolution of the data, which here is 30 meters^2^.
 
-Scrolling down, we can see on the lefthand side the period of *Dataset Availability* (2013-03-18 to present), the *Dataset Provider* (USGS), and a *Collection Snippet* which we can use to programatically bring the dataset into our script. Copy the collection snippet, close this window, and let’s paste the snippet into the script. 
+Scrolling down, we can see on the lefthand side the period of *Dataset Availability* (2013-03-18 to present), the *Dataset Provider* (USGS), and a *Collection Snippet* which we can use to programmatically bring the dataset into our script. Copy the collection snippet, close this window, and let’s paste the snippet into the script. 
 
 ```{r, echo=FALSE}
 knitr::include_graphics('images/collection_view.png')
@@ -232,10 +241,10 @@ To apply a **spatial filter**, we will create an Earth Engine **Feature** object
 knitr::include_graphics('images/geom_point.png')
 ```
 
-Once a point is placed, notice that it is automatically converted to a **Geometry Import**. It will appear under *Geometry Imports* on the map, and will also appear as *var geometry* at the imports section above your scripting panel. The same feature could have been created programmatically as well, for example: for example: 
+Once a point is placed, notice that it is automatically converted to a **Geometry Import**. It will appear under *Geometry Imports* on the map, and will also appear as *var geometry* at the imports section above your scripting panel. The same feature could have been created programmatically as well, for example: 
 `var geometry = ee.Geometry.Point([-118.64,34.10]);`. 
 
-We can use now use this feature to filter the image collection to only images which spatially intersect the new point. This is done by applying the method `.filterBounds()` to the Image Collection. 
+This feature can now be used to filter the image collection to only include images which spatially intersect the created point. This is done by applying the method `.filterBounds()` to the Image Collection. 
 
 ```{js,eval=FALSE}
 var landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
@@ -246,11 +255,11 @@ With the Image Collection filtered spatially, the next step is to apply a **temp
 
 ```{js, eval=FALSE}
 var landsat8 = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
-  .filterBounds(geometry)
-  .filterDate("2024-11-01", "2024-12-31");
+  .filterBounds(geometry) //spatial filter
+  .filterDate("2024-11-01", "2024-12-31"); // temporal filter 
 ```
 
-Notice how each filter can build on the last. With the spatial and temporal filter applied, we can now add the collection to the map and inspect it using the following command, and including the image visualization parameters from above. 
+Notice how each filter can build on the last. With the spatial and temporal filter applied, we can now add the collection to the map using the following command and including the image visualization parameters from above. 
 
 ```{js, eval=FALSE}
 Map.addLayer(landsat8, trueColorVis, "Landsat 8 Collection");
@@ -278,10 +287,7 @@ Each band in an image can be thought of as a 2D array of pixel values, which all
 
 Because clouds tend to have high reflectance in optical imagery, they often appear as unusually bright values within a time series. By taking the median at each pixel, these outliers are suppressed, resulting in a composite image close to the true median surface reflectance values--particularly when there are many cloud-free images. 
 
-
-Each band of an image is just a 2D array of numbers, so we can perform mathematical operations on them. For an image collection, we can use the `.median()` method to collapse all the images into a single image, where each pixel represents the median value of that location across the collection. Since clouds reflect sunlight brightly across the bands of an optical satellite image, taking the median pixel value across time removes their influence from the image, particularly if there are many cloud-free values at that pixel in the collection. 
-
-We can implement this by creating a new object called `landsat8_median`:
+Implement this by creating a new object called `landsat8_median`:
 
 ```{js, eval=FALSE}
 var landsat8_median = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
@@ -290,7 +296,7 @@ var landsat8_median = ee.ImageCollection("LANDSAT/LC08/C02/T1_L2")
   .median();
 ```
 
-The result of this operation is no longer an image collection, but a single image object. In GEE parlance, moving from a collection to a single image is referred to as **reducing** the image collection. 
+The result of this operation is no longer an image collection, but a single image object. In GEE parlance, moving from a collection to a single image is referred to as [reducing](https://developers.google.com/earth-engine/guides/reducers_image_collection) the image collection. 
 
 Visualize the resulting image using the same visualization parameters as above. Did the clouds disappear?
 
@@ -300,10 +306,10 @@ knitr::include_graphics('images/image_compositing.png')
 
 In this case, not entirely. This is due to the fact that there were only four images in the collection. However, in a sunny region like California, compositing across a longer time span would result in a much sharper image. What would it look like had we collapsed a year of data using this method? 
 
-This approach is quick and effective for producing a general visual overview, but it can also introduce distortions and leads to the loss of potentially valuable temporal information. To handle clouds more precisely while preserving information through time, we can explore alternative methods.
+This approach is quick and effective for producing a general visual overview, but it can introduce distortions and results in the loss of potentially valuable temporal information. To handle clouds more precisely while preserving information through time, we can explore alternative methods.
 
-#### Filtering by attributes 
-Recall that each image includes a set of properties, which are metadata associated with the scene. Landsat data include the property CLOUD_COVER, which represents the estimated percentage of cloud cover for a given image. For example, if an image has CLOUD_COVER = 40, then approximately 40% of the scene is estimated to be obscured by clouds based on USGS processing algorithms.
+#### Filtering by Image Properties 
+Recall that each image includes a set of properties, which are metadata associated with the scene. Landsat data include the property `CLOUD_COVER`, which represents the estimated percentage of cloud cover for a given image. For example, if an image's property `CLOUD_COVER` = 40, then approximately 40% of the scene is estimated to be obscured by clouds based on USGS processing algorithms.
 
 We can use this property to filter out images that are too cloudy for analysis. To do so, we append an additional filter step to the image collection:
 
@@ -314,32 +320,35 @@ var landsat8 = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
   .filter(ee.Filter.lt('CLOUD_COVER', 20));
 ```
 
-Here, the `.filter()` method is called to apply a new general filter to the image collection. This filter is defined using
+Here, we use the `.filter()` method to apply an additional condition to the image collection. The condition is defined using `ee.Filter.lt()`, which selects images where a specified property is less than a given threshold. In this case, we use the `CLOUD_COVER` property to retain only images with less than 20% estimated cloud cover.
 
-Here, we use the `.filter()` method to apply a condition to the image collection, defined using `ee.Filter.lt()`, which selects images where a given property is less than a specified threshold. In this case, we retain only images with `CLOUD_COVER` less than 20%.
-
-The result of this command will be an image collection which has been filtered for images below the cloud cover threshold. For relatively cloud-free regions such as southern California, this threshold will be sufficient, however, it can be adjusted depending on local climate and analysis needs.
+The resulting image collection contains only images that meet this condition, in addition to the spatial and temporal filters applied earlier. A cloud cover threshold of 20% may be sufficient for relatively cloud-free regions such as southern California, but the threshold can be adjusted depending on local climate conditions, data availability, and analysis objectives.
 
 #### Cloud Masking 
 A more robust way to handle clouds is by applying a **cloud mask**. Unlike simple filtering, which removes entire images, cloud masking operates at the pixel level, allowing us to retain useful observations within partially cloudy scenes.
 
 To implement this approach, we first define a cloud masking function. This introduces an important Earth Engine concept: applying a function across all images in a collection using the `.map()` method.
 
-For widely used sensors such as Landsat and Sentinel, well-tested cloud masking functions are readily available in the Earth Engine community and documentation. Here, we use a standard Landsat approach that leverages the `QA_PIXEL` band to identify clouds and cloud shadows based on quality assessment flags.
+For widely used sensors such as Landsat and Sentinel, well-tested cloud masking functions are readily available in the Earth Engine community and documentation. Here, we use a standard Landsat approach that leverages the `QA_PIXEL` band to identify clouds and cloud shadows based on quality assessment flags. For more information on the Landsat Quality Assessment (QA) bands and the bit flags used to identify clouds, cloud shadows, and other atmospheric conditions, see the [USGS Documentation](https://www.usgs.gov/landsat-missions/landsat-collection-2-quality-assessment-bands). 
 
 To implement this, we first define the masking function. Add the following code at the top of your script:
 ```{js, eval=FALSE}
-function maskL8sr(image) {  // intake an image
+function maskL8sr(image) { // intake an image
   var qa = image.select('QA_PIXEL'); // select the QA pixel band
-  var cloudMask = qa.bitwiseAnd(1 << 3).eq(0) // bitmap to identify clouds 
-  .and(qa.bitwiseAnd(1 << 5).eq(0)); // bitmap to identify cloud shadows
-  return image.updateMask(cloudMask); // return a masked image 
+
+  // define the cloud mask using Landsat 8's included bitmap codes in the QA band  
+  var cloudMask = qa.bitwiseAnd(1 << 1).eq(0) // Dilated cloud
+    .and(qa.bitwiseAnd(1 << 2).eq(0))         // Cirrus
+    .and(qa.bitwiseAnd(1 << 3).eq(0))         // Cloud
+    .and(qa.bitwiseAnd(1 << 4).eq(0));        // Cloud shadow
+
+  return image.updateMask(cloudMask); // return the masked image 
 }
 ```
 
 Now that we have defined a cloud masking function, we can apply it to every image in the collection. In GEE, this is known as mapping a function over an image collection.
 
-This is done using the `.map()` method, which applies a function to each image in the collection and returns a new, processed collection as output. The following code applies both the cloudiness atrribute filter and the cloud masking function, which is a robust way to deal with the problem of cloud cover.
+This is done using the `.map()` method, which applies a function to each image in the collection and returns a new, processed collection as output. The following code applies both the cloudiness attribute filter and the cloud masking function to every image in the collection, resulting in a more robust approach to dealing with cloud cover.
 
 ```{js, eval=FALSE}
 var landsat8 = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
@@ -355,14 +364,14 @@ How does the data look now with both the cloud cover filter and the cloud mask a
 knitr::include_graphics('images/cloud_filter_mask.png')
 ```
 
-The resulting image collection is now much cleaner and ready for analysis.
+The image collection is now much cleaner and ready for analysis.
 
 The dates and region selected here are intentional. The image precedes the destructive wildfires near Los Angeles in January 2025, which caused widespread damage across several communities. In the next exercise, we will use spectral band indices and change detection to map the extent and severity of this wildfire event and its impact on communities in the wildland-urban interface.
 
 ## Hands on: Satellite Change Detection Using GEE
 GEE is particularly well suited for change detection, as it provides seamless access to large temporal ranges of satellite imagery and efficient tools for comparing observations across dates.
 
-Change detection is a widely applied method in satellite image analysis, and and enables the identification and quantification of environmental changes across space and time. This method is applied across several domains, including:
+Change detection is a widely applied method in satellite image analysis, and enables the identification and quantification of environmental changes across space and time. This method is applied across several domains, including:
 
 - **Wildfire assessment:** Mapping burn extent and severity before and after fire events
 - **Deforestation and forest degradation:** Detecting tree cover loss, logging activity, or forest recovery
@@ -376,17 +385,20 @@ Change detection is a widely applied method in satellite image analysis, and and
 In this section, we will use change detection techniques to analyze wildfire severity and assess the extent of damage to communities in the wildland-urban interface during the 2025 Los Angeles wildfire. 
 
 ### Pre-Fire Imagery 
-In Section XX.XX, we learned how to create cloud-free composites using image collections, filtering, and masking techniques. We now apply these skills to analyze the 2025 Los Angeles wildfires by generating a high-quality pre-fire image composite image.
+In Section 9.5.5, we learned how to create cloud-free composites using image collections, filtering, and masking techniques. We now apply these skills to analyze the 2025 Los Angeles wildfires by generating a high-quality pre-fire image image composite.
 
 To do this, we use Landsat 8 data, apply filters to the image collection, perform image-based operations, and implement a cloud masking function. The following script produces a ready-to-use pre-fire composite based on these steps:
 
 ```{js, eval=FALSE}
 // Cloud Mask Function
-function maskL8sr(image) {  // intake an image
+function maskL8sr(image) { // intake an image
   var qa = image.select('QA_PIXEL'); // select the QA pixel band
-  var cloudMask = qa.bitwiseAnd(1 << 3).eq(0) // bitmap to identify clouds 
-  .and(qa.bitwiseAnd(1 << 5).eq(0)); // bitmap to identify cloud shadows
-  return image.updateMask(cloudMask); }  // return a masked image 
+  var cloudMask = qa.bitwiseAnd(1 << 1).eq(0) // Dilated cloud
+    .and(qa.bitwiseAnd(1 << 2).eq(0))         // Cirrus
+    .and(qa.bitwiseAnd(1 << 3).eq(0))         // Cloud
+    .and(qa.bitwiseAnd(1 << 4).eq(0));        // Cloud shadow
+  return image.updateMask(cloudMask); // return the masked image 
+}
 
 // Define Area of Interest
 var geometry = ee.Geometry.Point([-118.64,34.10]); 
@@ -446,7 +458,7 @@ Map.addLayer(landsat_pre, swir_vis,"Pre-fire false color");
 Map.addLayer(landsat_post, swir_vis,"Post-fire false color");
 ```
 
-```{r, echo=FALSE, fig.cap="False color visualizations take advantage of the multispectral nature of satellite data, and can help highlight features that our eyes struggle to see in the visible spectrum."}
+```{r, echo=FALSE, fig.cap="False color visualizations take advantage of the multispectral nature of satellite data and can help highlight features that our eyes struggle to see in the visible spectrum."}
 knitr::include_graphics('images/false_color_vis.png')
 ```
 
@@ -473,21 +485,43 @@ knitr::include_graphics('images/nbr.png')
 
 Since NIR reflectance is strongly associated with healthy vegetation, and SWIR reflectance increases over burned surfaces, the contrast between these bands provides a useful indicator of fire scars. This relationship is captured by the NBR, which is commonly used to map burned areas and estimate fire severity. ([Read more about NBR here.](https://un-spider.org/advisory-support/recommended-practices/recommended-practice-burn-severity/in-detail/normalized-burn-ratio))
 
-Earth Engine provides a built-in method for calculating normalized difference indices. The `.normalizedDifference()` method computes the normalized difference between two bands. In this case, we use band 5 (NIR) and band 7 (SWIR), and rename the result as a new band called NBR:
+Earth Engine provides a built-in method for calculating normalized difference indices. The `.normalizedDifference()` method computes the normalized difference between two bands. In the case of NBR, we use band 5 (NIR) and band 7 (SWIR). 
+
+**Note:** To obtain accurate results, we must first apply a scaling function to the data. Landsat Collection 2 Surface Reflectance data are scaled by a factor of 0.0000275 + -0.2 [(see the scaling factor here)](https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products), therefore we will first define a function to reverse this scaling. 
 
 ```{js, eval=FALSE}
-// Calculate NBR in pre and post-fire images
-var nbr_pre = landsat_pre.normalizedDifference(['SR_B5', 'SR_B7']).rename('NBR');
-var nbr_post = landsat_post.normalizedDifference(['SR_B5', 'SR_B7']).rename('NBR');
+// Apply Landsat Collection 2 surface reflectance scaling
+function scaleL8sr(image) {
+  var optical = image.select('SR_B.*') // select surface reflectance bands 
+    .multiply(0.0000275)
+    .add(-0.2);
+
+  return image.addBands(optical, null, true);
+}
 ```
 
-### Calculate the differenced Normalized Burn Ratio
+Now, apply `scaleL8sr` and `.normalizedDifference()` to calculate the Normalized Burn Ratio for the pre- and post-fire image composites. 
+
+```{js, eval=FALSE}
+// Calculate NBR in pre- and post-fire images
+var nbr_pre = landsat_pre
+  .scaleL8sr()
+  .normalizedDifference(['SR_B5', 'SR_B7'])
+  .rename('NBR');
+  
+var nbr_post = landsat_post
+  .scaleL8sr()
+  .normalizedDifference(['SR_B5', 'SR_B7'])
+  .rename('NBR');
+```
+
+### Calculate the differenced Normalized Burn Ratio (dNBR)
 The change between pre-fire and post-fire NBR is referred to as the **differenced Normalized Burn Ratio (dNBR)**. It is calculated by subtracting the post-fire NBR from the pre-fire NBR. In Earth Engine, as with other mathematical operations on images, this can be implemented using the `.subtract()` method.
 
 ```{js, eval=FALSE}
 // Calculate dNBR (pre - post)
 var dnbr = nbr_pre.subtract(nbr_post);
-Map.addLayer(dNBR);
+Map.addLayer(dnbr);
 ```
 
 The `dNBR` layer now represents change in NBR from pre- to post-fire. 
@@ -520,7 +554,7 @@ Map.addLayer(dnbr_mask,dnbrVis,"Fire Severity");
 knitr::include_graphics('images/dnbr.png')
 ```
 
-Explore the resulting dNBR map. From this data, it is apparent that two major fires occurred near Los Angeles: one to the north in the Altadena area, and another to the west of the city center, affecting regions including Pacific Palisades and Malibu. The dNBR product effectively highlights these burn scars and captures the spatial extent of both events.
+Explore the resulting dNBR map. From this data, it is apparent that two major fires occurred near Los Angeles: one to the north in the Altadena area (the Eaton fire), and another to the west of the city, affecting regions including Pacific Palisades and Malibu (the Palisades fire). The dNBR product effectively highlights these burn scars and captures the spatial extent of both events.
 
 You may also notice some noise in the map, where isolated urban, forest, and particularly agricultural pixels appear as burned despite not being directly affected by wildfire. This type of “noisiness” is common in change detection workflows, especially when using simple differencing approaches. It can arise from seasonal differences, phenological change, atmospheric effects, or misregistration between images.
 
@@ -604,7 +638,7 @@ The python client library is named `earthengine-api` and can be installed throug
 
 ```{bash, eval=FALSE}
 # pip
-pip install earthengine
+pip install earthengine-api
 
 # conda
 conda install -c conda-forge earthengine-api
@@ -652,8 +686,10 @@ ee.Initialize(project='your-project-id')
 # Cloud mask function - note the closer resemblance to the JS version
 def mask_l8sr(image):
   qa = image.select('QA_PIXEL')
-  cloud_mask = (qa.bitwiseAnd(1 << 3).eq(0)
-                .And(qa.bitwiseAnd(1 << 5).eq(0)))
+  cloud_mask = (qa.bitwiseAnd(1 << 1).eq(0) # Dilated cloud   
+    .and(qa.bitwiseAnd(1 << 2).eq(0)) # Cirrus
+    .and(qa.bitwiseAnd(1 << 3).eq(0)) # Cloud          
+    .and(qa.bitwiseAnd(1 << 4).eq(0))) # Cloud shadow 
   return image.updateMask(cloud_mask)
 
 # Define area of interest
@@ -679,7 +715,7 @@ true_color_vis = {
 Map = geemap.Map()
 Map.centerObject(geometry, 9)
 Map.addLayer(landsat_pre, true_color_vis, 'Pre-Fire Image')
-Map
+display(Map)
 ```
 
 The structural similarity to the JavaScript version is intentional and reflects the fact that both client libraries are thin wrappers around the same underlying API.
@@ -774,15 +810,13 @@ print(response.json())
 
 
 
-REST authentication is handled through standard Google Cloud OAuth2 flows and supports both user accounts and service accounts. Servicea accounts are typically preferred for automated or unattended workflows.
+REST authentication is handled through standard Google Cloud OAuth2 flows and supports both user accounts and service accounts. Service accounts are typically preferred for automated or unattended workflows.
 
 Full documentation of available endpoints is provided in the [GEE REST API Reference](https://developers.google.com/earth-engine/reference).
 
+## GEE Exercises 
 
-
-## GEE Exercises
-
-## GEE Written Questions
+### Written Questions
 
 **Suggested timing: Complete before lecture 2 of GEE Hands on Coding Exercises**
 
@@ -814,20 +848,56 @@ intersect with your current research or future career goals? *(1 paragraph)*
 **Question 5:** The client/server distinction is one of the most important concepts to understand when working with Earth Engine. In your own words, explain what is meant by *client-side* vs. *server-side* operations, and give one example of each from the code in this chapter. 
 
 
-### Computational Exercise
-
-Reproduce a simplified version of the wildfire change detection workflow from the *Hands On* section using the **Python API**, and compare your results to the JavaScript output.
+### Exercise 1: Replicating Analysis Using Alternative Interfaces
+Reproduce a simplified version of the wildfire change detection workflow from the Hands On section using either the Earth Engine **Python API** or the **R interface (rgee)**, and compare your results to the JavaScript output.
 
 Specifically:
 
-1. Open a new Google Colab notebook (or local Jupyter notebook with `earthengine-api` and `geemap` installed).
-2. Authenticate and initialize the Earth Engine Python client.
-3. Build pre-fire and post-fire Landsat 8 composites for the 2025 Los Angeles fire study area, using the same date ranges, area of interest, and cloud-masking function shown in this chapter.
-4. Calculate the differenced Normalized Burn Ratio (dNBR).
-5. Visualize the result using `geemap.Map()` with a similar visualization palette to the JavaScript example.
-6. Submit your notebook (`.ipynb`) along with a short (1-2 sentence) written comparison: did the Python output match the JavaScript output? What difference, if any, did you observe?
+1. Set up a computational environment using Google Colab or Jupyter Notebook for Python, or RStudio for R.
+2. Install and load the necessary packages (`earthengine-api` and `geemap` for Python, or `rgee` for R).
+3. Authenticate and initialize the Earth Engine API.
+4. Build pre-fire and post-fire Landsat 8 composites for the 2025 Los Angeles fire study area, using the same date ranges, area of interest, and cloud-masking function shown in this chapter.
+5. Calculate the differenced Normalized Burn Ratio (dNBR).
+6. Visualize the results using geemap (Python) or an appropriate mapping package in R, applying a similar visualization palette to the JavaScript example.
+7. Submit your notebook (.ipynb) or knitted R markdown document along with a short (1–2 sentence) comparison: did the results match the JavaScript output? What differences, if any, did you observe?
 
 This exercise is intended to reinforce that Earth Engine produces identical results across client libraries. The choice of interface affects workflow ergonomics but not the underlying analysis.
+
+### Exercise 2: Integrating GEE into Ecoinformatics Workflows
+Integrate analyses from GEE with environmental data from other research infrastructures. 
+
+In this exercise, you will apply the skills learned in this chapter to connect GEE workflows with those from the other chapters of this textbook. 
+
+**Suggested Research question:** How does vegetation productivity or greenness vary over time at an established environmental monitoring site, and how might these patterns relate to independently collected environmental observations?
+
+**1. Identify an environmental monitoring site**    
+Select an established monitoring site from another chapter of the textbook (e.g., NEON, LTER, or AmeriFlux).
+
+Identify:    
+* Geographic coordinates and spatial extent of the monitoring site    
+* Available environmental observations (e.g., precipitation, temperature, phenology, fluxes, or ecosystem productivity)    
+* Relevant temporal coverage    
+
+**2. Access Earth Engine through an API interface**    
+Identify the GEE API which will be most amenable to your workflow (JavaScript Code Editor, Python API, R interfeace). Then:
+
+* Initialize the Earth Engine API
+* Access a satellite dataset (such as Landsat or Sentinel-2)
+* Filter imagery by geographic extent, date, and cloud cover
+* Calculate a vegetation index (e.g., [NDVI](https://www.usgs.gov/landsat-missions/landsat-normalized-difference-vegetation-index))
+* Generate a temporal summary of vegetation conditions at the monitoring site    
+** *hint: a spatial reducer such as [reduce region](https://developers.google.com/earth-engine/guides/reducers_reduce_region) can provide a single average value at each time step*
+
+**3. Integrate with external environmental data**    
+Produce a visualization comparing satellite-derived vegetation dynamics with the selected environmental observations.
+
+These data can be used to investigate questions such as:    
+* Do seasonal changes in precipitation correspond with changes in vegetation greenness?    
+* Is there a temporal lag between environmental conditions and vegetation responses?    
+* How well do satellite-derived observations correspond with field-based measurements?    
+
+**4. Submit**    
+Submit your visualization with a brief written summary including which API choices you made and why, how you accessed and processed the data, and your interpretation of the results. 
 
 ### Culmination Activity
 
