@@ -1,19 +1,24 @@
-# Introduction to The International Soil Moisture Network and the ```ismn``` Python Library
-Written by Hugh Raggett
+---
+title: Introduction to the International Soil Moisture Network (ISMN) and Its Python Library
+author: Hugh Raggett
+---
 
 >Estimated time: 2 Hours
 
 ## Learning Objectives
 
-After completing this chapter, you will understand:
-- What the International Soil Moisture Network is and what their purpose is.
-- The different processes used to measure soil moisture.
-- How to traverse the ISMN's web portal and download data from it.
-- How to use the ```ismn``` Python package to work with downloaded data.
+<p>After completing this chapter, you will understand:</p>
+
+<ul>
+<li>What the International Soil Moisture Network is and its purpose.</li>
+<li>The different processes used to measure soil moisture.</li>
+<li>How to navigate the ISMN web portal and download data.</li>
+<li>How to use the <code>ismn</code> Python package with downloaded data.</li>
+</ul>
 
 ## The International Soil Moisture Network's Mission and Design
 
-The International Soil Moisture Network is an infrastructure that compiles in situ soil data from across the globe into a central network. Data from dozens of different soil monitoring networks can be accessed on their website, and the data can be analyzed with their python package. It helps validate soil moisture data products from satellites, as well as being a database on its own. Along with soil moisture, the ISMN has expanded to have soil temperature and precipitation data among others, as well as information about soil properties in the metadata.
+The International Soil Moisture Network is an infrastructure that compiles in situ soil data from across the globe into a centralized database. Data from dozens of different soil monitoring networks can be accessed on their website, and the data can be analyzed with their python package. It helps validate soil moisture data products from satellites, as well as being a database on its own. Along with soil moisture, the ISMN has expanded to have soil temperature and precipitation data among others, as well as information about soil properties in the metadata.
 
 Founded at the TU Wien (Technical University of Wien), it now is operated by the Federal Institute of Hydrology (BfG) in Germany and the International Centre for Water Resources and Global Change (ICWRGC). 
 
@@ -23,13 +28,13 @@ Founded at the TU Wien (Technical University of Wien), it now is operated by the
 
 
 ## Quality Assurance for Soil Moisture (QA4SM) Service
-The ISMN's satellite data verification service has a webpage at https://qa4sm.eu/ui/home, which has visuals of ISMN data compared against satellite readings. There is also an available API for QA4SM data, which will not be used in this chapter. Plots and data are visible on their website along with  API instructions, publications and datasets. 
+In addition to providing access to in situ soil moisture measurements, the ISMN is an important resource for validating satellite-derived soil moisture products. The Quality Assurance for Soil Moisture (QA4SM) service provides an interactive web-based platform for conducting these comparisons. Available at <https://qa4sm.eu/>, QA4SM allows users to evaluate satellite soil moisture products against ground-based observations from the ISMN, as well as reference datasets from land surface models and other sources. QA4SM also supports uploading custom datasets, allowing researchers to evaluate their own soil moisture products alongside the datasets already available within the platform. The service includes a [public API](https://qa4sm.eu/ui/public-api), which will not be covered in this chapter. 
 
 ## The Ecological Impacts of Soil Moisture
 
-Soil moisture is the water stored in the upper layer of soil, and it plays many important roles in ecosystems. It can help predict droughts, floods, weather, greenhouse gas emissions, and is the basis for vegetation growth. Soil moisture also allows for strong, diverse microbial communities in the soil, which then enhance the substrate. Dangerously low soil moisture can kill off these communities and start positive feedback loops of deteriorating the soil.
+Soil moisture refers to the water stored within the soil, particularly in its upper layers, and plays a fundamental role in ecosystem functioning. It influences vegetation growth, nutrient cycling, microbial activity, and the exchange of water and energy between terrestrial ecosystems and the atmosphere. Soil moisture is also an important variable for understanding and predicting droughts, floods, weather patterns, and greenhouse gas emissions.
 
-
+Soil water availability helps sustain diverse microbial communities, which drive important biogeochemical processes and contribute to soil structure and nutrient availability. Conversely, prolonged or severe soil moisture deficits can lead to plant stress and mortality, reduce microbial activity and diversity, and disrupt soil processes. These changes can trigger reinforcing feedback loops that further degrade soil conditions and reduce ecosystem resilience.
 
 ## Structure of the ISMN
 
@@ -37,24 +42,24 @@ The International Soil Moisture Network can be thought of as a “network of net
 
 
 ### Networks in the ISMN
-The ISMN is made up of many different ecological resarch infrastructures across the country, which vary in scale. Some networks like SNOTEL (SNOwpackTELemetryNetwork) and SOILSCAPE in the United states are very large, each having 509 and 224 stations respectively. Smaller networks can have as few as just one sensor, like BFG_Nw in Germany. 
+The ISMN is made up of many different ecological research infrastructures across the country, which vary in scale. Some networks like SNOTEL (SNOwpackTELemetryNetwork) and SOILSCAPE in the United States are very large, each having 509 and 224 stations respectively. Smaller networks can have as few as just one sensor, like BFG_Nw in Germany. 
 
-Larger and more developed countries tend to have many networks within them, like the United States, Germany the United Kingdom, and China. In other cases, networks can cross over international borders, such as the network ROMPS which has stations in Kyrgyzstan, Tajikistan, Uzbekistan, and Afghanistan.
+Larger and more developed countries tend to have many networks within them, such as the United States, Germany the United Kingdom, and China. In other cases, networks can cross over international borders, such as the network ROMPS which has stations in Kyrgyzstan, Tajikistan, Uzbekistan, and Afghanistan.
 
-A comprehensive list of all the networks in the ISMN can be found at: https://ismn.earth/en/networks/
+A comprehensive list of all the networks in the ISMN can be found at: <https://ismn.earth/en/networks/>
 
 ### Data Viewer and Web Portal
 
-The ISMN has a web portal (https://ismn.earth/en/) that contains most information from this chapter, as well as the data viewer and downloader. Here, there is metadata information about all the networks, visualizations of data, and information about the ISMN and their tools as a whole. 
+[The ISMN Web Portal](https://ismn.earth/en/) that contains most information from this chapter, as well as the data viewer and downloader. Here, there is metadata information about all the networks, visualizations of data, and information about the ISMN and their tools as a whole. 
 
 The web portal will be accessed later in this tutorial to download data. Also here is more information on the ISMN python package. 
 
 ### The ISMN's Methodology
-The ISMN contains surface and subsurface in-situ soil moisture data, collected across the globe. Since the data comes from different countries with different practices, it needs to be harmonized in terms of units. Then, advanced quality control is applied to the data, and it gets uploaded to the online database, with free public access. Quality flags that get used by the ISMN are explored later in this chapter. Additional metadata datasets are included for each station, which are the Koeppen Geiger climate class, Harmonized World Soil Database, and ESA’s CCI landcover.  
+The ISMN contains surface and subsurface in-situ soil moisture data, collected across the globe. Since the data comes from different countries with different practices, it needs to be harmonized in terms of units. Then, advanced quality control is applied to the data, and it gets uploaded to the online database, with free public access. Quality flags that get used by the ISMN are explored later in this chapter. Additional metadata datasets are included for each station, which are the Köppen Geiger climate class, Harmonized World Soil Database, and ESA’s CCI landcover.  
 
 <img src="images/ISMN_methodology.png" width="400" style="display:block; margin:auto;">
 
->A depiction if how data is compiled from various sources into the ISMN database. Sourced from the ISMN website.
+>A depiction of how data is compiled from various sources into the ISMN database. Sourced from the ISMN website.
 
 
 ### Metadata
@@ -64,7 +69,7 @@ For each station in the database, soil moisture data is available from the surfa
 
 <img src="images/ISMN_SM_features.png" width="300" style="display:block; margin:auto;">
 
->Depiction of focus of ISMN data, a focus around soil moisture with additional features surrounding. Sourced from IMSN website
+>Depiction of focus of ISMN data, a focus around soil moisture with additional features surrounding. Sourced from ISMN website
 
 
 Networks are updated over ranges of times, some being daily, some monthly or every few months, and others at irregular intervals. It is preferred that data can be provided every hour, but that is not always the case. For historical data, there are usually only measurements once or twice a month, or even more irregular. 
@@ -81,16 +86,16 @@ As mentioned before, to get consistent metadata across networks, external data s
 
 **CCI Landcover Classes -** Land covers retrieved from ESA’s Climate Change Initiative, with 300m resolution (versions: 2000-v1.6.1, 2005-v1.6.1, 2010-v1.6.1). 
 
-**Koppen-Geiger Climate Classes -** Classifications of climates from the Koeppen-Geiger database with an accuracy of 0.1 to 0.08 degrees respectively.  
+**Köppen-Geiger Climate Classes -** Classifications of climates from the Köppen-Geiger database with an accuracy of 0.1 to 0.08 degrees respectively.  
 
 **Soil and Landcover Information from Data Providers (not applicable to all networks) -** When available, data providers and network operators may give their own measurements for climate, landcover etc. to go along with the data collected from previously mentioned sources. 
 
 
 ### How Soil Data is Collected
 
-There are several measuring techniques for measuring in situ soil moisture, the most commonly used are: frequency domain reflectance (FDR), time domain reflectometry (TDR) and capacitance, all measuring the dielectric properties of the soil, and cosmic-ray neutron sensors (CRNS). Regardless of the methods, they all result in volumetric soil moisture content, which can fit into the ISMN dataset. 
+There are several techniques for measuring in situ soil moisture, the most commonly used are: frequency domain reflectance (FDR), time domain reflectometry (TDR) and capacitance, all measuring the dielectric properties of the soil, and cosmic-ray neutron sensors (CRNS). Regardless of the methods, they all result in volumetric soil moisture content, which can fit into the ISMN dataset. 
 
-**Time Domain Reflectance (TDR) -** Measures how fast electromagnetic pulses travel through soil, wetter soil slows them down. TDR is a very accurate method, and widely used in research. This is done by inserting metal rods horizontally at various depths in the soil then sends pulses down them, waitng for the return. The holes then get filled back in, and the sensors are usually then onnected to a data logger which can regularly measure and record readings. The rods can also be inserted vertically at the surface(Rasheed 2022).
+**Time Domain Reflectance (TDR) -** Measures how fast electromagnetic pulses travel through soil, wetter soil slows them down. TDR is a very accurate method, and widely used in research. This is done by inserting metal rods horizontally at various depths in the soil then sends pulses down them, waiting for the return. The holes then get filled back in, and the sensors are usually then connected to a data logger which can regularly measure and record readings. The rods can also be inserted vertically at the surface(Rasheed 2022).
 
 TDR systems do not need to account for any contents of the soil, nor do they need to be calibrated. This makes them very useful for spot measurements, without having to dig a hole and set up a sub-surface system(Rasheed 2022).
 
@@ -99,7 +104,7 @@ TDR systems do not need to account for any contents of the soil, nor do they nee
 >A TDR device in a hole about to be installed. Image courtesy of https://harvest.com/gallery/.
 
 
-**Frequency Domain Reflectometry (FDR) / Capacitance -** Frequency domain reflectometry is very similar to FDR, except it uses an oscillating electric field rather than individual pulses. On top of that, FDR systems are cheaper, simpler, and requier less power, making them popular for field use especially for long term temporal measurements(Rasheed 2022).
+**Frequency Domain Reflectometry (FDR) / Capacitance -** Frequency domain reflectometry is very similar to TDR, except it uses an oscillating electric field rather than individual pulses. On top of that, FDR systems are cheaper, simpler, and requiere less power, making them popular for field use especially for long term temporal measurements(Rasheed 2022).
 
 However, FDR systems are more sensitive to the contents of the soil, and can cause larger error if there is high salinity or mineral content(Rasheed 2022).
 
@@ -107,15 +112,15 @@ However, FDR systems are more sensitive to the contents of the soil, and can cau
 
 >An FDR device out of the soil, courtesy of the Soil Moisture - FDR (Profile Probe) wikipedia page.
 
-**Cosmic-Ray Neutron Sensors (CRNS) -** CRNS systems measure the amount of fast moving neutrons over a desired site. The soils' moitsure reduces the amount of fast moving neutrons. Mounted sensors above the ground measure the neutron flux over the site. A site can have a radius up to 240 meters, and a depth of up to 80 cm. A network that utilizes CRNS in the ISMN are the COSMOS networks, which are COSMOS (US) and COSMOS-UK, totaling 158 stations between them. To read more on CRNS and the COMOS networks, see https://globalcosmos.github.io/.  
+**Cosmic-Ray Neutron Sensors (CRNS) -** CRNS systems measure the amount of fast moving neutrons over a desired site. Soil moisture reduces the amount of fast moving neutrons. Mounted sensors above the ground measure the neutron flux over the site. A site can have a radius up to 240 meters, and a depth of up to 80 cm. A network that utilizes CRNS in the ISMN are the COSMOS networks, which are COSMOS (US) and COSMOS-UK, totaling 158 stations between them. To read more on CRNS and the COSMOS networks, see <https://globalcosmos.github.io/>.  
 
 <img src="images/ISMN_crns_scales.png" width="500" style="display:block; margin:auto;">
 
->A infographic showing ranges of multiple soil moisture detection systems, including stationary and mobile CRNS systems. Image courtesy of Global COSMOS.net (https://globalcosmos.github.io/).
+>A infographic showing ranges of multiple soil moisture detection systems, including stationary and mobile CRNS systems. Image courtesy of Global COSMOS.net (<https://globalcosmos.github.io/)>.
 
 
 ### Data Quality
-The ISMN uses quality flags to mark “dubious” data. There are two categories of flags, C and D. C flags are automatically assigned when a reading passes a certain threshold, making it suspicious. D flags are used in more case-by-case events, like strange spikes, or peaking soil moisture without any precipitation events. Reference https://ismn.earth/en/data/flag-overview/ for more in-depth information on ISMN data flags. 
+The ISMN uses quality flags to mark “dubious” data. There are two categories of flags, C and D. C flags are automatically assigned when a reading passes a certain threshold, making it suspicious. D flags are used in more case-by-case events, like strange spikes, or peaking soil moisture without any precipitation events. Reference <https://ismn.earth/en/data/flag-overview/> for more in-depth information on ISMN data flags. 
 
 When downloading data from the ISMN data viewer, there are options to filter out anything except "good" data, which isn't flagged. 
 
@@ -133,7 +138,7 @@ Measurements that fall outside of normal ranges get labeled with quality flags, 
 
 
 ## Downloading data from the ISMN Website
-Website link - (https://ismn.earth/en/)
+Website link: <https://ismn.earth/en/>
 
 The first step of working with ISMN data is downloading from the website. To do so, you will need to create an account and sign in (it's free).
 
@@ -141,14 +146,14 @@ From the home page, click on the “data access” button, and make sure that yo
 
 <img src="images\ISMN_network_map.png" width="700" style="display:block; margin:auto;">
 
->Image captured from IMSN data viewer/downloader.
+>Image captured from ISMN data viewer/downloader.
 
 
 On the left side, there are settings to select what networks will be included in the download, such as inputting coordinates, checking boxes, or drawing out areas on the map. There are also settings like including all climates, land covers etc. At the very bottom right of the window, it shows how many time series are being selected.
 
 <img src="images\ISMN_data_downloader1.webp" width="700" style="display:block; margin:auto;">
 
->Image from IMSN tool manual.
+>Image from ISMN tool manual.
 
 
 For the tutorial later in the chapter, we will only be selecting a handful of sites from Europe, visible in the picture below. These sites are FMI, GTK, REMEDHUS, RSMN, SMOSMANIA, VAS and WEGENERNET. For the time range, we will be using January 1, 2009, to December 31, 2020. Be sure to check the All variables, all climates and all land covers on the “more options” page too. Then click the “Download” button, and the screen below should appear.
@@ -157,21 +162,33 @@ For the tutorial later in the chapter, we will only be selecting a handful of si
 
 <img src="images\ISMN_Quality_Flags.png" width="700" style="display:block; margin:auto;">
 
->Image captured from IMSN data viewer/downloader.
+>Image captured from ISMN data viewer/downloader.
 
 
-On this page DO NOT check the gap filling with NaN box, and the other boxes do not matter too much, for this tutorial the quality flags being at least good is used. Once everything looks good, click download, and it can take a few minutes to complete. In the bottom right corner, there is a “your requests” button which has the links of your requests, which you will need to download, which will take a few more minutes. Links to download can also be found in your account’s email, depending on the time taken to download. Once the .zip file is on your local machine, you are ready to begin coding. You do not need to unzip this folder and take note of its path.
+On this page DO NOT check the gap filling with NaN box, and the other boxes do not matter too much, for this tutorial the quality flags being at least good is used. Once everything looks good, click Download. The process can take a few minutes to complete. In the bottom right corner, there is a “your requests” button which has the links of your requests, which you will need to download, which will take a few more minutes. Links to download can also be found in your account’s email, depending on the time taken to download. Once the .zip file is on your local machine, you are ready to begin coding. You do not need to unzip this folder and take note of its path.
 
 ## Hands On Part 1: Intro to the ```ismn``` Python Library
 Now, we will begin the hands on coding exercise in Python. In this segment, we will work with the data downloaded from the tutorial above to examine it's structure and create graphs. 
 
 ### Python Requirements
-Unlike other sections throughout the texbook, this section uses Pyhton. If you have not used Python on your local machine before, you can download it with ```pip install python``` on the command line. Once complete, you can also run ``` python --version ``` on the command line to make sure that it is installed and an up to date version. If you have conda on your machine, you can run ``` conda install python ``` instead. 
+Unlike other sections throughout the textbook, this section uses Python. If you have not used Python on your local machine before, you will first need to install it. Python can be downloaded from the official website (<https://www.python.org/downloads/>). Alternatively, you can install Python through the Anaconda distribution (<https://www.anaconda.com/download>), which provides Python along with tools for managing packages and computational environments.
 
-For this tutotial, Python version 3.12 was used as well as Jupyter notebooks for an IDE. Jupyter notebook can be downloaded via the command line too, ``` pip install notebook ```, and then ``` jupyter notebook ```. Whatever IDE that you use, be sure it can access the .zip file downloaded from the website.
+```python --version```
+
+For this tutorial, Python version 3.12 was used, along with Jupyter Notebook as the development environment (IDE). Jupyter Notebook provides an interactive environment where Python code can be executed in individual cells, making it particularly useful for data analysis and visualization.
+
+To install Jupyter Notebook using pip, run the following command in your terminal:
+
+```pip install notebook```
+
+Once installed, you can launch Jupyter Notebook by running:
+
+```jupyter notebook```
+
+You are welcome to use another Python development environment, such as Visual Studio Code or JupyterLab, provided it supports running Python code. Regardless of which environment you choose, make sure it can access the .zip file downloaded from the ISMN website, as this file will be used throughout the tutorial.
 
 ### Data Prepping
-First, lets import required packages. The main focus is the ```ISMN_Interface``` function, which comes from the ```ismn``` package. This can be dowloaded using ```pip install ismn``` from the command line. In this tutorial, we will also be using the ```numpy``` and ```matplotlib``` packages which also need their own dowloads using ```pip```. Source code is from the ISMN's coding tutotial located at: https://ismn.readthedocs.io/en/latest/examples/interface.html
+First, let's import required packages. The main focus is the ```ISMN_Interface``` function, which comes from the ```ismn``` package. This can be downloaded using ```pip install ismn``` from the command line. In this tutorial, we will also be using the ```numpy``` and ```matplotlib``` packages which also need their own downloads using ```pip```. Source code is from the ISMN's coding tutotial located at: https://ismn.readthedocs.io/en/latest/examples/interface.html
 
 
 ```python
@@ -181,14 +198,14 @@ import matplotlib.pyplot as plt  # matplotlib is not installed automatically
 %matplotlib inline
 ```
 
-For cleanliness, lets get the path to the local .zip file that was downloaded from the web portal. Be sure to keep it as is from the download. Change this path to wherever you saved the .zip file.
+For cleanliness, let's get the path to the local .zip file that was downloaded from the web portal. Be sure to keep it as is from the download. Change this path to wherever you saved the .zip file.
 
 
 ```python
 FILE_PATH="Downloads/Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.zip"
 ```
 
-After downloading data from the ISMN website, lets use the ```ISMN_Interface``` function to extract the .zip file, and store it in a data structure. From this data structure, many other tools from the ismn python library can be used on it. 
+After downloading data from the ISMN website, let's use the ```ISMN_Interface``` function to extract the .zip file, and store it in a data structure. From this data structure, many other tools from the ismn python library can be used on it. 
 
 
 ```python
@@ -200,7 +217,7 @@ ismn_data = ISMN_Interface(FILE_PATH)
     
 
 ### Data Organization
-Lets take a look at the object to make sure everything got dowloaded correctly. In the output below, it looks like all of the sites in the networks that we selected are in our dataframe.
+Let's take a look at the object to make sure everything got dowloaded correctly. In the output below, it looks like all of the sites in the networks that we selected are in our dataframe.
 
 
 ```python
@@ -223,7 +240,7 @@ ismn_data
 
 
 
-Within the dataframe, we can see seven subsections. These are the different networks that we selected when downloading the data from the web portal. The networks can be indexed with both integers as well as their strings, same thing goes for their stations within them. Lets choose the 'SMOSMANIA' network, and examine it.
+Within the dataframe, we can see seven subsections. These are the different networks that we selected when downloading the data from the web portal. The networks can be indexed with both integers as well as their strings, same thing goes for their stations within them. Let's choose the 'SMOSMANIA' network, and examine it.
 
 
 ```python
@@ -238,7 +255,7 @@ smos_data
 
 
 
-Now, lets do a little more investigation on the network. From the SMOSMANIA network, lets look at the SaintFelixdeLauragais station's sensor data. By just passing the station name, we can see all of the sensors at the station. 
+Now, let's do a little more investigation on the network. From the SMOSMANIA network, let's look at the SaintFelixdeLauragais station's sensor data. By just passing the station name, we can see all of the sensors at the station. 
 
 
 ```python
@@ -253,7 +270,7 @@ smos_data["SaintFelixdeLauragais"]
 
 
 ### Station Metadata
-To see that stations metadata, simply add ``` .metedata ``` onto the end of it, and we can see more information on the station. Lots of information regarding the soil makeup and instrument data is present here. We can also see landcover and climate information of the station too.
+To see that station's metadata, simply add ` .metadata ` onto the end of it, and we can see more information on the station. Lots of information regarding the soil makeup and instrument data is present here. We can also see landcover and climate information of the station too.
 
 
 ```python
@@ -321,7 +338,7 @@ smos_data["SaintFelixdeLauragais"].metadata
 
 
 ### Sensor Data
-Now, lets look at some actual soil moisture data from a sensor at the SaintFelixdeLauragais station. To access it, we use a similar function, just ``` .data ``` this time. To get data from the first sensor at the station, we are choosing the 0th index.
+Now, let's look at some actual soil moisture data from a sensor at the SaintFelixdeLauragais station. To access it, we use a similar function, just ``` .data ``` this time. To get data from the first sensor at the station, we are choosing the 0th index.
 
 In the output, we can see the data is from the dates we chose to download the data from, and all of the flags are "G" for good. 
 
@@ -442,7 +459,7 @@ In this section, we will plot & examine data from various sensors, as well as in
 
 
 ## Plotting Sensor Data
-Now, lets examine a senosr at the SaintFelixdeLauragais station. The available sensors to pick from are visible from sections before, here we chose the "ThetaProbe-ML2X_soil_moisture_0.050000_0.050000" sensor. After getting the sensor as an object, lets turn it's metadata into a PANDAS dataframe. Then, lets plot the sensor's soil moisture data as a time series. 
+Now, let's examine a sensor at the SaintFelixdeLauragais station. The available sensors to pick from are visible from sections before, here we chose the "ThetaProbe-ML2X_soil_moisture_0.050000_0.050000" sensor. After getting the sensor as an object, let's turn it's metadata into a PANDAS dataframe. Then, we will plot the sensor's soil moisture data as a time series. 
 
 In the output, we see a the metadata for the sensor, as well as a simple time series of measurements from that specific sensor. That gap around 2011 in the time series could be caused from various reasons like dubious data or sensor malfunctions.
 
@@ -531,7 +548,7 @@ pd.DataFrame(index=pd.Index(gpis, name='gpi'),
 
 
 
-<div>
+<div style="width: 100%; overflow-x: auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -637,7 +654,7 @@ lat = 27.0
 lon = 68.0
 station, dist = ismn_data.collection.get_nearest_station(lat, lon)
 
-# print the rtruned station name and distance from chosen coords
+# print the returned station name and distance from chosen coords
 print(f'Station {station.name} is {int(dist)} metres away from the passed coordinates: ({lat}, {lon})')
 assert ismn_data.collection.station4gpi(0) == station # same result when selecting with GPI
 
@@ -789,10 +806,7 @@ By simply adding the .metadata onto the larger ``` ismn_data ``` object, we can 
 ismn_data.metadata
 ```
 
-
-
-
-<div>
+<div style="width: 100%; overflow-x: auto;">
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -1163,7 +1177,7 @@ plt.show()
 In this section, we will filter out stations based on desired variables.
 
 ## Selecting and Reading Different Sensors based off Metadata
-To select sesnors with specific features, the get_dataset_ids function can be used. Passing through 'soil_temperature' as the variable, along with a 'max_depth' of 1m, as well as a 'lc_2005' (land cover 2005) of 130 and 'climate_KG' type of 'Csb', we get 4 stations that meet these criteria. The same result can be gotten using masking, done in the following cell. 
+To select sensors with specific features, the get_dataset_ids function can be used. Passing through 'soil_temperature' as the variable, along with a 'max_depth' of 1m, as well as a 'lc_2005' (land cover 2005) of 130 and 'climate_KG' type of 'Csb', we get 4 stations that meet these criteria. The same result can be gotten using masking, done in the following cell. 
 
 
 ```python
@@ -1184,7 +1198,7 @@ ids
 
 
 ```python
-# alternate way to calling funtion above, another method of filtering sensors
+# alternate way to calling function above, another method of filtering sensors
 conditions = (ismn_data.metadata['variable'].val == 'soil_temperature') & \
              (ismn_data.metadata['instrument'].depth_to <= 1) & \
              (ismn_data.metadata['lc_2005'].val == 130) & \
@@ -1225,7 +1239,7 @@ Here, we will get lists of sensors that meet requirements. In the next block of 
 for network, station, sensor in ismn_data.collection.iter_sensors(variable='soil_moisture',
                                                                   depth=[0., 0.05]):
     
-    # print general infromation for sensors that match from each network
+    # print general information for sensors that match from each network
     display(network)
     display(station)
     display(sensor)
@@ -1299,8 +1313,8 @@ for network, station, sensor in ismn_data.collection.iter_sensors(variable='soil
     
 
 
-## Climate Koppen Geiger Tickers
-Each station has variable called 'climate_KG', which is a 1-3 letters, and corresponds to the table below. The variable explains the greater biome's climate  of the sensor, and is more general than the landcover dict. In this case, the "KG" in 'climate_KG' stands for "Koeppen Geiger," not kilogram.
+## Climate Köppen Geiger Types
+Each station has variable called 'climate_KG', which is a 1-3 letters, and corresponds to the table below. The variable explains the greater biome's climate  of the sensor, and is more general than the landcover dict. In this case, the "KG" in 'climate_KG' stands for "Köppen Geiger," not kilogram.
 
 
 ```python
@@ -1346,9 +1360,9 @@ ismn_data.print_climate_dict()
     
 
 ## Surrounding Landcover
-Next, lets look at some locational data from the sensors. By calling the ``` print_landcover_dict ``` function, we see counts of surrounding geographical features around sensors. 
+Next, let's look at some locational data from the sensors. By calling the ``` print_landcover_dict ``` function, we see counts of surrounding geographical features around sensors. 
 
-The integer on the right of the colons is what corresponds to the definitions on the left, which is stored in the sensors metadata.
+The integer on the right of the colons is what corresponds to the definitions on the left, which is stored in the sensor's metadata.
 
 
 ```python
@@ -1401,10 +1415,10 @@ Now, in a similar process as before, we will iterate through sensors and their c
 
 
 ```python
-# iterate through sensors and corresponding stations witn precipitation readings with lc_2010 values 10 or 130
+# iterate through sensors and corresponding stations with precipitation readings with lc_2010 values 10 or 130
 for station, sensor in ismn_data['RSMN'].iter_sensors(variable='precipitation',
                                                       filter_meta_dict={'lc_2010': [10, 130]}):
-    # print station and senor names
+    # print station and sensor names
     display(station)
     display(sensor)
 
@@ -1464,7 +1478,7 @@ for station, sensor in ismn_data['RSMN'].iter_sensors(variable='precipitation',
 
 
 ## Selecting by Depth
-Once again, we will filter through sensors, but this time for sensor depth bewteen 0 and 0.05m, specific climates (refer to the Koeppen Geiger table for exact definitions), and the same land cover values as before. 
+Once again, we will filter through sensors, but this time for sensor depth between 0 and 0.05m, specific climates (refer to the Köppen Geiger table for exact definitions), and the same land cover values as before. 
 
 
 ```python
@@ -1484,7 +1498,7 @@ for network, station, sensor in ismn_data.collection \
     data.loc[data['soil_moisture_flag'] != 'G', 'soil_moisture'] = np.nan
     metadata = sensor.metadata
 
-    # look at the sensors metadata
+    # look at the sensor's metadata
     print('\033[1m' + f'Metadata for sensor {sensor}:'+ '\033[0m')
     display(metadata.to_pd())
 
@@ -1560,7 +1574,7 @@ The ``` ISMN_Interface ``` tool also has capabilities to make subsets of itself.
 
 
 ```python
-# metadat from stations with soil moisture data
+# metadata from stations with soil moisture data
 metadata = ismn_data.metadata[ismn_data.metadata[('variable', 'val')] == 'soil_moisture']
 
 # randomly pick 10 station ids
@@ -1641,7 +1655,7 @@ ismn_data['WEGENERNET'].get_citations()
  
 5.  What is the climate classification system called? What about landcovers?
 
-6.  Are there any strange occurances in the time series plots? What might be causing these?
+6.  Are there any strange occurrences in the time series plots? What might be causing these?
 
 7.  Besides soil moisture, what other features can be measured at any given station? List at least two.
 
@@ -1651,7 +1665,7 @@ Write up a 1-page derived data product or research pipeline proposal summary of 
 
 
 # To Do: Coding Lab
-Choose any network in the ISMN. In this Network, retrieve soil moisture data from one station, and then from two stations that are farther apart. What similarites do you notice between these plots? Why are they similar or not? 
+Choose any network in the ISMN. In this Network, retrieve soil moisture data from one station, and then from two stations that are farther apart. What similarities do you notice between these plots? Why are they similar or not? 
 
 Finally, get citations for the entire network as well as the KG climate classifications & landcover values for all stations that you used.
 
@@ -1666,7 +1680,7 @@ Dorigo, W. A., Wagner, W., Hohensinn, R., Hahn, S., Paulik, C., Xaver, A., Grube
 Dorigo, W.A. , Xaver, A. Vreugdenhil, M. Gruber, A., Hegyiová, A. Sanchis-Dufau, A.D., Zamojski, D. , Cordes, C., Wagner, W., and Drusch, M. (2013). GlobalAutomated Quality Control of In situ Soil Moisture data from the International Soil Moisture Network. Vadose Zone Journal, 12, 3, doi:10.2136/vzj2012.0097
 
 ## Coding Tutotial Citations & GitHub
-The ismn package can be found on github here: https://github.com/TUW-GEO/ismn
+The ismn package can be found on github here: <https://github.com/TUW-GEO/ismn>
 
 "Wolfgang Preimesberger, pbutting, tracyscanlon, daberer, Manuel Schmitzer, D. Baum, lzappa, Sebastian Hahn, bascrezee, Christoph Paulik, & Nicolas F. Bader. (2025). TUW-GEO/ismn: v1.5.2 (v1.5.2). Zenodo. https://doi.org/10.5281/zenodo.14987279"
 

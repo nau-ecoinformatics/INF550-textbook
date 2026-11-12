@@ -5,10 +5,6 @@ project:
 book:
   title: "Environmental Informatics Using Research Infrastructures and their Data"
 
-  #author:
-  #  - "Dr. Katharyn Duffy"
-  #  - "Dr. Ben Ruddell"
-
   description: "Course text for NAU INF 550"
   site-url: https://nau-ecoinformatics.github.io/INF550-textbook/
 
@@ -22,10 +18,11 @@ book:
     - 06-NEON_AOP.Rmd
     - 07-NASA_EOS.Rmd
     - 08-USGS.Rmd
-    - 09-GEE.Rmd
-    - 10-OneHealth_PathogenSurveillance.Rmd
-    - 11_Vulcan_EDGAR.Rmd
-    - 12-FAQ.Rmd
+    - 09-InternationalSoilMoistureNetwork.md
+    - 10-GEE.Rmd
+    - 11-OneHealth_PathogenSurveillance.Rmd
+    - 12_Vulcan_EDGAR.Rmd
+    - 13-Appendix.Rmd
 
 
   repo-url: https://github.com/nau-ecoinformatics/INF550-textbook

@@ -69,7 +69,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./09-GEE.html" rel="next">
+<link href="./09-InternationalSoilMoistureNetwork.html" rel="next">
 <link href="./07-NASA_EOS.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-12eeb4b20e9f5a2b0bfc604bfaf942bb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-6ef410166125f9951720823fec0802a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -205,25 +205,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></span></a>
+  <a href="./09-InternationalSoilMoistureNetwork.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
+  <a href="./10-GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  <a href="./11-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="./12_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
@@ -636,10 +642,10 @@ Summary of Modules
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc[[<span class="st">'Total-Result-Count'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "4459304"</code></pre>
+<pre><code>[1] "4447071"</code></pre>
 </div>
 </div>
-<p>This doesn’t provide any information about the sites, just the total number. I know that with 4,459,304 results, I will want to add more criteria before trying to download. Let’s continue to add query parameters before moving to <code>whatWQPsites</code>.</p>
+<p>This doesn’t provide any information about the sites, just the total number. I know that with 4,447,071 results, I will want to add more criteria before trying to download. Let’s continue to add query parameters before moving to <code>whatWQPsites</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify that you only want data from streams</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_stream <span class="ot">&lt;-</span> <span class="fu">readWQPdata</span>(<span class="at">statecode=</span><span class="st">"US:45"</span>, <span class="at">siteType=</span><span class="st">"Stream"</span>,</span>
@@ -650,10 +656,10 @@ Summary of Modules
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_stream[[<span class="st">'Total-Result-Count'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2232079"</code></pre>
+<pre><code>[1] "2225778"</code></pre>
 </div>
 </div>
-<p>2,232,079 results are still a lot to download. Let’s add more levels of criteria:</p>
+<p>2,225,778 results are still a lot to download. Let’s add more levels of criteria:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># specify that you want water temperature data and it should be from 1975 or later</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_stream_temp <span class="ot">&lt;-</span> <span class="fu">readWQPdata</span>(<span class="at">statecode=</span><span class="st">"US:45"</span>, <span class="at">siteType=</span><span class="st">"Stream"</span>,</span>
@@ -666,10 +672,10 @@ Summary of Modules
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_stream_temp[[<span class="st">'Total-Result-Count'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "163814"</code></pre>
+<pre><code>[1] "163220"</code></pre>
 </div>
 </div>
-<p>163,814 is little more manageable. We can also easily compare available stream temperature and lake temperature data.</p>
+<p>163,220 is little more manageable. We can also easily compare available stream temperature and lake temperature data.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_lake_temp <span class="ot">&lt;-</span> <span class="fu">readWQPdata</span>(<span class="at">statecode=</span><span class="st">"US:45"</span>, </span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">siteType=</span><span class="st">"Lake, Reservoir, Impoundment"</span>,</span>
@@ -688,11 +694,11 @@ Summary of Modules
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># comparing result counts</span></span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_stream_temp[[<span class="st">'Total-Result-Count'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "163814"</code></pre>
+<pre><code>[1] "163220"</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>wqpcounts_sc_lake_temp[[<span class="st">'Total-Result-Count'</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "68597"</code></pre>
+<pre><code>[1] "68215"</code></pre>
 </div>
 </div>
 <p>From these query results, it looks like South Carolina has much more stream data than it does lake data.</p>
@@ -2432,8 +2438,8 @@ Table 1. readWQP function definitions
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09-GEE.html" class="pagination-link" aria-label="Introduction to Google Earth Engine (GEE) platform &amp; its tools">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to Google Earth Engine (GEE) platform &amp; its tools</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09-InternationalSoilMoistureNetwork.html" class="pagination-link" aria-label="Introduction to the International Soil Moisture Network (ISMN) and Its Python Library">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

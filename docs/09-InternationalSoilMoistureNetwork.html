@@ -1,0 +1,3030 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Hugh Raggett">
+<meta name="description" content="Course text for NAU INF 550">
+
+<title>9&nbsp; Introduction to the International Soil Moisture Network (ISMN) and Its Python Library – Environmental Informatics Using Research Infrastructures and their Data</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10-GEE.html" rel="next">
+<link href="./08-USGS.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-6ef410166125f9951720823fec0802a0.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-InternationalSoilMoistureNetwork.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Environmental Informatics Using Research Infrastructures and their Data</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/nau-ecoinformatics/INF550-textbook" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Environmental Informatics Using Research Infrastructures and their Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-Pre-Course_Skills.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Course Setup: EcoInformatics Tools</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-Introduction_to_NEON.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to NEON &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-USA-NPN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to USA-NPN &amp; its Data</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-PhenoCam.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">PhenoCam: Digital Repeat Photography Networks &amp; Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-Fluxes_and_Inter-operability.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Flux Measurements &amp; Interoperability</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-NEON_AOP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">NEON Airborne Observation Plaform (AOP)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-NASA_EOS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">NASA’s Earth Observing System (EOS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-USGS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-InternationalSoilMoistureNetwork.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Appendix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Appendix</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</a></li>
+  <li><a href="#the-international-soil-moisture-networks-mission-and-design" id="toc-the-international-soil-moisture-networks-mission-and-design" class="nav-link" data-scroll-target="#the-international-soil-moisture-networks-mission-and-design"><span class="header-section-number">9.2</span> The International Soil Moisture Network’s Mission and Design</a></li>
+  <li><a href="#quality-assurance-for-soil-moisture-qa4sm-service" id="toc-quality-assurance-for-soil-moisture-qa4sm-service" class="nav-link" data-scroll-target="#quality-assurance-for-soil-moisture-qa4sm-service"><span class="header-section-number">9.3</span> Quality Assurance for Soil Moisture (QA4SM) Service</a></li>
+  <li><a href="#the-ecological-impacts-of-soil-moisture" id="toc-the-ecological-impacts-of-soil-moisture" class="nav-link" data-scroll-target="#the-ecological-impacts-of-soil-moisture"><span class="header-section-number">9.4</span> The Ecological Impacts of Soil Moisture</a></li>
+  <li><a href="#structure-of-the-ismn" id="toc-structure-of-the-ismn" class="nav-link" data-scroll-target="#structure-of-the-ismn"><span class="header-section-number">9.5</span> Structure of the ISMN</a></li>
+  <li><a href="#downloading-data-from-the-ismn-website" id="toc-downloading-data-from-the-ismn-website" class="nav-link" data-scroll-target="#downloading-data-from-the-ismn-website"><span class="header-section-number">9.6</span> Downloading data from the ISMN Website</a></li>
+  <li><a href="#hands-on-part-1-intro-to-the-ismn-python-library" id="toc-hands-on-part-1-intro-to-the-ismn-python-library" class="nav-link" data-scroll-target="#hands-on-part-1-intro-to-the-ismn-python-library"><span class="header-section-number">9.7</span> Hands On Part 1: Intro to the <code>ismn</code> Python Library</a></li>
+  <li><a href="#hands-on-part-2-built-in-ismn-functions-plotting-sensor-timeseries-data" id="toc-hands-on-part-2-built-in-ismn-functions-plotting-sensor-timeseries-data" class="nav-link" data-scroll-target="#hands-on-part-2-built-in-ismn-functions-plotting-sensor-timeseries-data"><span class="header-section-number">10</span> Hands On Part 2: Built-In ISMN Functions &amp; Plotting Sensor Timeseries Data</a>
+  <ul class="collapse">
+  <li><a href="#plotting-sensor-data" id="toc-plotting-sensor-data" class="nav-link" data-scroll-target="#plotting-sensor-data"><span class="header-section-number">10.1</span> Plotting Sensor Data</a></li>
+  <li><a href="#finding-the-nearest-station" id="toc-finding-the-nearest-station" class="nav-link" data-scroll-target="#finding-the-nearest-station"><span class="header-section-number">10.2</span> Finding the Nearest Station</a></li>
+  <li><a href="#finding-a-network-from-a-station" id="toc-finding-a-network-from-a-station" class="nav-link" data-scroll-target="#finding-a-network-from-a-station"><span class="header-section-number">10.3</span> Finding a Network from a Station</a></li>
+  <li><a href="#looking-at-the-metadata" id="toc-looking-at-the-metadata" class="nav-link" data-scroll-target="#looking-at-the-metadata"><span class="header-section-number">10.4</span> looking at the Metadata</a></li>
+  <li><a href="#plotting-station-locations" id="toc-plotting-station-locations" class="nav-link" data-scroll-target="#plotting-station-locations"><span class="header-section-number">10.5</span> Plotting Station Locations</a></li>
+  </ul></li>
+  <li><a href="#hands-on-part-3-ismn-variables-data-masking" id="toc-hands-on-part-3-ismn-variables-data-masking" class="nav-link" data-scroll-target="#hands-on-part-3-ismn-variables-data-masking"><span class="header-section-number">11</span> Hands On Part 3: ISMN Variables &amp; Data Masking</a>
+  <ul class="collapse">
+  <li><a href="#selecting-and-reading-different-sensors-based-off-metadata" id="toc-selecting-and-reading-different-sensors-based-off-metadata" class="nav-link" data-scroll-target="#selecting-and-reading-different-sensors-based-off-metadata"><span class="header-section-number">11.1</span> Selecting and Reading Different Sensors based off Metadata</a></li>
+  <li><a href="#selecting-by-variable-and-depth" id="toc-selecting-by-variable-and-depth" class="nav-link" data-scroll-target="#selecting-by-variable-and-depth"><span class="header-section-number">11.2</span> Selecting by Variable and Depth</a></li>
+  <li><a href="#climate-köppen-geiger-types" id="toc-climate-köppen-geiger-types" class="nav-link" data-scroll-target="#climate-köppen-geiger-types"><span class="header-section-number">11.3</span> Climate Köppen Geiger Types</a></li>
+  <li><a href="#surrounding-landcover" id="toc-surrounding-landcover" class="nav-link" data-scroll-target="#surrounding-landcover"><span class="header-section-number">11.4</span> Surrounding Landcover</a></li>
+  <li><a href="#selecting-by-variables-and-other-metadata" id="toc-selecting-by-variables-and-other-metadata" class="nav-link" data-scroll-target="#selecting-by-variables-and-other-metadata"><span class="header-section-number">11.5</span> Selecting by Variables and Other Metadata</a></li>
+  <li><a href="#selecting-by-depth" id="toc-selecting-by-depth" class="nav-link" data-scroll-target="#selecting-by-depth"><span class="header-section-number">11.6</span> Selecting by Depth</a></li>
+  <li><a href="#creating-subset-interface" id="toc-creating-subset-interface" class="nav-link" data-scroll-target="#creating-subset-interface"><span class="header-section-number">11.7</span> Creating Subset Interface</a></li>
+  </ul></li>
+  <li><a href="#ismn-chapter-citations" id="toc-ismn-chapter-citations" class="nav-link" data-scroll-target="#ismn-chapter-citations"><span class="header-section-number">12</span> ISMN &amp; Chapter Citations</a>
+  <ul class="collapse">
+  <li><a href="#get-network-citations" id="toc-get-network-citations" class="nav-link" data-scroll-target="#get-network-citations"><span class="header-section-number">12.1</span> Get Network Citations</a></li>
+  </ul></li>
+  <li><a href="#to-do-ismn-quiz-questions" id="toc-to-do-ismn-quiz-questions" class="nav-link" data-scroll-target="#to-do-ismn-quiz-questions"><span class="header-section-number">13</span> To Do: ISMN Quiz Questions</a></li>
+  <li><a href="#to-do-ismn-culmination-write-up" id="toc-to-do-ismn-culmination-write-up" class="nav-link" data-scroll-target="#to-do-ismn-culmination-write-up"><span class="header-section-number">14</span> To Do: ISMN Culmination Write Up</a></li>
+  <li><a href="#to-do-coding-lab" id="toc-to-do-coding-lab" class="nav-link" data-scroll-target="#to-do-coding-lab"><span class="header-section-number">15</span> To Do: Coding Lab</a>
+  <ul class="collapse">
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link" data-scroll-target="#acknowledgements"><span class="header-section-number">15.1</span> Acknowledgements</a></li>
+  <li><a href="#ismn-citations" id="toc-ismn-citations" class="nav-link" data-scroll-target="#ismn-citations"><span class="header-section-number">15.2</span> ISMN Citations</a></li>
+  <li><a href="#coding-tutotial-citations-github" id="toc-coding-tutotial-citations-github" class="nav-link" data-scroll-target="#coding-tutotial-citations-github"><span class="header-section-number">15.3</span> Coding Tutotial Citations &amp; GitHub</a></li>
+  <li><a href="#other-citations" id="toc-other-citations" class="nav-link" data-scroll-target="#other-citations"><span class="header-section-number">15.4</span> Other citations</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-InternationalSoilMoistureNetwork.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Hugh Raggett </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>Estimated time: 2 Hours</p>
+</blockquote>
+<section id="learning-objectives" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">9.1</span> Learning Objectives</h2>
+<p>
+After completing this chapter, you will understand:
+</p>
+<ul>
+<li>
+What the International Soil Moisture Network is and its purpose.
+</li>
+<li>
+The different processes used to measure soil moisture.
+</li>
+<li>
+How to navigate the ISMN web portal and download data.
+</li>
+<li>
+How to use the <code>ismn</code> Python package with downloaded data.
+</li>
+</ul>
+</section>
+<section id="the-international-soil-moisture-networks-mission-and-design" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="the-international-soil-moisture-networks-mission-and-design"><span class="header-section-number">9.2</span> The International Soil Moisture Network’s Mission and Design</h2>
+<p>The International Soil Moisture Network is an infrastructure that compiles in situ soil data from across the globe into a centralized database. Data from dozens of different soil monitoring networks can be accessed on their website, and the data can be analyzed with their python package. It helps validate soil moisture data products from satellites, as well as being a database on its own. Along with soil moisture, the ISMN has expanded to have soil temperature and precipitation data among others, as well as information about soil properties in the metadata.</p>
+<p>Founded at the TU Wien (Technical University of Wien), it now is operated by the Federal Institute of Hydrology (BfG) in Germany and the International Centre for Water Resources and Global Change (ICWRGC).</p>
+<p><img src="images/ISMN_some_networks.png" width="400" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>A map showing some of the networks in the ISMN. From the ISMN webpage.</p>
+</blockquote>
+</section>
+<section id="quality-assurance-for-soil-moisture-qa4sm-service" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="quality-assurance-for-soil-moisture-qa4sm-service"><span class="header-section-number">9.3</span> Quality Assurance for Soil Moisture (QA4SM) Service</h2>
+<p>In addition to providing access to in situ soil moisture measurements, the ISMN is an important resource for validating satellite-derived soil moisture products. The Quality Assurance for Soil Moisture (QA4SM) service provides an interactive web-based platform for conducting these comparisons. Available at <a href="https://qa4sm.eu/" class="uri">https://qa4sm.eu/</a>, QA4SM allows users to evaluate satellite soil moisture products against ground-based observations from the ISMN, as well as reference datasets from land surface models and other sources. QA4SM also supports uploading custom datasets, allowing researchers to evaluate their own soil moisture products alongside the datasets already available within the platform. The service includes a <a href="https://qa4sm.eu/ui/public-api">public API</a>, which will not be covered in this chapter.</p>
+</section>
+<section id="the-ecological-impacts-of-soil-moisture" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="the-ecological-impacts-of-soil-moisture"><span class="header-section-number">9.4</span> The Ecological Impacts of Soil Moisture</h2>
+<p>Soil moisture refers to the water stored within the soil, particularly in its upper layers, and plays a fundamental role in ecosystem functioning. It influences vegetation growth, nutrient cycling, microbial activity, and the exchange of water and energy between terrestrial ecosystems and the atmosphere. Soil moisture is also an important variable for understanding and predicting droughts, floods, weather patterns, and greenhouse gas emissions.</p>
+<p>Soil water availability helps sustain diverse microbial communities, which drive important biogeochemical processes and contribute to soil structure and nutrient availability. Conversely, prolonged or severe soil moisture deficits can lead to plant stress and mortality, reduce microbial activity and diversity, and disrupt soil processes. These changes can trigger reinforcing feedback loops that further degrade soil conditions and reduce ecosystem resilience.</p>
+</section>
+<section id="structure-of-the-ismn" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="structure-of-the-ismn"><span class="header-section-number">9.5</span> Structure of the ISMN</h2>
+<p>The International Soil Moisture Network can be thought of as a “network of networks”, where thousands of local soil monitoring sites are compiled into one framework. Each country and network has their own way of recording data, which the ISMN accounts for in their harmonizing process. Some stations also measure additional features like precipitation and soil temperature along with moisture, which is also accessible in the same datasets.</p>
+<section id="networks-in-the-ismn" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="networks-in-the-ismn"><span class="header-section-number">9.5.1</span> Networks in the ISMN</h3>
+<p>The ISMN is made up of many different ecological research infrastructures across the country, which vary in scale. Some networks like SNOTEL (SNOwpackTELemetryNetwork) and SOILSCAPE in the United States are very large, each having 509 and 224 stations respectively. Smaller networks can have as few as just one sensor, like BFG_Nw in Germany.</p>
+<p>Larger and more developed countries tend to have many networks within them, such as the United States, Germany the United Kingdom, and China. In other cases, networks can cross over international borders, such as the network ROMPS which has stations in Kyrgyzstan, Tajikistan, Uzbekistan, and Afghanistan.</p>
+<p>A comprehensive list of all the networks in the ISMN can be found at: <a href="https://ismn.earth/en/networks/" class="uri">https://ismn.earth/en/networks/</a></p>
+</section>
+<section id="data-viewer-and-web-portal" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="data-viewer-and-web-portal"><span class="header-section-number">9.5.2</span> Data Viewer and Web Portal</h3>
+<p><a href="https://ismn.earth/en/">The ISMN Web Portal</a> that contains most information from this chapter, as well as the data viewer and downloader. Here, there is metadata information about all the networks, visualizations of data, and information about the ISMN and their tools as a whole.</p>
+<p>The web portal will be accessed later in this tutorial to download data. Also here is more information on the ISMN python package.</p>
+</section>
+<section id="the-ismns-methodology" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="the-ismns-methodology"><span class="header-section-number">9.5.3</span> The ISMN’s Methodology</h3>
+<p>The ISMN contains surface and subsurface in-situ soil moisture data, collected across the globe. Since the data comes from different countries with different practices, it needs to be harmonized in terms of units. Then, advanced quality control is applied to the data, and it gets uploaded to the online database, with free public access. Quality flags that get used by the ISMN are explored later in this chapter. Additional metadata datasets are included for each station, which are the Köppen Geiger climate class, Harmonized World Soil Database, and ESA’s CCI landcover.</p>
+<p><img src="images/ISMN_methodology.png" width="400" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>A depiction of how data is compiled from various sources into the ISMN database. Sourced from the ISMN website.</p>
+</blockquote>
+</section>
+<section id="metadata" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="metadata"><span class="header-section-number">9.5.4</span> Metadata</h3>
+<p>Mandatory metadata information for each station comes from both the network operators as well as external data sources. For instance, soil properties, land cover and consistent climate are taken from external sources to provide consistency across all networks, and network operators can provide additional information on these. Network operators can also share quality control flags, which can all be accessed via the python tool (developed by TU Wien).</p>
+<p>For each station in the database, soil moisture data is available from the surface down to deeper soil layers; the number of depths and the exact depths measured depend on the setup of the specific network. Along with soil moisture, stations can additionally measure soil temperature, air temperature, precipitation, soil suction, snow water equivalent, snow depth and surface temperature. These features are not available on all stations, but when so, they are accessible via the python tool.</p>
+<p><img src="images/ISMN_SM_features.png" width="300" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>Depiction of focus of ISMN data, a focus around soil moisture with additional features surrounding. Sourced from ISMN website</p>
+</blockquote>
+<p>Networks are updated over ranges of times, some being daily, some monthly or every few months, and others at irregular intervals. It is preferred that data can be provided every hour, but that is not always the case. For historical data, there are usually only measurements once or twice a month, or even more irregular.</p>
+<p><img src="images/ISMN_data_availability.png" width="500" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>A graph showing frequency of readings per network. From the ISMN webpage.</p>
+</blockquote>
+</section>
+<section id="additional-metadata-datasets" class="level3" data-number="9.5.5">
+<h3 data-number="9.5.5" class="anchored" data-anchor-id="additional-metadata-datasets"><span class="header-section-number">9.5.5</span> Additional Metadata Datasets</h3>
+<p>As mentioned before, to get consistent metadata across networks, external data sources are used.</p>
+<p><strong>Harmonized World Soil Database (HWSD) -</strong> Used to retrieve soil information with 30’’ resolution (version v1.1).</p>
+<p><strong>CCI Landcover Classes -</strong> Land covers retrieved from ESA’s Climate Change Initiative, with 300m resolution (versions: 2000-v1.6.1, 2005-v1.6.1, 2010-v1.6.1).</p>
+<p><strong>Köppen-Geiger Climate Classes -</strong> Classifications of climates from the Köppen-Geiger database with an accuracy of 0.1 to 0.08 degrees respectively.</p>
+<p><strong>Soil and Landcover Information from Data Providers (not applicable to all networks) -</strong> When available, data providers and network operators may give their own measurements for climate, landcover etc. to go along with the data collected from previously mentioned sources.</p>
+</section>
+<section id="how-soil-data-is-collected" class="level3" data-number="9.5.6">
+<h3 data-number="9.5.6" class="anchored" data-anchor-id="how-soil-data-is-collected"><span class="header-section-number">9.5.6</span> How Soil Data is Collected</h3>
+<p>There are several techniques for measuring in situ soil moisture, the most commonly used are: frequency domain reflectance (FDR), time domain reflectometry (TDR) and capacitance, all measuring the dielectric properties of the soil, and cosmic-ray neutron sensors (CRNS). Regardless of the methods, they all result in volumetric soil moisture content, which can fit into the ISMN dataset.</p>
+<p><strong>Time Domain Reflectance (TDR) -</strong> Measures how fast electromagnetic pulses travel through soil, wetter soil slows them down. TDR is a very accurate method, and widely used in research. This is done by inserting metal rods horizontally at various depths in the soil then sends pulses down them, waiting for the return. The holes then get filled back in, and the sensors are usually then connected to a data logger which can regularly measure and record readings. The rods can also be inserted vertically at the surface(Rasheed 2022).</p>
+<p>TDR systems do not need to account for any contents of the soil, nor do they need to be calibrated. This makes them very useful for spot measurements, without having to dig a hole and set up a sub-surface system(Rasheed 2022).</p>
+<p><img src="images/ISMN_TDR.jpg" width="500" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>A TDR device in a hole about to be installed. Image courtesy of https://harvest.com/gallery/.</p>
+</blockquote>
+<p><strong>Frequency Domain Reflectometry (FDR) / Capacitance -</strong> Frequency domain reflectometry is very similar to TDR, except it uses an oscillating electric field rather than individual pulses. On top of that, FDR systems are cheaper, simpler, and requiere less power, making them popular for field use especially for long term temporal measurements(Rasheed 2022).</p>
+<p>However, FDR systems are more sensitive to the contents of the soil, and can cause larger error if there is high salinity or mineral content(Rasheed 2022).</p>
+<p><img src="images/ISMN_FDR.jpg" width="300" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>An FDR device out of the soil, courtesy of the Soil Moisture - FDR (Profile Probe) wikipedia page.</p>
+</blockquote>
+<p><strong>Cosmic-Ray Neutron Sensors (CRNS) -</strong> CRNS systems measure the amount of fast moving neutrons over a desired site. Soil moisture reduces the amount of fast moving neutrons. Mounted sensors above the ground measure the neutron flux over the site. A site can have a radius up to 240 meters, and a depth of up to 80 cm. A network that utilizes CRNS in the ISMN are the COSMOS networks, which are COSMOS (US) and COSMOS-UK, totaling 158 stations between them. To read more on CRNS and the COSMOS networks, see <a href="https://globalcosmos.github.io/" class="uri">https://globalcosmos.github.io/</a>.</p>
+<p><img src="images/ISMN_crns_scales.png" width="500" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>A infographic showing ranges of multiple soil moisture detection systems, including stationary and mobile CRNS systems. Image courtesy of Global COSMOS.net (<a href="https://globalcosmos.github.io/)" class="uri">https://globalcosmos.github.io/)</a>.</p>
+</blockquote>
+</section>
+<section id="data-quality" class="level3" data-number="9.5.7">
+<h3 data-number="9.5.7" class="anchored" data-anchor-id="data-quality"><span class="header-section-number">9.5.7</span> Data Quality</h3>
+<p>The ISMN uses quality flags to mark “dubious” data. There are two categories of flags, C and D. C flags are automatically assigned when a reading passes a certain threshold, making it suspicious. D flags are used in more case-by-case events, like strange spikes, or peaking soil moisture without any precipitation events. Reference <a href="https://ismn.earth/en/data/flag-overview/" class="uri">https://ismn.earth/en/data/flag-overview/</a> for more in-depth information on ISMN data flags.</p>
+<p>When downloading data from the ISMN data viewer, there are options to filter out anything except “good” data, which isn’t flagged.</p>
+</section>
+<section id="harmonization" class="level3" data-number="9.5.8">
+<h3 data-number="9.5.8" class="anchored" data-anchor-id="harmonization"><span class="header-section-number">9.5.8</span> Harmonization</h3>
+<p>Since there are no standardizations across networks, the ISMN has to process all of it domestically. When it comes to measuring soil moisture, there are many definitions such as: volumetric, water depth, mass, Soil Moisture Index, and plant available water. On top of that, there are different installation depths and positions (horizontal and vertical) among many other things. Because of this, datasets are harmonized in time, and in measurement units.</p>
+<p>All soil moisture data in the ISMN database are in (m3/m-3), which is the most commonly used unit. Other measurements get their own respective standards which they get harmonized to. For time, all measurements are converted to Coordinated Universal Time (UTC).</p>
+<p>Measurements that fall outside of normal ranges get labeled with quality flags, and datasets are harmonized to an hourly timestep NaN values (Not a Number) or missing timesteps are possible).</p>
+<p><img src="images/ISMN_harmonization.png" width="400" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>An infographic depicting the process of harmonizing data for the ISMN. Courtesy the ISMN website.</p>
+</blockquote>
+</section>
+</section>
+<section id="downloading-data-from-the-ismn-website" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="downloading-data-from-the-ismn-website"><span class="header-section-number">9.6</span> Downloading data from the ISMN Website</h2>
+<p>Website link: <a href="https://ismn.earth/en/" class="uri">https://ismn.earth/en/</a></p>
+<p>The first step of working with ISMN data is downloading from the website. To do so, you will need to create an account and sign in (it’s free).</p>
+<p>From the home page, click on the “data access” button, and make sure that you are signed into your account. From there, you should be looking at the data viewer window with all available networks, something like this:</p>
+<p><img src="images\ISMN_network_map.png" width="700" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>Image captured from ISMN data viewer/downloader.</p>
+</blockquote>
+<p>On the left side, there are settings to select what networks will be included in the download, such as inputting coordinates, checking boxes, or drawing out areas on the map. There are also settings like including all climates, land covers etc. At the very bottom right of the window, it shows how many time series are being selected.</p>
+<p><img src="images\ISMN_data_downloader1.webp" width="700" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>Image from ISMN tool manual.</p>
+</blockquote>
+<p>For the tutorial later in the chapter, we will only be selecting a handful of sites from Europe, visible in the picture below. These sites are FMI, GTK, REMEDHUS, RSMN, SMOSMANIA, VAS and WEGENERNET. For the time range, we will be using January 1, 2009, to December 31, 2020. Be sure to check the All variables, all climates and all land covers on the “more options” page too. Then click the “Download” button, and the screen below should appear.</p>
+<p><img src="images\ISMN_Quality_Flags.png" width="700" style="display:block; margin:auto;"></p>
+<blockquote class="blockquote">
+<p>Image captured from ISMN data viewer/downloader.</p>
+</blockquote>
+<p>On this page DO NOT check the gap filling with NaN box, and the other boxes do not matter too much, for this tutorial the quality flags being at least good is used. Once everything looks good, click Download. The process can take a few minutes to complete. In the bottom right corner, there is a “your requests” button which has the links of your requests, which you will need to download, which will take a few more minutes. Links to download can also be found in your account’s email, depending on the time taken to download. Once the .zip file is on your local machine, you are ready to begin coding. You do not need to unzip this folder and take note of its path.</p>
+</section>
+<section id="hands-on-part-1-intro-to-the-ismn-python-library" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="hands-on-part-1-intro-to-the-ismn-python-library"><span class="header-section-number">9.7</span> Hands On Part 1: Intro to the <code>ismn</code> Python Library</h2>
+<p>Now, we will begin the hands on coding exercise in Python. In this segment, we will work with the data downloaded from the tutorial above to examine it’s structure and create graphs.</p>
+<section id="python-requirements" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="python-requirements"><span class="header-section-number">9.7.1</span> Python Requirements</h3>
+<p>Unlike other sections throughout the textbook, this section uses Python. If you have not used Python on your local machine before, you will first need to install it. Python can be downloaded from the official website (<a href="https://www.python.org/downloads/" class="uri">https://www.python.org/downloads/</a>). Alternatively, you can install Python through the Anaconda distribution (<a href="https://www.anaconda.com/download" class="uri">https://www.anaconda.com/download</a>), which provides Python along with tools for managing packages and computational environments.</p>
+<p><code>python --version</code></p>
+<p>For this tutorial, Python version 3.12 was used, along with Jupyter Notebook as the development environment (IDE). Jupyter Notebook provides an interactive environment where Python code can be executed in individual cells, making it particularly useful for data analysis and visualization.</p>
+<p>To install Jupyter Notebook using pip, run the following command in your terminal:</p>
+<p><code>pip install notebook</code></p>
+<p>Once installed, you can launch Jupyter Notebook by running:</p>
+<p><code>jupyter notebook</code></p>
+<p>You are welcome to use another Python development environment, such as Visual Studio Code or JupyterLab, provided it supports running Python code. Regardless of which environment you choose, make sure it can access the .zip file downloaded from the ISMN website, as this file will be used throughout the tutorial.</p>
+</section>
+<section id="data-prepping" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="data-prepping"><span class="header-section-number">9.7.2</span> Data Prepping</h3>
+<p>First, let’s import required packages. The main focus is the <code>ISMN_Interface</code> function, which comes from the <code>ismn</code> package. This can be downloaded using <code>pip install ismn</code> from the command line. In this tutorial, we will also be using the <code>numpy</code> and <code>matplotlib</code> packages which also need their own downloads using <code>pip</code>. Source code is from the ISMN’s coding tutotial located at: https://ismn.readthedocs.io/en/latest/examples/interface.html</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ismn.interface <span class="im">import</span> ISMN_Interface</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt  <span class="co"># matplotlib is not installed automatically</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>matplotlib inline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>For cleanliness, let’s get the path to the local .zip file that was downloaded from the web portal. Be sure to keep it as is from the download. Change this path to wherever you saved the .zip file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>FILE_PATH<span class="op">=</span><span class="st">"Downloads/Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.zip"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>After downloading data from the ISMN website, let’s use the <code>ISMN_Interface</code> function to extract the .zip file, and store it in a data structure. From this data structure, many other tools from the ismn python library can be used on it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ismn_data <span class="op">=</span> ISMN_Interface(FILE_PATH)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Using the existing ismn metadata in Downloads\python_metadata\Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.csv to set up ISMN_Interface. 
+If there are issues with the data reader, you can remove the metadata csv file to repeat metadata collection.</code></pre>
+</section>
+<section id="data-organization" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="data-organization"><span class="header-section-number">9.7.3</span> Data Organization</h3>
+<p>Let’s take a look at the object to make sure everything got dowloaded correctly. In the output below, it looks like all of the sites in the networks that we selected are in our dataframe.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ismn_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>ismn.base.IsmnRoot Zip at Downloads\Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.zip
+with Networks[Stations]:
+------------------------
+  FMI: ['SAA111', 'SAA112', 'SAA120', 'SOD011', 'SOD012', 'SOD013', 'SOD021', 'SOD022', 'SOD023', 'SOD031', 'SOD032', 'SOD033', 'SOD071', 'SOD072', 'SOD073', 'SOD081', 'SOD082', 'SOD083', 'SOD091', 'SOD092', 'SOD093', 'SOD101', 'SOD102', 'SOD103', 'SOD130', 'SOD140', 'SODAWS'],
+  GTK: ['IlomantsiII', 'Kuusamo', 'PoriII', 'Suomussalmi'],
+  REMEDHUS: ['Canizal', 'Carramedina', 'Carretoro', 'CasaPeriles', 'ConcejodelMonte', 'ElCoto', 'ElTomillar', 'Granja-g', 'Guarena', 'Guarrati', 'LaAtalaya', 'LaCruzdeElias', 'LasArenas', 'LasBodegas', 'LasBrozas', 'LasEritas', 'LasTresRayas', 'LasVacas', 'LasVictorias', 'LlanosdelaBoveda', 'Paredinas', 'Zamarron'],
+  RSMN: ['Adamclisi', 'Alexandria', 'Bacles', 'Banloc', 'Barlad', 'Calarasi', 'ChisineuCris', 'Corugea', 'Cotnari', 'Darabani', 'Dej', 'Dumbraveni', 'Iasi', 'Oradea', 'RosioriideVede', 'SannicolauMare', 'SatuMare', 'Slatina', 'Slobozia', 'Tecuci'],
+  SMOSMANIA: ['Barnas', 'Berzeme', 'CabrieresdAvignon', 'Condom', 'CreondArmagnac', 'LaGrandCombe', 'Lahas', 'LezignanCorbieres', 'Mazan-Abbaye', 'Mejannes-le-Clap', 'Montaut', 'Mouthoumet', 'Narbonne', 'PeyrusseGrande', 'Pezenas', 'Pezenas-old', 'Prades-le-Lez', 'Sabres', 'SaintFelixdeLauragais', 'Savenes', 'Urgons', 'Villevielle'],
+  VAS: ['MelbexI', 'MelbexII'],
+  WEGENERNET: ['15', '19', '27', '34', '50', '54', '6', '77', '78', '84', '85', '99']</code></pre>
+<p>Within the dataframe, we can see seven subsections. These are the different networks that we selected when downloading the data from the web portal. The networks can be indexed with both integers as well as their strings, same thing goes for their stations within them. Let’s choose the ‘SMOSMANIA’ network, and examine it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>smos_data <span class="op">=</span> ismn_data[<span class="st">"SMOSMANIA"</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>smos_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Network 'SMOSMANIA' with Stations: ['Barnas', 'Berzeme', 'CabrieresdAvignon', 'Condom', 'CreondArmagnac', 'LaGrandCombe', 'Lahas', 'LezignanCorbieres', 'Mazan-Abbaye', 'Mejannes-le-Clap', 'Montaut', 'Mouthoumet', 'Narbonne', 'PeyrusseGrande', 'Pezenas', 'Pezenas-old', 'Prades-le-Lez', 'Sabres', 'SaintFelixdeLauragais', 'Savenes', 'Urgons', 'Villevielle']</code></pre>
+<p>Now, let’s do a little more investigation on the network. From the SMOSMANIA network, let’s look at the SaintFelixdeLauragais station’s sensor data. By just passing the station name, we can see all of the sensors at the station.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>smos_data[<span class="st">"SaintFelixdeLauragais"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Station 'SaintFelixdeLauragais' with Sensors: ['ThetaProbe-ML2X_soil_moisture_0.050000_0.050000', 'PT-100_soil_temperature_0.050000_0.050000', 'ThetaProbe-ML2X_soil_moisture_0.100000_0.100000', 'PT-100_soil_temperature_0.100000_0.100000', 'ThetaProbe-ML2X_soil_moisture_0.200000_0.200000', 'PT-100_soil_temperature_0.200000_0.200000', 'ThetaProbe-ML2X_soil_moisture_0.300000_0.300000', 'PT-100_soil_temperature_0.300000_0.300000', 'ThetaProbe-ML3_soil_moisture_0.200000_0.200000']</code></pre>
+</section>
+<section id="station-metadata" class="level3" data-number="9.7.4">
+<h3 data-number="9.7.4" class="anchored" data-anchor-id="station-metadata"><span class="header-section-number">9.7.4</span> Station Metadata</h3>
+<p>To see that station’s metadata, simply add <code>.metadata</code> onto the end of it, and we can see more information on the station. Lots of information regarding the soil makeup and instrument data is present here. We can also see landcover and climate information of the station too.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>smos_data[<span class="st">"SaintFelixdeLauragais"</span>].metadata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>MetaData([
+  MetaVar([clay_fraction, 22.8, Depth([0.05, 0.05])]),
+  MetaVar([climate_KG, Cfb, None]),
+  MetaVar([climate_insitu, unknown, None]),
+  MetaVar([elevation, 337.0, None]),
+  MetaVar([instrument, ThetaProbe-ML2X, Depth([0.05, 0.05])]),
+  MetaVar([latitude, 43.4417, None]),
+  MetaVar([lc_2000, 10, None]),
+  MetaVar([lc_2005, 10, None]),
+  MetaVar([lc_2010, 10, None]),
+  MetaVar([lc_insitu, unknown, None]),
+  MetaVar([longitude, 1.88, None]),
+  MetaVar([network, SMOSMANIA, None]),
+  MetaVar([organic_carbon, 1.15, Depth([0.05, 0.05])]),
+  MetaVar([sand_fraction, 43.5, Depth([0.05, 0.05])]),
+  MetaVar([saturation, 0.44, Depth([0.05, 0.05])]),
+  MetaVar([silt_fraction, 33.7, Depth([0.05, 0.05])]),
+  MetaVar([station, SaintFelixdeLauragais, None]),
+  MetaVar([timerange_from, 2009-01-01 00:00:00, None]),
+  MetaVar([timerange_to, 2020-12-31 00:00:00, None]),
+  MetaVar([variable, soil_moisture, Depth([0.05, 0.05])]),
+  MetaVar([instrument, PT-100, Depth([0.05, 0.05])]),
+  MetaVar([variable, soil_temperature, Depth([0.05, 0.05])]),
+  MetaVar([clay_fraction, 22.4, Depth([0.1, 0.1])]),
+  MetaVar([instrument, ThetaProbe-ML2X, Depth([0.1, 0.1])]),
+  MetaVar([organic_carbon, 0.84, Depth([0.1, 0.1])]),
+  MetaVar([sand_fraction, 40.3, Depth([0.1, 0.1])]),
+  MetaVar([saturation, 0.43, Depth([0.1, 0.1])]),
+  MetaVar([silt_fraction, 37.3, Depth([0.1, 0.1])]),
+  MetaVar([variable, soil_moisture, Depth([0.1, 0.1])]),
+  MetaVar([instrument, PT-100, Depth([0.1, 0.1])]),
+  MetaVar([variable, soil_temperature, Depth([0.1, 0.1])]),
+  MetaVar([clay_fraction, 23.9, Depth([0.2, 0.2])]),
+  MetaVar([instrument, ThetaProbe-ML2X, Depth([0.2, 0.2])]),
+  MetaVar([organic_carbon, 0.97, Depth([0.2, 0.2])]),
+  MetaVar([sand_fraction, 39.7, Depth([0.2, 0.2])]),
+  MetaVar([saturation, 0.44, Depth([0.2, 0.2])]),
+  MetaVar([silt_fraction, 36.4, Depth([0.2, 0.2])]),
+  MetaVar([timerange_to, 2017-09-01 11:00:00, None]),
+  MetaVar([variable, soil_moisture, Depth([0.2, 0.2])]),
+  MetaVar([instrument, PT-100, Depth([0.2, 0.2])]),
+  MetaVar([variable, soil_temperature, Depth([0.2, 0.2])]),
+  MetaVar([clay_fraction, 29.4, Depth([0.3, 0.3])]),
+  MetaVar([instrument, ThetaProbe-ML2X, Depth([0.3, 0.3])]),
+  MetaVar([organic_carbon, 0.7, Depth([0.3, 0.3])]),
+  MetaVar([sand_fraction, 32.0, Depth([0.3, 0.3])]),
+  MetaVar([saturation, 0.44, Depth([0.3, 0.3])]),
+  MetaVar([silt_fraction, 38.6, Depth([0.3, 0.3])]),
+  MetaVar([variable, soil_moisture, Depth([0.3, 0.3])]),
+  MetaVar([instrument, PT-100, Depth([0.3, 0.3])]),
+  MetaVar([variable, soil_temperature, Depth([0.3, 0.3])]),
+  MetaVar([instrument, ThetaProbe-ML3, Depth([0.2, 0.2])]),
+  MetaVar([timerange_from, 2017-10-16 13:00:00, None])
+])</code></pre>
+</section>
+<section id="sensor-data" class="level3" data-number="9.7.5">
+<h3 data-number="9.7.5" class="anchored" data-anchor-id="sensor-data"><span class="header-section-number">9.7.5</span> Sensor Data</h3>
+<p>Now, let’s look at some actual soil moisture data from a sensor at the SaintFelixdeLauragais station. To access it, we use a similar function, just <code>.data</code> this time. To get data from the first sensor at the station, we are choosing the 0th index.</p>
+<p>In the output, we can see the data is from the dates we chose to download the data from, and all of the flags are “G” for good.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>smos_data[<span class="st">"SaintFelixdeLauragais"</span>][<span class="dv">0</span>].data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+soil_moisture
+</th>
+<th>
+soil_moisture_flag
+</th>
+<th>
+soil_moisture_orig_flag
+</th>
+</tr>
+<tr>
+<th>
+date_time
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+2009-01-01 00:00:00
+</th>
+<td>
+0.2957
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2009-01-01 01:00:00
+</th>
+<td>
+0.2957
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2009-01-01 02:00:00
+</th>
+<td>
+0.2957
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2009-01-01 03:00:00
+</th>
+<td>
+0.2952
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2009-01-01 04:00:00
+</th>
+<td>
+0.2952
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+…
+</th>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 20:00:00
+</th>
+<td>
+0.2710
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 21:00:00
+</th>
+<td>
+0.2700
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 22:00:00
+</th>
+<td>
+0.2710
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 23:00:00
+</th>
+<td>
+0.2700
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-31 00:00:00
+</th>
+<td>
+0.2700
+</td>
+<td>
+G
+</td>
+<td>
+M
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+97750 rows × 3 columns
+</p>
+</div>
+</section>
+</section>
+<section id="hands-on-part-2-built-in-ismn-functions-plotting-sensor-timeseries-data" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> Hands On Part 2: Built-In ISMN Functions &amp; Plotting Sensor Timeseries Data</h1>
+<p>In this section, we will plot &amp; examine data from various sensors, as well as introduce other supplemental functions in the <code>ismn</code> python library.</p>
+<section id="plotting-sensor-data" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="plotting-sensor-data"><span class="header-section-number">10.1</span> Plotting Sensor Data</h2>
+<p>Now, let’s examine a sensor at the SaintFelixdeLauragais station. The available sensors to pick from are visible from sections before, here we chose the “ThetaProbe-ML2X_soil_moisture_0.050000_0.050000” sensor. After getting the sensor as an object, let’s turn it’s metadata into a PANDAS dataframe. Then, we will plot the sensor’s soil moisture data as a time series.</p>
+<p>In the output, we see a the metadata for the sensor, as well as a simple time series of measurements from that specific sensor. That gap around 2011 in the time series could be caused from various reasons like dubious data or sensor malfunctions.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the sensor's metadata</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sensor <span class="op">=</span> ismn_data[<span class="st">'SMOSMANIA'</span>][<span class="st">'SaintFelixdeLauragais'</span>][<span class="st">'ThetaProbe-ML2X_soil_moisture_0.050000_0.050000'</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sensor.metadata.to_pd())</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the stations data</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sensor.data.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>))</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># add labels</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Time [year]"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Soil Moisture [$m^3 m^{-3}$]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>variable        key       
+clay_fraction   val                            22.8
+                depth_from                     0.05
+                depth_to                       0.05
+climate_KG      val                             Cfb
+climate_insitu  val                         unknown
+elevation       val                           337.0
+instrument      val                 ThetaProbe-ML2X
+                depth_from                     0.05
+                depth_to                       0.05
+latitude        val                         43.4417
+lc_2000         val                              10
+lc_2005         val                              10
+lc_2010         val                              10
+lc_insitu       val                         unknown
+longitude       val                            1.88
+network         val                       SMOSMANIA
+organic_carbon  val                            1.15
+                depth_from                     0.05
+                depth_to                       0.05
+sand_fraction   val                            43.5
+                depth_from                     0.05
+                depth_to                       0.05
+saturation      val                            0.44
+                depth_from                     0.05
+                depth_to                       0.05
+silt_fraction   val                            33.7
+                depth_from                     0.05
+                depth_to                       0.05
+station         val           SaintFelixdeLauragais
+timerange_from  val             2009-01-01 00:00:00
+timerange_to    val             2020-12-31 00:00:00
+variable        val                   soil_moisture
+                depth_from                     0.05
+                depth_to                       0.05
+Name: data, dtype: object
+
+
+
+
+
+Text(0, 0.5, 'Soil Moisture [$m^3 m^{-3}$]')</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_36_2.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+<section id="finding-the-nearest-station" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="finding-the-nearest-station"><span class="header-section-number">10.2</span> Finding the Nearest Station</h2>
+<p>The <code>ISMN_Interface</code> object contains information on all stations in the selected area, including coordinates. Closest stations to given points can be found using the function <code>get_nearest_station</code>. In the output below, we can see coordinates for all of the stations across the 7 networks that we downloaded data from. Keep in mind when using this function, it will only return a station that has been downloaded.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># look at stations geocoordinates</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>grid <span class="op">=</span> ismn_data.collection.grid</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>gpis, lons, lats, _ <span class="op">=</span> grid.get_grid_points()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co"># turn into a pandas dataframe and print</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(index<span class="op">=</span>pd.Index(gpis, name<span class="op">=</span><span class="st">'gpi'</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>             data<span class="op">=</span>{<span class="st">'lon'</span>: lons, <span class="st">'lat'</span>: lats}).T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="width: 100%; overflow-x: auto;">
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+gpi
+</th>
+<th>
+0
+</th>
+<th>
+1
+</th>
+<th>
+2
+</th>
+<th>
+3
+</th>
+<th>
+4
+</th>
+<th>
+5
+</th>
+<th>
+6
+</th>
+<th>
+7
+</th>
+<th>
+8
+</th>
+<th>
+9
+</th>
+<th>
+…
+</th>
+<th>
+99
+</th>
+<th>
+100
+</th>
+<th>
+101
+</th>
+<th>
+102
+</th>
+<th>
+103
+</th>
+<th>
+104
+</th>
+<th>
+105
+</th>
+<th>
+106
+</th>
+<th>
+107
+</th>
+<th>
+108
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+lon
+</th>
+<td>
+27.55062
+</td>
+<td>
+27.55076
+</td>
+<td>
+27.53543
+</td>
+<td>
+26.63378
+</td>
+<td>
+26.63378
+</td>
+<td>
+26.63378
+</td>
+<td>
+26.65176
+</td>
+<td>
+26.65162
+</td>
+<td>
+26.65196
+</td>
+<td>
+26.65064
+</td>
+<td>
+…
+</td>
+<td>
+15.81499
+</td>
+<td>
+15.94361
+</td>
+<td>
+15.96578
+</td>
+<td>
+15.75960
+</td>
+<td>
+15.85507
+</td>
+<td>
+15.90710
+</td>
+<td>
+15.92462
+</td>
+<td>
+16.04056
+</td>
+<td>
+15.78112
+</td>
+<td>
+16.03337
+</td>
+</tr>
+<tr>
+<th>
+lat
+</th>
+<td>
+68.33019
+</td>
+<td>
+68.33025
+</td>
+<td>
+68.33881
+</td>
+<td>
+67.36187
+</td>
+<td>
+67.36179
+</td>
+<td>
+67.36195
+</td>
+<td>
+67.36691
+</td>
+<td>
+67.36685
+</td>
+<td>
+67.36691
+</td>
+<td>
+67.36702
+</td>
+<td>
+…
+</td>
+<td>
+46.97233
+</td>
+<td>
+46.97125
+</td>
+<td>
+46.95952
+</td>
+<td>
+46.94327
+</td>
+<td>
+46.99726
+</td>
+<td>
+46.93296
+</td>
+<td>
+46.93291
+</td>
+<td>
+46.93428
+</td>
+<td>
+46.91691
+</td>
+<td>
+46.92135
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+2 rows × 109 columns
+</p>
+</div>
+<p>Now, using the <code>get_nearest_station</code> function and passing in longitude and latitude values, we get the station object that is closest, and its distance from the given points.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the GPI or coordinates, a station from **all** stations in **all** networks in the collection can be selected.</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>lat <span class="op">=</span> <span class="fl">27.0</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>lon <span class="op">=</span> <span class="fl">68.0</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>station, dist <span class="op">=</span> ismn_data.collection.get_nearest_station(lat, lon)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># print the returned station name and distance from chosen coords</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Station </span><span class="sc">{</span>station<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> is </span><span class="sc">{</span><span class="bu">int</span>(dist)<span class="sc">}</span><span class="ss"> metres away from the passed coordinates: (</span><span class="sc">{</span>lat<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>lon<span class="sc">}</span><span class="ss">)'</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> ismn_data.collection.station4gpi(<span class="dv">0</span>) <span class="op">==</span> station <span class="co"># same result when selecting with GPI</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Station SAA111 is 43348 metres away from the passed coordinates: (27.0, 68.0)</code></pre>
+<p>We are able to save the station object from the <code>get_neareast_station</code> function, and get any further information on it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>station</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Station 'SAA111' with Sensors: ['5TE_soil_moisture_0.050000_0.050000', '5TE_soil_temperature_0.050000_0.050000', '5TE_soil_moisture_0.100000_0.100000', '5TE_soil_temperature_0.100000_0.100000', '5TE_soil_moisture_0.200000_0.200000', '5TE_soil_temperature_0.200000_0.200000', '5TE_soil_moisture_0.400000_0.400000', '5TE_soil_temperature_0.400000_0.400000', '5TE_soil_moisture_0.800000_0.800000', '5TE_soil_temperature_0.800000_0.800000', 'CS215_air_temperature_-2.000000_-2.000000']</code></pre>
+</section>
+<section id="finding-a-network-from-a-station" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="finding-a-network-from-a-station"><span class="header-section-number">10.3</span> Finding a Network from a Station</h2>
+<p>If you only have station information, that is enough to get the broader network as well. To do this, we use the <code>network_for_station</code> function, and pass the station name as a string. The function returns the network as an object, which we can then examine other stations and sensors within it.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># call the network_for_station function to do the network search</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> ismn_data.network_for_station(<span class="st">'SAA111'</span>, name_only<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># print results, both the network and the first sensors data in the first station of the network</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>display(network)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>display(network[<span class="dv">0</span>][<span class="dv">0</span>].data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Network 'FMI' with Stations: ['SAA111', 'SAA112', 'SAA120', 'SOD011', 'SOD012', 'SOD013', 'SOD021', 'SOD022', 'SOD023', 'SOD031', 'SOD032', 'SOD033', 'SOD071', 'SOD072', 'SOD073', 'SOD081', 'SOD082', 'SOD083', 'SOD091', 'SOD092', 'SOD093', 'SOD101', 'SOD102', 'SOD103', 'SOD130', 'SOD140', 'SODAWS']</code></pre>
+<div>
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+</th>
+<th>
+soil_moisture
+</th>
+<th>
+soil_moisture_flag
+</th>
+<th>
+soil_moisture_orig_flag
+</th>
+</tr>
+<tr>
+<th>
+date_time
+</th>
+<th>
+</th>
+<th>
+</th>
+<th>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+2012-10-14 00:00:00
+</th>
+<td>
+0.180
+</td>
+<td>
+D02
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2012-10-14 01:00:00
+</th>
+<td>
+0.180
+</td>
+<td>
+D02
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2012-10-14 02:00:00
+</th>
+<td>
+0.179
+</td>
+<td>
+D02
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2012-10-14 03:00:00
+</th>
+<td>
+0.178
+</td>
+<td>
+D02
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2012-10-14 04:00:00
+</th>
+<td>
+0.178
+</td>
+<td>
+D02
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+…
+</th>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 20:00:00
+</th>
+<td>
+0.100
+</td>
+<td>
+D01,D02,D03
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 21:00:00
+</th>
+<td>
+0.100
+</td>
+<td>
+D01,D02,D03
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 22:00:00
+</th>
+<td>
+0.100
+</td>
+<td>
+D01,D02,D03
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-30 23:00:00
+</th>
+<td>
+0.100
+</td>
+<td>
+D01,D02,D03
+</td>
+<td>
+M
+</td>
+</tr>
+<tr>
+<th>
+2020-12-31 00:00:00
+</th>
+<td>
+0.100
+</td>
+<td>
+D01,D02,D03
+</td>
+<td>
+M
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+54299 rows × 3 columns
+</p>
+</div>
+</section>
+<section id="looking-at-the-metadata" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="looking-at-the-metadata"><span class="header-section-number">10.4</span> looking at the Metadata</h2>
+<p>By simply adding the .metadata onto the larger <code>ismn_data</code> object, we can see all sensors in all the stations, along with some metadata. Notice a lot of information from this call are NaN or unknown.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>ismn_data.metadata</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="width: 100%; overflow-x: auto;">
+
+<table class="dataframe table table-sm table-striped small">
+<thead>
+<tr>
+<th>
+variable
+</th>
+<th colspan="3" halign="left">
+clay_fraction
+</th>
+<th colspan="3" halign="left">
+climate_KG
+</th>
+<th colspan="3" halign="left">
+climate_insitu
+</th>
+<th>
+elevation
+</th>
+<th>
+…
+</th>
+<th colspan="2" halign="left">
+timerange_from
+</th>
+<th colspan="3" halign="left">
+timerange_to
+</th>
+<th colspan="3" halign="left">
+variable
+</th>
+<th>
+file_path
+</th>
+<th>
+file_type
+</th>
+</tr>
+<tr>
+<th>
+key
+</th>
+<th>
+depth_from
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+depth_from
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+depth_from
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+depth_from
+</th>
+<th>
+…
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+depth_from
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+depth_from
+</th>
+<th>
+depth_to
+</th>
+<th>
+val
+</th>
+<th>
+val
+</th>
+<th>
+val
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>
+0
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+4.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfc
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-14 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+0.05
+</td>
+<td>
+0.05
+</td>
+<td>
+soil_moisture
+</td>
+<td>
+FMI/SAA111/FMI_FMI_SAA111_sm_0.050000_0.050000…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+1
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+4.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfc
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-14 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+0.05
+</td>
+<td>
+0.05
+</td>
+<td>
+soil_temperature
+</td>
+<td>
+FMI/SAA111/FMI_FMI_SAA111_ts_0.050000_0.050000…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+2
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+4.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfc
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-14 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+0.10
+</td>
+<td>
+0.10
+</td>
+<td>
+soil_moisture
+</td>
+<td>
+FMI/SAA111/FMI_FMI_SAA111_sm_0.100000_0.100000…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+3
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+4.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfc
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-14 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+0.10
+</td>
+<td>
+0.10
+</td>
+<td>
+soil_temperature
+</td>
+<td>
+FMI/SAA111/FMI_FMI_SAA111_ts_0.100000_0.100000…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+4
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+4.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfc
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2012-10-14 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2014-07-04 04:00:00
+</td>
+<td>
+0.20
+</td>
+<td>
+0.20
+</td>
+<td>
+soil_moisture
+</td>
+<td>
+FMI/SAA111/FMI_FMI_SAA111_sm_0.200000_0.200000…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+…
+</th>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+<td>
+…
+</td>
+</tr>
+<tr>
+<th>
+686
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfb
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2009-01-01 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+-2.00
+</td>
+<td>
+-2.00
+</td>
+<td>
+air_temperature
+</td>
+<td>
+WEGENERNET/99/WEGENERNET_WEGENERNET_99_ta_-2.0…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+687
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+20.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfb
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2009-01-01 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2013-06-18 15:00:00
+</td>
+<td>
+0.30
+</td>
+<td>
+0.30
+</td>
+<td>
+soil_moisture
+</td>
+<td>
+WEGENERNET/99/WEGENERNET_WEGENERNET_99_sm_0.30…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+688
+</th>
+<td>
+0.0
+</td>
+<td>
+0.3
+</td>
+<td>
+20.0
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfb
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2013-10-23 12:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-31 00:00:00
+</td>
+<td>
+0.20
+</td>
+<td>
+0.20
+</td>
+<td>
+soil_moisture
+</td>
+<td>
+WEGENERNET/99/WEGENERNET_WEGENERNET_99_sm_0.20…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+689
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfb
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2009-01-16 13:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2016-08-09 23:00:00
+</td>
+<td>
+-1.50
+</td>
+<td>
+-1.50
+</td>
+<td>
+precipitation
+</td>
+<td>
+WEGENERNET/99/WEGENERNET_WEGENERNET_99_p_-1.50…
+</td>
+<td>
+header_values
+</td>
+</tr>
+<tr>
+<th>
+690
+</th>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+Dfb
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+unknown
+</td>
+<td>
+NaN
+</td>
+<td>
+…
+</td>
+<td>
+NaN
+</td>
+<td>
+2016-08-10 00:00:00
+</td>
+<td>
+NaN
+</td>
+<td>
+NaN
+</td>
+<td>
+2020-12-30 22:00:00
+</td>
+<td>
+-1.50
+</td>
+<td>
+-1.50
+</td>
+<td>
+precipitation
+</td>
+<td>
+WEGENERNET/99/WEGENERNET_WEGENERNET_99_p_-1.50…
+</td>
+<td>
+header_values
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+691 rows × 62 columns
+</p>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get sensor ids for desired sensors after filtering</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> ismn_data.get_dataset_ids(variable<span class="op">=</span><span class="st">'soil_temperature'</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                                max_depth<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                                filter_meta_dict<span class="op">=</span>{<span class="st">'lc_2005'</span>: <span class="dv">130</span>, <span class="st">'climate_KG'</span>: <span class="st">'Csb'</span>})</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the valid stations</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ids</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[456, 458, 460, 462]</code></pre>
+</section>
+<section id="plotting-station-locations" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="plotting-station-locations"><span class="header-section-number">10.5</span> Plotting Station Locations</h2>
+<p>Here, we are plotting station locations on a map, only if their depth for ‘soil_moisture’ measurement are out of desired depth range. To do so, desired min and max depth are passed through the <code>plot_station_locations</code> function. Same can be done with the ‘soil_temperature’ variable.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot available station on a map</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">16</span>,<span class="dv">10</span>), subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()})</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ismn_data.plot_station_locations(<span class="st">'soil_moisture'</span>, min_depth<span class="op">=</span><span class="fl">0.</span>, max_depth<span class="op">=</span><span class="fl">0.1</span>, ax<span class="op">=</span>axs[<span class="dv">0</span>], markersize<span class="op">=</span><span class="dv">5</span>, text_scalefactor<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>ismn_data.plot_station_locations(<span class="st">'soil_temperature'</span>, min_depth<span class="op">=</span><span class="fl">0.5</span>, ax<span class="op">=</span>axs[<span class="dv">1</span>], markersize<span class="op">=</span><span class="dv">5</span>, text_scalefactor<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">0</span>].set_extent([<span class="op">-</span><span class="dv">10</span>, <span class="dv">35</span>, <span class="dv">34</span>, <span class="dv">71</span>])</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>axs[<span class="dv">1</span>].set_extent([<span class="op">-</span><span class="dv">10</span>, <span class="dv">35</span>, <span class="dv">34</span>, <span class="dv">71</span>])</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_49_0.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="hands-on-part-3-ismn-variables-data-masking" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> Hands On Part 3: ISMN Variables &amp; Data Masking</h1>
+<p>In this section, we will filter out stations based on desired variables.</p>
+<section id="selecting-and-reading-different-sensors-based-off-metadata" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="selecting-and-reading-different-sensors-based-off-metadata"><span class="header-section-number">11.1</span> Selecting and Reading Different Sensors based off Metadata</h2>
+<p>To select sensors with specific features, the get_dataset_ids function can be used. Passing through ‘soil_temperature’ as the variable, along with a ‘max_depth’ of 1m, as well as a ‘lc_2005’ (land cover 2005) of 130 and ‘climate_KG’ type of ‘Csb’, we get 4 stations that meet these criteria. The same result can be gotten using masking, done in the following cell.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get sesnors with soil temp readings, a max depth of 1m, and specific land cover and climate values </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> ismn_data.get_dataset_ids(variable<span class="op">=</span><span class="st">'soil_temperature'</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                                max_depth<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                                filter_meta_dict<span class="op">=</span>{<span class="st">'lc_2005'</span>: <span class="dv">130</span>, <span class="st">'climate_KG'</span>: <span class="st">'Csb'</span>})</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the sensors that meet requirements</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>ids</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[456, 458, 460, 462]</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alternate way to calling function above, another method of filtering sensors</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>conditions <span class="op">=</span> (ismn_data.metadata[<span class="st">'variable'</span>].val <span class="op">==</span> <span class="st">'soil_temperature'</span>) <span class="op">&amp;</span> <span class="op">\</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>             (ismn_data.metadata[<span class="st">'instrument'</span>].depth_to <span class="op">&lt;=</span> <span class="dv">1</span>) <span class="op">&amp;</span> <span class="op">\</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>             (ismn_data.metadata[<span class="st">'lc_2005'</span>].val <span class="op">==</span> <span class="dv">130</span>) <span class="op">&amp;</span> <span class="op">\</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>             (ismn_data.metadata[<span class="st">'climate_KG'</span>].val <span class="op">==</span> <span class="st">'Csb'</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># apply the mask and look at the valid stations</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>ismn_data.metadata[conditions].index.to_list()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>[456, 458, 460, 462]</code></pre>
+<p>Using the stations’ IDs that we just gathered from masking, we can plot a time series of soil temperature. Since not every station measures soil temperature, masking the data first is an important step to get soil temperature since it is not available at every station.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the filtered sensor ids for soil temp</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ts, meta <span class="op">=</span> ismn_data.read(ids, return_meta<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> ts.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>), title<span class="op">=</span><span class="ss">f'Time series for ID </span><span class="sc">{</span>ids[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">'</span>, xlabel<span class="op">=</span><span class="st">"Time [year]"</span>, ylabel<span class="op">=</span><span class="st">"Soil Temp. [°C]"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_55_0.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+<section id="selecting-by-variable-and-depth" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="selecting-by-variable-and-depth"><span class="header-section-number">11.2</span> Selecting by Variable and Depth</h2>
+<p>Here, we will get lists of sensors that meet requirements. In the next block of code, only sensor with soil moisture readings from 0-0.05 meters are iterated through, and their information is shown and plotted. In this example, the <code>ismn_data.collection.iter_sensors</code> function returns networks, stations, and sensors that apply. (It returns a lot of text, so here we will stop after the first sensor)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterate through only stations that have soil moisture data at a depth from 0 to 0.05m </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> network, station, sensor <span class="kw">in</span> ismn_data.collection.iter_sensors(variable<span class="op">=</span><span class="st">'soil_moisture'</span>,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                                                                  depth<span class="op">=</span>[<span class="fl">0.</span>, <span class="fl">0.05</span>]):</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print general information for sensors that match from each network</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    display(network)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    display(station)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    display(sensor)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print the first sensor's metadata</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\033</span><span class="st">[1m'</span> <span class="op">+</span> <span class="ss">f'Metadata for sensor </span><span class="sc">{</span>sensor<span class="sc">}</span><span class="ss">:'</span><span class="op">+</span> <span class="st">'</span><span class="ch">\033</span><span class="st">[0m'</span>)</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    display(sensor.metadata.to_pd())</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> sensor.data.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>), title<span class="op">=</span><span class="ss">f'Time series for sensor </span><span class="sc">{</span>sensor<span class="sc">.</span>name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Time [year]"</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Soil Moisture [$m^3 m^{-3}$]"</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span>  <span class="co"># for this example we stop after the first sensor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Network 'FMI' with Stations: ['SAA111', 'SAA112', 'SAA120', 'SOD011', 'SOD012', 'SOD013', 'SOD021', 'SOD022', 'SOD023', 'SOD031', 'SOD032', 'SOD033', 'SOD071', 'SOD072', 'SOD073', 'SOD081', 'SOD082', 'SOD083', 'SOD091', 'SOD092', 'SOD093', 'SOD101', 'SOD102', 'SOD103', 'SOD130', 'SOD140', 'SODAWS']
+
+
+
+Station 'SAA111' with Sensors: ['5TE_soil_moisture_0.050000_0.050000', '5TE_soil_temperature_0.050000_0.050000', '5TE_soil_moisture_0.100000_0.100000', '5TE_soil_temperature_0.100000_0.100000', '5TE_soil_moisture_0.200000_0.200000', '5TE_soil_temperature_0.200000_0.200000', '5TE_soil_moisture_0.400000_0.400000', '5TE_soil_temperature_0.400000_0.400000', '5TE_soil_moisture_0.800000_0.800000', '5TE_soil_temperature_0.800000_0.800000', 'CS215_air_temperature_-2.000000_-2.000000']
+
+
+
+5TE_soil_moisture_0.050000_0.050000
+
+
+[1mMetadata for sensor 5TE_soil_moisture_0.050000_0.050000:[0m
+
+
+
+variable        key       
+clay_fraction   val                           4.0
+                depth_from                    0.0
+                depth_to                      0.3
+climate_KG      val                           Dfc
+climate_insitu  val                       unknown
+elevation       val                         441.0
+instrument      val                           5TE
+                depth_from                   0.05
+                depth_to                     0.05
+latitude        val                      68.33019
+lc_2000         val                           110
+lc_2005         val                           110
+lc_2010         val                           110
+lc_insitu       val                       unknown
+longitude       val                      27.55062
+network         val                           FMI
+organic_carbon  val                          2.18
+                depth_from                    0.0
+                depth_to                      0.3
+sand_fraction   val                          87.0
+                depth_from                    0.0
+                depth_to                      0.3
+saturation      val                          0.49
+                depth_from                    0.0
+                depth_to                      0.3
+silt_fraction   val                           9.0
+                depth_from                    0.0
+                depth_to                      0.3
+station         val                        SAA111
+timerange_from  val           2012-10-14 00:00:00
+timerange_to    val           2020-12-31 00:00:00
+variable        val                 soil_moisture
+                depth_from                   0.05
+                depth_to                     0.05
+Name: data, dtype: object</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_57_5.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+<section id="climate-köppen-geiger-types" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="climate-köppen-geiger-types"><span class="header-section-number">11.3</span> Climate Köppen Geiger Types</h2>
+<p>Each station has variable called ‘climate_KG’, which is a 1-3 letters, and corresponds to the table below. The variable explains the greater biome’s climate of the sensor, and is more general than the landcover dict. In this case, the “KG” in ‘climate_KG’ stands for “Köppen Geiger,” not kilogram.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ismn_data.print_climate_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>KOEPPEN GEIGER Climate Classification
+-------------------------------------
+Af  : Tropical Rainforest
+Am  : Tropical Monsoon
+As  : Tropical Savanna Dry
+Aw  : Tropical Savanna Wet
+BWk : Arid Desert Cold
+BWh : Arid Desert Hot
+BWn : Arid Desert With Frequent Fog
+BSk : Arid Steppe Cold
+BSh : Arid Steppe Hot
+BSn : Arid Steppe With Frequent Fog
+Csa : Temperate Dry Hot Summer
+Csb : Temperate Dry Warm Summer
+Csc : Temperate Dry Cold Summer
+Cwa : Temperate Dry Winter, Hot Summer
+Cwb : Temperate Dry Winter, Warm Summer
+Cwc : Temperate Dry Winter, Cold Summer
+Cfa : Temperate Without Dry Season, Hot Summer
+Cfb : Temperate Without Dry Season, Warm Summer
+Cfc : Temperate Without Dry Season, Cold Summer
+Dsa : Cold Dry Summer, Hot Summer
+Dsb : Cold Dry Summer, Warm Summer
+Dsc : Cold Dry Summer, Cold Summer
+Dsd : Cold Dry Summer, Very Cold Winter
+Dwa : Cold Dry Winter, Hot Summer
+Dwb : Cold Dry Winter, Warm Summer
+Dwc : Cold Dry Winter, Cold Summer
+Dwd : Cold Dry Winter, Very Cold Winter
+Dfa : Cold Dry Without Dry Season, Hot Summer
+Dfb : Cold Dry Without Dry Season, Warm Summer
+Dfc : Cold Dry Without Dry Season, Cold Summer
+Dfd : Cold Dry Without Dry Season, Very Cold Winter
+ET  : Polar Tundra
+EF  : Polar Eternal Winter
+W   : Water</code></pre>
+</section>
+<section id="surrounding-landcover" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="surrounding-landcover"><span class="header-section-number">11.4</span> Surrounding Landcover</h2>
+<p>Next, let’s look at some locational data from the sensors. By calling the <code>print_landcover_dict</code> function, we see counts of surrounding geographical features around sensors.</p>
+<p>The integer on the right of the colons is what corresponds to the definitions on the left, which is stored in the sensor’s metadata.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>ismn_data.print_landcover_dict()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>CCI Landcover Classification
+----------------------------
+Cropland, rainfed: 10
+Cropland, rainfed / Herbaceous cover: 11
+Cropland, rainfed / Tree or shrub cover: 12
+Cropland, irrigated or post-flooding: 20
+Mosaic cropland (&gt;50%) / natural vegetation (tree, shrub, herbaceous: 30
+Mosaic natural vegetation (tree, shrub, herbaceous cover) (&gt;50%) / cropland (&lt;50%): 40
+Tree cover, broadleaved, evergreen, Closed to open (&gt;15%): 50
+Tree cover, broadleaved, deciduous, Closed to open (&gt;15%): 60
+Tree cover, broadleaved, deciduous, Closed (&gt;40%): 61
+Tree cover, broadleaved, deciduous, Open (15-40%): 62
+Tree cover, needleleaved, evergreen, closed to open (&gt;15%): 70
+Tree cover, needleleaved, evergreen, closed (&gt;40%): 71
+Tree cover, needleleaved, evergreen, open (15-40%): 72
+Tree cover, needleleaved, deciduous, closed to open (&gt;15%): 80
+Tree cover, needleleaved, deciduous, closed (&gt;40%): 81
+Tree cover, needleleaved, deciduous, open (15-40%): 82
+Tree cover, mixed leaf type (broadleaved and needleleaved): 90
+Mosaic tree and shrub (&gt;50%) / herbaceous cover (&lt;50%): 100
+Mosaic herbaceous cover (&gt;50%) / tree and shrub (&lt;50%): 110
+Shrubland: 120
+Shrubland / Evergreen Shrubland: 121
+Shrubland / Deciduous Shrubland: 122
+Grassland: 130
+Lichens and mosses: 140
+Sparse vegetation (tree, shrub, herbaceous cover) (&lt;15%): 150
+Sparse vegetation (tree, shrub, herbaceous cover) (&lt;15%) / Sparse shrub (&lt;15%): 152
+Sparse vegetation (tree, shrub, herbaceous cover) (&lt;15%) / Sparse herbaceous cover (&lt;15%): 153
+Tree cover, flooded, fresh or brakish water: 160
+Tree cover, flooded, saline water: 170
+Shrub or herbaceous cover, flooded, fresh/saline/brakish water: 180
+Urban areas: 190
+Bare areas: 200
+Consolidated bare areas: 201
+Unconsolidated bare areas: 202
+Water: 210
+Permanent snow and ice: 220</code></pre>
+</section>
+<section id="selecting-by-variables-and-other-metadata" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="selecting-by-variables-and-other-metadata"><span class="header-section-number">11.5</span> Selecting by Variables and Other Metadata</h2>
+<p>Now, in a similar process as before, we will iterate through sensors and their corresponding sensors that have data for precipitation measurements with ‘lc_2010’ values 10 (Cropland) or 130 (Grassland). The function <code>iter_sensors</code> will return the station and sensor values. Here, we will plot precipitation values.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># iterate through sensors and corresponding stations with precipitation readings with lc_2010 values 10 or 130</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> station, sensor <span class="kw">in</span> ismn_data[<span class="st">'RSMN'</span>].iter_sensors(variable<span class="op">=</span><span class="st">'precipitation'</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                                                      filter_meta_dict<span class="op">=</span>{<span class="st">'lc_2010'</span>: [<span class="dv">10</span>, <span class="dv">130</span>]}):</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print station and sensor names</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    display(station)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    display(sensor)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># get the metadata from the sensor</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> sensor.read_data()</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    metadata <span class="op">=</span> sensor.metadata</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot precip data for the first sensor in iteration</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\033</span><span class="st">[1m'</span> <span class="op">+</span> <span class="ss">f'Metadata for sensor </span><span class="sc">{</span>sensor<span class="sc">}</span><span class="ss">:'</span> <span class="op">+</span> <span class="st">'</span><span class="ch">\033</span><span class="st">[0m'</span>)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>    display(metadata.to_pd())</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> data.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>), title<span class="op">=</span><span class="ss">f'Time series for sensor </span><span class="sc">{</span>sensor<span class="sc">.</span>name<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Time [year]"</span>)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Precipitation [mm]"</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span> <span class="co"># for this example we stop after the first sensor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Station 'Barlad' with Sensors: ['5TM_soil_moisture_0.000000_0.050000', '5TM_soil_temperature_0.000000_0.050000', 'HMP155-Vaisala_air_temperature_-2.000000_-2.000000', 'QMR102_precipitation_-1.400000_-1.400000']
+
+
+
+QMR102_precipitation_-1.400000_-1.400000
+
+
+[1mMetadata for sensor QMR102_precipitation_-1.400000_-1.400000:[0m
+
+
+
+variable        key       
+climate_KG      val                           Dfb
+climate_insitu  val                       unknown
+elevation       val                         172.0
+instrument      val                        QMR102
+                depth_from                   -1.4
+                depth_to                     -1.4
+latitude        val                      46.23313
+lc_2000         val                            10
+lc_2005         val                            10
+lc_2010         val                            10
+lc_insitu       val                       unknown
+longitude       val                      27.64438
+network         val                          RSMN
+station         val                        Barlad
+timerange_from  val           2014-06-06 07:00:00
+timerange_to    val           2020-12-31 00:00:00
+variable        val                 precipitation
+                depth_from                   -1.4
+                depth_to                     -1.4
+Name: data, dtype: object</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_63_4.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+<section id="selecting-by-depth" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="selecting-by-depth"><span class="header-section-number">11.6</span> Selecting by Depth</h2>
+<p>Once again, we will filter through sensors, but this time for sensor depth between 0 and 0.05m, specific climates (refer to the Köppen Geiger table for exact definitions), and the same land cover values as before.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ismn.meta <span class="im">import</span> Depth</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> network, station, sensor <span class="kw">in</span> ismn_data.collection <span class="op">\</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    .iter_sensors(variable<span class="op">=</span><span class="st">'soil_moisture'</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>                  depth<span class="op">=</span>Depth(<span class="fl">0.</span>,<span class="fl">0.05</span>),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>                  filter_meta_dict<span class="op">=</span>{<span class="st">'lc_2010'</span>: [<span class="dv">10</span>, <span class="dv">130</span>],</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'climate_KG'</span>:[<span class="st">'Csc'</span>, <span class="st">'Cfa'</span>, <span class="st">'Dfc'</span>]}):</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    display(network)</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    display(station)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>    display(sensor)</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># set all non good data flagged values as NaN</span></span>
+<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> sensor.read_data()</span>
+<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>    data.loc[data[<span class="st">'soil_moisture_flag'</span>] <span class="op">!=</span> <span class="st">'G'</span>, <span class="st">'soil_moisture'</span>] <span class="op">=</span> np.nan</span>
+<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a>    metadata <span class="op">=</span> sensor.metadata</span>
+<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># look at the sensor's metadata</span></span>
+<span id="cb40-18"><a href="#cb40-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'</span><span class="ch">\033</span><span class="st">[1m'</span> <span class="op">+</span> <span class="ss">f'Metadata for sensor </span><span class="sc">{</span>sensor<span class="sc">}</span><span class="ss">:'</span><span class="op">+</span> <span class="st">'</span><span class="ch">\033</span><span class="st">[0m'</span>)</span>
+<span id="cb40-19"><a href="#cb40-19" aria-hidden="true" tabindex="-1"></a>    display(metadata.to_pd())</span>
+<span id="cb40-20"><a href="#cb40-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-21"><a href="#cb40-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># plot soil moisture reading from the sensor</span></span>
+<span id="cb40-22"><a href="#cb40-22" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> data.plot(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">4</span>), title<span class="op">=</span><span class="ss">f"G-flagged SM for '</span><span class="sc">{</span>sensor<span class="sc">.</span>name<span class="sc">}</span><span class="ss">' at station '</span><span class="sc">{</span>station<span class="sc">.</span>name<span class="sc">}</span><span class="ss">' in network '</span><span class="sc">{</span>network<span class="sc">.</span>name<span class="sc">}</span><span class="ss">''"</span>)</span>
+<span id="cb40-23"><a href="#cb40-23" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"Time [year]"</span>)</span>
+<span id="cb40-24"><a href="#cb40-24" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"Soil Moisture [$m^3 m^{-3}$]"</span>)</span>
+<span id="cb40-25"><a href="#cb40-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">break</span> <span class="co"># for this example we stop after the first sensor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Network 'RSMN' with Stations: ['Adamclisi', 'Alexandria', 'Bacles', 'Banloc', 'Barlad', 'Calarasi', 'ChisineuCris', 'Corugea', 'Cotnari', 'Darabani', 'Dej', 'Dumbraveni', 'Iasi', 'Oradea', 'RosioriideVede', 'SannicolauMare', 'SatuMare', 'Slatina', 'Slobozia', 'Tecuci']
+
+
+
+Station 'Dumbraveni' with Sensors: ['5TM_soil_moisture_0.000000_0.050000', '5TM_soil_temperature_0.000000_0.050000', 'HMP45DX_air_temperature_-2.000000_-2.000000', 'QMR102_precipitation_-1.400000_-1.400000']
+
+
+
+5TM_soil_moisture_0.000000_0.050000
+
+
+[1mMetadata for sensor 5TM_soil_moisture_0.000000_0.050000:[0m
+
+
+
+variable        key       
+clay_fraction   val                          19.0
+                depth_from                    0.0
+                depth_to                      0.3
+climate_KG      val                           Dfc
+climate_insitu  val                       unknown
+elevation       val                         318.0
+instrument      val                           5TM
+                depth_from                    0.0
+                depth_to                     0.05
+latitude        val                      46.22786
+lc_2000         val                            10
+lc_2005         val                            10
+lc_2010         val                            10
+lc_insitu       val                       unknown
+longitude       val                      24.59161
+network         val                          RSMN
+organic_carbon  val                          0.99
+                depth_from                    0.0
+                depth_to                      0.3
+sand_fraction   val                          37.0
+                depth_from                    0.0
+                depth_to                      0.3
+saturation      val                          0.44
+                depth_from                    0.0
+                depth_to                      0.3
+silt_fraction   val                          44.0
+                depth_from                    0.0
+                depth_to                      0.3
+station         val                    Dumbraveni
+timerange_from  val           2014-06-11 12:00:00
+timerange_to    val           2020-12-31 00:00:00
+variable        val                 soil_moisture
+                depth_from                    0.0
+                depth_to                     0.05
+Name: data, dtype: object</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_65_5.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+<section id="creating-subset-interface" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="creating-subset-interface"><span class="header-section-number">11.7</span> Creating Subset Interface</h2>
+<p>The <code>ISMN_Interface</code> tool also has capabilities to make subsets of itself. Using the <code>subset_from_ids</code> function, we can do so. First, we randomly choose 10 sensor ids from sensors with soil moisture data, and put those sensors into the new subset.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># metadata from stations with soil moisture data</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>metadata <span class="op">=</span> ismn_data.metadata[ismn_data.metadata[(<span class="st">'variable'</span>, <span class="st">'val'</span>)] <span class="op">==</span> <span class="st">'soil_moisture'</span>]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># randomly pick 10 station ids</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> np.random.choice(metadata.index, <span class="dv">10</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create the subset of 10 random sensors, store in the subset object</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>subset <span class="op">=</span> ismn_data.subset_from_ids(ids)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>subset</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>Using the existing ismn metadata in Downloads\python_metadata\Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.csv to set up ISMN_Interface. 
+If there are issues with the data reader, you can remove the metadata csv file to repeat metadata collection.
+
+
+
+
+
+ismn.base.IsmnRoot Zip at Downloads\Data_separate_files_header_20090101_20201231_13318_PEr6_20260403.zip
+with Networks[Stations]:
+------------------------
+  GTK: ['IlomantsiII', 'PoriII'],
+  SMOSMANIA: ['Mouthoumet', 'Mejannes-le-Clap'],
+  FMI: ['SOD011', 'SOD140', 'SOD083'],
+  REMEDHUS: ['Guarena']</code></pre>
+<p>Now, we will plot the 10 random sensors, and color code for network.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#plot available station on a map</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">10</span>), subplot_kw<span class="op">=</span>{<span class="st">'projection'</span>: ccrs.Robinson()})</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>subset.plot_station_locations(ax<span class="op">=</span>ax, markersize<span class="op">=</span><span class="dv">7</span>, text_scalefactor<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="dv">10</span>, <span class="dv">35</span>, <span class="dv">34</span>, <span class="dv">71</span>])</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="output_69_0.png" class="img-fluid figure-img"></p>
+<figcaption>png</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="ismn-chapter-citations" class="level1" data-number="12">
+<h1 data-number="12"><span class="header-section-number">12</span> ISMN &amp; Chapter Citations</h1>
+<section id="get-network-citations" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="get-network-citations"><span class="header-section-number">12.1</span> Get Network Citations</h2>
+<p>Citations for the network are also available via the <code>get_citaions</code> function. They can be exported to a text file using the <code>export_citations</code> function too. The citations are specific to the networks that you selected when downloading.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at citations</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ismn_data[<span class="st">'WEGENERNET'</span>].get_citations()</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># export the citations to a text file</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ismn_data.collection.export_citations(out_file='citations_for_my_subset.txt')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<pre><code>['Kirchengast, G., Kabas, T., Leuprecht, A., Bichler, C. &amp; Truhetz, H. (2014), ‘Wegenernet: A pioneering high-resolution network for monitoring weather and climate’, Bulletin of the American Meteorological Society 95.',
+ 'Fuchsberger, J., Kirchengast, G. &amp; Kabas, T. (2020), ‘Wegenernet high-resolution weather and climate data 2007 to 2019’, Earth System Science Data Discussions 2020, 1–49.']</code></pre>
+</section>
+</section>
+<section id="to-do-ismn-quiz-questions" class="level1" data-number="13">
+<h1 data-number="13"><span class="header-section-number">13</span> To Do: ISMN Quiz Questions</h1>
+<ol type="1">
+<li><p>What are real world applications to having so much soil data?</p></li>
+<li><p>How can you get metadata information from a sensor?</p></li>
+<li><p>Which ISMN network has the most stations? What country is it in?</p></li>
+<li><p>How can you see ISMN citations from the python library?</p></li>
+<li><p>What is the climate classification system called? What about landcovers?</p></li>
+<li><p>Are there any strange occurrences in the time series plots? What might be causing these?</p></li>
+<li><p>Besides soil moisture, what other features can be measured at any given station? List at least two.</p></li>
+</ol>
+</section>
+<section id="to-do-ismn-culmination-write-up" class="level1" data-number="14">
+<h1 data-number="14"><span class="header-section-number">14</span> To Do: ISMN Culmination Write Up</h1>
+<p>Write up a 1-page derived data product or research pipeline proposal summary of a project that you might want to explore using ISMN data. Include the types of data that you would need to implement this project and how you would retrieve them. Save this summary as you will be refining and adding to your ideas over the course of the semester.</p>
+</section>
+<section id="to-do-coding-lab" class="level1" data-number="15">
+<h1 data-number="15"><span class="header-section-number">15</span> To Do: Coding Lab</h1>
+<p>Choose any network in the ISMN. In this Network, retrieve soil moisture data from one station, and then from two stations that are farther apart. What similarities do you notice between these plots? Why are they similar or not?</p>
+<p>Finally, get citations for the entire network as well as the KG climate classifications &amp; landcover values for all stations that you used.</p>
+<section id="acknowledgements" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="acknowledgements"><span class="header-section-number">15.1</span> Acknowledgements</h2>
+<p>This chapter focuses on the International Soil Moisture Network, as well as the ISMN Python library. The ISMN is a community project that relies on help from scientists across the world to grow.</p>
+<p>Sincerest thanks go to Wolfgang Preimesberger and Dr.&nbsp;Wolfgang Korres, who assisted in revising the chapter. Preimesberger also developed the ISMN Python library and wrote the tutorial which the coding section is based on.</p>
+</section>
+<section id="ismn-citations" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="ismn-citations"><span class="header-section-number">15.2</span> ISMN Citations</h2>
+<p>Dorigo, W., Himmelbauer, I., Aberer, D., Schremmer, L., Petrakovic, I., Zappa, L., Preimesberger, W., Xaver, A., Annor, F., Ardö, J., Baldocchi, D., Bitelli, M., Blöschl, G., Bogena, H., Brocca, L., Calvet, J.-C., Camarero, J. J., Capello, G., Choi, M., Cosh, M. C., van de Giesen, N., Hajdu, I., Ikonen, J., Jensen, K. H., Kanniah, K. D., de Kat, I., Kirchengast, G., Kumar Rai, P., Kyrouac, J., Larson, K., Liu, S., Loew, A., Moghaddam, M., Martínez Fernández, J., Mattar Bader, C., Morbidelli, R., Musial, J. P., Osenga, E., Palecki, M. A., Pellarin, T., Petropoulos, G. P., Pfeil, I., Powers, J., Robock, A., Rüdiger, C., Rummel, U., Strobel, M., Su, Z., Sullivan, R., Tagesson, T., Varlagin, A., Vreugdenhil, M., Walker, J., Wen, J., Wenger, F., Wigneron, J. P., Woods, M., Yang, K., Zeng, Y., Zhang, X., Zreda, M., Dietrich, S., Gruber, A., van Oevelen, P., Wagner, W., Scipal, K., Drusch, M., and Sabia, R.: The International Soil Moisture Network: serving Earth system science for over a decade, Hydrol. Earth Syst. Sci., 25, 5749–5804, https://doi.org/10.5194/hess-25-5749-2021, 2021.​​​​​ Dorigo, W. A., Wagner, W., Hohensinn, R., Hahn, S., Paulik, C., Xaver, A., Gruber, A., Drusch, M., Mecklenburg, S., van Oevelen, P., Robock, A., and Jackson, T. (2011). The International Soil Moisture Network: a data hosting facility for global in situ soil moisture measurements, Hydrol. Earth Syst. Sci., 15, 1675-1698, doi:10.5194/hess-15-1675-2011. Dorigo, W.A. , Xaver, A. Vreugdenhil, M. Gruber, A., Hegyiová, A. Sanchis-Dufau, A.D., Zamojski, D. , Cordes, C., Wagner, W., and Drusch, M. (2013). GlobalAutomated Quality Control of In situ Soil Moisture data from the International Soil Moisture Network. Vadose Zone Journal, 12, 3, doi:10.2136/vzj2012.0097</p>
+</section>
+<section id="coding-tutotial-citations-github" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="coding-tutotial-citations-github"><span class="header-section-number">15.3</span> Coding Tutotial Citations &amp; GitHub</h2>
+<p>The ismn package can be found on github here: <a href="https://github.com/TUW-GEO/ismn" class="uri">https://github.com/TUW-GEO/ismn</a></p>
+<p>“Wolfgang Preimesberger, pbutting, tracyscanlon, daberer, Manuel Schmitzer, D. Baum, lzappa, Sebastian Hahn, bascrezee, Christoph Paulik, &amp; Nicolas F. Bader. (2025). TUW-GEO/ismn: v1.5.2 (v1.5.2). Zenodo. https://doi.org/10.5281/zenodo.14987279”</p>
+</section>
+<section id="other-citations" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="other-citations"><span class="header-section-number">15.4</span> Other citations</h2>
+<p>Andreasen, M., Jensen, K. H., Desilets, D., Franz, T. E., Zreda, M., Bogena, H. R., &amp; Looms, M. C. (2017). Status and perspectives on the cosmic-ray neutron method for soil moisture estimation and other environmental science applications. Vadose Zone Journal, 16(8), 1–11. https://doi.org/10.2136/vzj2017.04.0086</p>
+<p>Rasheed, M. W., Tang, J., Sarwar, A., Shah, S., Saddique, N., Khan, M. U., Khan, M. I., Nawaz, S., Shamshiri, R. R., Aziz, M., &amp; Sultan, M. (2022). Soil moisture measuring techniques and factors affecting the moisture dynamics: A comprehensive review. Sustainability, 14(18), 11538. https://doi.org/10.3390/su141811538</p>
+<p>Topp, G. C., et al.&nbsp;“Mechanisms for Soil Moisture Effects on Activity of Nitrifying Bacteria” Applied and Environmental Microbiology, vol.&nbsp;61, no. 1, 1995, pp.&nbsp;218–221.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/nau-ecoinformatics\.github\.io\/INF550-textbook\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./08-USGS.html" class="pagination-link" aria-label="USGS National Water Information System (NWIS)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./10-GEE.html" class="pagination-link" aria-label="Introduction to the Google Earth Engine (GEE) Platform and Interfaces">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-InternationalSoilMoistureNetwork.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

@@ -2,54 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/index.html</loc>
-    <lastmod>2026-11-12T04:05:14.119Z</lastmod>
+    <lastmod>2026-11-12T17:48:51.628Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/01-Pre-Course_Skills.html</loc>
-    <lastmod>2026-11-09T16:38:17.929Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.855Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/02-Introduction_to_NEON.html</loc>
-    <lastmod>2026-11-09T17:04:15.974Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.857Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/03-USA-NPN.html</loc>
-    <lastmod>2026-11-09T17:22:13.808Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.859Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/04-PhenoCam.html</loc>
-    <lastmod>2026-11-10T01:39:56.446Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.861Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/05-Fluxes_and_Inter-operability.html</loc>
-    <lastmod>2026-11-10T01:47:52.651Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.867Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/06-NEON_AOP.html</loc>
-    <lastmod>2026-11-10T02:13:19.212Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.867Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/07-NASA_EOS.html</loc>
-    <lastmod>2026-11-10T02:38:43.345Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.867Z</lastmod>
   </url>
   <url>
     <loc>https://nau-ecoinformatics.github.io/INF550-textbook/08-USGS.html</loc>
-    <lastmod>2026-11-10T02:51:51.417Z</lastmod>
+    <lastmod>2026-11-12T16:44:10.867Z</lastmod>
   </url>
   <url>
-    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/09-GEE.html</loc>
-    <lastmod>2026-11-10T18:41:45.624Z</lastmod>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/09-InternationalSoilMoistureNetwork.html</loc>
+    <lastmod>2026-11-12T17:43:35.559Z</lastmod>
   </url>
   <url>
-    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/10-OneHealth_PathogenSurveillance.html</loc>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/10-GEE.html</loc>
+    <lastmod>2026-11-12T16:44:10.877Z</lastmod>
+  </url>
+  <url>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/11-OneHealth_PathogenSurveillance.html</loc>
     <lastmod>2026-11-04T21:24:08.581Z</lastmod>
   </url>
   <url>
-    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/11_Vulcan_EDGAR.html</loc>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/12_Vulcan_EDGAR.html</loc>
     <lastmod>2026-10-30T19:57:07.186Z</lastmod>
   </url>
   <url>
-    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/12-FAQ.html</loc>
-    <lastmod>2026-11-09T17:20:18.783Z</lastmod>
+    <loc>https://nau-ecoinformatics.github.io/INF550-textbook/13-Appendix.html</loc>
+    <lastmod>2026-11-12T16:44:10.877Z</lastmod>
   </url>
 </urlset>

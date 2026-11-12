@@ -11,7 +11,7 @@
 <meta name="author" content="Jalyn Gearries">
 <meta name="description" content="Course text for NAU INF 550">
 
-<title>9&nbsp; Introduction to the Google Earth Engine (GEE) Platform and Interfaces – Environmental Informatics Using Research Infrastructures and their Data</title>
+<title>10&nbsp; Introduction to the Google Earth Engine (GEE) Platform and Interfaces – Environmental Informatics Using Research Infrastructures and their Data</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -72,8 +72,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./10-OneHealth_PathogenSurveillance.html" rel="next">
-<link href="./08-USGS.html" rel="prev">
+<link href="./11-OneHealth_PathogenSurveillance.html" rel="next">
+<link href="./09-InternationalSoilMoistureNetwork.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -124,7 +124,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./09-GEE.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-GEE.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -208,25 +208,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./09-GEE.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span></a>
+  <a href="./09-InternationalSoilMoistureNetwork.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
+  <a href="./10-GEE.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./11_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  <a href="./11-OneHealth_PathogenSurveillance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-FAQ.html" class="sidebar-item-text sidebar-link">
+  <a href="./12_Vulcan_EDGAR.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">High-Resolution Carbon Emissions Using the Vulcan Dataset</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-Appendix.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Appendix</span></a>
   </div>
 </li>
@@ -240,23 +246,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul class="collapse">
-  <li><a href="#gee-learning-objectives" id="toc-gee-learning-objectives" class="nav-link active" data-scroll-target="#gee-learning-objectives"><span class="header-section-number">9.1</span> GEE Learning Objectives</a></li>
-  <li><a href="#gee-overview" id="toc-gee-overview" class="nav-link" data-scroll-target="#gee-overview"><span class="header-section-number">9.2</span> GEE Overview:</a></li>
-  <li><a href="#learning-materials" id="toc-learning-materials" class="nav-link" data-scroll-target="#learning-materials"><span class="header-section-number">9.3</span> Learning Materials</a></li>
-  <li><a href="#data-available-on-gee" id="toc-data-available-on-gee" class="nav-link" data-scroll-target="#data-available-on-gee"><span class="header-section-number">9.4</span> Data Available on GEE:</a></li>
-  <li><a href="#hands-on-using-the-gee-code-editor" id="toc-hands-on-using-the-gee-code-editor" class="nav-link" data-scroll-target="#hands-on-using-the-gee-code-editor"><span class="header-section-number">9.5</span> Hands on: Using the GEE Code Editor</a></li>
-  <li><a href="#hands-on-satellite-change-detection-using-gee" id="toc-hands-on-satellite-change-detection-using-gee" class="nav-link" data-scroll-target="#hands-on-satellite-change-detection-using-gee"><span class="header-section-number">9.6</span> Hands on: Satellite Change Detection Using GEE</a></li>
-  <li><a href="#other-interfaces-to-the-earth-engine-api" id="toc-other-interfaces-to-the-earth-engine-api" class="nav-link" data-scroll-target="#other-interfaces-to-the-earth-engine-api"><span class="header-section-number">9.7</span> Other Interfaces to the Earth Engine API</a></li>
-  <li><a href="#gee-exercises" id="toc-gee-exercises" class="nav-link" data-scroll-target="#gee-exercises"><span class="header-section-number">9.8</span> GEE Exercises</a></li>
+  <li><a href="#gee-learning-objectives" id="toc-gee-learning-objectives" class="nav-link active" data-scroll-target="#gee-learning-objectives"><span class="header-section-number">10.1</span> GEE Learning Objectives</a></li>
+  <li><a href="#gee-overview" id="toc-gee-overview" class="nav-link" data-scroll-target="#gee-overview"><span class="header-section-number">10.2</span> GEE Overview:</a></li>
+  <li><a href="#learning-materials" id="toc-learning-materials" class="nav-link" data-scroll-target="#learning-materials"><span class="header-section-number">10.3</span> Learning Materials</a></li>
+  <li><a href="#data-available-on-gee" id="toc-data-available-on-gee" class="nav-link" data-scroll-target="#data-available-on-gee"><span class="header-section-number">10.4</span> Data Available on GEE:</a></li>
+  <li><a href="#hands-on-using-the-gee-code-editor" id="toc-hands-on-using-the-gee-code-editor" class="nav-link" data-scroll-target="#hands-on-using-the-gee-code-editor"><span class="header-section-number">10.5</span> Hands on: Using the GEE Code Editor</a></li>
+  <li><a href="#hands-on-satellite-change-detection-using-gee" id="toc-hands-on-satellite-change-detection-using-gee" class="nav-link" data-scroll-target="#hands-on-satellite-change-detection-using-gee"><span class="header-section-number">10.6</span> Hands on: Satellite Change Detection Using GEE</a></li>
+  <li><a href="#other-interfaces-to-the-earth-engine-api" id="toc-other-interfaces-to-the-earth-engine-api" class="nav-link" data-scroll-target="#other-interfaces-to-the-earth-engine-api"><span class="header-section-number">10.7</span> Other Interfaces to the Earth Engine API</a></li>
+  <li><a href="#gee-exercises" id="toc-gee-exercises" class="nav-link" data-scroll-target="#gee-exercises"><span class="header-section-number">10.8</span> GEE Exercises</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/10-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></h1>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></h1>
 </div>
 
 
@@ -285,8 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Estimated Time: 2 hours</p>
 </blockquote>
 <p><strong>Course participants</strong>: As you review this information, please consider the final course project that you will build upon over this semester. At the end of this section, you will document an initial research question or idea and associated data needed to address that question, that you may want to explore while pursuing this course.</p>
-<section id="gee-learning-objectives" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="gee-learning-objectives"><span class="header-section-number">9.1</span> GEE Learning Objectives</h2>
+<section id="gee-learning-objectives" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="gee-learning-objectives"><span class="header-section-number">10.1</span> GEE Learning Objectives</h2>
 <p>At the end of this activity, you will be able to:</p>
 <ul>
 <li><p>Understand the structure and capabilities of Google Earth Engine (GEE), including its cloud-based infrastructure, data catalog, and computational resources</p></li>
@@ -295,26 +301,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Integrate Earth Engine into broader ecoinformatics workflows by accessing, processing, and analyzing cloud-hosted geospatial data within external computational environments</p></li>
 </ul>
 </section>
-<section id="gee-overview" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="gee-overview"><span class="header-section-number">9.2</span> GEE Overview:</h2>
+<section id="gee-overview" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="gee-overview"><span class="header-section-number">10.2</span> GEE Overview:</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gKGOeTFHnKY?si=V4ZwjGtbd8B_76cD" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 </iframe>
 <p>The <a href="https://earthengine.google.com/">Google Earth Engine (GEE)</a> platform combines a multi-petabyte catalog of satellite imagery and geospatial datasets with the massive computational power of Google’s cloud infrastructure. Rather than downloading and processing large datasets locally, GEE users can leverage Google’s distributed computing resources to perform complex analyses across large spatial and temporal scales. This architecture enables planetary-scale environmental monitoring and analysis that would otherwise require substantial local computing resources and data storage.</p>
 <p>Scientists, researchers, and developers use Earth Engine to detect environmental changes, identify trends, and quantify processes occurring across the Earth’s surface. Students and academic researchers can access Earth Engine at no cost for eligible noncommercial educational and research activities. Commercial use is also supported through separate pricing arrangements.</p>
 </section>
-<section id="learning-materials" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="learning-materials"><span class="header-section-number">9.3</span> Learning Materials</h2>
+<section id="learning-materials" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="learning-materials"><span class="header-section-number">10.3</span> Learning Materials</h2>
 <p>Since its initial launch in 2010, Google Earth Engine has grown into one of the most widely used platforms in the remote sensing and geospatial research communities. Its capabilities and large international user base have generated a wealth of learning materials, including official documentation, tutorials, video lectures, textbooks, workshops, and community-developed tools and workflows. Students are encouraged to take advantage of these resources and explore the various ways that GEE can be applied to research tasks in their area of interest.</p>
-<section id="lecture-google-earth-engine-101" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="lecture-google-earth-engine-101"><span class="header-section-number">9.3.1</span> Lecture: Google Earth Engine 101</h3>
+<section id="lecture-google-earth-engine-101" class="level3" data-number="10.3.1">
+<h3 data-number="10.3.1" class="anchored" data-anchor-id="lecture-google-earth-engine-101"><span class="header-section-number">10.3.1</span> Lecture: Google Earth Engine 101</h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/I-wFYm4Hnhg" title="Google Earth Engine 101 Part 1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
 </iframe>
 <blockquote class="blockquote">
 <p>Time: 1 hour, 17 minutes</p>
 </blockquote>
 </section>
-<section id="recommended-resources" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="recommended-resources"><span class="header-section-number">9.3.2</span> Recommended Resources</h3>
+<section id="recommended-resources" class="level3" data-number="10.3.2">
+<h3 data-number="10.3.2" class="anchored" data-anchor-id="recommended-resources"><span class="header-section-number">10.3.2</span> Recommended Resources</h3>
 <p>For students interested in developing a deeper understanding of GEE, the open textbook <a href="https://www.eefabook.org/">Cloud-Based Remote Sensing with Google Earth Engine: Fundamentals and Applications</a> is an exceptional supplementary resource. Edited by over 100 researchers, practitioners, and Earth Engine experts (notably several Google engineers and developers directly involved in building the platform), this textbook is among the most comprehensive resources available for learning Earth Engine. It is highly recommended as a reference throughout this course and beyond.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -326,8 +332,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="relevant-links" class="level3" data-number="9.3.3">
-<h3 data-number="9.3.3" class="anchored" data-anchor-id="relevant-links"><span class="header-section-number">9.3.3</span> Relevant Links:</h3>
+<section id="relevant-links" class="level3" data-number="10.3.3">
+<h3 data-number="10.3.3" class="anchored" data-anchor-id="relevant-links"><span class="header-section-number">10.3.3</span> Relevant Links:</h3>
 <ol type="1">
 <li><p><a href="https://earthengine.google.com/platform/">GEE platform overview</a></p></li>
 <li><p><a href="https://developers.google.com/earth-engine/">GEE documentation</a></p></li>
@@ -338,8 +344,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 </section>
 </section>
-<section id="data-available-on-gee" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="data-available-on-gee"><span class="header-section-number">9.4</span> <a href="https://developers.google.com/earth-engine/datasets">Data Available on GEE</a>:</h2>
+<section id="data-available-on-gee" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="data-available-on-gee"><span class="header-section-number">10.4</span> <a href="https://developers.google.com/earth-engine/datasets">Data Available on GEE</a>:</h2>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -384,13 +390,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="hands-on-using-the-gee-code-editor" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="hands-on-using-the-gee-code-editor"><span class="header-section-number">9.5</span> Hands on: Using the GEE Code Editor</h2>
+<section id="hands-on-using-the-gee-code-editor" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="hands-on-using-the-gee-code-editor"><span class="header-section-number">10.5</span> Hands on: Using the GEE Code Editor</h2>
 <p>GEE makes their data available through a number of different <a href="https://developers.google.com/earth-engine">channels and tools</a>. This flexibility reflects the way geospatial data are handled in Earth Engine: rather than downloading datasets locally, users send computational requests to remote servers where the data are stored and processed. These requests are made through a set of APIs and client libraries that translate user-written code into Earth Engine operations.</p>
 <p>Access to Earth Engine data is typically mediated through these client libraries, which provide interfaces in both JavaScript and Python. These libraries act as a bridge between user-written code and the Earth Engine servers, allowing complex geospatial analyses to be expressed in a relatively compact and high-level syntax. Users can also interact directly with Earth Engine through a REST API, although this is less commonly used for exploratory analysis.</p>
 <p>One of the most widely used interfaces is the JavaScript-based <a href="https://developers.google.com/earth-engine/guides/playground">Code Editor</a>, which provides an interactive, browser-based environment for working with Earth Engine data. The Python client library offers similar functionality, and can be used in environments such as Google Colab, local Python installations, or cloud-based platforms such as App Engine. Together, these interfaces allow users to choose a workflow that best fits their computational background and research needs.</p>
-<section id="setting-up-an-earth-engine-account" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="setting-up-an-earth-engine-account"><span class="header-section-number">9.5.1</span> Setting Up an Earth Engine Account</h3>
+<section id="setting-up-an-earth-engine-account" class="level3" data-number="10.5.1">
+<h3 data-number="10.5.1" class="anchored" data-anchor-id="setting-up-an-earth-engine-account"><span class="header-section-number">10.5.1</span> Setting Up an Earth Engine Account</h3>
 <p>Before accessing any of the interfaces described above, a Google Earth Engine account is required. As of 2024, registration is no longer a standalone process. Earth Engine access is granted at the level of a <strong>Google Cloud project</strong>, which is linked to your Google account. This change was made to support the platform’s commercial release while preserving free access for academic and research users.</p>
 <p>To register:</p>
 <ol type="1">
@@ -402,8 +408,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>A note on quotas:</strong> in 2026, Earth Engine introduced a tiered quota system for noncommercial projects. Projects that have not selected a tier are placed in the <em>Community Tier</em> by default, which is sufficient for coursework and exploratory analysis but applies stricter rate limits than higher tiers. If you find that long-running scripts begin to fail with <code>OverQuotaError</code>, the quota tier of your project is the first thing to check. Tier selection is done from the Earth Engine project management page at <a href="https://code.earthengine.google.com/register" class="uri">https://code.earthengine.google.com/register</a>.</p>
 <p>Once registered, the Code Editor at <a href="https://code.earthengine.google.com/" class="uri">https://code.earthengine.google.com/</a> is immediately accessible. No further authentication is required from the browser. The Python and R client libraries each require an additional local authentication step, which is described in the <em>Other Interfaces</em> section later in this chapter.</p>
 </section>
-<section id="the-gee-code-editor" class="level3" data-number="9.5.2">
-<h3 data-number="9.5.2" class="anchored" data-anchor-id="the-gee-code-editor"><span class="header-section-number">9.5.2</span> The GEE Code Editor</h3>
+<section id="the-gee-code-editor" class="level3" data-number="10.5.2">
+<h3 data-number="10.5.2" class="anchored" data-anchor-id="the-gee-code-editor"><span class="header-section-number">10.5.2</span> The GEE Code Editor</h3>
 <p>GEE provides access to a Code Editor as an integrated development environment (IDE) for the Earth Engine JavaScript API. This IDE offers a platform to write and execute code, visualize results on an interactive map, and manage scripts and projects within a single web-based environment. The Code Editor is accessed through a dedicated webpage:</p>
 <p>https://code.earthengine.google.com/</p>
 <p>Access to Earth Engine data through the Code Editor is built around the JavaScript programming language, which serves as the primary scripting interface for this environment. JavaScript provides a lightweight and accessible syntax that acts as a direct bridge to the Earth Engine API, where all geospatial computations are performed. Although JavaScript may not be the most familiar programming language for many researchers in the geosciences, it is the most mature and fully supported option within Earth Engine. Importantly, users do not need to become expert JavaScript programmers to use the platform effectively. Instead, a basic understanding of syntax is sufficient, since most operations in Earth Engine are performed by calling pre-built functions from the Earth Engine library. This <a href="https://developers.google.com/earth-engine/tutorials/tutorial_js_01">brief introduction</a> to JavaScript syntax for GEE provided by the GEE developer team is enough to get started for most use cases.</p>
@@ -432,8 +438,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>You should see the text output appear in the upper-right panel under “Console”. This is basic JavaScript, which runs in your web browser on the client side. The power of GEE is in taking advantage of Google’s vast infrastructure of servers to both access data and perform calculations on the server side. This client-server distinction is important in GEE and can be read about <a href="https://developers.google.com/earth-engine/guides/client_server">here</a>. We can now begin using GEE to access data on the server side, specifically, images and image collections.</p>
 </section>
-<section id="working-with-earth-engine-image-objects" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="working-with-earth-engine-image-objects"><span class="header-section-number">9.5.3</span> Working with Earth Engine Image Objects</h3>
+<section id="working-with-earth-engine-image-objects" class="level3" data-number="10.5.3">
+<h3 data-number="10.5.3" class="anchored" data-anchor-id="working-with-earth-engine-image-objects"><span class="header-section-number">10.5.3</span> Working with Earth Engine Image Objects</h3>
 <p>Before writing any code, it is useful to understand that the Earth Engine API’s functionality is organized around <strong>objects</strong> (e.g., Earth Engine images, image collections, features, and feature collections) and associated <strong>methods</strong>, which are built-in functions that operate on these object types. Detailed documentation for these object types and their methods is provided in the ‘Docs’ panel on the upper left of the Code Editor. (See here for <a href="https://developers.google.com/earth-engine/guides/objects_methods_overview">more information on GEE objects and methods</a>).</p>
 <p>Let’s now begin working with GEE objects by accessing an image from Landsat 8, one of the most widely used Earth Observation platforms. In the Script Editor, enter and run the following code:</p>
 <div class="cell">
@@ -477,8 +483,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>In the Inspector panel, open the <em>Objects</em> section, and click on <em>bands</em>. We can see that this Landsat 8 image contains 19 bands. Under <em>properties</em>, we can see that the image also includes a lot of metadata, such as <code>CLOUD_COVER</code>, <code>DATE_ACQUIRED</code>, <code>SUN_AZIMUTH</code>, etc. These properties will be useful for filtering image collections in the future.</p>
 </section>
-<section id="working-with-image-collections" class="level3" data-number="9.5.4">
-<h3 data-number="9.5.4" class="anchored" data-anchor-id="working-with-image-collections"><span class="header-section-number">9.5.4</span> Working With Image Collections</h3>
+<section id="working-with-image-collections" class="level3" data-number="10.5.4">
+<h3 data-number="10.5.4" class="anchored" data-anchor-id="working-with-image-collections"><span class="header-section-number">10.5.4</span> Working With Image Collections</h3>
 <p>We previously loaded one single Landsat image to the map. But the true power of GEE is in working with <strong>image collections</strong>, which can represent an entire catalogue of data from a specific satellite or database.</p>
 <p>Let’s use Landsat 8 once again. We can type the ID of the satellite into an <code>ee.ImageCollection()</code> object, much as we did above. But this time we can search for this collection using the search bar. In the upper search bar at the top of the code editor webpage, type “Landsat 8” and click Enter. There will be several results representing different processing levels. Find the dataset titled <code>USGS Landsat 8 Level 2, Collection 2, Tier 1</code>.</p>
 <div class="cell">
@@ -506,8 +512,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> landsat8 <span class="op">=</span> ee<span class="op">.</span><span class="fu">ImageCollection</span>(<span class="st">"LANDSAT/LC08/C02/T1_L2"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="filtering-an-image-collection" class="level4" data-number="9.5.4.1">
-<h4 data-number="9.5.4.1" class="anchored" data-anchor-id="filtering-an-image-collection"><span class="header-section-number">9.5.4.1</span> Filtering an Image Collection</h4>
+<section id="filtering-an-image-collection" class="level4" data-number="10.5.4.1">
+<h4 data-number="10.5.4.1" class="anchored" data-anchor-id="filtering-an-image-collection"><span class="header-section-number">10.5.4.1</span> Filtering an Image Collection</h4>
 <p>While having all of the data from Landsat 8 in one object is interesting, it’s not very useful. We need to filter the image collection to focus on the time and location of interest. We can filter spatially to focus on an area of interest, and temporally to narrow in on a particular timeframe.</p>
 <p>To apply a <strong>spatial filter</strong>, we will create an Earth Engine <strong>Feature</strong> object. The Map Display allows one way to do this manually. On the map panel, click the <em>Point</em> icon, then click a point of interest where you would like to see satellite imagery on your map. I’ll choose southern California near Los Angeles.</p>
 <div class="cell">
@@ -547,8 +553,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="dealing-with-clouds" class="level3" data-number="9.5.5">
-<h3 data-number="9.5.5" class="anchored" data-anchor-id="dealing-with-clouds"><span class="header-section-number">9.5.5</span> Dealing with Clouds</h3>
+<section id="dealing-with-clouds" class="level3" data-number="10.5.5">
+<h3 data-number="10.5.5" class="anchored" data-anchor-id="dealing-with-clouds"><span class="header-section-number">10.5.5</span> Dealing with Clouds</h3>
 <p>Take a look at your image collection on the map. You will likely only see the first image in the collection. Does it have any clouds?</p>
 <p>Clouds are an ever-present challenge when working with satellite data. Even if your area of interest is clear in the topmost image, there’s no guarantee it’s unobstructed in the other images of the collection. To handle this, we’ll explore three methods:</p>
 <ol type="1">
@@ -556,8 +562,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Filtering by attributes:</strong> Remove images with high cloud cover using the metadata property.</li>
 <li><strong>Cloud masking:</strong> Apply a mask that identifies and removes clouds at the pixel level.</li>
 </ol>
-<section id="median-compositing" class="level4" data-number="9.5.5.1">
-<h4 data-number="9.5.5.1" class="anchored" data-anchor-id="median-compositing"><span class="header-section-number">9.5.5.1</span> Median Compositing</h4>
+<section id="median-compositing" class="level4" data-number="10.5.5.1">
+<h4 data-number="10.5.5.1" class="anchored" data-anchor-id="median-compositing"><span class="header-section-number">10.5.5.1</span> Median Compositing</h4>
 <p>The simplest way to reduce clouds in an image collection is to apply a mathematical operation across the entire collection. While this may sound complex, Earth Engine makes it straightforward.</p>
 <p>Each band in an image can be thought of as a 2D array of pixel values, which allows mathematical operations to be applied across images. For an image collection, the <code>.median()</code> method reduces the collection to a single image by computing the median value at each pixel location.</p>
 <p>Because clouds tend to have high reflectance in optical imagery, they often appear as unusually bright values within a time series. By taking the median at each pixel, these outliers are suppressed, resulting in a composite image close to the true median surface reflectance values–particularly when there are many cloud-free images.</p>
@@ -582,8 +588,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this case, not entirely. This is due to the fact that there were only four images in the collection. However, in a sunny region like California, compositing across a longer time span would result in a much sharper image. What would it look like had we collapsed a year of data using this method?</p>
 <p>This approach is quick and effective for producing a general visual overview, but it can introduce distortions and results in the loss of potentially valuable temporal information. To handle clouds more precisely while preserving information through time, we can explore alternative methods.</p>
 </section>
-<section id="filtering-by-image-properties" class="level4" data-number="9.5.5.2">
-<h4 data-number="9.5.5.2" class="anchored" data-anchor-id="filtering-by-image-properties"><span class="header-section-number">9.5.5.2</span> Filtering by Image Properties</h4>
+<section id="filtering-by-image-properties" class="level4" data-number="10.5.5.2">
+<h4 data-number="10.5.5.2" class="anchored" data-anchor-id="filtering-by-image-properties"><span class="header-section-number">10.5.5.2</span> Filtering by Image Properties</h4>
 <p>Recall that each image includes a set of properties, which are metadata associated with the scene. Landsat data include the property <code>CLOUD_COVER</code>, which represents the estimated percentage of cloud cover for a given image. For example, if an image’s property <code>CLOUD_COVER</code> = 40, then approximately 40% of the scene is estimated to be obscured by clouds based on USGS processing algorithms.</p>
 <p>We can use this property to filter out images that are too cloudy for analysis. To do so, we append an additional filter step to the image collection:</p>
 <div class="cell">
@@ -595,8 +601,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Here, we use the <code>.filter()</code> method to apply an additional condition to the image collection. The condition is defined using <code>ee.Filter.lt()</code>, which selects images where a specified property is less than a given threshold. In this case, we use the <code>CLOUD_COVER</code> property to retain only images with less than 20% estimated cloud cover.</p>
 <p>The resulting image collection contains only images that meet this condition, in addition to the spatial and temporal filters applied earlier. A cloud cover threshold of 20% may be sufficient for relatively cloud-free regions such as southern California, but the threshold can be adjusted depending on local climate conditions, data availability, and analysis objectives.</p>
 </section>
-<section id="cloud-masking" class="level4" data-number="9.5.5.3">
-<h4 data-number="9.5.5.3" class="anchored" data-anchor-id="cloud-masking"><span class="header-section-number">9.5.5.3</span> Cloud Masking</h4>
+<section id="cloud-masking" class="level4" data-number="10.5.5.3">
+<h4 data-number="10.5.5.3" class="anchored" data-anchor-id="cloud-masking"><span class="header-section-number">10.5.5.3</span> Cloud Masking</h4>
 <p>A more robust way to handle clouds is by applying a <strong>cloud mask</strong>. Unlike simple filtering, which removes entire images, cloud masking operates at the pixel level, allowing us to retain useful observations within partially cloudy scenes.</p>
 <p>To implement this approach, we first define a cloud masking function. This introduces an important Earth Engine concept: applying a function across all images in a collection using the <code>.map()</code> method.</p>
 <p>For widely used sensors such as Landsat and Sentinel, well-tested cloud masking functions are readily available in the Earth Engine community and documentation. Here, we use a standard Landsat approach that leverages the <code>QA_PIXEL</code> band to identify clouds and cloud shadows based on quality assessment flags. For more information on the Landsat Quality Assessment (QA) bands and the bit flags used to identify clouds, cloud shadows, and other atmospheric conditions, see the <a href="https://www.usgs.gov/landsat-missions/landsat-collection-2-quality-assessment-bands">USGS Documentation</a>.</p>
@@ -638,8 +644,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="hands-on-satellite-change-detection-using-gee" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="hands-on-satellite-change-detection-using-gee"><span class="header-section-number">9.6</span> Hands on: Satellite Change Detection Using GEE</h2>
+<section id="hands-on-satellite-change-detection-using-gee" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="hands-on-satellite-change-detection-using-gee"><span class="header-section-number">10.6</span> Hands on: Satellite Change Detection Using GEE</h2>
 <p>GEE is particularly well suited for change detection, as it provides seamless access to large temporal ranges of satellite imagery and efficient tools for comparing observations across dates.</p>
 <p>Change detection is a widely applied method in satellite image analysis, and enables the identification and quantification of environmental changes across space and time. This method is applied across several domains, including:</p>
 <ul>
@@ -653,8 +659,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Coastal change:</strong> Tracking shoreline erosion, sediment movement, and sea level impacts</li>
 </ul>
 <p>In this section, we will use change detection techniques to analyze wildfire severity and assess the extent of damage to communities in the wildland-urban interface during the 2025 Los Angeles wildfire.</p>
-<section id="pre-fire-imagery" class="level3" data-number="9.6.1">
-<h3 data-number="9.6.1" class="anchored" data-anchor-id="pre-fire-imagery"><span class="header-section-number">9.6.1</span> Pre-Fire Imagery</h3>
+<section id="pre-fire-imagery" class="level3" data-number="10.6.1">
+<h3 data-number="10.6.1" class="anchored" data-anchor-id="pre-fire-imagery"><span class="header-section-number">10.6.1</span> Pre-Fire Imagery</h3>
 <p>In Section 9.5.5, we learned how to create cloud-free composites using image collections, filtering, and masking techniques. We now apply these skills to analyze the 2025 Los Angeles wildfires by generating a high-quality pre-fire image image composite.</p>
 <p>To do this, we use Landsat 8 data, apply filters to the image collection, perform image-based operations, and implement a cloud masking function. The following script produces a ready-to-use pre-fire composite based on these steps:</p>
 <div class="cell">
@@ -689,8 +695,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_pre<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"Pre-Fire Image"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="post-fire-imagery" class="level3" data-number="9.6.2">
-<h3 data-number="9.6.2" class="anchored" data-anchor-id="post-fire-imagery"><span class="header-section-number">9.6.2</span> Post-Fire Imagery</h3>
+<section id="post-fire-imagery" class="level3" data-number="10.6.2">
+<h3 data-number="10.6.2" class="anchored" data-anchor-id="post-fire-imagery"><span class="header-section-number">10.6.2</span> Post-Fire Imagery</h3>
 <p>To generate a post-fire image, we follow the same approach but select a time period after the fire event. The fires occurred between January 7 and 31, 2025, so we begin with February 2025 as our post-fire window. Using the same workflow, we can produce a clear post-fire composite.</p>
 <p>Add the following code to the end of your script:</p>
 <div class="cell">
@@ -706,8 +712,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">Map</span><span class="op">.</span><span class="fu">addLayer</span>(landsat_post<span class="op">,</span> trueColorVis<span class="op">,</span> <span class="st">"Post-Fire Image"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="adjusting-visualization-parameters" class="level3" data-number="9.6.3">
-<h3 data-number="9.6.3" class="anchored" data-anchor-id="adjusting-visualization-parameters"><span class="header-section-number">9.6.3</span> Adjusting Visualization Parameters</h3>
+<section id="adjusting-visualization-parameters" class="level3" data-number="10.6.3">
+<h3 data-number="10.6.3" class="anchored" data-anchor-id="adjusting-visualization-parameters"><span class="header-section-number">10.6.3</span> Adjusting Visualization Parameters</h3>
 <p>You should now be able to compare the pre- and post-fire images on the map. Open the Layers panel in the upper-right corner and use the transparency slider for each layer to explore differences between them. Adjust the post-fire layer and observe how the landscape has changed.</p>
 <p>Some of these differences are due to fire, while others reflect seasonal variation between the image acquisition dates. To better isolate fire-related changes, we can apply visualization techniques that specifically highlight burned areas.</p>
 <p>Burned surfaces exhibit high reflectance in the <em>shortwave infrared (SWIR)</em> region, making them easier to identify using false color composites. To emphasize these fire scars, we will create a <strong>false color visualization</strong>. Append the following code to your script:</p>
@@ -735,8 +741,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Toggle the post-fire false color layer on and off to compare it with the underlying imagery. You should observe areas where green vegetation gives way to bright red patches. These red regions indicate burned surfaces, which appear red in this visualization due to their high reflectance in the shortwave infrared (SWIR) region.</p>
 <p>In this band combination, SWIR reflectance is displayed in red, near-infrared (NIR) reflectance in green, and red reflectance in blue.</p>
 </section>
-<section id="calculating-indices-using-band-math" class="level3" data-number="9.6.4">
-<h3 data-number="9.6.4" class="anchored" data-anchor-id="calculating-indices-using-band-math"><span class="header-section-number">9.6.4</span> Calculating Indices Using Band Math</h3>
+<section id="calculating-indices-using-band-math" class="level3" data-number="10.6.4">
+<h3 data-number="10.6.4" class="anchored" data-anchor-id="calculating-indices-using-band-math"><span class="header-section-number">10.6.4</span> Calculating Indices Using Band Math</h3>
 <p>One of the most common transformations applied to multispectral satellite data is the calculation of spectral indices. A widely used example is the <strong>Normalized Difference Vegetation Index (NDVI)</strong>.</p>
 <p>As we have seen, individual spectral bands provide information about features on the Earth’s surface. However, additional insight can be gained by examining the relationship between bands, particularly through ratios of their values. In the case of vegetation, healthy plants strongly reflect radiation in the near-infrared (NIR) band while absorbing radiation in the red band.</p>
 <p>NDVI leverages this contrast to provide an indicator of vegetation presence and density, and is calculated using the following formula:</p>
@@ -786,8 +792,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">rename</span>(<span class="st">'NBR'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="calculate-the-differenced-normalized-burn-ratio-dnbr" class="level3" data-number="9.6.5">
-<h3 data-number="9.6.5" class="anchored" data-anchor-id="calculate-the-differenced-normalized-burn-ratio-dnbr"><span class="header-section-number">9.6.5</span> Calculate the differenced Normalized Burn Ratio (dNBR)</h3>
+<section id="calculate-the-differenced-normalized-burn-ratio-dnbr" class="level3" data-number="10.6.5">
+<h3 data-number="10.6.5" class="anchored" data-anchor-id="calculate-the-differenced-normalized-burn-ratio-dnbr"><span class="header-section-number">10.6.5</span> Calculate the differenced Normalized Burn Ratio (dNBR)</h3>
 <p>The change between pre-fire and post-fire NBR is referred to as the <strong>differenced Normalized Burn Ratio (dNBR)</strong>. It is calculated by subtracting the post-fire NBR from the pre-fire NBR. In Earth Engine, as with other mathematical operations on images, this can be implemented using the <code>.subtract()</code> method.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Calculate dNBR (pre - post)</span></span>
@@ -796,8 +802,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>dNBR</code> layer now represents change in NBR from pre- to post-fire.</p>
 </section>
-<section id="visualize-burn-severity" class="level3" data-number="9.6.6">
-<h3 data-number="9.6.6" class="anchored" data-anchor-id="visualize-burn-severity"><span class="header-section-number">9.6.6</span> Visualize Burn Severity</h3>
+<section id="visualize-burn-severity" class="level3" data-number="10.6.6">
+<h3 data-number="10.6.6" class="anchored" data-anchor-id="visualize-burn-severity"><span class="header-section-number">10.6.6</span> Visualize Burn Severity</h3>
 <p>dNBR has been widely used as an indicator of burn severity, with higher values generally corresponding to more severe fire impacts. The USGS has developed a standard classification scheme that relates ranges of dNBR values to categories of burn severity.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -836,12 +842,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>You may also notice some noise in the map, where isolated urban, forest, and particularly agricultural pixels appear as burned despite not being directly affected by wildfire. This type of “noisiness” is common in change detection workflows, especially when using simple differencing approaches. It can arise from seasonal differences, phenological change, atmospheric effects, or misregistration between images.</p>
 <p>These limitations can be reduced using more advanced approaches, such as improved cloud and quality masking, threshold tuning, spatial filtering, or machine learning-based classification methods.</p>
 </section>
-<section id="integrating-land-cover-and-burn-severity" class="level3" data-number="9.6.7">
-<h3 data-number="9.6.7" class="anchored" data-anchor-id="integrating-land-cover-and-burn-severity"><span class="header-section-number">9.6.7</span> Integrating Land Cover and Burn Severity</h3>
+<section id="integrating-land-cover-and-burn-severity" class="level3" data-number="10.6.7">
+<h3 data-number="10.6.7" class="anchored" data-anchor-id="integrating-land-cover-and-burn-severity"><span class="header-section-number">10.6.7</span> Integrating Land Cover and Burn Severity</h3>
 <p>While burn severity maps derived from dNBR clearly show where wildfire activity has occurred, they do not distinguish between different types of affected landscapes. To better understand wildfire impacts at the human–environment interface, we can combine burn severity with land cover information.</p>
 <p>In particular, this allows us to identify where fire has intersected with urban areas, providing a direct view of impacts within the wildland–urban interface (WUI). By overlaying land cover classifications with burn severity, we can isolate burned urban pixels and more clearly assess how wildfire affected developed regions in and around Los Angeles.</p>
-<section id="land-cover-data" class="level4" data-number="9.6.7.1">
-<h4 data-number="9.6.7.1" class="anchored" data-anchor-id="land-cover-data"><span class="header-section-number">9.6.7.1</span> Land Cover Data</h4>
+<section id="land-cover-data" class="level4" data-number="10.6.7.1">
+<h4 data-number="10.6.7.1" class="anchored" data-anchor-id="land-cover-data"><span class="header-section-number">10.6.7.1</span> Land Cover Data</h4>
 <p>A suitable source of land cover information for this application is the USFS Landscape Change Monitoring System (LCMS). In Google Earth Engine, the LCMS provides land cover and land use classification products up to October 2024, immediately preceding the fire event analyzed here. The dataset is available at 30 m spatial resolution, which is consistent with the Landsat 8 imagery used for burn severity estimation, allowing for direct spatial comparison without resampling.</p>
 <p>In this analysis, LCMS is used to provide contextual land cover information, enabling interpretation of burn severity patterns within different landscape types, particularly in relation to the wildland–urban interface. This is important because spectral burn indices alone do not distinguish between urban infrastructure, vegetation, or mixed land use areas.</p>
 <p>The data can be accessed and displayed in a similar manner to the Landsat image collections:</p>
@@ -866,8 +872,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="burned-areas-in-the-wildland-urban-interface" class="level3" data-number="9.6.8">
-<h3 data-number="9.6.8" class="anchored" data-anchor-id="burned-areas-in-the-wildland-urban-interface"><span class="header-section-number">9.6.8</span> Burned Areas in the Wildland-Urban Interface</h3>
+<section id="burned-areas-in-the-wildland-urban-interface" class="level3" data-number="10.6.8">
+<h3 data-number="10.6.8" class="anchored" data-anchor-id="burned-areas-in-the-wildland-urban-interface"><span class="header-section-number">10.6.8</span> Burned Areas in the Wildland-Urban Interface</h3>
 <p>With both burn severity (dNBR) and land use maps, we can now identify which neighborhoods in the WUI were burned in the 2025 Los Angeles fires. To accomplish this, we can simply update the <strong>mask</strong> of the dNBR data layer using the urban land use classification.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">var</span> urban <span class="op">=</span> lcms<span class="op">.</span><span class="fu">select</span>(<span class="st">'Land_Use'</span>)<span class="op">.</span><span class="fu">eq</span>(<span class="dv">2</span>)<span class="op">;</span> <span class="co">// Select the land use band, then, urban land use is coded as 2</span></span>
@@ -906,8 +912,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="other-interfaces-to-the-earth-engine-api" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="other-interfaces-to-the-earth-engine-api"><span class="header-section-number">9.7</span> Other Interfaces to the Earth Engine API</h2>
+<section id="other-interfaces-to-the-earth-engine-api" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="other-interfaces-to-the-earth-engine-api"><span class="header-section-number">10.7</span> Other Interfaces to the Earth Engine API</h2>
 <p>The Code Editor is the most convenient way to begin working with Earth Engine, but it is not the only one. The same Earth Engine backend can be accessed through several client libraries, each suited to a different workflow:</p>
 <table class="caption-top table">
 <colgroup>
@@ -946,11 +952,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>All four interfaces communicate with the same Earth Engine servers and produce identical results. The choice of interface is largely a matter of which ecosystem the rest of an analysis lives in.</p>
-<section id="the-python-api" class="level3" data-number="9.7.1">
-<h3 data-number="9.7.1" class="anchored" data-anchor-id="the-python-api"><span class="header-section-number">9.7.1</span> The Python API</h3>
+<section id="the-python-api" class="level3" data-number="10.7.1">
+<h3 data-number="10.7.1" class="anchored" data-anchor-id="the-python-api"><span class="header-section-number">10.7.1</span> The Python API</h3>
 <p>For analyses that combine Earth Engine outputs with other Python libraries (e.g., <code>pandas</code>, <code>xarray</code>, <code>scikit-learn</code>, <code>geopandas</code>), the Python API is the most natural fit. It is also the recommended interface for batch processing and scheduled jobs.</p>
-<section id="installation" class="level4" data-number="9.7.1.1">
-<h4 data-number="9.7.1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">9.7.1.1</span> Installation</h4>
+<section id="installation" class="level4" data-number="10.7.1.1">
+<h4 data-number="10.7.1.1" class="anchored" data-anchor-id="installation"><span class="header-section-number">10.7.1.1</span> Installation</h4>
 <p>The python client library is named <code>earthengine-api</code> and can be installed through <code>pip</code> or <code>conda</code>:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip</span></span>
@@ -965,8 +971,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>If you are using Google Colab, both packages are pre-installed.</p>
 </section>
-<section id="authentication-and-initialization" class="level4" data-number="9.7.1.2">
-<h4 data-number="9.7.1.2" class="anchored" data-anchor-id="authentication-and-initialization"><span class="header-section-number">9.7.1.2</span> Authentication and Initialization</h4>
+<section id="authentication-and-initialization" class="level4" data-number="10.7.1.2">
+<h4 data-number="10.7.1.2" class="anchored" data-anchor-id="authentication-and-initialization"><span class="header-section-number">10.7.1.2</span> Authentication and Initialization</h4>
 <p>The Python API requires a one-time authentication step per machine, followed by initialization with a Cloud project ID at the start of each session:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ee</span>
@@ -982,8 +988,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The <code>project</code> argument should match the Cloud project ID created during account registration. If <code>ee.Initialize()</code> is called without a <code>project</code> argument, the call will fail with an error directing you to specify one.</p>
 </section>
-<section id="a-parallel-example-loading-and-filtering-an-image-collection" class="level4" data-number="9.7.1.3">
-<h4 data-number="9.7.1.3" class="anchored" data-anchor-id="a-parallel-example-loading-and-filtering-an-image-collection"><span class="header-section-number">9.7.1.3</span> A Parallel Example: Loading and Filtering an Image Collection</h4>
+<section id="a-parallel-example-loading-and-filtering-an-image-collection" class="level4" data-number="10.7.1.3">
+<h4 data-number="10.7.1.3" class="anchored" data-anchor-id="a-parallel-example-loading-and-filtering-an-image-collection"><span class="header-section-number">10.7.1.3</span> A Parallel Example: Loading and Filtering an Image Collection</h4>
 <p>The Python API mirrors the JavaScript API closely. Object types, method names, and chaining patterns are nearly identical. The main syntactic differences are Python’s snake_case for some helper functions, the use of dictionaries instead of object literals, and the explicit <code>getInfo()</code> call required to pull values to the client.</p>
 <p>The same Landsat 8 cloud-masked composite produced earlier in this chapter can be produced as follows:</p>
 <div class="cell">
@@ -1028,8 +1034,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>The structural similarity to the JavaScript version is intentional and reflects the fact that both client libraries are thin wrappers around the same underlying API.</p>
 </section>
-<section id="client-vs.-server-in-python" class="level4" data-number="9.7.1.4">
-<h4 data-number="9.7.1.4" class="anchored" data-anchor-id="client-vs.-server-in-python"><span class="header-section-number">9.7.1.4</span> Client vs.&nbsp;Server in Python</h4>
+<section id="client-vs.-server-in-python" class="level4" data-number="10.7.1.4">
+<h4 data-number="10.7.1.4" class="anchored" data-anchor-id="client-vs.-server-in-python"><span class="header-section-number">10.7.1.4</span> Client vs.&nbsp;Server in Python</h4>
 <p>The client/server distinction introduced earlier in this chapter is particularly important to keep in mind when working in Python. Earth Engine objects are <code>server-side</code>: their values do not exist on the local machine and cannot be inspected directly with standard Python tools. For example, the following will not return what a Python user might expect:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This prints a description of the server-side object, NOT its value</span></span>
@@ -1041,8 +1047,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Calls to <code>.getInfo()</code> block execution until a response is received from the server, and can be slow or fail entirely for large objects. As a rule of thumb, <code>getInfo()</code> should be used sparingly and only on small, scalar results. For larger outputs, use <code>ee.batch.Export</code> to write results to Google Drive, Google Cloud Storage, or as Earth Engine Assets.</p>
 </section>
 </section>
-<section id="the-r-interface-rgee" class="level3" data-number="9.7.2">
-<h3 data-number="9.7.2" class="anchored" data-anchor-id="the-r-interface-rgee"><span class="header-section-number">9.7.2</span> The R Interface: rgee</h3>
+<section id="the-r-interface-rgee" class="level3" data-number="10.7.2">
+<h3 data-number="10.7.2" class="anchored" data-anchor-id="the-r-interface-rgee"><span class="header-section-number">10.7.2</span> The R Interface: rgee</h3>
 <p>For users who prefer to remain in R, the <code>rgee</code> package provides an R binding for the Earth Engine API. <code>rgee</code> is a community-maintained package (part of the r-spatial ecosystem) rather than an official Google product, but it is well documented and stable, and integrates cleanly with the R spatial stack.</p>
 <p>A practical caveat: <code>rgee</code> is implemented as a <code>reticulate</code> wrapper around the Python <code>earthengine-api</code>. This means that a working Python installation and the <code>earthengine-api</code> Python package are both required, even when working entirely in R. Setup is non-trivial on a fresh machine and is the most common source of friction reported by <code>rgee</code> users.</p>
 <p>Installation and one-time setup:</p>
@@ -1073,8 +1079,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>For more on <code>rgee</code>, including examples of pulling Earth Engine outputs directly into <code>sf</code> and <code>stars</code> objects, see the package documentation at <a href="https://r-spatial.github.io/rgee/" class="uri">https://r-spatial.github.io/rgee/</a>.</p>
 </section>
-<section id="rest-api" class="level3" data-number="9.7.3">
-<h3 data-number="9.7.3" class="anchored" data-anchor-id="rest-api"><span class="header-section-number">9.7.3</span> REST API</h3>
+<section id="rest-api" class="level3" data-number="10.7.3">
+<h3 data-number="10.7.3" class="anchored" data-anchor-id="rest-api"><span class="header-section-number">10.7.3</span> REST API</h3>
 <p>The REST API is the lowest-level interface to Earth Engine, exposing the service as a set of standard HTTPS endpoints that return JSON. Unlike the client libraries, the REST API has no language-specific bindings - it can be called from any environment capable of making authenticated HTTP requests, including web applications, mobile clients, or languages without a maintained Earth Engine library (e.g., Julia, Go, Rust).</p>
 <p>For most analytical work, the REST API is <em>not</em> the recommended entry point. The JavaScript, Python, and R client libraries handle a substantial amount of complexity (object serialization, request batching, error handling) that must be implemented manually when working directly with REST. The REST API is most appropriate when:</p>
 <ul>
@@ -1107,14 +1113,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Full documentation of available endpoints is provided in the <a href="https://developers.google.com/earth-engine/reference">GEE REST API Reference</a>.</p>
 </section>
 </section>
-<section id="gee-exercises" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="gee-exercises"><span class="header-section-number">9.8</span> GEE Exercises</h2>
-<section id="written-questions" class="level3" data-number="9.8.1">
-<h3 data-number="9.8.1" class="anchored" data-anchor-id="written-questions"><span class="header-section-number">9.8.1</span> Written Questions</h3>
+<section id="gee-exercises" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="gee-exercises"><span class="header-section-number">10.8</span> GEE Exercises</h2>
+<section id="written-questions" class="level3" data-number="10.8.1">
+<h3 data-number="10.8.1" class="anchored" data-anchor-id="written-questions"><span class="header-section-number">10.8.1</span> Written Questions</h3>
 <p><strong>Suggested timing: Complete before lecture 2 of GEE Hands on Coding Exercises</strong></p>
 <strong>Question 1:</strong> How might or does GEE intersect with your current research or future career goals? <em>(1 paragraph)</em>
 </section></section></main></div>
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/09-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><div id="ds-challenge" data-markdown="1">
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/10-GEE.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><div id="ds-challenge" data-markdown="1">
 <p><strong>Question 2:</strong> Consider either your current or future research, or a question you’d like to address during this course:</p>
 <p>· What climate data or additional phenological datasets would be valuable to address your research interests?</p>
 <p>· What challenges, if any, could you foresee when beginning to work with these data?</p>
@@ -1125,8 +1131,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p><strong>Question 4:</strong> Compare the four interfaces to Earth Engine described in this chapter (Code Editor, Python API, <code>rgee</code>, REST API). For your own typical workflow, which interface would you choose, and why? Are there situations in which you would use more than one?</p>
 <p><strong>Question 5:</strong> The client/server distinction is one of the most important concepts to understand when working with Earth Engine. In your own words, explain what is meant by <em>client-side</em> vs.&nbsp;<em>server-side</em> operations, and give one example of each from the code in this chapter.</p>
-<section id="exercise-1-replicating-analysis-using-alternative-interfaces" class="level3" data-number="9.8.2">
-<h3 data-number="9.8.2" data-anchor-id="exercise-1-replicating-analysis-using-alternative-interfaces"><span class="header-section-number">9.8.2</span> Exercise 1: Replicating Analysis Using Alternative Interfaces</h3>
+<section id="exercise-1-replicating-analysis-using-alternative-interfaces" class="level3" data-number="10.8.2">
+<h3 data-number="10.8.2" data-anchor-id="exercise-1-replicating-analysis-using-alternative-interfaces"><span class="header-section-number">10.8.2</span> Exercise 1: Replicating Analysis Using Alternative Interfaces</h3>
 <p>Reproduce a simplified version of the wildfire change detection workflow from the Hands On section using either the Earth Engine <strong>Python API</strong> or the <strong>R interface (rgee)</strong>, and compare your results to the JavaScript output.</p>
 <p>Specifically:</p>
 <ol type="1">
@@ -1140,8 +1146,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>This exercise is intended to reinforce that Earth Engine produces identical results across client libraries. The choice of interface affects workflow ergonomics but not the underlying analysis.</p>
 </section>
-<section id="exercise-2-integrating-gee-into-ecoinformatics-workflows" class="level3" data-number="9.8.3">
-<h3 data-number="9.8.3" data-anchor-id="exercise-2-integrating-gee-into-ecoinformatics-workflows"><span class="header-section-number">9.8.3</span> Exercise 2: Integrating GEE into Ecoinformatics Workflows</h3>
+<section id="exercise-2-integrating-gee-into-ecoinformatics-workflows" class="level3" data-number="10.8.3">
+<h3 data-number="10.8.3" data-anchor-id="exercise-2-integrating-gee-into-ecoinformatics-workflows"><span class="header-section-number">10.8.3</span> Exercise 2: Integrating GEE into Ecoinformatics Workflows</h3>
 <p>Integrate analyses from GEE with environmental data from other research infrastructures.</p>
 <p>In this exercise, you will apply the skills learned in this chapter to connect GEE workflows with those from the other chapters of this textbook.</p>
 <p><strong>Suggested Research question:</strong> How does vegetation productivity or greenness vary over time at an established environmental monitoring site, and how might these patterns relate to independently collected environmental observations?</p>
@@ -1170,8 +1176,8 @@ Produce a visualization comparing satellite-derived vegetation dynamics with the
 <p><strong>4. Submit</strong><br>
 Submit your visualization with a brief written summary including which API choices you made and why, how you accessed and processed the data, and your interpretation of the results.</p>
 </section>
-<section id="culmination-activity" class="level3" data-number="9.8.4">
-<h3 data-number="9.8.4" data-anchor-id="culmination-activity"><span class="header-section-number">9.8.4</span> Culmination Activity</h3>
+<section id="culmination-activity" class="level3" data-number="10.8.4">
+<h3 data-number="10.8.4" data-anchor-id="culmination-activity"><span class="header-section-number">10.8.4</span> Culmination Activity</h3>
 <p>Write up a 1-page summary of a project you might want to explore using Google Earth Engine over the duration of this course. Your summary should include:</p>
 <ul>
 <li>A brief statement of the research question or applied problem</li>
@@ -1591,13 +1597,13 @@ Submit your visualization with a brief written summary including which API choic
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./08-USGS.html" class="pagination-link" aria-label="USGS National Water Information System (NWIS)">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">USGS National Water Information System (NWIS)</span></span>
+      <a href="./09-InternationalSoilMoistureNetwork.html" class="pagination-link" aria-label="Introduction to the International Soil Moisture Network (ISMN) and Its Python Library">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./10-OneHealth_PathogenSurveillance.html" class="pagination-link" aria-label="One Health, Pathogen Surveillance, and Nextstrain">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./11-OneHealth_PathogenSurveillance.html" class="pagination-link" aria-label="One Health, Pathogen Surveillance, and Nextstrain">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">One Health, Pathogen Surveillance, and Nextstrain</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

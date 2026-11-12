@@ -26,14 +26,15 @@ Edited by Dr. Ben Ruddell and Scott LaRocca
 5. [Flux Measurements & Interoperability](05-Fluxes_and_Inter-operability.Rmd)
 6. [NEON Airborne Observation Platform (AOP)](06-NEON-AOP.Rmd)
 7. [NASA's Earth Observing System (EOS)](07-NASA-EOS.Rmd)
-8. [USGS National Water Information System (NWIS)](08-USGS.Rmd) 
-9. [Introduction to the Google Earth Engine (GEE) Platform and Interfaces](09-GEE.Rmd)
-10. [One Health, Pathogen Surveillance, and Nextstrain](10-OneHealth_PathogenSurveillance.Rmd)
-11. [High-Resolution Carbon Emissions Using the Vulcan Dataset](11-Vulcan.Rmd)
+8. [USGS National Water Information System (NWIS)](08-USGS.Rmd)
+9. [Introduction to the International Soil Moisture Network (ISMN) and Its Python Library](09-InternationalSoilMoistureNetwork.md)
+10. [Introduction to the Google Earth Engine (GEE) Platform and Interfaces](10-GEE.Rmd)
+11. [One Health, Pathogen Surveillance, and Nextstrain](11-OneHealth_PathogenSurveillance.Rmd)
+12. [High-Resolution Carbon Emissions Using the Vulcan Dataset](12-Vulcan.Rmd)
 
 #### Supplementary Materials {-}
 
-[Appendix](12-FAQ.Rmd)
+[Appendix](13-Appendix.Rmd)
 
 ## Preface {-}
 
