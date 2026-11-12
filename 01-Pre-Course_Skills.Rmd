@@ -7,12 +7,12 @@ output:
     df_print: paged
 ---
 
-# Pre-Course Setup: EcoInformatics Tools {.unnumbered}
+# Pre-Course Setup: Ecoinformatics Tools {.unnumbered}
 
 The purpose of this course is to train you in key ecoinformatics
 practices.
 
-Therefore, as an Ecoinformatician you *need* to be able to:
+Therefore, as an ecoinformatician you *need* to be able to:
 
 #### 1. Access data
 Pull data from Application Programming Interfaces (APIs).      
@@ -279,7 +279,7 @@ Hi, I'm Dr. Katharyn Duffy.  I have a Ph.D in Earth Science from Northern Arizon
 repository or submitted pull requests please reference the resources
 listed above.*
 
-# Why 'EcoInformatics'?
+# Why 'Ecoinformatics'?
 
 *Portions of the following introduction were adapted from [Michener &
 Jones (2012), "Ecoinformatics: supporting

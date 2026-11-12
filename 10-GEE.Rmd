@@ -138,7 +138,7 @@ Once registered, the Code Editor at <https://code.earthengine.google.com/> is im
 
 GEE provides access to a Code Editor as an integrated development environment (IDE) for the Earth Engine JavaScript API. This IDE offers a platform to write and execute code, visualize results on an interactive map, and manage scripts and projects within a single web-based environment. The Code Editor is accessed through a dedicated webpage:
 
-https://code.earthengine.google.com/
+<https://code.earthengine.google.com/>
 
 Access to Earth Engine data through the Code Editor is built around the JavaScript programming language, which serves as the primary scripting interface for this environment. JavaScript provides a lightweight and accessible syntax that acts as a direct bridge to the Earth Engine API, where all geospatial computations are performed. Although JavaScript may not be the most familiar programming language for many researchers in the geosciences, it is the most mature and fully supported option within Earth Engine. Importantly, users do not need to become expert JavaScript programmers to use the platform effectively. Instead, a basic understanding of syntax is sufficient, since most operations in Earth Engine are performed by calling pre-built functions from the Earth Engine library. This [brief introduction](https://developers.google.com/earth-engine/tutorials/tutorial_js_01) to JavaScript syntax for GEE provided by the GEE developer team is enough to get started for most use cases.
 

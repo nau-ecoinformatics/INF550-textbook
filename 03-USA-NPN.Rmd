@@ -1,6 +1,6 @@
 
 
-# Introduction to USA-NPN & its Data
+# Introduction to the USA National Phenology Network (USA-NPN) & its Data
 
 > Estimated Time: 2 hours
 

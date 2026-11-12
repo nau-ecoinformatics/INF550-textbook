@@ -7,7 +7,7 @@ output:
     df_print: paged
 ---
 
-# Introduction to NEON & its Data
+# Introduction to the National Ecological Observatory Network (NEON) & Its Data
 
 > Estimated Time: 2 hours
 
@@ -179,9 +179,7 @@ NEON Biorepository</a>.
 Watch this 4:02 minute video to better understand the NEON Airborne
 Observation Platform (AOP).
 
-<iframe width="560" height="315" src="https://youtu.be/iQZzN12Apuk?si=cMPst3pvX6xC-8X4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-
-</iframe>
+<iframe width="773" height="435" src="https://www.youtube.com/embed/iQZzN12Apuk" title="Tour of NEON&#39;s Airborne Observation Platform (AOP)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ::: {markdown="1"}
 <i class="fa fa-star"></i> **Data Tip:** NEON also provides support to

@@ -20,8 +20,8 @@ Edited by Dr. Ben Ruddell and Scott LaRocca
 
 #### Chapters {-}
 
-2. [Introduction to NEON & Its Data](02-Introduction-to-NEON.Rmd)
-3. [Introduction to USA-NPN & Its Data](03-USA-NPN.Rmd)
+2. [Introduction to the National Ecological Observatory Network (NEON) & Its Data](02-Introduction-to-NEON.Rmd)
+3. [Introduction to the USA National Phenology Network (USA-NPN) & its Data](03-USA-NPN.Rmd)
 4. [PhenoCam: Digital Repeat Photography Networks & Methods](04-PhenoCam.Rmd)
 5. [Flux Measurements & Interoperability](05-Fluxes_and_Inter-operability.Rmd)
 6. [NEON Airborne Observation Platform (AOP)](06-NEON-AOP.Rmd)
