@@ -1,5 +1,5 @@
 ---
-title: Introduction to the International Soil Moisture Network (ISMN) and Its Python Library
+title: The International Soil Moisture Network (ISMN): Data Access and Python Tools
 author: Hugh Raggett
 ---
 

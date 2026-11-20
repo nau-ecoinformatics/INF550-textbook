@@ -2,7 +2,7 @@
 title: "Environmental Informatics Using Research Infrastructures and their Data"
 cover-image: "images/EcoInfo4.png"
 github-repo: 'nau-ecoinformatics/INF550-textbook'
-description: "An open textbook for big science in ecology"
+description: "A Graduate Textbook for Big Science in Ecology"
 always_allow_html: true
 ---
 
@@ -20,15 +20,15 @@ Edited by Dr. Ben Ruddell and Scott LaRocca
 
 #### Chapters {-}
 
-2. [Introduction to the National Ecological Observatory Network (NEON) & Its Data](02-Introduction-to-NEON.Rmd)
-3. [Introduction to the USA National Phenology Network (USA-NPN) & its Data](03-USA-NPN.Rmd)
+2. [Introduction to the National Ecological Observatory Network (NEON) and Its Data](02-Introduction-to-NEON.Rmd)
+3. [Introduction to the USA National Phenology Network (USA-NPN)](03-USA-NPN.Rmd)
 4. [PhenoCam: Digital Repeat Photography Networks & Methods](04-PhenoCam.Rmd)
 5. [Flux Measurements & Interoperability](05-Fluxes_and_Inter-operability.Rmd)
 6. [NEON Airborne Observation Platform (AOP)](06-NEON-AOP.Rmd)
 7. [NASA's Earth Observing System (EOS)](07-NASA-EOS.Rmd)
 8. [USGS National Water Information System (NWIS)](08-USGS.Rmd)
-9. [Introduction to the International Soil Moisture Network (ISMN) and Its Python Library](09-InternationalSoilMoistureNetwork.md)
-10. [Introduction to the Google Earth Engine (GEE) Platform and Interfaces](10-GEE.Rmd)
+9. [The International Soil Moisture Network (ISMN): Data Access and Python Tools](09-InternationalSoilMoistureNetwork.md)
+10. [Introduction to the Google Earth Engine Platform and Its Interfaces](10-GEE.Rmd)
 11. [One Health, Pathogen Surveillance, and Nextstrain](11-OneHealth_PathogenSurveillance.Rmd)
 12. [High-Resolution Carbon Emissions Using the Vulcan Dataset](12-Vulcan.Rmd)
 

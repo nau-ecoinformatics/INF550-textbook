@@ -1,5 +1,5 @@
 ---
-title: Introduction to the Google Earth Engine (GEE) Platform and Interfaces
+title: Introduction to the Google Earth Engine (GEE) Platform and Its Interfaces
 author: 
 - Ogonna Eli
 - Scott LaRocca

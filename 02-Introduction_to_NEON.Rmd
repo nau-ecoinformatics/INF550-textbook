@@ -7,7 +7,7 @@ output:
     df_print: paged
 ---
 
-# Introduction to the National Ecological Observatory Network (NEON) & Its Data
+# Introduction to the National Ecological Observatory Network (NEON) and Its Data
 
 > Estimated Time: 2 hours
 
