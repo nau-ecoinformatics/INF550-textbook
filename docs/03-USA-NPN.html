@@ -206,13 +206,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-InternationalSoilMoistureNetwork.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Introduction to the International Soil Moisture Network (ISMN) and Its Python Library</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">The International Soil Moisture Network (ISMN): Data Access and Python Tools</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-GEE.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Interfaces</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Introduction to the Google Earth Engine (GEE) Platform and Its Interfaces</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -238,8 +238,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</a>
+  <ul class="collapse">
+  <li><a href="#guest-lectures" id="toc-guest-lectures" class="nav-link" data-scroll-target="#guest-lectures"><span class="header-section-number">3.1.1</span> Guest Lectures</a></li>
+  <li><a href="#assignments-in-this-chapter" id="toc-assignments-in-this-chapter" class="nav-link" data-scroll-target="#assignments-in-this-chapter"><span class="header-section-number">3.1.2</span> Assignments in this Chapter</a></li>
+  </ul></li>
+  <li><a href="#usa-npn-project-mission-design" id="toc-usa-npn-project-mission-design" class="nav-link" data-scroll-target="#usa-npn-project-mission-design"><span class="header-section-number">3.2</span> USA-NPN Project Mission &amp; Design:</a></li>
+  <li><a href="#vision-mission" id="toc-vision-mission" class="nav-link" data-scroll-target="#vision-mission"><span class="header-section-number">3.3</span> Vision &amp; Mission</a>
+  <ul class="collapse">
+  <li><a href="#relevant-documents-background-information" id="toc-relevant-documents-background-information" class="nav-link" data-scroll-target="#relevant-documents-background-information"><span class="header-section-number">3.3.1</span> Relevant documents &amp; background information:</a></li>
+  </ul></li>
+  <li><a href="#usa-npns-spatial-design" id="toc-usa-npns-spatial-design" class="nav-link" data-scroll-target="#usa-npns-spatial-design"><span class="header-section-number">3.4</span> USA-NPN’s Spatial Design:</a></li>
+  <li><a href="#types-of-usa-npn-data" id="toc-types-of-usa-npn-data" class="nav-link" data-scroll-target="#types-of-usa-npn-data"><span class="header-section-number">3.5</span> Types of USA-NPN Data:</a>
+  <ul class="collapse">
+  <li><a href="#observational" id="toc-observational" class="nav-link" data-scroll-target="#observational"><span class="header-section-number">3.5.1</span> Observational</a></li>
+  <li><a href="#status-intensity-data" id="toc-status-intensity-data" class="nav-link" data-scroll-target="#status-intensity-data"><span class="header-section-number">3.5.2</span> Status &amp; Intensity Data</a></li>
+  <li><a href="#gridded-raster-data" id="toc-gridded-raster-data" class="nav-link" data-scroll-target="#gridded-raster-data"><span class="header-section-number">3.5.3</span> Gridded Raster Data</a></li>
+  <li><a href="#pheno-forecasts" id="toc-pheno-forecasts" class="nav-link" data-scroll-target="#pheno-forecasts"><span class="header-section-number">3.5.4</span> Pheno-Forecasts</a></li>
+  </ul></li>
+  <li><a href="#how-to-access-usa-npn-data" id="toc-how-to-access-usa-npn-data" class="nav-link" data-scroll-target="#how-to-access-usa-npn-data"><span class="header-section-number">3.6</span> How to Access USA-NPN Data:</a>
+  <ul class="collapse">
+  <li><a href="#the-usa-npn-landing-page" id="toc-the-usa-npn-landing-page" class="nav-link" data-scroll-target="#the-usa-npn-landing-page"><span class="header-section-number">3.6.1</span> The USA-NPN Landing page</a></li>
+  <li><a href="#apis" id="toc-apis" class="nav-link" data-scroll-target="#apis"><span class="header-section-number">3.6.2</span> APIs</a></li>
+  <li><a href="#rnpn-package" id="toc-rnpn-package" class="nav-link" data-scroll-target="#rnpn-package"><span class="header-section-number">3.6.3</span> Rnpn package</a></li>
+  <li><a href="#phenology-observation-portal-for-observational-data" id="toc-phenology-observation-portal-for-observational-data" class="nav-link" data-scroll-target="#phenology-observation-portal-for-observational-data"><span class="header-section-number">3.6.4</span> Phenology Observation Portal (for observational data)</a></li>
+  <li><a href="#geospatial-request-builder-for-raster-data-and-image-files" id="toc-geospatial-request-builder-for-raster-data-and-image-files" class="nav-link" data-scroll-target="#geospatial-request-builder-for-raster-data-and-image-files"><span class="header-section-number">3.6.5</span> Geospatial Request Builder (for raster data and image files)</a></li>
+  <li><a href="#visualization-tool" id="toc-visualization-tool" class="nav-link" data-scroll-target="#visualization-tool"><span class="header-section-number">3.6.6</span> Visualization Tool</a></li>
+  </ul></li>
+  <li><a href="#usa-npn-exercises-part-1" id="toc-usa-npn-exercises-part-1" class="nav-link" data-scroll-target="#usa-npn-exercises-part-1"><span class="header-section-number">3.7</span> USA-NPN Exercises Part 1</a>
+  <ul class="collapse">
+  <li><a href="#usa-npn-written-questions" id="toc-usa-npn-written-questions" class="nav-link" data-scroll-target="#usa-npn-written-questions"><span class="header-section-number">3.7.1</span> USA-NPN Written Questions</a></li>
+  </ul></li>
+  <li><a href="#hands-on-accessing-usa-npn-data-via-rnpn" id="toc-hands-on-accessing-usa-npn-data-via-rnpn" class="nav-link" data-scroll-target="#hands-on-accessing-usa-npn-data-via-rnpn"><span class="header-section-number">3.8</span> Hands on: Accessing USA-NPN Data via rNPN</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">3.8.1</span> Introduction</a></li>
+  <li><a href="#accessing-usa-npn-observational-data" id="toc-accessing-usa-npn-observational-data" class="nav-link" data-scroll-target="#accessing-usa-npn-observational-data"><span class="header-section-number">3.8.2</span> Accessing USA-NPN Observational Data</a></li>
+  <li><a href="#status-and-intensity-data" id="toc-status-and-intensity-data" class="nav-link" data-scroll-target="#status-and-intensity-data"><span class="header-section-number">3.8.3</span> Status and Intensity Data</a></li>
+  <li><a href="#individual-phenometrics" id="toc-individual-phenometrics" class="nav-link" data-scroll-target="#individual-phenometrics"><span class="header-section-number">3.8.4</span> Individual Phenometrics</a></li>
+  <li><a href="#site-phenometrics" id="toc-site-phenometrics" class="nav-link" data-scroll-target="#site-phenometrics"><span class="header-section-number">3.8.5</span> Site Phenometrics</a></li>
+  <li><a href="#magnitude-phenometrics" id="toc-magnitude-phenometrics" class="nav-link" data-scroll-target="#magnitude-phenometrics"><span class="header-section-number">3.8.6</span> Magnitude Phenometrics</a></li>
+  <li><a href="#usa-npn-geospatial-data" id="toc-usa-npn-geospatial-data" class="nav-link" data-scroll-target="#usa-npn-geospatial-data"><span class="header-section-number">3.8.7</span> USA-NPN Geospatial Data</a></li>
+  </ul></li>
+  <li><a href="#accumulated-growing-degree-day-products" id="toc-accumulated-growing-degree-day-products" class="nav-link" data-scroll-target="#accumulated-growing-degree-day-products"><span class="header-section-number">3.9</span> Accumulated Growing Degree Day Products</a></li>
+  <li><a href="#extended-spring-indices" id="toc-extended-spring-indices" class="nav-link" data-scroll-target="#extended-spring-indices"><span class="header-section-number">3.10</span> Extended Spring Indices</a>
+  <ul class="collapse">
+  <li><a href="#other-layers" id="toc-other-layers" class="nav-link" data-scroll-target="#other-layers"><span class="header-section-number">3.10.1</span> Other Layers</a></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together"><span class="header-section-number">3.11</span> Putting it all together:</a></li>
+  <li><a href="#combine-point-and-raster-data" id="toc-combine-point-and-raster-data" class="nav-link" data-scroll-target="#combine-point-and-raster-data"><span class="header-section-number">3.12</span> Combine Point and Raster Data</a>
+  <ul class="collapse">
+  <li><a href="#step-1-get-the-data" id="toc-step-1-get-the-data" class="nav-link" data-scroll-target="#step-1-get-the-data"><span class="header-section-number">3.12.1</span> Step 1: Get the data</a></li>
+  <li><a href="#step-2-preparing-the-data" id="toc-step-2-preparing-the-data" class="nav-link" data-scroll-target="#step-2-preparing-the-data"><span class="header-section-number">3.12.2</span> Step 2: Preparing the data</a></li>
+  <li><a href="#step-3-define-style-options-and-create-graph" id="toc-step-3-define-style-options-and-create-graph" class="nav-link" data-scroll-target="#step-3-define-style-options-and-create-graph"><span class="header-section-number">3.12.3</span> Step 3: Define style options and create graph</a></li>
+  </ul></li>
+  <li><a href="#live-demo-code-with-lee-marsh-of-usa-npn" id="toc-live-demo-code-with-lee-marsh-of-usa-npn" class="nav-link" data-scroll-target="#live-demo-code-with-lee-marsh-of-usa-npn"><span class="header-section-number">3.13</span> Live Demo Code with Lee Marsh of USA-NPN</a>
+  <ul class="collapse">
+  <li><a href="#basic-utility-functions" id="toc-basic-utility-functions" class="nav-link" data-scroll-target="#basic-utility-functions"><span class="header-section-number">3.13.1</span> Basic Utility Functions</a></li>
+  <li><a href="#download-observational-data" id="toc-download-observational-data" class="nav-link" data-scroll-target="#download-observational-data"><span class="header-section-number">3.13.2</span> Download Observational Data</a></li>
+  <li><a href="#magnitude-data" id="toc-magnitude-data" class="nav-link" data-scroll-target="#magnitude-data"><span class="header-section-number">3.13.3</span> Magnitude Data</a></li>
+  <li><a href="#downloading-geospatial-data" id="toc-downloading-geospatial-data" class="nav-link" data-scroll-target="#downloading-geospatial-data"><span class="header-section-number">3.13.4</span> Downloading Geospatial Data</a></li>
+  <li><a href="#putting-it-together" id="toc-putting-it-together" class="nav-link" data-scroll-target="#putting-it-together"><span class="header-section-number">3.13.5</span> Putting it together</a></li>
+  <li><a href="#other-data-sources-e.g.-daymet-modis" id="toc-other-data-sources-e.g.-daymet-modis" class="nav-link" data-scroll-target="#other-data-sources-e.g.-daymet-modis"><span class="header-section-number">3.13.6</span> Other Data Sources, e.g.&nbsp;Daymet, MODIS</a></li>
+  </ul></li>
+  <li><a href="#usa-npn-exercises-part-2" id="toc-usa-npn-exercises-part-2" class="nav-link" data-scroll-target="#usa-npn-exercises-part-2"><span class="header-section-number">3.14</span> USA-NPN Exercises Part 2</a>
+  <ul class="collapse">
+  <li><a href="#usa-npn-coding-lab---modeling-agdd" id="toc-usa-npn-coding-lab---modeling-agdd" class="nav-link" data-scroll-target="#usa-npn-coding-lab---modeling-agdd"><span class="header-section-number">3.14.1</span> USA-NPN Coding Lab - Modeling AGDD</a></li>
+  </ul></li>
+  <li><a href="#neon-tos-phenology-data-lecture" id="toc-neon-tos-phenology-data-lecture" class="nav-link" data-scroll-target="#neon-tos-phenology-data-lecture"><span class="header-section-number">3.15</span> NEON TOS Phenology Data Lecture</a></li>
+  <li><a href="#understanding-observation-biases-and-censoring-in-citizen-science-data" id="toc-understanding-observation-biases-and-censoring-in-citizen-science-data" class="nav-link" data-scroll-target="#understanding-observation-biases-and-censoring-in-citizen-science-data"><span class="header-section-number">3.16</span> Understanding Observation Biases and Censoring in Citizen Science Data</a>
+  <ul class="collapse">
+  <li><a href="#many-existing-modeling-approaches-fail-in-one-or-both-regards." id="toc-many-existing-modeling-approaches-fail-in-one-or-both-regards." class="nav-link" data-scroll-target="#many-existing-modeling-approaches-fail-in-one-or-both-regards."><span class="header-section-number">3.16.1</span> Many existing modeling approaches fail in one (or both) regards.</a></li>
+  <li><a href="#censoring" id="toc-censoring" class="nav-link" data-scroll-target="#censoring"><span class="header-section-number">3.16.2</span> Censoring</a></li>
+  </ul></li>
+  <li><a href="#so-then-how-can-we-model-censored-data" id="toc-so-then-how-can-we-model-censored-data" class="nav-link" data-scroll-target="#so-then-how-can-we-model-censored-data"><span class="header-section-number">3.17</span> So then how can we model censored data?</a></li>
+  <li><a href="#usa-npn-exercies-part-3" id="toc-usa-npn-exercies-part-3" class="nav-link" data-scroll-target="#usa-npn-exercies-part-3"><span class="header-section-number">3.18</span> USA-NPN Exercies Part 3</a>
+  <ul class="collapse">
+  <li><a href="#usa-npn-culmination-activity" id="toc-usa-npn-culmination-activity" class="nav-link" data-scroll-target="#usa-npn-culmination-activity"><span class="header-section-number">3.18.1</span> USA-NPN Culmination Activity</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/03-USA-NPN.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -266,7 +348,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Estimated Time: 2 hours</p>
 </blockquote>
-<div id="ds-challenge" data-markdown="1">
 <p><strong>Course participants</strong>: As you review this information, please consider the final course project that you will build upon over this semester. At the end of this section, you will document an initial research question or idea and associated data needed to address that question, that you may want to explore while pursuing this course.</p>
 <section id="learning-objectives" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">3.1</span> Learning Objectives</h2>
@@ -457,10 +538,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="3.7.1" class="anchored" data-anchor-id="usa-npn-written-questions"><span class="header-section-number">3.7.1</span> USA-NPN Written Questions</h3>
 <p><strong>Suggested timing: Complete before lecture 2 of USA-NPN Hands on Coding Exercises</strong></p>
 <p><strong>Question 1:</strong> How might or does USA-NPN intersect with your current research or future career goals? <em>(1 paragraph)</em></p>
-</section>
-</section>
-</div>
-<div id="ds-challenge" data-markdown="1">
 <p><strong>Question 2:</strong> Use the USA-NPN visualization tool ( &lt;www.usanpn.org/data/visualizations&gt; ) to answer the following questions. Consider the research question that you may explore as your final semester project or a current project that you are working on and answer each of the following questions:</p>
 <p>· Are there species, regions, or phenophases of interest to you?</p>
 <p>· Is there geospatial phenology data that is useful for your work (e.g. Spring Indices or Growing Degree Days)?</p>
@@ -469,7 +546,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Question 3:</strong> Consider either your current or future research, or a question you’d like to address during this course:</p>
 <p>· What climate data or additional phenological datasets would be valuable to address your research interests?</p>
 <p>· What challenges, if any, could you foresee when beginning to work with these data?</p>
-<div id="ds-challenge" data-markdown="1">
+</section>
+</section>
 <section id="hands-on-accessing-usa-npn-data-via-rnpn" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="hands-on-accessing-usa-npn-data-via-rnpn"><span class="header-section-number">3.8</span> Hands on: Accessing USA-NPN Data via rNPN</h2>
 <section id="introduction" class="level3" data-number="3.8.1">
@@ -582,7 +660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b04112f2b34'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpQfn05j\file102443c83a06'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -602,7 +680,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b04112f2b34'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b0437b95260'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpQfn05j\file102446392988'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -622,7 +700,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b0437b95260'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b0411f873f8'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpQfn05j\file102429d52474'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -642,7 +720,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b0411f873f8'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b043d4f5e37'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpQfn05j\file102413747588'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -677,7 +755,7 @@ line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b043d4f5e37'</c
 </div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in readLines(con, n = pagesize, encoding = "UTF-8"): incomplete final
-line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpotpYFq\file4b04d741eed'</code></pre>
+line found on 'C:\Users\Scott\AppData\Local\Temp\RtmpQfn05j\file102465c32438'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1195,7 +1273,7 @@ Attaching package: 'dplyr'</code></pre>
 <pre><code>Finished: Stacked 3 data tables and 5 metadata tables!</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Stacking took 11.44615 secs</code></pre>
+<pre><code>Stacking took 13.6574 secs</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co">#NEON sends the data as a nested list, so I need to undo that</span></span>
 <span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unlist all data frames</span></span>
@@ -1397,7 +1475,6 @@ mgcv::summary.gam(model) </code></pre>
 </ul>
 </section>
 </section>
-<div id="ds-challenge" data-markdown="1">
 <section id="neon-tos-phenology-data-lecture" class="level2" data-number="3.15">
 <h2 data-number="3.15" class="anchored" data-anchor-id="neon-tos-phenology-data-lecture"><span class="header-section-number">3.15</span> NEON TOS Phenology Data Lecture</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/aSapVSBoUA8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="">
@@ -1504,9 +1581,6 @@ mgcv::summary.gam(model) </code></pre>
 
 </section>
 </section>
-</div>
-</div>
-</div>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1926,4 +2000,4 @@ mgcv::summary.gam(model) </code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/03-USA-NPN.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/edit/main/03-USA-NPN.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/nau-ecoinformatics/INF550-textbook/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

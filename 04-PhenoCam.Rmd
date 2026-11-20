@@ -1,5 +1,5 @@
 
-# PhenoCam: Digital Repeat Photography Networks & Methods
+# PhenoCam: Digital Repeat Photography Networks and Methods
 
 > Estimated Time: 4 hours
 

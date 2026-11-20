@@ -4,7 +4,7 @@ output:
   pdf_document: default
 ---
 
-# Flux Measurements & Interoperability
+# Flux Measurements and Interoperability
 
 > Estimated Time: 3 hours
 

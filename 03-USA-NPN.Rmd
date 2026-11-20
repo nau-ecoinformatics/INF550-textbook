@@ -1,10 +1,13 @@
-
-
-# Introduction to the USA National Phenology Network (USA-NPN)
+---
+title: "Introduction to the USA National Phenology Network (USA-NPN)"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+---
 
 > Estimated Time: 2 hours
 
-::: {#ds-challenge markdown="1"}
 **Course participants**: As you review this information, please consider
 the final course project that you will build upon over this semester. At
 the end of this section, you will document an initial research question
@@ -378,9 +381,7 @@ Exercises**
 
 **Question 1:** How might or does USA-NPN intersect with your current
 research or future career goals? *(1 paragraph)*
-:::
 
-<div id="ds-challenge" markdown="1">
 
 **Question 2:** Use the USA-NPN visualization tool
 ( <www.usanpn.org/data/visualizations> ) to answer the following questions.
@@ -407,7 +408,6 @@ valuable to address your research interests?
 · What challenges, if any, could you foresee when beginning to work with
 these data?
 
-<div id="ds-challenge" markdown="1">
 
 ## Hands on: Accessing USA-NPN Data via rNPN
 
@@ -1573,7 +1573,6 @@ Hints:
 -   Plot your new model
 -   Comment on your new model: was it improved? If so how?
 
-<div id="ds-challenge" markdown="1">
 
 ## NEON TOS Phenology Data Lecture
 
